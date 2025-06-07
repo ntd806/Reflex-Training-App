@@ -66,6 +66,51 @@ Reflex-Training-App/
 - **Linked Speech Practice:**  
   Add words/phrases in the input, manage the list on the right panel.
 
+## Uploading Words or Sentences from Excel
+
+You can quickly add multiple words or sentences by uploading an Excel file.
+
+### How to Upload
+
+1. Prepare an Excel file (`.xlsx` or `.xls`) with your words or sentences in the **first column**.
+    - For words: Each row should contain a word or phrase.
+    - For sentences: Each row should contain a sentence.
+    - You may optionally add a header row (e.g., `word` or `sentence`), but it's not required.
+
+2. On the web app, scroll down to the section **"Nhập câu từ file Excel:"**.
+
+3. Click **"Chọn file"** and select your Excel file.
+
+4. Click **"Tải lên"** to upload.  
+   - The words or sentences will be added to the corresponding list.
+
+> **Note:**  
+> - On the main page, the upload will add words.  
+> - On the "Sentence Practice" page, the upload will add sentences.  
+> - On the "Repeat Sentence" page, the upload will add repeat sentences.
+
+### File Format Example
+
+| word/sentence         |
+|-----------------------|
+| get it                |
+| need it               |
+| pass it               |
+| Books are heavy.      |
+| Our professor is here |
+
+Or, without a header:
+
+|                       |
+|-----------------------|
+| get it                |
+| need it               |
+| pass it               |
+| Books are heavy.      |
+| Our professor is here |
+
+Only the first column will be used.
+
 ## License
 
 MIT License
