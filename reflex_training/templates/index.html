@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflex Training App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Reflex Training App</h1>
+    <div id="status" style="font-size:2em; color:blue; font-weight:bold; margin-bottom:20px;"></div>
+    <div class="flex-main">
+        <!-- Bên trái: Thực hành -->
+        <div style="flex: 6; min-width: 0;">
+            <div>
+                <label for="intervalInput"><b>Thời gian mỗi lượt (giây):</b></label>
+                <input type="number" id="intervalInput" value="10" min="1" max="60" style="width:60px;">
+                <button onclick="updateInterval()">Cập nhật</button>
+                <button onclick="togglePause()">Pause</button>
+                <span id="intervalStatus" style="margin-left:10px;color:green;font-weight:bold;"></span>
+            </div>
+            <div id="timer" style="font-size:2em; color:green; font-weight:bold; margin-bottom:20px;"></div>
+            <div id="output"></div>
+            <h2>1. Random Number Generator</h2>
+            <label>Min: <input type="number" id="minNumber" value="-1000" style="width:80px;"></label>
+            <label>Max: <input type="number" id="maxNumber" value="1000000000" style="width:110px;"></label>
+            <button onclick="startPractice('number')">Practice Number</button>
+            <h2>2. Random Year Generator (Up to 2999)</h2>
+            <label>Min: <input type="number" id="minYear" value="1" style="width:80px;"></label>
+            <label>Max: <input type="number" id="maxYear" value="2999" style="width:110px;"></label>
+            <button onclick="startPractice('year')">Practice Year</button>
+            <h2>3. Linked Speech Practice</h2>
+            <input type="text" id="wordInput" placeholder="Enter words (e.g., about it, going to)">
+            <button onclick="addWords()">Add Words</button>
+            <button onclick="startPractice('word')">Practice Word</button>
+        </div>
+        <!-- Bên phải: Danh sách từ và tìm kiếm -->
+        <div style="flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc;">
+            <div>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm từ..." style="width:70%;">
+                <button onclick="searchWordList()">Tìm</button>
+            </div>
+            <div id="wordList" style="margin-top:15px;"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

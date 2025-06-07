@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+#output {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    min-height: 100px;
+}
+#wordInput {
+    width: 300px;
+    padding: 5px;
+}
+#status {
+    color: blue;
+    font-weight: bold;
+}
+.flex-main {
+    display: flex;
+    gap: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
