@@ -59,7 +59,17 @@
             <input type="text" id="guideInput" placeholder="Pronunciation guide (optional)">
             <button onclick="addWords()">Add Words</button>
             <button onclick="startPractice('word')">Practice Word</button>
+            <!-- Thêm vào sau phần nhập câu -->
+            <div style="margin-top:20px;">
+                   <form id="excelForm" enctype="multipart/form-data" style="margin-top:15px;">
+                    <label><b>Nhập câu từ file Excel:</b></label>
+                    <input type="file" id="excelFile" name="excelFile" accept=".xlsx,.xls">
+                    <button type="submit">Tải lên</button>
+                </form>
+                <div id="excelStatus" style="color:green;margin-top:5px;"></div>
+            </div>
         </div>
+        
         <!-- Bên phải: Danh sách từ và tìm kiếm -->
         <div style="flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc;">
             <div>
@@ -69,7 +79,7 @@
             <div id="wordList" style="margin-top:15px;"></div>
         </div>
     </div>
-   </div>
+</div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
 function showWordList() {
@@ -143,6 +153,33 @@ function speak(text) {
         window.speechSynthesis.speak(utterance);
     }
 }
+
+$('#excelForm').on('submit', function(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById('excelFile');
+    if (!fileInput.files.length) {
+        $('#excelStatus').css('color','red').text('Chưa chọn file!');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('excelFile', fileInput.files[0]);
+    // Chọn target phù hợp với từng trang
+    formData.append('target', 'words'); // hoặc 'repeat_sentences' hoặc 'words'
+    $.ajax({
+        url: '/upload_sentences',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(res) {
+            $('#excelStatus').css('color','green').text(res.message);
+            loadSentences && loadSentences();
+        },
+        error: function(xhr) {
+            $('#excelStatus').css('color','red').text(xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : 'Lỗi!');
+        }
+    });
+});
 </script>
 </body>
 </html>
