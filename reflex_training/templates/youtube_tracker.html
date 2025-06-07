@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .flex-main { display: flex; gap: 20px; }
+        .yt-list-col { flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc; }
+        .yt-player-col { flex: 6; min-width: 0; }
+    </style>
+</head>
+<body>
+<div class="content">
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <label style="margin-left:10px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
+    <h1>YouTube Tracker</h1>
+    <div class="flex-main">
+        <!-- Bên trái: player và nhập link -->
+        <div class="yt-player-col">
+            <div>
+                <input type="text" id="youtubeInput" placeholder="Paste YouTube link..." style="width:60%;">
+                <button onclick="addYoutubeLink()">Add</button>
+                <span id="loadingStatus" style="margin-left:10px; color:green; font-weight:bold;"></span>
+            </div>
+            <div id="playerSection" style="margin-top:30px;"></div>
+        </div>
+        <!-- Bên phải: danh sách video -->
+        <div class="yt-list-col">
+            <div>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm video..." style="width:70%;">
+                <button onclick="searchYoutubeList()">Tìm</button>
+            </div>
+            <div id="youtubeList" style="margin-top:20px;"></div>
+        </div>
+    </div>
+</div>
+<script>
+let allYoutubeLinks = [];
+let ytPlayer, ytPlayerInterval, lastUrl = '', lastVideoId = '', lastTime = 0;
+
+// Load YouTube IFrame API
+(function() {
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+})();
+
+window.onYouTubeIframeAPIReady = function() {
+    // Không tạo player ở đây, chỉ tạo khi playYoutube được gọi
+};
+
+function addYoutubeLink() {
+    const url = $('#youtubeInput').val().trim();
+    if (!url) return;
+    $('#loadingStatus').text('Đang thêm, vui lòng chờ...');
+    $.ajax({
+        url: '/youtube_links',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({url}),
+        success: function() {
+            $('#youtubeInput').val('');
+            $('#loadingStatus').text('Thêm thành công!');
+            loadYoutubeLinks();
+            setTimeout(() => { $('#loadingStatus').text(''); }, 1500);
+        },
+        error: function(xhr) {
+            let msg = 'Có lỗi, thử lại!';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                msg = xhr.responseJSON.error;
+            }
+            $('#loadingStatus').text(msg);
+            setTimeout(() => { $('#loadingStatus').text(''); }, 2500);
+        }
+    });
+}
+function loadYoutubeLinks() {
+    $.get('/youtube_links', function(links) {
+        // Sắp xếp theo thời gian mới nhất
+        links.sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''));
+        allYoutubeLinks = links;
+        renderYoutubeList(links);
+    });
+}
+function renderYoutubeList(links) {
+    let html = '<b>Danh sách video:</b><ul>';
+    links.forEach(link => {
+        html += `<li>
+            <span style="cursor:pointer;color:blue;text-decoration:underline;" onclick="playYoutube('${link.url}',${link.last_time||0})">${link.title || link.url}</span>
+            <span style="margin-left:10px;">[${link.watched ? 'Đã xem' : 'Chưa xem'}]</span>
+            <span style="margin-left:10px;">${link.added_date}</span>
+        </li>`;
+    });
+    html += '</ul>';
+    $('#youtubeList').html(html);
+}
+function searchYoutubeList() {
+    const q = $('#searchInput').val().trim().toLowerCase();
+    if (!q) {
+        renderYoutubeList(allYoutubeLinks);
+        return;
+    }
+    const filtered = allYoutubeLinks.filter(link => link.url.toLowerCase().includes(q));
+    renderYoutubeList(filtered);
+}
+
+function playYoutube(url, lastTime) {
+    let videoId = '';
+    try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu')) {
+            if (u.searchParams.get('v')) videoId = u.searchParams.get('v');
+            else if (u.pathname.startsWith('/embed/')) videoId = u.pathname.split('/embed/')[1];
+            else if (u.pathname.length > 1) videoId = u.pathname.slice(1);
+        }
+    } catch {}
+    if (!videoId) {
+        $('#playerSection').html('<i>Không nhận diện được video ID!</i>');
+        return;
+    }
+    lastUrl = url;
+    lastVideoId = videoId;
+    lastTime = lastTime || 0;
+    $('#playerSection').html(`<div id="ytplayer"></div>`);
+    // Nếu player đã tồn tại, load video mới
+    if (typeof YT !== "undefined" && YT.Player && ytPlayer) {
+        ytPlayer.loadVideoById({videoId: videoId, startSeconds: Math.floor(lastTime)});
+    } else {
+        ytPlayer = new YT.Player('ytplayer', {
+            height: '315',
+            width: '560',
+            videoId: videoId,
+            playerVars: { 'autoplay': 1, 'start': Math.floor(lastTime) },
+            events: {
+                'onReady': function(event) {
+                    event.target.playVideo();
+                    if (ytPlayerInterval) clearInterval(ytPlayerInterval);
+                    ytPlayerInterval = setInterval(saveYoutubeTime, 5000);
+                }
+            }
+        });
+    }
+    // Đánh dấu đã xem
+    $.ajax({
+        url: '/youtube_links/update',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({url: url, watched: true}),
+        success: function() {
+            loadYoutubeLinks(); // cập nhật lại giao diện
+        }
+    });
+}
+
+// Lưu lại thời gian đang xem khi đóng trang
+window.onbeforeunload = function() {
+    saveYoutubeTime();
+};
+
+function saveYoutubeTime() {
+    if (!ytPlayer || !lastUrl) return;
+    let current = 0;
+    try {
+        current = ytPlayer.getCurrentTime ? Math.floor(ytPlayer.getCurrentTime()) : 0;
+    } catch {}
+    $.ajax({
+        url: '/youtube_links/update',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({url: lastUrl, last_time: current}),
+        success: function() {}
+    });
+}
+
+$(function() {
+    loadYoutubeLinks();
+});
+</script>
+</body>
+</html>

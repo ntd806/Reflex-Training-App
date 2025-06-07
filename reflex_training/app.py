@@ -5,6 +5,7 @@ import os
 from urllib.parse import unquote
 import datetime
 import pandas as pd
+import requests
 
 app = Flask(__name__)
 
@@ -13,6 +14,7 @@ GUIDES_FILE = 'pronunciation_guides.json'
 WORDS_FILE = 'words.json'
 SENTENCES_FILE = 'sentences.json'
 REPEAT_SENTENCES_FILE = 'repeat_sentences.json'
+YOUTUBE_LINKS_FILE = 'youtube_links.json'
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -64,6 +66,16 @@ def load_repeat_sentences():
 def save_repeat_sentences(sentences):
     with open(REPEAT_SENTENCES_FILE, 'w', encoding='utf-8') as f:
         json.dump(sentences, f, ensure_ascii=False, indent=4)
+
+def load_youtube_links():
+    if os.path.exists(YOUTUBE_LINKS_FILE):
+        with open(YOUTUBE_LINKS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_youtube_links(links):
+    with open(YOUTUBE_LINKS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(links, f, ensure_ascii=False, indent=4)
 
 def get_pronunciation_guide(word):
     guides = load_guides()
@@ -449,6 +461,60 @@ def upload_sentences():
         return jsonify({'message': f'Đã thêm {len(sentences)} câu/từ!'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/youtube_tracker')
+def youtube_tracker():
+    return render_template('youtube_tracker.html')
+
+@app.route('/youtube_links', methods=['GET'])
+def get_youtube_links():
+    return jsonify(load_youtube_links())
+
+@app.route('/youtube_links', methods=['POST'])
+def add_youtube_link():
+    data = request.json
+    url = data.get('url', '').strip()
+    if not url:
+        return jsonify({'error': 'Missing URL'}), 400
+    links = load_youtube_links()
+    if any(link['url'] == url for link in links):
+        return jsonify({'error': 'Link đã tồn tại!'}), 400
+    # Lấy tiêu đề video từ noembed
+    title = url
+    try:
+        resp = requests.get('https://noembed.com/embed', params={'url': url}, timeout=5)
+        if resp.ok:
+            info = resp.json()
+            if 'title' in info:
+                title = info['title']
+    except Exception:
+        pass
+    links = load_youtube_links()
+    links.append({
+        'url': url,
+        'title': title,
+        'added_date': today_str(),
+        'watched': False,
+        'last_time': 0
+    })
+    save_youtube_links(links)
+    return jsonify({'message': 'Added', 'links': links})
+
+@app.route('/youtube_links/update', methods=['POST'])
+def update_youtube_link():
+    data = request.json
+    url = data.get('url')
+    last_time = data.get('last_time', 0)
+    watched = data.get('watched', None)
+    links = load_youtube_links()
+    for link in links:
+        if link['url'] == url:
+            if last_time is not None:
+                link['last_time'] = last_time
+            if watched is not None:
+                link['watched'] = watched
+    save_youtube_links(links)
+    return jsonify({'message': 'Updated'})
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
