@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sentence Practice</title>
+    <title>Repeat Sentence</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -16,7 +16,7 @@
         <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
         <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
     </nav>
-    <h1>Sentence Practice</h1>
+    <h1>Repeat Sentence</h1>
     <div>
         <input type="text" id="sentenceInput" placeholder="Nhập mẫu câu..." style="width:60%;">
         <button onclick="addSentence()">Thêm mẫu câu</button>
@@ -52,7 +52,7 @@ function addSentence() {
     const s = $('#sentenceInput').val().trim();
     if (!s) return;
     $.ajax({
-        url: '/sentences',
+        url: '/repeat_sentences',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({sentence: s}),
@@ -63,7 +63,7 @@ function addSentence() {
     });
 }
 function loadSentences() {
-    $.get('/sentences', function(sentences) {
+    $.get('/repeat_sentences', function(sentences) {
         if (!sentences.length) {
             $('#sentenceList').html('<i>Chưa có mẫu câu nào.</i>');
             return;
@@ -118,7 +118,7 @@ function showSentence(s) {
     }
 }
 function getRandomSentence() {
-    $.get('/sentences/random', function(data) {
+    $.get('/repeat_sentences/random', function(data) {
         if (!data.sentence) {
             $('#randomSentence').html('<i>Chưa có mẫu câu nào.</i>');
             return;
@@ -143,14 +143,14 @@ function deleteSentence(s) {
     const sentence = decodeURIComponent(s);
     if (!confirm(`Xoá mẫu câu: "${sentence}"?`)) return;
     $.ajax({
-        url: '/sentences/' + encodeURIComponent(sentence),
+        url: '/repeat_sentences/' + encodeURIComponent(sentence),
         type: 'DELETE',
         success: function() { loadSentences(); }
     });
 }
 function togglePriority(s) {
     const sentence = decodeURIComponent(s);
-    $.post('/sentences/priority/' + encodeURIComponent(sentence), function() {
+    $.post('/repeat_sentences/priority/' + encodeURIComponent(sentence), function() {
         loadSentences();
     });
 }

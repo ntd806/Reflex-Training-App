@@ -11,6 +11,7 @@ app = Flask(__name__)
 GUIDES_FILE = 'pronunciation_guides.json'
 WORDS_FILE = 'words.json'
 SENTENCES_FILE = 'sentences.json'
+REPEAT_SENTENCES_FILE = 'repeat_sentences.json'
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -51,6 +52,16 @@ def load_sentences():
 
 def save_sentences(sentences):
     with open(SENTENCES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(sentences, f, ensure_ascii=False, indent=4)
+
+def load_repeat_sentences():
+    if os.path.exists(REPEAT_SENTENCES_FILE):
+        with open(REPEAT_SENTENCES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_repeat_sentences(sentences):
+    with open(REPEAT_SENTENCES_FILE, 'w', encoding='utf-8') as f:
         json.dump(sentences, f, ensure_ascii=False, indent=4)
 
 def get_pronunciation_guide(word):
@@ -247,6 +258,10 @@ def get_priority_words():
 def sentence_practice():
     return render_template('sentence.html')
 
+@app.route('/repeat_sentence')
+def repeat_sentence():
+    return render_template('repeat_sentence.html')
+
 @app.route('/sentences/<sentence>', methods=['DELETE'])
 def delete_sentence(sentence):
     sentences = load_sentences()
@@ -273,6 +288,64 @@ def toggle_sentence_priority(sentence):
             found = True
     if found:
         save_sentences(sentences)
+        return jsonify({'message': 'Updated'})
+    return jsonify({'error': 'Sentence not found'}), 404
+
+@app.route('/repeat_sentences', methods=['GET'])
+def get_repeat_sentences():
+    return jsonify(load_repeat_sentences())
+
+@app.route('/repeat_sentences', methods=['POST'])
+def add_repeat_sentence():
+    data = request.json
+    sentence = data.get('sentence', '').strip()
+    if not sentence:
+        return jsonify({'error': 'Missing sentence'}), 400
+    sentences = load_repeat_sentences()
+    # Kiểm tra trùng
+    for item in sentences:
+        s = item['sentence'] if isinstance(item, dict) else item
+        if s == sentence:
+            return jsonify({'error': 'Sentence already exists'}), 400
+    sentences.append({'sentence': sentence, 'priority': False})
+    save_repeat_sentences(sentences)
+    return jsonify({'message': 'Sentence added', 'sentences': sentences})
+
+@app.route('/repeat_sentences/random')
+def random_repeat_sentence():
+    sentences = load_repeat_sentences()
+    if not sentences:
+        return jsonify({'sentence': '', 'message': 'No sentences available'})
+    s = random.choice(sentences)
+    if isinstance(s, dict):
+        s = s.get('sentence', '')
+    return jsonify({'sentence': s})
+
+@app.route('/repeat_sentences/<sentence>', methods=['DELETE'])
+def delete_repeat_sentence(sentence):
+    sentences = load_repeat_sentences()
+    new_sentences = []
+    for item in sentences:
+        s = item['sentence'] if isinstance(item, dict) else item
+        if s != sentence:
+            new_sentences.append(item)
+    save_repeat_sentences(new_sentences)
+    return jsonify({'message': 'Deleted'})
+
+@app.route('/repeat_sentences/priority/<sentence>', methods=['POST'])
+def toggle_repeat_sentence_priority(sentence):
+    sentences = load_repeat_sentences()
+    found = False
+    for i, item in enumerate(sentences):
+        if isinstance(item, str):
+            if item == sentence:
+                sentences[i] = {'sentence': item, 'priority': True}
+                found = True
+        elif item.get('sentence') == sentence:
+            item['priority'] = not item.get('priority', False)
+            found = True
+    if found:
+        save_repeat_sentences(sentences)
         return jsonify({'message': 'Updated'})
     return jsonify({'error': 'Sentence not found'}), 404
 
