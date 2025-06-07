@@ -8,7 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Reflex Training App</h1>
+   <div class="content">
+     <h1>Reflex Training App</h1>
     <div id="status" style="font-size:2em; color:blue; font-weight:bold; margin-bottom:20px;"></div>
     <div class="flex-main">
         <!-- Bên trái: Thực hành -->
@@ -32,6 +33,7 @@
             <button onclick="startPractice('year')">Practice Year</button>
             <h2>3. Linked Speech Practice</h2>
             <input type="text" id="wordInput" placeholder="Enter words (e.g., about it, going to)">
+            <input type="text" id="guideInput" placeholder="Pronunciation guide (optional)">
             <button onclick="addWords()">Add Words</button>
             <button onclick="startPractice('word')">Practice Word</button>
         </div>
@@ -44,6 +46,42 @@
             <div id="wordList" style="margin-top:15px;"></div>
         </div>
     </div>
+   </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+function showWordList() {
+    $.get('/words', function(words) {
+        if (!words.length) {
+            document.getElementById('wordList').innerHTML = '<i>Chưa có từ nào.</i>';
+            return;
+        }
+        let html = '<b>Danh sách từ:</b><ul style="margin-top:5px;">';
+        words.forEach(word => {
+            html += `<li style="cursor:pointer;display:inline-block;width:90%;">
+                        <span onclick="showWordDetail('${word.replace(/'/g,"\\'")}')">${word}</span>
+                        <button onclick="deleteWord('${word.replace(/'/g,"\\'")}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
+                    </li>`;
+        });
+        html += '</ul>';
+        document.getElementById('wordList').innerHTML = html;
+    });
+}
+
+function showWordDetail(word) {
+    $.get(`/guides`, function(guides) {
+        let guide = guides[word] || "No guide available.";
+        document.getElementById('output').innerHTML = `
+            <div style="font-size:1.3em;"><b>Practice this:</b> ${word}<br>
+            <b>Pronunciation Guide:</b> ${guide}</div>
+            <div style="margin-top:10px; display:flex; align-items:center; justify-content: flex-end;">
+                <button 
+                    onclick="speak('${word.replace(/'/g,"\\'")}')" 
+                    style="font-size:1.1em; padding:10px 20px; float:right; margin-top:0; margin-bottom:0; margin-right:0; margin-left:20px; height:100%;">Read</button>
+            </div>
+        `;
+        currentText = word;
+    });
+}
+</script>
 </body>
 </html>
