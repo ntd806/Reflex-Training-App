@@ -15,6 +15,12 @@
         <a href="/" style="margin-right:20px;">Trang chính</a>
         <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
         <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <label style="margin-left:10px;">
+            Chọn giọng nói:
+            <select id="voiceSelect" style="font-size:1em;">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </label>
     </nav>
     <h1>Sentence Practice</h1>
     <div>
@@ -37,6 +43,7 @@
             Số lần lặp lại
             <input type="number" id="repeatCount" value="1" min="1" max="10" style="width:40px;">
         </label>
+        
     </div>
     <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
     <div id="sentenceList" style="margin-top:25px;"></div>
@@ -47,6 +54,7 @@ let speakRepeatId = null;
 let currentSentence = '';
 let repeatTimes = 1;
 let spokenCount = 0;
+let voices = [];
 
 function addSentence() {
     const s = $('#sentenceInput').val().trim();
@@ -132,10 +140,29 @@ function getRandomSentence() {
         }
     });
 }
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (!voiceSelect) return;
+    voiceSelect.innerHTML = '';
+    voices.forEach((voice, idx) => {
+        const option = document.createElement('option');
+        option.value = idx;
+        option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+        voiceSelect.appendChild(option);
+    });
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener('DOMContentLoaded', loadVoices);
+
 function speak(text) {
     if (text) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
+        const voiceSelect = document.getElementById('voiceSelect');
+        if (voiceSelect && voices[voiceSelect.value]) {
+            utterance.voice = voices[voiceSelect.value];
+            utterance.lang = voices[voiceSelect.value].lang;
+        }
         window.speechSynthesis.speak(utterance);
     }
 }
