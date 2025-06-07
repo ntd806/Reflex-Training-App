@@ -7,11 +7,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .priority-btn[priority="true"] { background: orange; }
+        .flex-main { display: flex; }
     </style>
 </head>
 <body>
 <div class="content">
-     <nav style="margin-bottom:20px;">
+    <nav style="margin-bottom:20px;">
         <a href="/" style="margin-right:20px;">Trang chính</a>
         <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
         <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
@@ -23,30 +24,43 @@
         </label>
     </nav>
     <h1>Sentence Practice</h1>
-    <div>
-        <input type="text" id="sentenceInput" placeholder="Nhập mẫu câu..." style="width:60%;">
-        <button onclick="addSentence()">Thêm mẫu câu</button>
+    <div class="flex-main">
+        <!-- Bên trái: Thực hành -->
+        <div style="flex: 6; min-width: 0;">
+            <div>
+                <input type="text" id="sentenceInput" placeholder="Nhập mẫu câu..." style="width:60%;">
+                <button onclick="addSentence()">Thêm mẫu câu</button>
+            </div>
+            <div style="margin-top:15px;">
+                <button onclick="getRandomSentence()" style="font-size:1.2em;">Practice</button>
+                <button onclick="togglePause()" id="pauseBtn" style="font-size:1.2em;">Pause</button>
+                <label style="margin-left:15px;">
+                    <input type="checkbox" id="autoSpeakCheckbox" checked>
+                    Tự động đọc
+                </label>
+                <label style="margin-left:10px;">
+                    Lặp lại mỗi
+                    <input type="number" id="repeatSpeakInterval" value="2" min="1" max="10" style="width:40px;">
+                    giây
+                </label>
+                <label style="margin-left:10px;">
+                    Số lần lặp lại
+                    <input type="number" id="repeatCount" value="1" min="1" max="10" style="width:40px;">
+                </label>
+                
+            </div>
+            <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
+        </div>
+        <!-- Bên phải: Danh sách và tìm kiếm -->
+        <div style="flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc;">
+            <div>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm câu..." style="width:70%;">
+                <button onclick="searchSentenceList()">Tìm</button>
+                <button onclick="showUnlearnedSentences()">Chưa học</button>
+            </div>
+            <div id="sentenceList" style="margin-top:15px;"></div>
+        </div>
     </div>
-    <div style="margin-top:15px;">
-        <button onclick="getRandomSentence()" style="font-size:1.2em;">Practice</button>
-        <button onclick="togglePause()" id="pauseBtn" style="font-size:1.2em;">Pause</button>
-        <label style="margin-left:15px;">
-            <input type="checkbox" id="autoSpeakCheckbox" checked>
-            Tự động đọc
-        </label>
-        <label style="margin-left:10px;">
-            Lặp lại mỗi
-            <input type="number" id="repeatSpeakInterval" value="2" min="1" max="10" style="width:40px;">
-            giây
-        </label>
-        <label style="margin-left:10px;">
-            Số lần lặp lại
-            <input type="number" id="repeatCount" value="1" min="1" max="10" style="width:40px;">
-        </label>
-        
-    </div>
-    <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
-    <div id="sentenceList" style="margin-top:25px;"></div>
     <!-- Thêm vào sau phần nhập câu -->
 <form id="excelForm" enctype="multipart/form-data" style="margin-top:15px;">
     <label><b>Nhập câu từ file Excel:</b></label>
@@ -77,7 +91,7 @@ function addSentence() {
         }
     });
 }
-function loadSentences() {
+function loadSentences(filterUnlearned = false, search = '') {
     $.get('/sentences', function(sentences) {
         if (!sentences.length) {
             $('#sentenceList').html('<i>Chưa có mẫu câu nào.</i>');
@@ -87,6 +101,8 @@ function loadSentences() {
         sentences.forEach((item, idx) => {
             let s = typeof item === 'string' ? item : item.sentence;
             let priority = typeof item === 'object' && item.priority;
+            if (filterUnlearned && priority) return; // chỉ lấy câu chưa practice
+            if (search && !s.toLowerCase().includes(search.toLowerCase())) return;
             html += `<li>
                 <span style="cursor:pointer;" onclick="showSentence('${encodeURIComponent(s)}')">${s}</span>
                 <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
@@ -122,10 +138,21 @@ function setupSpeakRepeat() {
         }, repeatSec * 1000);
     }
 }
+function searchSentenceList() {
+    const q = $('#searchInput').val().trim();
+    loadSentences(false, q);
+}
+function showUnlearnedSentences() {
+    loadSentences(true);
+}
+// Khi practice câu, tự động đánh dấu đã practice (ưu tiên)
 function showSentence(s) {
     const sentence = decodeURIComponent(s);
     currentSentence = sentence;
     $('#randomSentence').html(sentence);
+    $.post('/sentences/priority/' + encodeURIComponent(sentence), function() {
+        loadSentences();
+    });
     if ($('#autoSpeakCheckbox').is(':checked')) {
         setupSpeakRepeat();
     } else {

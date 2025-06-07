@@ -187,9 +187,18 @@ def add_sentence():
     if not sentence:
         return jsonify({'error': 'Missing sentence'}), 400
     sentences = load_sentences()
-    if sentence in sentences:
-        return jsonify({'error': 'Sentence already exists'}), 400
-    sentences.append(sentence)
+    # Kiểm tra trùng
+    for item in sentences:
+        s = item['sentence'] if isinstance(item, dict) else item
+        if s == sentence:
+            return jsonify({'error': 'Sentence already exists'}), 400
+    # Thêm các trường mới
+    sentences.append({
+        'sentence': sentence,
+        'priority': False,
+        'shown_today': 0,
+        'last_shown_date': ''
+    })
     save_sentences(sentences)
     return jsonify({'message': 'Sentence added', 'sentences': sentences})
 
@@ -198,11 +207,22 @@ def random_sentence():
     sentences = load_sentences()
     if not sentences:
         return jsonify({'sentence': '', 'message': 'No sentences available'})
+    # Chỉ lấy object, nếu là string thì chuyển sang object
+    for i, s in enumerate(sentences):
+        if isinstance(s, str):
+            sentences[i] = {
+                'sentence': s,
+                'priority': False,
+                'shown_today': 0,
+                'last_shown_date': ''
+            }
     s = random.choice(sentences)
-    # Nếu là object thì lấy trường 'sentence'
-    if isinstance(s, dict):
-        s = s.get('sentence', '')
-    return jsonify({'sentence': s})
+    # Cập nhật shown_today và last_shown_date
+    today = datetime.date.today().isoformat()
+    s['shown_today'] = s.get('shown_today', 0) + 1
+    s['last_shown_date'] = today
+    save_sentences(sentences)
+    return jsonify({'sentence': s['sentence']})
 
 @app.route('/get_content/<mode>')
 def get_content(mode):
@@ -323,7 +343,13 @@ def add_repeat_sentence():
         s = item['sentence'] if isinstance(item, dict) else item
         if s == sentence:
             return jsonify({'error': 'Sentence already exists'}), 400
-    sentences.append({'sentence': sentence, 'priority': False})
+    # Thêm các trường mới
+    sentences.append({
+        'sentence': sentence,
+        'priority': False,
+        'shown_today': 0,
+        'last_shown_date': ''
+    })
     save_repeat_sentences(sentences)
     return jsonify({'message': 'Sentence added', 'sentences': sentences})
 
@@ -332,10 +358,22 @@ def random_repeat_sentence():
     sentences = load_repeat_sentences()
     if not sentences:
         return jsonify({'sentence': '', 'message': 'No sentences available'})
+    # Chỉ lấy object, nếu là string thì chuyển sang object
+    for i, s in enumerate(sentences):
+        if isinstance(s, str):
+            sentences[i] = {
+                'sentence': s,
+                'priority': False,
+                'shown_today': 0,
+                'last_shown_date': ''
+            }
     s = random.choice(sentences)
-    if isinstance(s, dict):
-        s = s.get('sentence', '')
-    return jsonify({'sentence': s})
+    # Cập nhật shown_today và last_shown_date
+    today = datetime.date.today().isoformat()
+    s['shown_today'] = s.get('shown_today', 0) + 1
+    s['last_shown_date'] = today
+    save_repeat_sentences(sentences)
+    return jsonify({'sentence': s['sentence']})
 
 @app.route('/repeat_sentences/<sentence>', methods=['DELETE'])
 def delete_repeat_sentence(sentence):
@@ -382,13 +420,23 @@ def upload_sentences():
             data = load_sentences()
             for s in sentences:
                 if not any((isinstance(item, dict) and item.get('sentence') == s) or item == s for item in data):
-                    data.append({'sentence': s, 'priority': False})
+                    data.append({
+                        'sentence': s,
+                        'priority': False,
+                        'shown_today': 0,
+                        'last_shown_date': ''
+                    })
             save_sentences(data)
         elif target == 'repeat_sentences':
             data = load_repeat_sentences()
             for s in sentences:
                 if not any((isinstance(item, dict) and item.get('sentence') == s) or item == s for item in data):
-                    data.append({'sentence': s, 'priority': False})
+                    data.append({
+                        'sentence': s,
+                        'priority': False,
+                        'shown_today': 0,
+                        'last_shown_date': ''
+                    })
             save_repeat_sentences(data)
         elif target == 'words':
             data = load_words()
