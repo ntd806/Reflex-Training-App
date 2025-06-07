@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import random
 import json
 import os
+from urllib.parse import unquote
 
 app = Flask(__name__)
 
@@ -66,14 +67,18 @@ def add_word():
     save_words(words)
     return jsonify({'message': 'Word added', 'words': words})
 
-@app.route('/words/<word>', methods=['DELETE'])
+@app.route('/words/<path:word>', methods=['DELETE'])
 def delete_word(word):
     """Xóa từ khỏi danh sách"""
+    word = unquote(word).strip()
     words = load_words()
-    if word in words:
-        words.remove(word)
-        save_words(words)
-        return jsonify({'message': f"Deleted word '{word}'", 'words': words})
+    print(f"Trying to delete: '{word}'")
+    print("Current words:", words)
+    for w in words:
+        if w.strip() == word:
+            words.remove(w)
+            save_words(words)
+            return jsonify({'message': f"Deleted word '{word}'", 'words': words})
     return jsonify({'error': 'Word not found'}), 404
 
 @app.route('/words/<word>', methods=['PUT'])

@@ -146,14 +146,13 @@ function showWordList() {
 }
 
 function deleteWord(word) {
-    if (!confirm(`Xoá từ "${word}"?`)) return;
-    $.ajax({
-        url: `/words/${encodeURIComponent(word)}`,
-        type: 'DELETE',
-        success: function() {
-            showWordList();
-        }
-    });
+    if (!confirm(`Delete "${word}"?`)) return;
+    fetch(`/words/${encodeURIComponent(word)}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(data => {
+            if (data.words) renderWordList(data.words);
+            else alert(data.error || 'Delete failed');
+        });
 }
 
 // Gọi showWordList khi thêm từ mới
