@@ -47,6 +47,13 @@
     </div>
     <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
     <div id="sentenceList" style="margin-top:25px;"></div>
+    <!-- Thêm vào sau phần nhập câu -->
+    <form id="excelForm" enctype="multipart/form-data" style="margin-top:15px;">
+        <label><b>Nhập câu từ file Excel:</b></label>
+        <input type="file" id="excelFile" name="excelFile" accept=".xlsx,.xls">
+        <button type="submit">Tải lên</button>
+    </form>
+    <div id="excelStatus" style="color:green;margin-top:5px;"></div>
 </div>
 <script>
 let isPaused = false;
@@ -194,6 +201,32 @@ $('#autoSpeakCheckbox, #repeatSpeakInterval, #repeatCount').on('change', functio
 });
 $(function() {
     loadSentences();
+});
+$('#excelForm').on('submit', function(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById('excelFile');
+    if (!fileInput.files.length) {
+        $('#excelStatus').css('color','red').text('Chưa chọn file!');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('excelFile', fileInput.files[0]);
+    // Chọn target phù hợp với từng trang
+    formData.append('target', 'repeat_sentences'); // hoặc 'repeat_sentences' hoặc 'words'
+    $.ajax({
+        url: '/upload_sentences',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(res) {
+            $('#excelStatus').css('color','green').text(res.message);
+            loadSentences && loadSentences();
+        },
+        error: function(xhr) {
+            $('#excelStatus').css('color','red').text(xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : 'Lỗi!');
+        }
+    });
 });
 </script>
 </body>

@@ -4,6 +4,7 @@ import json
 import os
 from urllib.parse import unquote
 import datetime
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -87,13 +88,28 @@ def add_word():
     data = request.json
     word = data.get('word', '').strip()
     if not word:
-        return jsonify({'error': 'Missing word'}), 400
+        return jsonify({'error': 'Word is required'}), 400
+
     words = load_words()
-    if word in words:
-        return jsonify({'error': 'Word already exists'}), 400
-    words.append(word)
+    # Kiểm tra trùng lặp
+    for w in words:
+        if isinstance(w, dict) and w.get('word', '').strip().lower() == word.lower():
+            return jsonify({'error': 'Word already exists'}), 400
+
+    # Đảm bảo chỉ thêm object đúng định dạng
+    new_word = {
+        "word": word,
+        "priority": False,
+        "shown_today": 0,
+        "last_shown_date": ""
+    }
+    words.append(new_word)
+
+    # Lọc lại list, chỉ giữ object đúng định dạng
+    words = [w for w in words if isinstance(w, dict) and 'word' in w]
+
     save_words(words)
-    return jsonify({'message': 'Word added', 'words': words})
+    return jsonify({'message': 'Word added', 'words': [w['word'] for w in words]})
 
 @app.route('/words/<path:word>', methods=['DELETE'])
 def delete_word(word):
@@ -348,6 +364,43 @@ def toggle_repeat_sentence_priority(sentence):
         save_repeat_sentences(sentences)
         return jsonify({'message': 'Updated'})
     return jsonify({'error': 'Sentence not found'}), 404
+
+@app.route('/upload_sentences', methods=['POST'])
+def upload_sentences():
+    file = request.files.get('excelFile')
+    target = request.form.get('target', 'sentences')
+    if not file:
+        return jsonify({'error': 'No file uploaded'}), 400
+    try:
+        df = pd.read_excel(file)
+        # Giả sử cột đầu tiên là câu, tên cột là 'sentence' hoặc không có header
+        if 'sentence' in df.columns:
+            sentences = df['sentence'].dropna().astype(str).tolist()
+        else:
+            sentences = df.iloc[:,0].dropna().astype(str).tolist()
+        if target == 'sentences':
+            data = load_sentences()
+            for s in sentences:
+                if not any((isinstance(item, dict) and item.get('sentence') == s) or item == s for item in data):
+                    data.append({'sentence': s, 'priority': False})
+            save_sentences(data)
+        elif target == 'repeat_sentences':
+            data = load_repeat_sentences()
+            for s in sentences:
+                if not any((isinstance(item, dict) and item.get('sentence') == s) or item == s for item in data):
+                    data.append({'sentence': s, 'priority': False})
+            save_repeat_sentences(data)
+        elif target == 'words':
+            data = load_words()
+            for s in sentences:
+                if not any((isinstance(item, dict) and item.get('word') == s) or item == s for item in data):
+                    data.append({'word': s, 'priority': False, 'shown_today': 0, 'last_shown_date': ''})
+            save_words(data)
+        else:
+            return jsonify({'error': 'Invalid target'}), 400
+        return jsonify({'message': f'Đã thêm {len(sentences)} câu/từ!'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
