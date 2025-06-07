@@ -8,8 +8,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-   <div class="content">
-     <h1>Reflex Training App</h1>
+<div class="content">
+    <!-- Menu điều hướng -->
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
+    </nav>
+    <h1>Sentence Practice</h1>
     <div id="status" style="font-size:2em; color:blue; font-weight:bold; margin-bottom:20px;"></div>
     <div class="flex-main">
         <!-- Bên trái: Thực hành -->
@@ -19,6 +24,19 @@
                 <input type="number" id="intervalInput" value="10" min="1" max="60" style="width:60px;">
                 <button onclick="updateInterval()">Cập nhật</button>
                 <button onclick="togglePause()">Pause</button>
+                <label style="margin-left:15px;">
+                    <input type="checkbox" id="autoSpeakCheckbox" checked>
+                    Phát âm từ
+                </label>
+                <label style="margin-left:10px;">
+                    Lặp lại mỗi
+                    <input type="number" id="repeatSpeakInterval" value="2" min="1" max="10" style="width:40px;">
+                    giây
+                </label>
+                <label style="margin-left:10px;">
+                    Số lần xuất hiện/từ/ngày
+                    <input type="number" id="maxShowPerDay" value="3" min="1" max="20" style="width:40px;">
+                </label>
                 <span id="intervalStatus" style="margin-left:10px;color:green;font-weight:bold;"></span>
             </div>
             <div id="timer" style="font-size:2em; color:green; font-weight:bold; margin-bottom:20px;"></div>
@@ -56,11 +74,12 @@ function showWordList() {
             return;
         }
         let html = '<b>Danh sách từ:</b><ul style="margin-top:5px;">';
-        words.forEach(word => {
-            html += `<li style="cursor:pointer;display:inline-block;width:90%;">
-                        <span onclick="showWordDetail('${word.replace(/'/g,"\\'")}')">${word}</span>
-                        <button onclick="deleteWord('${word.replace(/'/g,"\\'")}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
-                    </li>`;
+        words.forEach(wordObj => {
+            html += `<li>
+                ${wordObj.word}
+                <button onclick="deleteWord('${wordObj.word}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
+                <button onclick="togglePriority('${wordObj.word}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;${wordObj.priority ? 'background:orange;' : ''}">${wordObj.priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+            </li>`;
         });
         html += '</ul>';
         document.getElementById('wordList').innerHTML = html;
@@ -81,6 +100,15 @@ function showWordDetail(word) {
         `;
         currentText = word;
     });
+}
+
+function togglePriority(word) {
+    fetch(`/words/priority/${encodeURIComponent(word)}`, { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+            if (data.words) showWordList();
+            else alert(data.error || 'Update failed');
+        });
 }
 </script>
 </body>

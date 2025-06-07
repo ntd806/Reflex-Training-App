@@ -3,18 +3,27 @@ import random
 import json
 import os
 from urllib.parse import unquote
+import datetime
 
 app = Flask(__name__)
 
 # Đường dẫn tới file lưu trữ hướng dẫn phát âm
 GUIDES_FILE = 'pronunciation_guides.json'
 WORDS_FILE = 'words.json'
+SENTENCES_FILE = 'sentences.json'
+
+def today_str():
+    return datetime.date.today().isoformat()
 
 def load_words():
     """Tải danh sách từ từ file"""
     if os.path.exists(WORDS_FILE):
         with open(WORDS_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            data = json.load(f)
+            # Nếu là danh sách string cũ thì chuyển sang object
+            if data and isinstance(data[0], str):
+                data = [{"word": w, "priority": False, "shown_today": 0, "last_shown_date": ""} for w in data]
+            return data
     return []
 
 def save_words(words):
@@ -34,14 +43,22 @@ def save_guides(guides):
     with open(GUIDES_FILE, 'w', encoding='utf-8') as f:
         json.dump(guides, f, ensure_ascii=False, indent=4)
 
+def load_sentences():
+    if os.path.exists(SENTENCES_FILE):
+        with open(SENTENCES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_sentences(sentences):
+    with open(SENTENCES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(sentences, f, ensure_ascii=False, indent=4)
+
 def get_pronunciation_guide(word):
-    """Cung cấp hướng dẫn đọc cho từ/cụm từ"""
-    pronunciation_guides = {
-        "about it": "Pronounce as /əˈbaʊt ɪt/, linking 'about' and 'it' smoothly with a quick transition.",
-        "going to": "Pronounce as /ˈɡoʊɪŋ tə/, often reduced to 'gonna' in casual speech.",
-        "want to": "Pronounce as /ˈwɑːnt tə/, often reduced to 'wanna' in casual speech."
-    }
-    return pronunciation_guides.get(word, f"Pronounce '{word}' naturally, linking words smoothly if applicable.")
+    guides = load_guides()
+    for k, v in guides.items():
+        if k.strip().lower() == word.strip().lower():
+            return v
+    return "No guide available."
 
 @app.route('/')
 def index():
@@ -116,7 +133,7 @@ def add_or_update_guide():
     word = data.get('word')
     guide = data.get('guide')
     if not word or not guide:
-        return jsonify({'error': 'Missing word or guide'}), 400
+        return jsonify({'error': 'Word and guide are required'}), 400
     guides = load_guides()
     guides[word] = guide
     save_guides(guides)
@@ -131,6 +148,34 @@ def delete_guide(word):
         save_guides(guides)
         return jsonify({'message': f"Deleted guide for '{word}'"})
     return jsonify({'error': 'Word not found'}), 404
+
+@app.route('/sentences', methods=['GET'])
+def get_sentences():
+    return jsonify(load_sentences())
+
+@app.route('/sentences', methods=['POST'])
+def add_sentence():
+    data = request.json
+    sentence = data.get('sentence', '').strip()
+    if not sentence:
+        return jsonify({'error': 'Missing sentence'}), 400
+    sentences = load_sentences()
+    if sentence in sentences:
+        return jsonify({'error': 'Sentence already exists'}), 400
+    sentences.append(sentence)
+    save_sentences(sentences)
+    return jsonify({'message': 'Sentence added', 'sentences': sentences})
+
+@app.route('/sentences/random')
+def random_sentence():
+    sentences = load_sentences()
+    if not sentences:
+        return jsonify({'sentence': '', 'message': 'No sentences available'})
+    s = random.choice(sentences)
+    # Nếu là object thì lấy trường 'sentence'
+    if isinstance(s, dict):
+        s = s.get('sentence', '')
+    return jsonify({'sentence': s})
 
 @app.route('/get_content/<mode>')
 def get_content(mode):
@@ -160,12 +205,76 @@ def get_content(mode):
         return jsonify({'content': f"Random Year: {year}", 'text': str(year), 'next_mode': 'year'})
     elif mode == 'word':
         words = load_words()
-        if not words:
-            return jsonify({'content': 'No words in the list. Please add words.', 'text': '', 'next_mode': 'word'})
-        word = random.choice(words)
-        guide = get_pronunciation_guide(word)
-        return jsonify({'content': f"Practice this: {word}<br>Pronunciation Guide: {guide}", 'text': word, 'next_mode': 'word'})
+        max_show = int(request.args.get('max_show', 3))
+        today = today_str()
+        # Reset shown_today nếu sang ngày mới
+        for w in words:
+            if w['last_shown_date'] != today:
+                w['shown_today'] = 0
+                w['last_shown_date'] = today
+        save_words(words)
+        # Ưu tiên lấy từ priority chưa đủ số lần/ngày
+        priority_words = [w for w in words if w['priority'] and w['shown_today'] < max_show]
+        normal_words = [w for w in words if not w['priority'] and w['shown_today'] < max_show]
+        candidates = priority_words if priority_words else normal_words
+        if not candidates:
+            return jsonify({'content': 'Đã hoàn thành hết các từ ưu tiên/ngày!', 'text': '', 'next_mode': 'word'})
+        word_obj = random.choice(candidates)
+        word_obj['shown_today'] += 1
+        word_obj['last_shown_date'] = today
+        save_words(words)
+        guide = get_pronunciation_guide(word_obj['word'])
+        return jsonify({'content': f"Practice this: {word_obj['word']}<br>Pronunciation Guide: {guide}", 'text': word_obj['word'], 'next_mode': 'word'})
     return jsonify({'content': 'Invalid mode', 'text': '', 'next_mode': mode})
+
+@app.route('/words/priority/<word>', methods=['POST'])
+def toggle_priority(word):
+    words = load_words()
+    for w in words:
+        if w['word'] == word:
+            w['priority'] = not w.get('priority', False)
+            save_words(words)
+            return jsonify({'message': 'Updated', 'words': words})
+    return jsonify({'error': 'Word not found'}), 404
+
+@app.route('/priority_words')
+def get_priority_words():
+    words = load_words()
+    priority = [w['word'] for w in words if w.get('priority')]
+    return jsonify(priority)
+
+@app.route('/sentence_practice')
+def sentence_practice():
+    return render_template('sentence.html')
+
+@app.route('/sentences/<sentence>', methods=['DELETE'])
+def delete_sentence(sentence):
+    sentences = load_sentences()
+    # Hỗ trợ cả dạng object và string
+    new_sentences = []
+    for item in sentences:
+        s = item['sentence'] if isinstance(item, dict) else item
+        if s != sentence:
+            new_sentences.append(item)
+    save_sentences(new_sentences)
+    return jsonify({'message': 'Deleted'})
+
+@app.route('/sentences/priority/<sentence>', methods=['POST'])
+def toggle_sentence_priority(sentence):
+    sentences = load_sentences()
+    found = False
+    for i, item in enumerate(sentences):
+        if isinstance(item, str):
+            if item == sentence:
+                sentences[i] = {'sentence': item, 'priority': True}
+                found = True
+        elif item.get('sentence') == sentence:
+            item['priority'] = not item.get('priority', False)
+            found = True
+    if found:
+        save_sentences(sentences)
+        return jsonify({'message': 'Updated'})
+    return jsonify({'error': 'Sentence not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

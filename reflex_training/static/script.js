@@ -5,6 +5,7 @@ let timerId = null;
 let currentText = '';
 let intervalSeconds = 0;
 let secondsLeft = 0;
+let speakRepeatId = null; // interval id cho lặp lại phát âm
 
 const modeOrder = ['number', 'year', 'word'];
 
@@ -18,6 +19,7 @@ function speak(text) {
 
 function addWords() {
     const word = document.getElementById('wordInput').value.trim();
+    const guide = document.getElementById('guideInput').value.trim();
     if (!word) {
         document.getElementById('output').innerHTML = 'Vui lòng nhập từ!';
         return;
@@ -30,7 +32,19 @@ function addWords() {
         success: function(data) {
             document.getElementById('output').innerHTML = data.message;
             document.getElementById('wordInput').value = '';
+            document.getElementById('guideInput').value = '';
             showWordList();
+            // Nếu có hướng dẫn đọc, gửi lên server
+            if (guide) {
+                $.ajax({
+                    url: '/guides',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ word: word, guide: guide }),
+                    success: function() {},
+                    error: function() {}
+                });
+            }
         },
         error: function(xhr) {
             const res = xhr.responseJSON;
@@ -44,16 +58,36 @@ function getNextMode(mode) {
     return modeOrder[(idx + 1) % modeOrder.length];
 }
 
+function clearSpeakRepeat() {
+    if (speakRepeatId) {
+        clearInterval(speakRepeatId);
+        speakRepeatId = null;
+    }
+}
+
+function setupSpeakRepeat() {
+    clearSpeakRepeat();
+    if (document.getElementById('autoSpeakCheckbox').checked) {
+        let repeatSec = parseInt(document.getElementById('repeatSpeakInterval').value) || 2;
+        speak(currentText);
+        speakRepeatId = setInterval(() => {
+            if (isPaused) return;
+            speak(currentText);
+        }, repeatSec * 1000);
+    }
+}
+
 function startPractice(mode) {
     if (intervalId) clearInterval(intervalId);
     if (timerId) clearInterval(timerId);
+    clearSpeakRepeat();
     currentMode = mode;
     isPaused = false;
     intervalSeconds = parseInt(document.getElementById('intervalInput').value) || 6;
     secondsLeft = intervalSeconds;
     document.getElementById('status').innerText = 'Practicing...';
     updateTimer();
-    loadContent(mode);
+    loadContent(mode, true);
 
     timerId = setInterval(() => {
         if (!isPaused) {
@@ -62,7 +96,7 @@ function startPractice(mode) {
             updateTimer();
             if (secondsLeft <= 0) {
                 secondsLeft = intervalSeconds;
-                loadContent(currentMode);
+                loadContent(currentMode, true);
             }
         }
     }, 1000);
@@ -72,7 +106,7 @@ function updateTimer() {
     document.getElementById('timer').innerText = `Còn lại: ${secondsLeft}s`;
 }
 
-function loadContent(mode) {
+function loadContent(mode, autoSpeak = false) {
     let params = {};
     if (mode === 'number') {
         let minVal = document.getElementById('minNumber').value;
@@ -85,6 +119,9 @@ function loadContent(mode) {
         let maxYear = document.getElementById('maxYear').value;
         params.min = (minYear !== '' && !isNaN(Number(minYear))) ? Number(minYear) : 1;
         params.max = (maxYear !== '' && !isNaN(Number(maxYear))) ? Number(maxYear) : 2999;
+    }
+    if (mode === 'word') {
+        params.max_show = parseInt(document.getElementById('maxShowPerDay').value) || 3;
     }
     $.get({
         url: `/get_content/${mode}`,
@@ -100,6 +137,12 @@ function loadContent(mode) {
             `;
             currentText = data.text;
             currentMode = data.next_mode;
+            // Lặp lại phát âm nếu checkbox được chọn và autoSpeak=true
+            if (autoSpeak && document.getElementById('autoSpeakCheckbox').checked) {
+                setupSpeakRepeat();
+            } else {
+                clearSpeakRepeat();
+            }
         }
     });
 }
@@ -158,6 +201,7 @@ function deleteWord(word) {
 // Gọi showWordList khi thêm từ mới
 function addWords() {
     const word = document.getElementById('wordInput').value.trim();
+    const guide = document.getElementById('guideInput').value.trim();
     if (!word) {
         document.getElementById('output').innerHTML = 'Vui lòng nhập từ!';
         return;
@@ -170,7 +214,19 @@ function addWords() {
         success: function(data) {
             document.getElementById('output').innerHTML = data.message;
             document.getElementById('wordInput').value = '';
+            document.getElementById('guideInput').value = '';
             showWordList();
+            // Nếu có hướng dẫn đọc, gửi lên server
+            if (guide) {
+                $.ajax({
+                    url: '/guides',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ word: word, guide: guide }),
+                    success: function() {},
+                    error: function() {}
+                });
+            }
         },
         error: function(xhr) {
             const res = xhr.responseJSON;

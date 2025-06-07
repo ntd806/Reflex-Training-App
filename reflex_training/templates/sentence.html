@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentence Practice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .priority-btn[priority="true"] { background: orange; }
+    </style>
+</head>
+<body>
+<div class="content">
+     <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
+    </nav>
+    <h1>Sentence Practice</h1>
+    <div>
+        <input type="text" id="sentenceInput" placeholder="Nhập mẫu câu..." style="width:60%;">
+        <button onclick="addSentence()">Thêm mẫu câu</button>
+    </div>
+    <div style="margin-top:15px;">
+        <button onclick="getRandomSentence()" style="font-size:1.2em;">Practice</button>
+        <button onclick="togglePause()" id="pauseBtn" style="font-size:1.2em;">Pause</button>
+        <label style="margin-left:15px;">
+            <input type="checkbox" id="autoSpeakCheckbox" checked>
+            Tự động đọc
+        </label>
+        <label style="margin-left:10px;">
+            Lặp lại mỗi
+            <input type="number" id="repeatSpeakInterval" value="2" min="1" max="10" style="width:40px;">
+            giây
+        </label>
+        <label style="margin-left:10px;">
+            Số lần lặp lại
+            <input type="number" id="repeatCount" value="1" min="1" max="10" style="width:40px;">
+        </label>
+    </div>
+    <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
+    <div id="sentenceList" style="margin-top:25px;"></div>
+</div>
+<script>
+let isPaused = false;
+let speakRepeatId = null;
+let currentSentence = '';
+let repeatTimes = 1;
+let spokenCount = 0;
+
+function addSentence() {
+    const s = $('#sentenceInput').val().trim();
+    if (!s) return;
+    $.ajax({
+        url: '/sentences',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({sentence: s}),
+        success: function(data) {
+            $('#sentenceInput').val('');
+            loadSentences();
+        }
+    });
+}
+function loadSentences() {
+    $.get('/sentences', function(sentences) {
+        if (!sentences.length) {
+            $('#sentenceList').html('<i>Chưa có mẫu câu nào.</i>');
+            return;
+        }
+        let html = '<b>Danh sách mẫu câu:</b><ul>';
+        sentences.forEach((item, idx) => {
+            let s = typeof item === 'string' ? item : item.sentence;
+            let priority = typeof item === 'object' && item.priority;
+            html += `<li>
+                <span style="cursor:pointer;" onclick="showSentence('${encodeURIComponent(s)}')">${s}</span>
+                <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
+                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+            </li>`;
+        });
+        html += '</ul>';
+        $('#sentenceList').html(html);
+    });
+}
+function clearSpeakRepeat() {
+    if (speakRepeatId) {
+        clearInterval(speakRepeatId);
+        speakRepeatId = null;
+    }
+}
+function setupSpeakRepeat() {
+    clearSpeakRepeat();
+    if ($('#autoSpeakCheckbox').is(':checked')) {
+        let repeatSec = parseInt($('#repeatSpeakInterval').val()) || 2;
+        repeatTimes = parseInt($('#repeatCount').val()) || 1;
+        spokenCount = 0;
+        speak(currentSentence);
+        spokenCount++;
+        speakRepeatId = setInterval(() => {
+            if (isPaused) return;
+            if (spokenCount >= repeatTimes) {
+                clearSpeakRepeat();
+                return;
+            }
+            speak(currentSentence);
+            spokenCount++;
+        }, repeatSec * 1000);
+    }
+}
+function showSentence(s) {
+    const sentence = decodeURIComponent(s);
+    currentSentence = sentence;
+    $('#randomSentence').html(sentence);
+    if ($('#autoSpeakCheckbox').is(':checked')) {
+        setupSpeakRepeat();
+    } else {
+        clearSpeakRepeat();
+    }
+}
+function getRandomSentence() {
+    $.get('/sentences/random', function(data) {
+        if (!data.sentence) {
+            $('#randomSentence').html('<i>Chưa có mẫu câu nào.</i>');
+            return;
+        }
+        currentSentence = data.sentence;
+        $('#randomSentence').html(data.sentence);
+        if ($('#autoSpeakCheckbox').is(':checked')) {
+            setupSpeakRepeat();
+        } else {
+            clearSpeakRepeat();
+        }
+    });
+}
+function speak(text) {
+    if (text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
+}
+function deleteSentence(s) {
+    const sentence = decodeURIComponent(s);
+    if (!confirm(`Xoá mẫu câu: "${sentence}"?`)) return;
+    $.ajax({
+        url: '/sentences/' + encodeURIComponent(sentence),
+        type: 'DELETE',
+        success: function() { loadSentences(); }
+    });
+}
+function togglePriority(s) {
+    const sentence = decodeURIComponent(s);
+    $.post('/sentences/priority/' + encodeURIComponent(sentence), function() {
+        loadSentences();
+    });
+}
+function togglePause() {
+    isPaused = !isPaused;
+    $('#pauseBtn').text(isPaused ? 'Resume' : 'Pause');
+}
+$('#autoSpeakCheckbox, #repeatSpeakInterval, #repeatCount').on('change', function() {
+    if (currentSentence && $('#autoSpeakCheckbox').is(':checked')) {
+        setupSpeakRepeat();
+    } else {
+        clearSpeakRepeat();
+    }
+});
+$(function() {
+    loadSentences();
+});
+</script>
+</body>
+</html>
