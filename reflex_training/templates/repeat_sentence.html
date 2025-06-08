@@ -13,7 +13,7 @@
 <div class="content">
       <nav style="margin-bottom:20px;">
         <a href="/" style="margin-right:20px;">Trang chính</a>
-        <a href="/sentence_practice" style="margin-right:20px;">Luyện mẫu câu</a>
+        <a href="/sentence_practice" style="margin-right:20px;">WFD</a>
         <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
         <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
         <label style="margin-left:10px;">
@@ -26,8 +26,8 @@
         <!-- Bên trái: Thực hành -->
         <div style="flex: 6; min-width: 0;">
             <div>
-                <input type="text" id="sentenceInput" placeholder="Nhập mẫu câu..." style="width:60%;">
-                <button onclick="addSentence()">Thêm mẫu câu</button>
+                <input type="text" id="sentenceInput" placeholder="Nhập nhiều mẫu câu, ngăn cách bởi dấu chấm (.)" style="width:60%;">
+                <button onclick="addSentences()">Thêm mẫu câu</button>
             </div>
             <div style="margin-top:15px;">
                 <button onclick="getRandomSentence()" style="font-size:1.2em;">Practice</button>
@@ -74,18 +74,27 @@ let repeatTimes = 1;
 let spokenCount = 0;
 let voices = [];
 
-function addSentence() {
-    const s = $('#sentenceInput').val().trim();
-    if (!s) return;
-    $.ajax({
-        url: '/repeat_sentences',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({sentence: s}),
-        success: function(data) {
-            $('#sentenceInput').val('');
-            loadSentences();
-        }
+function addSentences() {
+    const input = $('#sentenceInput').val().trim();
+    if (!input) return;
+    // Tách các câu bởi dấu chấm, loại bỏ khoảng trắng thừa và câu rỗng
+    const sentences = input.split('.').map(s => s.trim()).filter(s => s);
+    let added = 0;
+    let done = 0;
+    sentences.forEach(sentence => {
+        $.ajax({
+            url: '/repeat_sentences',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({sentence}),
+            complete: function() {
+                done++;
+                if (done === sentences.length) {
+                    $('#sentenceInput').val('');
+                    loadSentences();
+                }
+            }
+        });
     });
 }
 function loadSentences(filterUnlearned = false, search = '') {
