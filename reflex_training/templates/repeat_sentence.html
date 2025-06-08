@@ -202,15 +202,23 @@ window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener('DOMContentLoaded', loadVoices);
 
 function speak(text) {
-    if (text) {
-        const utterance = new SpeechSynthesisUtterance(text);
+    if (!text) return;
+    // Chia nhỏ câu theo dấu chấm, xuống dòng, hoặc dấu phẩy
+    const parts = text.match(/[^\.!\?\n]+[\.!\?\n]?/g) || [text];
+    function speakPart(i) {
+        if (i >= parts.length) return;
+        const utterance = new SpeechSynthesisUtterance(parts[i].trim());
         const voiceSelect = document.getElementById('voiceSelect');
         if (voiceSelect && voices[voiceSelect.value]) {
             utterance.voice = voices[voiceSelect.value];
             utterance.lang = voices[voiceSelect.value].lang;
         }
+        utterance.onend = function() {
+            speakPart(i + 1);
+        };
         window.speechSynthesis.speak(utterance);
     }
+    speakPart(0);
 }
 function deleteSentence(s) {
     const sentence = decodeURIComponent(s);
