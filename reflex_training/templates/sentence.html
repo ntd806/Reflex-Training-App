@@ -125,9 +125,9 @@ function loadSentences(filterUnlearned = false, search = '') {
             if (filterUnlearned && priority) return; // chỉ lấy câu chưa practice
             if (search && !s.toLowerCase().includes(search.toLowerCase())) return;
             html += `<li>
-                <span style="cursor:pointer;" onclick="showSentence('${encodeURIComponent(s)}')">${s}</span>
-                <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
-                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+                <span style="cursor:pointer;" onclick="showSentence(&quot;${encodeURIComponent(s)}&quot;)">${s}</span>
+                <button onclick="deleteSentence(&quot;${encodeURIComponent(s)}&quot;);event.stopPropagation();" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
+                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority(&quot;${encodeURIComponent(s)}&quot;);event.stopPropagation();" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
             </li>`;
         });
         html += '</ul>';
@@ -177,19 +177,21 @@ function showSentence(s) {
     const sentence = decodeURIComponent(s);
     currentSentence = sentence;
     $('#randomSentence').html(sentence);
-    $.post('/sentences/priority/' + encodeURIComponent(sentence), function() {
-        loadSentences();
-    });
     if ($('#autoSpeakCheckbox').is(':checked')) {
-        setupSpeakRepeat();
+        clearSpeakRepeat(); // Dừng lặp lại cũ nếu có
+        speak(currentSentence); // Đọc ngay khi click
+        setupSpeakRepeat();     // Thiết lập lặp lại nếu cần
     } else {
         clearSpeakRepeat();
     }
 }
 function getRandomSentence() {
-    $.get('/sentences/random', function(data) {
+    // Lấy số lần lặp lại/ngày từ input
+    const maxShow = parseInt($('#repeatCount').val()) || 1;
+    $.get('/sentences/random?max_show=' + maxShow, function(data) {
         if (!data.sentence) {
-            $('#randomSentence').html('<i>Chưa có mẫu câu nào.</i>');
+            $('#randomSentence').html('<i>Đã hoàn thành hết các câu ưu tiên/ngày!</i>');
+            clearSpeakRepeat();
             return;
         }
         currentSentence = data.sentence;
@@ -229,6 +231,12 @@ function speak(text) {
             utterance.voice = voices[voiceSelect.value];
             utterance.lang = voices[voiceSelect.value].lang;
         }
+        utterance.onend = function() {
+            // Nếu tự động đọc, lấy câu tiếp theo
+            if ($('#autoSpeakCheckbox').is(':checked')) {
+                getRandomSentence();
+            }
+        };
         window.speechSynthesis.speak(utterance);
         return;
     }
@@ -246,7 +254,13 @@ function speak(text) {
 
     let i = 0;
     function speakPart() {
-        if (i >= parts.length) return;
+        if (i >= parts.length) {
+            // Đọc xong toàn bộ câu, lấy câu tiếp theo nếu tự động đọc
+            if ($('#autoSpeakCheckbox').is(':checked')) {
+                getRandomSentence();
+            }
+            return;
+        }
         const utterance = new SpeechSynthesisUtterance(parts[i]);
         const voiceSelect = document.getElementById('voiceSelect');
         if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {

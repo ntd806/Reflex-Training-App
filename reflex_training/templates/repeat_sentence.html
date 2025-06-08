@@ -203,22 +203,58 @@ window.addEventListener('DOMContentLoaded', loadVoices);
 
 function speak(text) {
     if (!text) return;
-    // Chia nhỏ câu theo dấu chấm, xuống dòng, hoặc dấu phẩy
-    const parts = text.match(/[^\.!\?\n]+[\.!\?\n]?/g) || [text];
-    function speakPart(i) {
-        if (i >= parts.length) return;
-        const utterance = new SpeechSynthesisUtterance(parts[i].trim());
+    window.speechSynthesis.cancel();
+
+    // Nếu không có dấu ngắt, đọc toàn bộ câu
+    if (!/[\.!\?\n,]/.test(text)) {
+        const utterance = new SpeechSynthesisUtterance(text.trim());
         const voiceSelect = document.getElementById('voiceSelect');
-        if (voiceSelect && voices[voiceSelect.value]) {
+        if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {
             utterance.voice = voices[voiceSelect.value];
             utterance.lang = voices[voiceSelect.value].lang;
         }
         utterance.onend = function() {
-            speakPart(i + 1);
+            // Chỉ tự động lấy câu mới nếu checkbox được bật
+            if ($('#autoSpeakCheckbox').is(':checked')) {
+                getRandomSentence();
+            }
+        };
+        window.speechSynthesis.speak(utterance);
+        return;
+    }
+
+    // Nếu có dấu ngắt, chia nhỏ và đọc từng phần
+    let parts = text.split(/([\.!\?\n,]+)/g).reduce((arr, cur, idx, src) => {
+        if (idx % 2 === 0) {
+            let next = src[idx + 1] || '';
+            let phrase = (cur + next).trim();
+            if (phrase) arr.push(phrase);
+        }
+        return arr;
+    }, []);
+    if (!parts.length) parts = [text];
+
+    let i = 0;
+    function speakPart() {
+        if (i >= parts.length) {
+            if ($('#autoSpeakCheckbox').is(':checked')) {
+                getRandomSentence();
+            }
+            return;
+        }
+        const utterance = new SpeechSynthesisUtterance(parts[i]);
+        const voiceSelect = document.getElementById('voiceSelect');
+        if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {
+            utterance.voice = voices[voiceSelect.value];
+            utterance.lang = voices[voiceSelect.value].lang;
+        }
+        utterance.onend = function() {
+            i++;
+            speakPart();
         };
         window.speechSynthesis.speak(utterance);
     }
-    speakPart(0);
+    speakPart();
 }
 function deleteSentence(s) {
     const sentence = decodeURIComponent(s);

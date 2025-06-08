@@ -194,17 +194,15 @@ def get_sentences():
 
 @app.route('/sentences', methods=['POST'])
 def add_sentence():
-    data = request.json
+    data = request.get_json()
     sentence = data.get('sentence', '').strip()
     if not sentence:
-        return jsonify({'error': 'Missing sentence'}), 400
+        return jsonify({'error': 'Sentence is required'}), 400
     sentences = load_sentences()
-    # Kiểm tra trùng
-    for item in sentences:
-        s = item['sentence'] if isinstance(item, dict) else item
-        if s == sentence:
-            return jsonify({'error': 'Sentence already exists'}), 400
-    # Thêm các trường mới
+    # Kiểm tra trùng lặp
+    if any((s.get('sentence') if isinstance(s, dict) else s) == sentence for s in sentences):
+        return jsonify({'error': 'Sentence already exists'}), 400
+    # Thêm đúng cấu trúc object
     sentences.append({
         'sentence': sentence,
         'priority': False,
@@ -212,14 +210,16 @@ def add_sentence():
         'last_shown_date': ''
     })
     save_sentences(sentences)
-    return jsonify({'message': 'Sentence added', 'sentences': sentences})
+    return jsonify({'message': 'Sentence added'})
 
 @app.route('/sentences/random')
 def random_sentence():
     sentences = load_sentences()
     if not sentences:
         return jsonify({'sentence': '', 'message': 'No sentences available'})
-    # Chỉ lấy object, nếu là string thì chuyển sang object
+    # Đảm bảo object
+    today = datetime.date.today().isoformat()
+    max_show = int(request.args.get('max_show', 3))
     for i, s in enumerate(sentences):
         if isinstance(s, str):
             sentences[i] = {
@@ -228,9 +228,19 @@ def random_sentence():
                 'shown_today': 0,
                 'last_shown_date': ''
             }
-    s = random.choice(sentences)
-    # Cập nhật shown_today và last_shown_date
-    today = datetime.date.today().isoformat()
+    # Reset shown_today nếu sang ngày mới
+    for s in sentences:
+        if s.get('last_shown_date') != today:
+            s['shown_today'] = 0
+            s['last_shown_date'] = today
+    # Ưu tiên lấy câu priority chưa đủ số lần/ngày
+    priority_sentences = [s for s in sentences if s.get('priority') and s.get('shown_today', 0) < max_show]
+    normal_sentences = [s for s in sentences if not s.get('priority') and s.get('shown_today', 0) < max_show]
+    candidates = priority_sentences if priority_sentences else normal_sentences
+    if not candidates:
+        save_sentences(sentences)
+        return jsonify({'sentence': '', 'message': 'Đã hoàn thành hết các câu ưu tiên/ngày!'})
+    s = random.choice(candidates)
     s['shown_today'] = s.get('shown_today', 0) + 1
     s['last_shown_date'] = today
     save_sentences(sentences)
@@ -345,17 +355,14 @@ def get_repeat_sentences():
 
 @app.route('/repeat_sentences', methods=['POST'])
 def add_repeat_sentence():
-    data = request.json
+    data = request.get_json()
     sentence = data.get('sentence', '').strip()
     if not sentence:
-        return jsonify({'error': 'Missing sentence'}), 400
+        return jsonify({'error': 'Sentence is required'}), 400
     sentences = load_repeat_sentences()
-    # Kiểm tra trùng
-    for item in sentences:
-        s = item['sentence'] if isinstance(item, dict) else item
-        if s == sentence:
-            return jsonify({'error': 'Sentence already exists'}), 400
-    # Thêm các trường mới
+    # Kiểm tra trùng lặp
+    if any((s.get('sentence') if isinstance(s, dict) else s) == sentence for s in sentences):
+        return jsonify({'error': 'Sentence already exists'}), 400
     sentences.append({
         'sentence': sentence,
         'priority': False,
@@ -363,7 +370,7 @@ def add_repeat_sentence():
         'last_shown_date': ''
     })
     save_repeat_sentences(sentences)
-    return jsonify({'message': 'Sentence added', 'sentences': sentences})
+    return jsonify({'message': 'Sentence added'})
 
 @app.route('/repeat_sentences/random')
 def random_repeat_sentence():
