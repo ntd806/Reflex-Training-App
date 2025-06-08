@@ -5,6 +5,7 @@
     <title>YouTube Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <style>
         .flex-main { display: flex; gap: 20px; }
         .yt-list-col { flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc; }
@@ -36,6 +37,7 @@
         <div class="yt-player-col">
             <div>
                 <input type="text" id="youtubeInput" placeholder="Paste YouTube link..." style="width:60%;">
+                <input type="text" id="videoTypeInput" placeholder="Loại video (ví dụ: TED, News...)" style="width:30%; margin-left:10px;">
                 <button onclick="addYoutubeLink()">Add</button>
                 <span id="loadingStatus" style="margin-left:10px; color:green; font-weight:bold;"></span>
             </div>
@@ -47,10 +49,32 @@
                 <input type="text" id="searchInput" placeholder="Tìm kiếm video..." style="width:70%;">
                 <button onclick="searchYoutubeList()">Tìm</button>
             </div>
+            <!-- Thêm menu phụ filter loại video bên trên danh sách video -->
+            <div style="margin-bottom:10px;">
+                <label for="videoTypeFilter">Loại video:</label>
+                <select id="videoTypeFilter" onchange="filterByType()" style="min-width:100px;">
+                    <option value="">Tất cả</option>
+                </select>
+            </div>
             <div id="youtubeList" style="margin-top:20px;"></div>
         </div>
     </div>
 </div>
+<!-- Thay thế div transcriptModal bằng đoạn sau để có thể cuộn nội dung -->
+<div id="transcriptModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; max-height:80vh; overflow-y:auto; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button onclick="saveTranscript()" style="background:#4CAF50; color:#fff; border:none; padding:6px 16px; border-radius:4px;">Lưu</button>
+        <span style="flex:1;"></span>
+        <span style="cursor:pointer; font-size:1.5em; color:#d00; font-weight:bold;" onclick="closeTranscriptModal()">×</span>
+    </div>
+    <h3 style="margin-top:10px;">Lưu transcript (có thể dùng màu sắc, in đậm, nghiêng...)</h3>
+    <textarea id="transcriptInput" style="height:200px; background:#fafaff; margin-bottom:10px;"></textarea>
+    <input type="hidden" id="transcriptUrl">
+    <div style="margin-top:10px; text-align:right; color:#888; font-size:1em;">
+        Cuộn lên/xuống bằng chuột hoặc trackpad
+    </div>
+</div>
+
 <script>
 let allYoutubeLinks = [];
 let ytPlayer, ytPlayerInterval, lastUrl = '', lastVideoId = '', lastTime = 0;
@@ -67,17 +91,20 @@ window.onYouTubeIframeAPIReady = function() {
     // Không tạo player ở đây, chỉ tạo khi playYoutube được gọi
 };
 
+// Sửa hàm addYoutubeLink để gửi loại video lên backend
 function addYoutubeLink() {
     const url = $('#youtubeInput').val().trim();
+    const videoType = $('#videoTypeInput').val().trim();
     if (!url) return;
     $('#loadingStatus').text('Đang thêm, vui lòng chờ...');
     $.ajax({
         url: '/youtube_links',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({url}),
+        data: JSON.stringify({url, video_type: videoType}),
         success: function() {
             $('#youtubeInput').val('');
+            $('#videoTypeInput').val('');
             $('#loadingStatus').text('Thêm thành công!');
             loadYoutubeLinks();
             setTimeout(() => { $('#loadingStatus').text(''); }, 1500);
@@ -92,11 +119,17 @@ function addYoutubeLink() {
         }
     });
 }
+
 function loadYoutubeLinks() {
     $.get('/youtube_links', function(links) {
         // Sắp xếp theo thời gian mới nhất
         links.sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''));
         allYoutubeLinks = links;
+        // Cập nhật menu loại video
+        const types = [...new Set(links.map(l => l.video_type).filter(Boolean))];
+        let options = '<option value="">Tất cả</option>';
+        types.forEach(t => options += `<option value="${t}">${t}</option>`);
+        $('#videoTypeFilter').html(options);
         renderYoutubeList(links);
     });
 }
@@ -107,6 +140,9 @@ function renderYoutubeList(links) {
             <span style="cursor:pointer;color:blue;text-decoration:underline;" onclick="playYoutube('${link.url}',${link.last_time||0})">${link.title || link.url}</span>
             <span style="margin-left:10px;">[${link.watched ? 'Đã xem' : 'Chưa xem'}]</span>
             <span style="margin-left:10px;">${link.added_date}</span>
+            ${link.video_type ? `<span style="margin-left:10px; color:purple;">(${link.video_type})</span>` : ''}
+            <a href="javascript:void(0)" onclick="openTranscript('${link.url}')" style="margin-left:10px;color:#007bff;">Transcript</a>
+            <button onclick="showTranscriptInput('${link.url}')" style="margin-left:5px;">Lưu transcript</button>
         </li>`;
     });
     html += '</ul>';
@@ -120,6 +156,27 @@ function searchYoutubeList() {
     }
     const filtered = allYoutubeLinks.filter(link => link.url.toLowerCase().includes(q));
     renderYoutubeList(filtered);
+}
+
+// Lọc và hiển thị loại video
+function filterByType() {
+    const type = $('#videoTypeFilter').val();
+    if (!type) {
+        renderYoutubeList(allYoutubeLinks);
+        return;
+    }
+    const filtered = allYoutubeLinks.filter(link => (link.video_type || '') === type);
+    renderYoutubeList(filtered);
+}
+
+// Tự động điền loại video vào menu filter
+function populateVideoTypeFilter(links) {
+    const types = [...new Set(links.map(link => link.type).filter(type => type))];
+    const filterSelect = $('#videoTypeFilter');
+    filterSelect.empty().append('<option value="">Tất cả</option>');
+    types.forEach(type => {
+        filterSelect.append(`<option value="${type}">${type}</option>`);
+    });
 }
 
 function playYoutube(url, lastTime) {
@@ -232,6 +289,68 @@ if (typeof speechSynthesis !== 'undefined') {
 
 $(function() {
     loadYoutubeLinks();
+});
+
+function showTranscriptInput(url) {
+    const link = allYoutubeLinks.find(l => l.url === url);
+    if (ckeditorInstance) {
+        ckeditorInstance.setData(link && link.transcript ? link.transcript : '');
+    }
+    $('#transcriptUrl').val(url);
+    $('#transcriptModal').show();
+}
+
+function closeTranscriptModal() {
+    $('#transcriptModal').hide();
+}
+
+function saveTranscript() {
+    const url = $('#transcriptUrl').val();
+    const transcript = ckeditorInstance ? ckeditorInstance.getData() : '';
+    $.ajax({
+        url: '/youtube_links/update',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({url, transcript}),
+        success: function() {
+            closeTranscriptModal();
+            loadYoutubeLinks();
+        }
+    });
+}
+
+function openTranscript(url) {
+    const link = allYoutubeLinks.find(l => l.url === url);
+    if (!link || !link.transcript) {
+        alert('Chưa có transcript!');
+        return;
+    }
+    // Mở cửa sổ mới hiển thị transcript đã định dạng
+    const win = window.open('', '_blank', 'width=800,height=600');
+    win.document.write(`<html><head><title>Transcript</title></head><body style="font-family:sans-serif;"><div style="padding:20px;">${link.transcript}</div></body></html>`);
+    win.document.close();
+}
+
+let ckeditorInstance;
+$(document).ready(function() {
+    ClassicEditor
+        .create(document.querySelector('#transcriptInput'), {
+            toolbar: [
+                'heading', '|',
+                'bold', 'italic', 'underline', 'strikethrough', '|',
+                'fontColor', 'fontBackgroundColor', 'fontFamily', 'fontSize', '|',
+                'bulletedList', 'numberedList', '|',
+                'alignment', '|',
+                'link', 'blockQuote', 'insertTable', 'undo', 'redo'
+            ],
+            fontSize: {
+                options: [9, 11, 13, 'default', 17, 19, 21, 27, 35],
+                supportAllValues: false
+            }
+        })
+        .then(editor => {
+            ckeditorInstance = editor;
+        });
 });
 </script>
 </body>

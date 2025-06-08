@@ -474,6 +474,7 @@ def get_youtube_links():
 def add_youtube_link():
     data = request.json
     url = data.get('url', '').strip()
+    video_type = data.get('video_type', '').strip()
     if not url:
         return jsonify({'error': 'Missing URL'}), 400
     links = load_youtube_links()
@@ -495,7 +496,8 @@ def add_youtube_link():
         'title': title,
         'added_date': today_str(),
         'watched': False,
-        'last_time': 0
+        'last_time': 0,
+        'video_type': video_type
     })
     save_youtube_links(links)
     return jsonify({'message': 'Added', 'links': links})
@@ -506,6 +508,7 @@ def update_youtube_link():
     url = data.get('url')
     last_time = data.get('last_time', 0)
     watched = data.get('watched', None)
+    transcript = data.get('transcript', None)
     links = load_youtube_links()
     for link in links:
         if link['url'] == url:
@@ -513,6 +516,8 @@ def update_youtube_link():
                 link['last_time'] = last_time
             if watched is not None:
                 link['watched'] = watched
+            if transcript is not None:
+                link['transcript'] = transcript
     save_youtube_links(links)
     return jsonify({'message': 'Updated'})
 
