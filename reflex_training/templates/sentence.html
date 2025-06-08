@@ -117,6 +117,8 @@ function clearSpeakRepeat() {
         clearInterval(speakRepeatId);
         speakRepeatId = null;
     }
+    // Stop any ongoing speech immediately
+    window.speechSynthesis.cancel();
 }
 function setupSpeakRepeat() {
     clearSpeakRepeat();
@@ -127,6 +129,10 @@ function setupSpeakRepeat() {
         speak(currentSentence);
         spokenCount++;
         speakRepeatId = setInterval(() => {
+            if (!$('#autoSpeakCheckbox').is(':checked')) {
+                clearSpeakRepeat();
+                return;
+            }
             if (isPaused) return;
             if (spokenCount >= repeatTimes) {
                 clearSpeakRepeat();
@@ -217,6 +223,14 @@ function togglePriority(s) {
 function togglePause() {
     isPaused = !isPaused;
     $('#pauseBtn').text(isPaused ? 'Resume' : 'Pause');
+    if (isPaused) {
+        window.speechSynthesis.cancel(); // Dừng audio ngay lập tức khi Pause
+    } else {
+        // Nếu còn lượt lặp lại và checkbox đang bật thì tiếp tục lặp lại
+        if (currentSentence && $('#autoSpeakCheckbox').is(':checked')) {
+            setupSpeakRepeat();
+        }
+    }
 }
 $('#autoSpeakCheckbox, #repeatSpeakInterval, #repeatCount').on('change', function() {
     if (currentSentence && $('#autoSpeakCheckbox').is(':checked')) {
