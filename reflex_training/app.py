@@ -216,7 +216,6 @@ def random_sentence():
     sentences = load_sentences()
     if not sentences:
         return jsonify({'sentence': '', 'message': 'No sentences available'})
-    # Đảm bảo object
     today = datetime.date.today().isoformat()
     max_show = int(request.args.get('max_show', 3))
     for i, s in enumerate(sentences):
@@ -227,12 +226,10 @@ def random_sentence():
                 'shown_today': 0,
                 'last_shown_date': ''
             }
-    # Reset shown_today nếu sang ngày mới
     for s in sentences:
         if s.get('last_shown_date') != today:
             s['shown_today'] = 0
             s['last_shown_date'] = today
-    # Ưu tiên lấy câu priority chưa đủ số lần/ngày
     priority_sentences = [s for s in sentences if s.get('priority') and s.get('shown_today', 0) < max_show]
     normal_sentences = [s for s in sentences if not s.get('priority') and s.get('shown_today', 0) < max_show]
     candidates = priority_sentences if priority_sentences else normal_sentences
@@ -243,7 +240,8 @@ def random_sentence():
     s['shown_today'] = s.get('shown_today', 0) + 1
     s['last_shown_date'] = today
     save_sentences(sentences)
-    return jsonify({'sentence': s['sentence']})
+    # Trả về cả transcript
+    return jsonify({'sentence': s['sentence'], 'transcript': s.get('transcript', '')})
 
 @app.route('/get_content/<mode>')
 def get_content(mode):
@@ -392,7 +390,8 @@ def random_repeat_sentence():
     s['shown_today'] = s.get('shown_today', 0) + 1
     s['last_shown_date'] = today
     save_repeat_sentences(sentences)
-    return jsonify({'sentence': s['sentence']})
+    # Trả về cả transcript
+    return jsonify({'sentence': s['sentence'], 'transcript': s.get('transcript', '')})
 
 @app.route('/repeat_sentences/<sentence>', methods=['DELETE'])
 def delete_repeat_sentence(sentence):

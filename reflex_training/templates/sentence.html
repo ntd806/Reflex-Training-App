@@ -128,6 +128,8 @@ function loadSentences(filterUnlearned = false, search = '') {
             $('#sentenceList').html('<i>Chưa có mẫu câu nào.</i>');
             return;
         }
+        // Đảo ngược để câu mới nhất lên đầu
+        sentences = sentences.slice().reverse();
         let html = '<b>Danh sách mẫu câu:</b><ul>';
         sentences.forEach((item, idx) => {
             let s = typeof item === 'string' ? item : item.sentence;
@@ -215,15 +217,12 @@ function getRandomSentence() {
             return;
         }
         currentSentence = data.sentence;
-        // Lấy transcript từ danh sách đã load
-        $.get('/sentences', function(sentences) {
-            const found = sentences.find(item => item.sentence === data.sentence);
-            let transcript = found && found.transcript ? found.transcript : '';
-            $('#randomSentence').html(
-                `<div>${data.sentence}</div>` +
-                (transcript ? `<div style="color:#666; font-size:1em; margin-top:6px;">Transcript: ${transcript}</div>` : '')
-            );
-        });
+        // Ưu tiên lấy transcript từ response random
+        let transcript = data.transcript || '';
+        $('#randomSentence').html(
+            `<div>${data.sentence}</div>` +
+            (transcript ? `<div style="color:#666; font-size:1em; margin-top:6px;">Transcript: ${transcript}</div>` : '')
+        );
         if ($('#autoSpeakCheckbox').is(':checked')) {
             setupSpeakRepeat();
         } else {
