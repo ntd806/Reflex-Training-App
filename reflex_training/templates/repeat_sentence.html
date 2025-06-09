@@ -38,7 +38,7 @@
                 </label>
                 <label style="margin-left:10px;">
                     Lặp lại mỗi
-                    <input type="number" id="repeatSpeakInterval" value="2" min="1" max="10" style="width:40px;">
+                    <input type="number" id="repeatSpeakInterval" value="10" min="5" max="20" style="width:40px;">
                     giây
                 </label>
                 <label style="margin-left:10px;">
@@ -65,6 +65,16 @@
         <button type="submit">Tải lên</button>
     </form>
     <div id="excelStatus" style="color:green;margin-top:5px;"></div>
+</div>
+<!-- Thêm modal sau div .content -->
+<div id="transcriptModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+    <h3>Sửa transcript</h3>
+    <textarea id="transcriptInput" style="width:100%;height:80px;"></textarea>
+    <input type="hidden" id="transcriptSentence">
+    <div style="margin-top:10px;">
+        <button onclick="saveTranscript()">Lưu</button>
+        <button onclick="$('#transcriptModal').hide()">Đóng</button>
+    </div>
 </div>
 <script>
 let isPaused = false;
@@ -106,11 +116,14 @@ function loadSentences(filterUnlearned = false, search = '') {
         let html = '<b>Danh sách mẫu câu:</b><ul>';
         sentences.forEach((item, idx) => {
             let s = typeof item === 'string' ? item : item.sentence;
+            let transcript = item.transcript || '';
             let priority = typeof item === 'object' && item.priority;
-            if (filterUnlearned && priority) return; // chỉ lấy câu chưa practice
+            if (filterUnlearned && priority) return;
             if (search && !s.toLowerCase().includes(search.toLowerCase())) return;
             html += `<li>
                 <span style="cursor:pointer;" onclick="showSentence('${encodeURIComponent(s)}')">${s}</span>
+                <div style="color:#666; font-size:0.95em; margin-left:10px; margin-top:2px;">${transcript ? 'Transcript: ' + transcript : ''}</div>
+                <button onclick="editTranscript('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Sửa transcript</button>
                 <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
                 <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
             </li>`;
@@ -161,7 +174,15 @@ function showUnlearnedSentences() {
 function showSentence(s) {
     const sentence = decodeURIComponent(s);
     currentSentence = sentence;
-    $('#randomSentence').html(sentence);
+    // Lấy transcript từ danh sách đã load
+    $.get('/repeat_sentences', function(sentences) {
+        const found = sentences.find(item => item.sentence === sentence);
+        let transcript = found && found.transcript ? found.transcript : '';
+        $('#randomSentence').html(
+            `<div>${sentence}</div>` +
+            (transcript ? `<div style="color:#666; font-size:1em; margin-top:6px;">Transcript: ${transcript}</div>` : '')
+        );
+    });
     $.post('/repeat_sentences/priority/' + encodeURIComponent(sentence), function() {
         loadSentences();
     });
@@ -178,7 +199,15 @@ function getRandomSentence() {
             return;
         }
         currentSentence = data.sentence;
-        $('#randomSentence').html(data.sentence);
+        // Lấy transcript từ danh sách đã load
+        $.get('/repeat_sentences', function(sentences) {
+            const found = sentences.find(item => item.sentence === data.sentence);
+            let transcript = found && found.transcript ? found.transcript : '';
+            $('#randomSentence').html(
+                `<div>${data.sentence}</div>` +
+                (transcript ? `<div style="color:#666; font-size:1em; margin-top:6px;">Transcript: ${transcript}</div>` : '')
+            );
+        });
         if ($('#autoSpeakCheckbox').is(':checked')) {
             setupSpeakRepeat();
         } else {
@@ -319,6 +348,29 @@ $('#excelForm').on('submit', function(e) {
         }
     });
 });
+function editTranscript(s) {
+    const sentence = decodeURIComponent(s);
+    $.get('/repeat_sentences', function(sentences) {
+        const found = sentences.find(item => item.sentence === sentence);
+        $('#transcriptInput').val(found && found.transcript ? found.transcript : '');
+        $('#transcriptSentence').val(sentence);
+        $('#transcriptModal').show();
+    });
+}
+function saveTranscript() {
+    const sentence = $('#transcriptSentence').val();
+    const transcript = $('#transcriptInput').val();
+    $.ajax({
+        url: '/repeat_sentences/transcript/' + encodeURIComponent(sentence),
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({transcript}),
+        success: function() {
+            $('#transcriptModal').hide();
+            loadSentences();
+        }
+    });
+}
 </script>
 </body>
 </html>

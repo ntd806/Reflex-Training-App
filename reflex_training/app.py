@@ -91,8 +91,10 @@ def index():
 
 @app.route('/words', methods=['GET'])
 def get_words():
-    """Lấy danh sách từ"""
-    return jsonify(load_words())
+    """Lấy danh sách từ (mới nhất lên đầu)"""
+    words = load_words()
+    # Đảo ngược danh sách để từ mới nhất lên đầu
+    return jsonify(list(reversed(words)))
 
 @app.route('/words', methods=['POST'])
 def add_word():
@@ -193,15 +195,15 @@ def get_sentences():
 def add_sentence():
     data = request.get_json()
     sentence = data.get('sentence', '').strip()
+    transcript = data.get('transcript', '').strip() if 'transcript' in data else ''
     if not sentence:
         return jsonify({'error': 'Sentence is required'}), 400
     sentences = load_sentences()
-    # Kiểm tra trùng lặp
     if any((s.get('sentence') if isinstance(s, dict) else s) == sentence for s in sentences):
         return jsonify({'error': 'Sentence already exists'}), 400
-    # Thêm đúng cấu trúc object
     sentences.append({
         'sentence': sentence,
+        'transcript': transcript,
         'priority': False,
         'shown_today': 0,
         'last_shown_date': ''
@@ -354,14 +356,15 @@ def get_repeat_sentences():
 def add_repeat_sentence():
     data = request.get_json()
     sentence = data.get('sentence', '').strip()
+    transcript = data.get('transcript', '').strip()
     if not sentence:
         return jsonify({'error': 'Sentence is required'}), 400
     sentences = load_repeat_sentences()
-    # Kiểm tra trùng lặp
     if any((s.get('sentence') if isinstance(s, dict) else s) == sentence for s in sentences):
         return jsonify({'error': 'Sentence already exists'}), 400
     sentences.append({
         'sentence': sentence,
+        'transcript': transcript,
         'priority': False,
         'shown_today': 0,
         'last_shown_date': ''
@@ -524,6 +527,30 @@ def update_youtube_link():
                 link['transcript'] = transcript
     save_youtube_links(links)
     return jsonify({'message': 'Updated'})
+
+@app.route('/repeat_sentences/transcript/<sentence>', methods=['POST'])
+def update_repeat_sentence_transcript(sentence):
+    data = request.get_json()
+    transcript = data.get('transcript', '').strip()
+    sentences = load_repeat_sentences()
+    for s in sentences:
+        if s.get('sentence') == sentence:
+            s['transcript'] = transcript
+            save_repeat_sentences(sentences)
+            return jsonify({'message': 'Transcript updated'})
+    return jsonify({'error': 'Sentence not found'}), 404
+
+@app.route('/sentences/transcript/<sentence>', methods=['POST'])
+def update_sentence_transcript(sentence):
+    data = request.get_json()
+    transcript = data.get('transcript', '').strip()
+    sentences = load_sentences()
+    for s in sentences:
+        if s.get('sentence') == sentence:
+            s['transcript'] = transcript
+            save_sentences(sentences)
+            return jsonify({'message': 'Transcript updated'})
+    return jsonify({'error': 'Sentence not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
