@@ -125,13 +125,10 @@ def add_word():
 
 @app.route('/words/<path:word>', methods=['DELETE'])
 def delete_word(word):
-    """Xóa từ khỏi danh sách"""
-    word = unquote(word).strip()
     words = load_words()
-    print(f"Trying to delete: '{word}'")
-    print("Current words:", words)
+    # If words is a list of dicts with 'word' key:
     for w in words:
-        if w.strip() == word:
+        if (w.get('word') if isinstance(w, dict) else w) == word:
             words.remove(w)
             save_words(words)
             return jsonify({'message': f"Deleted word '{word}'", 'words': words})

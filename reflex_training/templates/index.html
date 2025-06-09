@@ -181,6 +181,21 @@ $('#excelForm').on('submit', function(e) {
         }
     });
 });
+
+function deleteWord(word) {
+    if (!confirm(`Xoá từ: "${word}"?`)) return;
+    $.ajax({
+        url: '/words/' + encodeURIComponent(word),
+        type: 'DELETE',
+        success: function(res) {
+            if (res.words) showWordList();
+            else alert(res.error || 'Xoá thất bại');
+        },
+        error: function() {
+            alert('Lỗi khi xoá từ!');
+        }
+    });
+}
 </script>
 </body>
 </html>
