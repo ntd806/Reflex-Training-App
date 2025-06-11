@@ -13,7 +13,7 @@
 <div class="content">
       <nav style="margin-bottom:20px;">
         <a href="/" style="margin-right:20px;">Trang chính</a>
-        <a href="/sentence_practice" style="margin-right:20px;">WFD</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
         <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
         <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
         <label style="margin-left:10px;">
@@ -44,6 +44,11 @@
                 <label style="margin-left:10px;">
                     Số lần lặp lại
                     <input type="number" id="repeatCount" value="1" min="1" max="10" style="width:40px;">
+                </label>
+                <label style="margin-left:10px;">
+                    Nghỉ giữa các câu
+                    <input type="number" id="sentencePause" value="3" min="1" max="10" style="width:40px;">
+                    giây
                 </label>
             </div>
             <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
@@ -242,9 +247,8 @@ function speak(text) {
             utterance.lang = voices[voiceSelect.value].lang;
         }
         utterance.onend = function() {
-            // Chỉ tự động lấy câu mới nếu checkbox được bật
             if ($('#autoSpeakCheckbox').is(':checked')) {
-                getRandomSentence();
+                setTimeout(getRandomSentence, ($('#sentencePause').val() ? parseInt($('#sentencePause').val()) : 3) * 1000);
             }
         };
         window.speechSynthesis.speak(utterance);
@@ -266,7 +270,7 @@ function speak(text) {
     function speakPart() {
         if (i >= parts.length) {
             if ($('#autoSpeakCheckbox').is(':checked')) {
-                getRandomSentence();
+                setTimeout(getRandomSentence, ($('#sentencePause').val() ? parseInt($('#sentencePause').val()) : 3) * 1000);
             }
             return;
         }
