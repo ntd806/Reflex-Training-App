@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice -S/-ES and -ED Endings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .ending-rule { margin-bottom: 18px; }
+        .ending-rule b { color: #007bff; }
+        .example { color: #555; margin-left: 18px; }
+        @media (max-width: 700px) {
+          .ending-columns { flex-direction: column !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <label style="margin-left:10px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
+    <h1>Practice -S/-ES and -ED Endings</h1>
+        <div style="margin-top:30px;">
+        <input type="text" id="customWordInput" placeholder="Nhập từ mới..." style="width:180px;">
+        <button onclick="addCustomWord()">Thêm từ</button>
+        <label style="margin-left:15px;">
+            Nghỉ giữa các từ
+            <input type="number" id="wordPause" value="2" min="1" max="10" style="width:40px;">
+            giây
+        </label>
+        <button id="pauseBtn" onclick="togglePauseAutoPractice()" style="margin-left:15px;">Pause</button>
+    </div>
+    <div id="practiceArea" style="margin-top:40px; font-size:1.3em; color:blue;"></div>
+    <div style="display: flex; gap: 40px; margin-top:30px;" class="ending-columns">
+    <div style="flex:1;">
+        <h2>-S/-ES Endings</h2>
+        <div class="ending-rule"><b>/s/</b> – Sau âm vô thanh: <span class="example">cats, books, laughs</span></div>
+        <div class="ending-rule"><b>/ɪz/</b> – Sau âm /s/, /z/, /ʃ/, /tʃ/, /ʒ/, /dʒ/: <span class="example">watches, buses, roses, garages</span></div>
+        <div class="ending-rule"><b>/z/</b> – Các trường hợp còn lại: <span class="example">dogs, pens, plays</span></div>
+        <div style="margin-top:20px; text-align:right;">
+            <button onclick="startAutoPractice('s')">Practice -S/-ES</button>
+        </div>
+    </div>
+    <div style="flex:1;">
+        <h2>-ED Endings</h2>
+        <div class="ending-rule"><b>/t/</b> – Âm kết thúc vô thanh (except t): <span class="example">walked, laughed, stopped</span></div>
+        <div class="ending-rule"><b>/ɪd/</b> – Âm kết thúc /t/ hoặc /d/: <span class="example">wanted, needed, added</span></div>
+        <div class="ending-rule"><b>/d/</b> – Các trường hợp còn lại: <span class="example">played, cleaned, called</span></div>
+        <div style="margin-top:20px; text-align:right;">
+            <button onclick="startAutoPractice('ed')">Practice -ED</button>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+let voices = [];
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (!voiceSelect) return;
+    voiceSelect.innerHTML = '';
+    voices.forEach((voice, idx) => {
+        const option = document.createElement('option');
+        option.value = idx;
+        option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+        voiceSelect.appendChild(option);
+    });
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener('DOMContentLoaded', loadVoices);
+
+let sWords = [
+    {word: "cats", ending: "/s/"}, {word: "books", ending: "/s/"}, {word: "laughs", ending: "/s/"},
+    {word: "watches", ending: "/ɪz/"}, {word: "buses", ending: "/ɪz/"}, {word: "roses", ending: "/ɪz/"}, {word: "garages", ending: "/ɪz/"},
+    {word: "dogs", ending: "/z/"}, {word: "pens", ending: "/z/"}, {word: "plays", ending: "/z/"}
+];
+let edWords = [
+    {word: "walked", ending: "/t/"}, {word: "laughed", ending: "/t/"}, {word: "stopped", ending: "/t/"},
+    {word: "wanted", ending: "/ɪd/"}, {word: "needed", ending: "/ɪd/"}, {word: "added", ending: "/ɪd/"},
+    {word: "played", ending: "/d/"}, {word: "cleaned", ending: "/d/"}, {word: "called", ending: "/d/"}
+];
+
+// Tự động nhận diện nhóm âm cuối cho -S/-ES
+function detectSEnding(word) {
+    const voiceless = ['p','k','f','θ'];
+    const izEndings = ['s','z','ʃ','tʃ','ʒ','dʒ'];
+    let w = word.toLowerCase();
+    // Đơn giản hóa: kiểm tra ký tự cuối
+    if (w.endsWith('s') || w.endsWith('x') || w.endsWith('z') || w.endsWith('sh') || w.endsWith('ch') || w.endsWith('ge') || w.endsWith('ce')) return "/ɪz/";
+    if (w.endsWith('p') || w.endsWith('k') || w.endsWith('f')) return "/s/";
+    return "/z/";
+}
+
+// Tự động nhận diện nhóm âm cuối cho -ED
+function detectEDEnding(word) {
+    let w = word.toLowerCase();
+    if (w.endsWith('ed')) {
+        if (w.endsWith('ted') || w.endsWith('ded')) return "/ɪd/";
+        let beforeEd = w[w.length-3];
+        if (['p','k','f','s','ʃ','tʃ'].includes(beforeEd)) return "/t/";
+        if (beforeEd === 't' || beforeEd === 'd') return "/ɪd/";
+        return "/d/";
+    }
+    return "";
+}
+
+function addCustomWord() {
+    let word = $('#customWordInput').val().trim();
+    if (!word) return;
+    let ending = '';
+    if (word.endsWith('ed')) {
+        ending = detectEDEnding(word);
+        if (!ending) ending = "/d/";
+        edWords.push({word, ending});
+        alert(`Đã thêm từ "${word}" vào nhóm -ED với đuôi ${ending}`);
+    } else if (word.endsWith('s')) {
+        ending = detectSEnding(word);
+        sWords.push({word, ending});
+        alert(`Đã thêm từ "${word}" vào nhóm -S/-ES với đuôi ${ending}`);
+    } else {
+        alert('Chỉ hỗ trợ tự động cho từ kết thúc bằng "s" hoặc "ed".');
+        return;
+    }
+    $('#customWordInput').val('');
+}
+
+// Đọc và nghỉ giữa các từ
+function practiceS() {
+    practiceWordGroup(sWords);
+}
+function practiceED() {
+    practiceWordGroup(edWords);
+}
+let autoPracticeInterval = null;
+let autoPracticeType = null;
+
+function startAutoPractice(type) {
+    stopAutoPractice();
+    autoPracticeType = type;
+    autoPracticeStep(); // Run first immediately
+    let pause = parseInt($('#wordPause').val()) || 2;
+    autoPracticeInterval = setInterval(autoPracticeStep, pause * 1000 + 1200); // 1200ms ~ speech duration
+}
+
+function stopAutoPractice() {
+    if (autoPracticeInterval) {
+        clearInterval(autoPracticeInterval);
+        autoPracticeInterval = null;
+    }
+}
+
+let isAutoPaused = false;
+
+function togglePauseAutoPractice() {
+    isAutoPaused = !isAutoPaused;
+    $('#pauseBtn').text(isAutoPaused ? 'Resume' : 'Pause');
+}
+
+function autoPracticeStep() {
+    if (isAutoPaused) return;
+    if (autoPracticeType === 's') {
+        practiceWordGroup(sWords, false);
+    } else if (autoPracticeType === 'ed') {
+        practiceWordGroup(edWords, false);
+    }
+}
+
+// Sửa lại practiceWordGroup để không tự động nghỉ khi auto
+function practiceWordGroup(wordList, manual = true) {
+    let idx = Math.floor(Math.random() * wordList.length);
+    let item = wordList[idx];
+    $('#practiceArea').html(`<b>${item.word}</b> <span style="color:#888;">(${item.ending})</span>`);
+    speak(item.word);
+    // Nếu là manual (bấm 1 lần), nghỉ giữa các từ
+    if (manual) {
+        let pause = parseInt($('#wordPause').val()) || 2;
+        setTimeout(()=>{}, pause*1000);
+    }
+}
+
+function speak(text, cb) {
+    if (!text) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voiceSelect && voices[voiceSelect.value]) {
+        utterance.voice = voices[voiceSelect.value];
+        utterance.lang = voices[voiceSelect.value].lang;
+    }
+    if (cb) utterance.onend = cb;
+    window.speechSynthesis.speak(utterance);
+}
+window.onbeforeunload = stopAutoPractice;
+</script>
+</body>
+</html>

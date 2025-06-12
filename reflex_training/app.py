@@ -15,6 +15,7 @@ WORDS_FILE = 'words.json'
 SENTENCES_FILE = 'sentences.json'
 REPEAT_SENTENCES_FILE = 'repeat_sentences.json'
 YOUTUBE_LINKS_FILE = 'youtube_links.json'
+ENDING_WORDS_FILE = os.path.join(os.path.dirname(__file__), 'ending_words.json')
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -76,6 +77,16 @@ def load_youtube_links():
 def save_youtube_links(links):
     with open(YOUTUBE_LINKS_FILE, 'w', encoding='utf-8') as f:
         json.dump(links, f, ensure_ascii=False, indent=4)
+
+def load_ending_words():
+    if os.path.exists(ENDING_WORDS_FILE):
+        with open(ENDING_WORDS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {"sWords": [], "edWords": []}
+
+def save_ending_words(data):
+    with open(ENDING_WORDS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 def get_pronunciation_guide(word):
     guides = load_guides()
@@ -317,6 +328,10 @@ def sentence_practice():
 def repeat_sentence():
     return render_template('repeat_sentence.html')
 
+@app.route('/ending_practice')
+def ending_practice():
+    return render_template('ending_practice.html')
+
 @app.route('/sentences/<sentence>', methods=['DELETE'])
 def delete_sentence(sentence):
     sentences = load_sentences()
@@ -550,6 +565,16 @@ def update_sentence_transcript(sentence):
             save_sentences(sentences)
             return jsonify({'message': 'Transcript updated'})
     return jsonify({'error': 'Sentence not found'}), 404
+
+@app.route('/ending_words', methods=['GET'])
+def get_ending_words():
+    return jsonify(load_ending_words())
+
+@app.route('/ending_words', methods=['POST'])
+def update_ending_words():
+    data = request.get_json()
+    save_ending_words(data)
+    return jsonify({"message": "Updated"})
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
