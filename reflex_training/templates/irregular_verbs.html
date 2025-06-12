@@ -259,6 +259,27 @@ function speak(text) {
     window.speechSynthesis.speak(utterance);
 }
 
+function stopPractice() {
+    if (practiceInterval) {
+        clearInterval(practiceInterval);
+        practiceInterval = null;
+    }
+    window.speechSynthesis.cancel();
+}
+
+function togglePauseAutoPractice() {
+    isAutoPaused = !isAutoPaused; // Toggle the pause state
+    document.getElementById('pauseBtn').innerText = isAutoPaused ? 'Resume' : 'Pause';
+    
+    // If paused, cancel any ongoing speech
+    if (isAutoPaused) {
+        window.speechSynthesis.cancel();
+        console.log('Practice paused.');
+    } else {
+        console.log('Practice resumed.');
+    }
+}
+
 // Make sure verbs are loaded when page loads
 $(document).ready(function() {
     loadVerbs();
