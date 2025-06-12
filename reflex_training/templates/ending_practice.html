@@ -67,7 +67,7 @@
         <input type="text" id="searchInput" placeholder="Tìm kiếm từ..." style="width:180px;">
         <button onclick="searchWordList()">Tìm</button>
     </div>
-    <div id="practiceArea" style="margin-top:40px; font-size:1.3em; color:blue;"></div>
+    <div id="practiceArea" style="margin-top:40px; font-size:2em; color:blue; text-align:center;"></div>
     <div style="display: flex; gap: 40px; margin-top:30px;" class="ending-columns">
         <div style="flex:1;">
             <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -261,13 +261,17 @@ function autoPracticeStep() {
 }
 
 function practiceWordGroup(wordList) {
-    // Prioritize words with priority = true
     let priorityWords = wordList.filter(word => word.priority);
     let candidates = priorityWords.length > 0 ? priorityWords : wordList;
 
     let idx = Math.floor(Math.random() * candidates.length);
     let item = candidates[idx];
-    $('#practiceArea').html(`<b>${item.word}</b> <span style="color:#888;">(${item.ending})</span>`);
+    $('#practiceArea').html(`
+        <div style="margin:0 auto;">
+            <b>${item.word}</b> 
+            <span style="color:#888;font-size:0.8em;">(${item.ending})</span>
+        </div>
+    `);
     speak(item.word);
 }
 
