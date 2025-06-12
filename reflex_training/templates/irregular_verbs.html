@@ -86,14 +86,17 @@
         <input type="text" id="searchInput" placeholder="Tìm kiếm động từ..." style="width:180px;">
         <button onclick="searchVerbList()">Tìm</button>
     </div>
-    <div id="practiceArea" style="margin-top:40px; font-size:2em; color:blue; text-align:center;"></div>
-    <div class="verb-forms" style="margin-top:30px;">
-        <div class="verb-form">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <h3>Irregular Verbs</h3>
-                <button onclick="startPractice()" style="margin-left: 10px;">Practice</button>
+
+    <div style="display: flex; justify-content: flex-end; gap: 20px; margin-top: 30px;">
+        <div id="practiceArea" style="font-size:2em; color:blue; text-align:center; width:40%;"></div>
+        <div class="verb-forms" style="width:40%;">
+            <div class="verb-form">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h3>Irregular Verbs</h3>
+                    <button onclick="startPractice()" style="margin-left: 10px;">Practice</button>
+                </div>
+                <div id="verbList" class="verb-list"></div>
             </div>
-            <div id="verbList" class="verb-list"></div>
         </div>
     </div>
 </div>
