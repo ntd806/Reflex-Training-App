@@ -17,6 +17,7 @@ SENTENCES_FILE = 'sentences.json'
 REPEAT_SENTENCES_FILE = 'repeat_sentences.json'
 YOUTUBE_LINKS_FILE = 'youtube_links.json'
 ENDING_WORDS_FILE = os.path.join(os.path.dirname(__file__), 'ending_words.json')
+IRREGULAR_VERBS_FILE = os.path.join(os.path.dirname(__file__), 'irregular_verbs.json')
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -96,6 +97,25 @@ def load_ending_words():
 
 def save_ending_words(data):
     with open(ENDING_WORDS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+def load_irregular_verbs():
+    """Load irregular verbs from JSON file"""
+    try:
+        if os.path.exists(IRREGULAR_VERBS_FILE):
+            with open(IRREGULAR_VERBS_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                print(f"Loaded {len(data)} verbs") # Debug log
+                return data
+        else:
+            print(f"File not found: {IRREGULAR_VERBS_FILE}") # Debug log
+            return []
+    except Exception as e:
+        print(f"Error loading irregular verbs: {e}") # Debug log
+        return []
+
+def save_irregular_verbs(data):
+    with open(IRREGULAR_VERBS_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def get_pronunciation_guide(word):
@@ -618,6 +638,36 @@ def toggle_ending_word_priority():
             return jsonify({"message": f"Priority toggled for {word}"})
 
     return jsonify({"error": f"Word not found: {word}"}), 404
+
+@app.route('/irregular_verbs')
+def irregular_verbs_page():
+    return render_template('irregular_verbs.html')
+
+@app.route('/api/irregular_verbs', methods=['GET'])
+def get_irregular_verbs():
+    return jsonify(load_irregular_verbs())
+
+@app.route('/api/irregular_verbs', methods=['POST'])
+def add_irregular_verb():
+    verb = request.get_json()
+    verbs = load_irregular_verbs()
+    if any(v['v1'] == verb['v1'] for v in verbs):
+        return jsonify({"error": "Verb already exists"}), 400
+    verbs.append(verb)
+    save_irregular_verbs(verbs)
+    return jsonify({"message": "Verb added"})
+
+@app.route('/api/irregular_verbs/toggle_priority', methods=['POST'])
+def toggle_irregular_verb_priority():
+    data = request.get_json()
+    v1 = data.get('v1')
+    verbs = load_irregular_verbs()
+    for verb in verbs:
+        if verb['v1'] == v1:
+            verb['priority'] = not verb.get('priority', False)
+            save_irregular_verbs(verbs)
+            return jsonify({"message": "Priority toggled"})
+    return jsonify({"error": "Verb not found"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

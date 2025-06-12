@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice Irregular Verbs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .verb-list {
+            margin-top: 20px;
+        }
+        .verb-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .verb-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .priority-btn {
+            background-color: #eee;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+        }
+        .priority-btn.active {
+            background-color: orange;
+        }
+        .verb-forms {
+            display: flex;
+            gap: 20px;
+        }
+        .verb-form {
+            text-align: center;
+        }
+        .verb-form h3 {
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <label style="margin-left:10px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
+    <h1>Practice Irregular Verbs</h1>
+    <div style="margin-top:30px;">
+        <div style="display: flex; gap: 10px; align-items: flex-end;">
+            <div>
+                <label>V1 (Base Form)<br>
+                <input type="text" id="v1Input" placeholder="write" style="width:120px;"></label>
+            </div>
+            <div>
+                <label>V2 (Past Simple)<br>
+                <input type="text" id="v2Input" placeholder="wrote" style="width:120px;"></label>
+            </div>
+            <div>
+                <label>V3 (Past Participle)<br>
+                <input type="text" id="v3Input" placeholder="written" style="width:120px;"></label>
+            </div>
+            <button onclick="addVerb()" style="height: 28px;">Add Verb</button>
+        </div>
+        <label style="margin-left:15px;">
+            Nghỉ giữa các từ
+            <input type="number" id="wordPause" value="3" min="1" max="10" style="width:40px;">
+            giây
+        </label>
+        <button id="pauseBtn" onclick="togglePauseAutoPractice()" style="margin-left:15px;">Pause</button>
+    </div>
+    <div style="margin-top:20px;">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm động từ..." style="width:180px;">
+        <button onclick="searchVerbList()">Tìm</button>
+    </div>
+    <div id="practiceArea" style="margin-top:40px; font-size:2em; color:blue; text-align:center;"></div>
+    <div class="verb-forms" style="margin-top:30px;">
+        <div class="verb-form">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h3>Irregular Verbs</h3>
+                <button onclick="startPractice()" style="margin-left: 10px;">Practice</button>
+            </div>
+            <div id="verbList" class="verb-list"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+let voices = [];
+let verbs = [];
+let isAutoPaused = false;
+let practiceInterval = null;
+let currentVerbIndex = 0;
+let currentFormIndex = 0;
+
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (!voiceSelect) return;
+    voiceSelect.innerHTML = '';
+    voices.forEach((voice, idx) => {
+        const option = document.createElement('option');
+        option.value = idx;
+        option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+        voiceSelect.appendChild(option);
+    });
+}
+
+window.speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener('DOMContentLoaded', loadVoices);
+
+function loadVerbs() {
+    $('#verbList').html('<div>Loading verbs...</div>');
+    $.get('/api/irregular_verbs')
+        .done(function(data) {
+            verbs = (data || []).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            if (verbs.length === 0) {
+                $('#verbList').html('<div>No verbs available. Please add some verbs first.</div>');
+                return;
+            }
+            renderVerbList(verbs);
+        })
+        .fail(function(err) {
+            $('#verbList').html('<div>Error loading verbs. Please try again.</div>');
+        });
+}
+
+function renderVerbList(verbList) {
+    let html = '<ul>';
+    verbList.forEach(verb => {
+        html += `<li>
+            <span>${verb.v1} - ${verb.v2} - ${verb.v3}</span>
+            <button class="priority-btn ${verb.priority ? 'active' : ''}" 
+                onclick="togglePriority('${verb.v1}')">${verb.priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+        </li>`;
+    });
+    html += '</ul>';
+    $('#verbList').html(html);
+}
+
+function addVerb() {
+    const v1 = $('#v1Input').val().trim();
+    const v2 = $('#v2Input').val().trim();
+    const v3 = $('#v3Input').val().trim();
+    
+    if (!v1 || !v2 || !v3) {
+        alert('Please fill in all verb forms');
+        return;
+    }
+
+    const verb = {
+        v1, v2, v3,
+        priority: false,
+        timestamp: Math.floor(Date.now() / 1000)
+    };
+
+    $.ajax({
+        url: '/api/irregular_verbs',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(verb),
+        success: function() {
+            $('#v1Input').val('');
+            $('#v2Input').val('');
+            $('#v3Input').val('');
+            loadVerbs();
+        }
+    });
+}
+
+function togglePriority(v1) {
+    $.ajax({
+        url: '/api/irregular_verbs/toggle_priority',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ v1 }),
+        success: function() {
+            loadVerbs();
+        }
+    });
+}
+
+function searchVerbList() {
+    const searchTerm = $('#searchInput').val().trim().toLowerCase();
+    const filteredVerbs = verbs.filter(verb => 
+        verb.v1.toLowerCase().includes(searchTerm) ||
+        verb.v2.toLowerCase().includes(searchTerm) ||
+        verb.v3.toLowerCase().includes(searchTerm)
+    );
+    renderVerbList(filteredVerbs);
+}
+
+function startPractice() {
+    stopPractice();
+    currentVerbIndex = 0;
+    currentFormIndex = 0;
+    isAutoPaused = false;
+    $('#pauseBtn').text('Pause');
+    practiceStep(); // Chạy lần đầu ngay lập tức
+    let pause = parseInt($('#wordPause').val()) || 3;
+    practiceInterval = setInterval(() => {
+        if (!isAutoPaused) {
+            practiceStep();
+        }
+    }, pause * 1000 + 1200); // Thêm 1.2s cho thời gian nói
+}
+
+function practiceStep() {
+    if (!verbs || verbs.length === 0) return;
+    let priorityVerbs = verbs.filter(v => v.priority);
+    let practiceVerbs = priorityVerbs.length > 0 ? priorityVerbs : verbs;
+    if (practiceVerbs.length === 0) return;
+
+    if (currentFormIndex === 0) {
+        currentVerbIndex = Math.floor(Math.random() * practiceVerbs.length);
+    }
+    const verb = practiceVerbs[currentVerbIndex];
+    const forms = [verb.v1, verb.v2, verb.v3];
+    const formNames = ['Base Form', 'Past Simple', 'Past Participle'];
+
+    $('#practiceArea').html(`
+        <div style="margin:0 auto;">
+            <b style="font-size:1.2em;">${forms[currentFormIndex]}</b>
+            <div style="font-size:0.5em; color:#666; margin-top:5px;">${formNames[currentFormIndex]}</div>
+        </div>
+    `);
+
+    // GỌI speak ở đây để tự động nói
+    speak(forms[currentFormIndex]);
+
+    currentFormIndex = (currentFormIndex + 1) % 3;
+}
+
+function speak(text) {
+    if (!text) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {
+        utterance.voice = voices[voiceSelect.value];
+        utterance.lang = voices[voiceSelect.value].lang;
+    }
+    window.speechSynthesis.speak(utterance);
+}
+
+// Make sure verbs are loaded when page loads
+$(document).ready(function() {
+    loadVerbs();
+    loadVoices();
+});
+</script>
+</body>
+</html>
