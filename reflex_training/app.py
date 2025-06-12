@@ -6,6 +6,7 @@ from urllib.parse import unquote
 import datetime
 import pandas as pd
 import requests
+import time
 
 app = Flask(__name__)
 
@@ -81,7 +82,16 @@ def save_youtube_links(links):
 def load_ending_words():
     if os.path.exists(ENDING_WORDS_FILE):
         with open(ENDING_WORDS_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            data = json.load(f)
+            # Ensure 'priority' and 'timestamp' fields exist
+            for word_list_name in ["sWords", "edWords"]:
+                if word_list_name in data:
+                    for word_obj in data[word_list_name]:
+                        if "priority" not in word_obj:
+                            word_obj["priority"] = False
+                        if "timestamp" not in word_obj:
+                            word_obj["timestamp"] = 0  # Default timestamp for old entries
+            return data
     return {"sWords": [], "edWords": []}
 
 def save_ending_words(data):
@@ -568,13 +578,46 @@ def update_sentence_transcript(sentence):
 
 @app.route('/ending_words', methods=['GET'])
 def get_ending_words():
-    return jsonify(load_ending_words())
+    data = load_ending_words()
+    # Reverse the lists to show newest first
+    data["sWords"] = list(reversed(data["sWords"]))
+    data["edWords"] = list(reversed(data["edWords"]))
+    return jsonify(data)
 
 @app.route('/ending_words', methods=['POST'])
 def update_ending_words():
     data = request.get_json()
+    # Add timestamp to new words
+    current_time = int(time.time())
+    for word_list in [data["sWords"], data["edWords"]]:
+        for word in word_list:
+            if "timestamp" not in word:
+                word["timestamp"] = current_time
     save_ending_words(data)
     return jsonify({"message": "Updated"})
+
+@app.route('/ending_words/toggle_priority', methods=['POST'])
+def toggle_ending_word_priority():
+    data = request.get_json()
+    word = data.get('word')
+    word_type = data.get('word_type')  # "sWords" or "edWords"
+
+    if not word or not word_type:
+        return jsonify({"error": "Word and word_type are required"}), 400
+
+    ending_words = load_ending_words()
+    word_list = ending_words.get(word_type)
+
+    if not word_list:
+        return jsonify({"error": f"Invalid word_type: {word_type}"}), 400
+
+    for word_obj in word_list:
+        if word_obj["word"] == word:
+            word_obj["priority"] = not word_obj["priority"]
+            save_ending_words(ending_words)
+            return jsonify({"message": f"Priority toggled for {word}"})
+
+    return jsonify({"error": f"Word not found: {word}"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

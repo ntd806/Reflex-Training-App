@@ -12,6 +12,31 @@
         @media (max-width: 700px) {
           .ending-columns { flex-direction: column !important; }
         }
+        .word-list {
+            margin-top: 20px;
+        }
+        .word-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .word-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .priority-btn {
+            background-color: #eee;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: black; /* Make priority button text black */
+            font-weight: bold; /* Make priority button text bold */
+        }
+        .priority-btn.active {
+            background-color: orange;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +53,7 @@
         </label>
     </nav>
     <h1>Practice -S/-ES and -ED Endings</h1>
-        <div style="margin-top:30px;">
+    <div style="margin-top:30px;">
         <input type="text" id="customWordInput" placeholder="Nhập từ mới..." style="width:180px;">
         <button onclick="addCustomWord()">Thêm từ</button>
         <label style="margin-left:15px;">
@@ -38,28 +63,35 @@
         </label>
         <button id="pauseBtn" onclick="togglePauseAutoPractice()" style="margin-left:15px;">Pause</button>
     </div>
+    <div style="margin-top:20px;">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm từ..." style="width:180px;">
+        <button onclick="searchWordList()">Tìm</button>
+    </div>
     <div id="practiceArea" style="margin-top:40px; font-size:1.3em; color:blue;"></div>
     <div style="display: flex; gap: 40px; margin-top:30px;" class="ending-columns">
-    <div style="flex:1;">
-        <h2>-S/-ES Endings</h2>
-        <div class="ending-rule"><b>/s/</b> – Sau âm vô thanh: <span class="example">cats, books, laughs</span></div>
-        <div class="ending-rule"><b>/ɪz/</b> – Sau âm /s/, /z/, /ʃ/, /tʃ/, /ʒ/, /dʒ/: <span class="example">watches, buses, roses, garages</span></div>
-        <div class="ending-rule"><b>/z/</b> – Các trường hợp còn lại: <span class="example">dogs, pens, plays</span></div>
-        <div style="margin-top:20px; text-align:right;">
-            <button onclick="startAutoPractice('s')">Practice -S/-ES</button>
-        </div>
-    </div>
-    <div style="flex:1;">
-        <h2>-ED Endings</h2>
-        <div class="ending-rule"><b>/t/</b> – Âm kết thúc vô thanh (except t): <span class="example">walked, laughed, stopped</span></div>
-        <div class="ending-rule"><b>/ɪd/</b> – Âm kết thúc /t/ hoặc /d/: <span class="example">wanted, needed, added</span></div>
-        <div class="ending-rule"><b>/d/</b> – Các trường hợp còn lại: <span class="example">played, cleaned, called</span></div>
-        <div style="margin-top:20px; text-align:right;">
-            <button onclick="startAutoPractice('ed')">Practice -ED</button>
-        </div>
-    </div>
-</div>
+        <div style="flex:1;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h2>-S/-ES Endings</h2>
+                <button onclick="startAutoPractice('s')" style="margin-left: 10px;">Practice -S/-ES</button>
+            </div>
+            <div class="ending-rule"><b>/s/</b> – Sau âm vô thanh: <span class="example">cats, books, laughs</span></div>
+            <div class="ending-rule"><b>/ɪz/</b> – Sau âm /s/, /z/, /ʃ/, /tʃ/, /ʒ/, /dʒ/: <span class="example">watches, buses, roses, garages</span></div>
+            <div class="ending-rule"><b>/z/</b> – Các trường hợp còn lại: <span class="example">dogs, pens, plays</span></div>
+            <div id="sWordsList" class="word-list"></div>
 
+        </div>
+        <div style="flex:1;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h2>-ED Endings</h2>
+                 <button onclick="startAutoPractice('ed')" style="margin-left: 10px;">Practice -ED</button>
+            </div>
+            <div class="ending-rule"><b>/t/</b> – Âm kết thúc vô thanh (except t): <span class="example">walked, laughed, stopped</span></div>
+            <div class="ending-rule"><b>/ɪd/</b> – Âm kết thúc /t/ hoặc /d/: <span class="example">wanted, needed, added</span></div>
+            <div class="ending-rule"><b>/d/</b> – Các trường hợp còn lại: <span class="example">played, cleaned, called</span></div>
+            <div id="edWordsList" class="word-list"></div>
+
+        </div>
+    </div>
 </div>
 <script>
 let voices = [];
@@ -78,18 +110,59 @@ function loadVoices() {
 window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener('DOMContentLoaded', loadVoices);
 
-let sWords = [
-    {word: "cats", ending: "/s/"}, {word: "books", ending: "/s/"}, {word: "laughs", ending: "/s/"},
-    {word: "watches", ending: "/ɪz/"}, {word: "buses", ending: "/ɪz/"}, {word: "roses", ending: "/ɪz/"}, {word: "garages", ending: "/ɪz/"},
-    {word: "dogs", ending: "/z/"}, {word: "pens", ending: "/z/"}, {word: "plays", ending: "/z/"}
-];
-let edWords = [
-    {word: "walked", ending: "/t/"}, {word: "laughed", ending: "/t/"}, {word: "stopped", ending: "/t/"},
-    {word: "wanted", ending: "/ɪd/"}, {word: "needed", ending: "/ɪd/"}, {word: "added", ending: "/ɪd/"},
-    {word: "played", ending: "/d/"}, {word: "cleaned", ending: "/d/"}, {word: "called", ending: "/d/"}
-];
+let sWords = [];
+let edWords = [];
 
-// Tự động nhận diện nhóm âm cuối cho -S/-ES
+function loadEndingWords() {
+    $.get('/ending_words', function(data) {
+        // Sort words by timestamp (newest first)
+        sWords = (data.sWords || []).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        edWords = (data.edWords || []).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        renderWordList('s', sWords);
+        renderWordList('ed', edWords);
+    });
+}
+
+function renderWordList(type, wordList) {
+    let html = '<ul>';
+    wordList.forEach(item => {
+        html += `<li>
+            <span>${item.word} (${item.ending})</span>
+            <button class="priority-btn ${item.priority ? 'active' : ''}" data-word="${item.word}" data-type="${type}" onclick="togglePriority(this, '${item.word}', '${type}')">${item.priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+        </li>`;
+    });
+    html += '</ul>';
+    $(`#${type}WordsList`).html(html);
+}
+
+function togglePriority(btn, word, type) {
+    $.ajax({
+        url: '/ending_words/toggle_priority',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ word: word, word_type: `${type}Words` }),
+        success: function(data) {
+            loadEndingWords(); // Reload the lists to update the UI
+        }
+    });
+}
+
+function searchWordList() {
+    const searchTerm = $('#searchInput').val().trim().toLowerCase();
+
+    $.get('/ending_words', function(data) {
+        sWords = data.sWords || [];
+        edWords = data.edWords || [];
+
+        // Filter the reloaded lists
+        let filteredSWords = sWords.filter(item => item.word.toLowerCase().includes(searchTerm));
+        let filteredEdWords = edWords.filter(item => item.word.toLowerCase().includes(searchTerm));
+
+        renderWordList('s', filteredSWords);
+        renderWordList('ed', filteredEdWords);
+    });
+}
+
 function detectSEnding(word) {
     const voiceless = ['p','k','f','θ'];
     const izEndings = ['s','z','ʃ','tʃ','ʒ','dʒ'];
@@ -117,29 +190,42 @@ function addCustomWord() {
     let word = $('#customWordInput').val().trim();
     if (!word) return;
     let ending = '';
+    let wordObj = {
+        word: word,
+        priority: false,
+        timestamp: Math.floor(Date.now() / 1000)  // Add timestamp
+    };
     if (word.endsWith('ed')) {
         ending = detectEDEnding(word);
         if (!ending) ending = "/d/";
-        edWords.push({word, ending});
+        wordObj.ending = ending;
+        edWords.unshift(wordObj);  // Add to beginning of array
         alert(`Đã thêm từ "${word}" vào nhóm -ED với đuôi ${ending}`);
     } else if (word.endsWith('s')) {
         ending = detectSEnding(word);
-        sWords.push({word, ending});
+        wordObj.ending = ending;
+        sWords.unshift(wordObj);  // Add to beginning of array
         alert(`Đã thêm từ "${word}" vào nhóm -S/-ES với đuôi ${ending}`);
     } else {
         alert('Chỉ hỗ trợ tự động cho từ kết thúc bằng "s" hoặc "ed".');
         return;
     }
     $('#customWordInput').val('');
+    saveEndingWords();
 }
 
-// Đọc và nghỉ giữa các từ
-function practiceS() {
-    practiceWordGroup(sWords);
+function saveEndingWords() {
+    $.ajax({
+        url: '/ending_words',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ sWords: sWords, edWords: edWords }),
+        success: function() {
+            loadEndingWords();
+        }
+    });
 }
-function practiceED() {
-    practiceWordGroup(edWords);
-}
+
 let autoPracticeInterval = null;
 let autoPracticeType = null;
 
@@ -168,23 +254,21 @@ function togglePauseAutoPractice() {
 function autoPracticeStep() {
     if (isAutoPaused) return;
     if (autoPracticeType === 's') {
-        practiceWordGroup(sWords, false);
+        practiceWordGroup(sWords);
     } else if (autoPracticeType === 'ed') {
-        practiceWordGroup(edWords, false);
+        practiceWordGroup(edWords);
     }
 }
 
-// Sửa lại practiceWordGroup để không tự động nghỉ khi auto
-function practiceWordGroup(wordList, manual = true) {
-    let idx = Math.floor(Math.random() * wordList.length);
-    let item = wordList[idx];
+function practiceWordGroup(wordList) {
+    // Prioritize words with priority = true
+    let priorityWords = wordList.filter(word => word.priority);
+    let candidates = priorityWords.length > 0 ? priorityWords : wordList;
+
+    let idx = Math.floor(Math.random() * candidates.length);
+    let item = candidates[idx];
     $('#practiceArea').html(`<b>${item.word}</b> <span style="color:#888;">(${item.ending})</span>`);
     speak(item.word);
-    // Nếu là manual (bấm 1 lần), nghỉ giữa các từ
-    if (manual) {
-        let pause = parseInt($('#wordPause').val()) || 2;
-        setTimeout(()=>{}, pause*1000);
-    }
 }
 
 function speak(text, cb) {
@@ -200,6 +284,10 @@ function speak(text, cb) {
     window.speechSynthesis.speak(utterance);
 }
 window.onbeforeunload = stopAutoPractice;
+
+$(document).ready(function() {
+    loadEndingWords();
+});
 </script>
 </body>
 </html>
