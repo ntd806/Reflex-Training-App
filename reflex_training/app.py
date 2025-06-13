@@ -449,8 +449,12 @@ def delete_repeat_sentence(sentence):
     save_repeat_sentences(new_sentences)
     return jsonify({'message': 'Deleted'})
 
-@app.route('/repeat_sentences/priority/<sentence>', methods=['POST'])
-def toggle_repeat_sentence_priority(sentence):
+@app.route('/repeat_sentences/priority/', methods=['POST'])
+def toggle_repeat_sentence_priority():
+    data = request.get_json()
+    sentence = data.get('sentence')
+    if not sentence:
+        return jsonify({'error': 'No sentence provided'}), 400
     sentences = load_repeat_sentences()
     found = False
     for i, item in enumerate(sentences):

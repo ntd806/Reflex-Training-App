@@ -134,7 +134,7 @@ function loadSentences(filterUnlearned = false, search = '') {
                 <div style="color:#666; font-size:0.95em; margin-left:10px; margin-top:2px;">${transcript ? 'Transcript: ' + transcript : ''}</div>
                 <button onclick="editTranscript('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Sửa transcript</button>
                 <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
-                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${s.replace(/'/g, "\\'")}')">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
             </li>`;
         });
         html += '</ul>';
@@ -301,8 +301,18 @@ function deleteSentence(s) {
 }
 function togglePriority(s) {
     const sentence = decodeURIComponent(s);
-    $.post('/repeat_sentences/priority/' + encodeURIComponent(sentence), function() {
-        loadSentences();
+    if (!sentence) {
+        alert('Không xác định được câu để ưu tiên!');
+        return;
+    }
+    $.ajax({
+        url: '/repeat_sentences/priority/',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ sentence: sentence }),
+        success: function() {
+            loadSentences();
+        }
     });
 }
 function togglePause() {
