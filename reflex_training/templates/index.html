@@ -94,9 +94,15 @@ function showWordList() {
         let html = '<b>Danh sách từ:</b><ul style="margin-top:5px;">';
         words.forEach(wordObj => {
             html += `<li>
-                <span style="cursor:pointer;color:#007bff;text-decoration:underline;" onclick="showWordDetail('${wordObj.word.replace(/'/g,"\\'")}')">${wordObj.word}</span>
-                <button onclick="deleteWord('${wordObj.word}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
-                <button onclick="togglePriority('${wordObj.word}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;${wordObj.priority ? 'background:orange;' : ''}">${wordObj.priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+                <span style="cursor:pointer;color:#007bff;text-decoration:underline;" 
+                    onclick="showWordDetail('${wordObj.word.replace(/'/g, "\\'")}')">${wordObj.word}</span>
+                <button onclick="deleteWord('${wordObj.word.replace(/'/g, "\\'")}')" 
+                    style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
+                <button class="priority-btn" priority="${wordObj.priority ? 'true' : 'false'}" 
+                    onclick="togglePriority('${wordObj.word.replace(/'/g, "\\'")}')" 
+                    style="font-size:0.9em;padding:2px 8px;margin-left:8px;${wordObj.priority ? 'background:orange;' : ''}">
+                    ${wordObj.priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}
+                </button>
             </li>`;
         });
         html += '</ul>';

@@ -181,24 +181,13 @@ function populateVideoTypeFilter(links) {
     });
 }
 
-function playYoutube(url, lastTime) {
-    let videoId = '';
-    try {
-        const u = new URL(url);
-        if (u.hostname.includes('youtu')) {
-            if (u.searchParams.get('v')) videoId = u.searchParams.get('v');
-            else if (u.pathname.startsWith('/embed/')) videoId = u.pathname.split('/embed/')[1];
-            else if (u.pathname.length > 1) videoId = u.pathname.slice(1);
-        }
-    } catch {}
+function playYoutube(url, lastTime = 0) {
+    const videoId = extractVideoId(url);
     if (!videoId) {
-        $('#playerSection').html('<i>Không nhận diện được video ID!</i>');
+        $('#playerSection').html('<i>Invalid or unsupported YouTube URL!</i>');
         return;
     }
-    lastUrl = url;
-    lastVideoId = videoId;
-    lastTime = lastTime || 0;
-    // Sử dụng width:100% và aspect-ratio cho responsive
+
     $('#playerSection').html(`
         <div style="width:100%;max-width:100%;">
             <div style="position:relative;width:100%;padding-bottom:56.25%;">
@@ -354,6 +343,34 @@ $(document).ready(function() {
             ckeditorInstance = editor;
         });
 });
+
+function isValidYoutubeUrl(url) {
+    return url.includes('youtube.com') || url.includes('youtu.be');
+}
+
+function extractVideoId(url) {
+    try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu')) {
+            if (u.pathname.startsWith('/shorts/')) {
+                // Handle YouTube Shorts URLs
+                return u.pathname.split('/shorts/')[1];
+            } else if (u.searchParams.get('v')) {
+                // Handle standard YouTube URLs
+                return u.searchParams.get('v');
+            } else if (u.pathname.startsWith('/embed/')) {
+                // Handle embedded YouTube URLs
+                return u.pathname.split('/embed/')[1];
+            } else if (u.pathname.length > 1) {
+                // Handle other YouTube URL formats
+                return u.pathname.slice(1);
+            }
+        }
+    } catch (e) {
+        console.error('Invalid YouTube URL:', url, e);
+    }
+    return null;
+}
 </script>
 </body>
 </html>
