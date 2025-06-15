@@ -124,14 +124,19 @@ function addYoutubeLink() {
 
 function loadYoutubeLinks() {
     $.get('/youtube_links', function(links) {
-        // Sắp xếp theo thời gian mới nhất
+        // Sắp xếp danh sách video theo thời gian mới nhất
         links.sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''));
         allYoutubeLinks = links;
+
+        // Lấy danh sách loại video và sắp xếp theo thứ tự tăng dần
+        const types = [...new Set(links.map(l => l.video_type).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+
         // Cập nhật menu loại video
-        const types = [...new Set(links.map(l => l.video_type).filter(Boolean))];
         let options = '<option value="">Tất cả</option>';
         types.forEach(t => options += `<option value="${t}">${t}</option>`);
         $('#videoTypeFilter').html(options);
+
+        // Hiển thị danh sách video
         renderYoutubeList(links);
     });
 }
