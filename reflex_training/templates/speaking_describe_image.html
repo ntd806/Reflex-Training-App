@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speaking Describe Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="content">
+  <nav style="margin-bottom:20px; display: flex; align-items: center;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+         <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
+        <label style="margin-left:10px; display: flex; align-items: center;">
+            <span style="margin-right:4px;">Giọng đọc</span>
+            <select id="voiceSelect" style="min-width:100px; max-width:150px; height:28px; font-size:0.95em;"></select>
+        </label>
+        <input type="text" id="vocabInput" placeholder="Nhập từ vựng..." style="margin-left:30px; padding-left:28px; height:28px; border-radius:4px; border:1px solid #ccc; background:url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/book.svg') no-repeat 6px center/16px 16px, #fff;">
+        <button onclick="readVocab()" style="margin-left:8px; height:32px; display:flex; align-items:center;">
+            <span style="margin-right:4px;">Read</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="vertical-align:middle;" viewBox="0 0 16 16">
+                <path d="M8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3zm0 1a4 4 0 1 1 0 8A4 4 0 0 1 8 4zm.5 2.5a.5.5 0 0 0-1 0v2.793l1.146 1.147a.5.5 0 0 0 .708-.708L8.5 8.293V6.5z"/>
+            </svg>
+        </button>
+    </nav>
+    <div class="flex-main">
+        <!-- Bên trái: Form nhập liệu -->
+        <div style="flex: 2; min-width: 0; padding: 15px; border: 1px solid #ccc;">
+            <h3>Thêm bài nói mới</h3>
+            <form id="addSpeakingForm">
+                <label>Tiêu đề:</label>
+                <input type="text" id="titleInput" placeholder="Nhập tiêu đề..." style="width:100%; margin-bottom:10px;">
+                <label>Script:</label>
+                <textarea id="scriptInput" placeholder="Nhập nội dung bài nói..." style="width:100%; height:100px; margin-bottom:10px;"></textarea>
+                <label>Hình ảnh (URL hoặc Base64):</label>
+                <textarea id="imageInput" placeholder="Dán URL hoặc mã Base64 của hình ảnh..." style="width:100%; height:80px; margin-bottom:10px;"></textarea>
+                <img id="previewImage" src="" alt="Preview" style="max-width:100%; display:none; margin-bottom:10px;">
+                <label>Loại bài nói:</label>
+                <select id="typeInput" style="width:100%; margin-bottom:10px;">
+                    <option value="pie">Pie</option>
+                    <option value="line">Line</option>
+                    <option value="bar">Bar</option>
+                    <option value="photo">Photo</option>
+                    <option value="process">Process</option>
+                    <option value="cycle">Cycle</option>
+                </select>
+                <button type="button" onclick="addSpeaking()">Thêm bài nói</button>
+            </form>
+        </div>
+        <!-- Bên phải: Danh sách bài nói -->
+        <div style="flex: 6; min-width: 0; padding: 15px; border: 1px solid #ccc;">
+            <div style="margin-bottom:10px;">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm bài nói..." style="width:60%;">
+                <button onclick="searchSpeakings()" style="margin-left:10px;">Tìm kiếm</button>
+                <select id="filterType" style="width:20%;" onchange="filterSpeakings()">
+                    <option value="">Tất cả</option>
+                    <option value="pie">Pie</option>
+                    <option value="line">Line</option>
+                    <option value="bar">Bar</option>
+                    <option value="photo">Photo</option>
+                    <option value="process">Process</option>
+                    <option value="cycle">Cycle</option>
+                </select>
+            </div>
+            <div id="speakingList" style="display: flex; flex-wrap: wrap; gap: 15px;"></div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='speaking_describe_image.js') }}"></script>
+<script>
+// Khi người dùng nhập hoặc dán hình ảnh vào ô textarea
+$('#imageInput').on('input', function() {
+    const imageUrl = $(this).val().trim();
+    if (imageUrl) {
+        $('#previewImage').attr('src', imageUrl).show();
+    } else {
+        $('#previewImage').hide();
+    }
+});
+
+// Hàm thêm bài nói
+function addSpeaking() {
+    const title = $('#titleInput').val().trim();
+    const script = $('#scriptInput').val().trim();
+    const type = $('#typeInput').val();
+    const image = $('#imageInput').val().trim();
+
+    if (!title || !script || !type || !image) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    const newSpeaking = {
+        id: Date.now(),
+        title,
+        script,
+        image,
+        type,
+        created_at: new Date().toISOString()
+    };
+
+    $.ajax({
+        url: '/speaking_describe_image',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(newSpeaking),
+        success: function() {
+            alert('Đã thêm bài nói!');
+            loadSpeakings();
+            $('#addSpeakingForm')[0].reset();
+            $('#previewImage').hide();
+        }
+    });
+}
+
+function renderSpeakingList(list) {
+    const container = $('#speakingList');
+    container.empty();
+    list.forEach(item => {
+        container.append(`
+            <div style="border:1px solid #ccc; padding:10px; width:200px;">
+                <img src="${item.image}" alt="${item.title}" style="width:100%; height:120px; object-fit:cover;">
+                <h4>${item.title}</h4>
+                <p>Loại: ${item.type}</p>
+                <a href="/speaking_describe_image/${item.id}" target="_blank" style="display:block; margin-top:10px; text-align:center; background:#007bff; color:white; padding:5px 10px; text-decoration:none; border-radius:4px;">Xem chi tiết</a>
+            </div>
+        `);
+    });
+}
+
+function filterSpeakings() {
+    const type = $('#filterType').val();
+
+    // Gửi yêu cầu lọc loại bài nói đến backend
+    $.get('/speaking_describe_image/filter', { type: type }, function(data) {
+        renderSpeakingList(data);
+    });
+}
+
+function searchSpeakings() {
+    const keyword = $('#searchInput').val().trim();
+
+    // Gửi yêu cầu tìm kiếm từ khóa đến backend
+    $.get('/speaking_describe_image/search', { q: keyword }, function(data) {
+        renderSpeakingList(data);
+    });
+}
+</script>
+</body>
+</html>

@@ -673,5 +673,82 @@ def toggle_irregular_verb_priority():
             return jsonify({"message": "Priority toggled"})
     return jsonify({"error": "Verb not found"}), 404
 
+@app.route('/speaking_describe_image', methods=['GET'])
+def get_speakings():
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    return jsonify([])
+
+@app.route('/speaking_describe_image_page', methods=['GET'])
+def speaking_describe_image_page():
+    """Render the Speaking Describe Image HTML page"""
+    return render_template('speaking_describe_image.html')
+
+@app.route('/speaking_describe_image', methods=['POST'])
+def add_speaking():
+    data = request.json
+    if not data.get('title') or not data.get('script') or not data.get('image') or not data.get('type'):
+        return jsonify({'error': 'Missing fields'}), 400
+
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+    else:
+        speakings = []
+
+    speakings.append(data)
+    with open('speaking_describe_image.json', 'w', encoding='utf-8') as f:
+        json.dump(speakings, f, ensure_ascii=False, indent=4)
+
+    return jsonify({'message': 'Speaking added successfully!'})
+
+@app.route('/speaking_describe_image/<int:item_id>', methods=['GET'])
+def view_speaking_detail(item_id):
+    """Render the detail page for a specific speaking item."""
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+            item = next((s for s in speakings if s['id'] == item_id), None)
+            if item:
+                return render_template('speaking_detail.html', item=item)
+    return "Item not found", 404
+
+@app.route('/speaking_describe_image/search', methods=['GET'])
+def search_speakings():
+    keyword = request.args.get('q', '').lower()
+
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+
+        # Lọc theo từ khóa
+        filtered = [
+            s for s in speakings
+            if keyword in s['title'].lower() or keyword in s['script'].lower()
+        ]
+        return jsonify(filtered)
+
+    return jsonify([])
+
+@app.route('/speaking_describe_image/filter', methods=['GET'])
+def filter_speakings():
+    speaking_type = request.args.get('type', '')
+
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+
+        # Lọc theo loại bài nói
+        filtered = [
+            s for s in speakings
+            if not speaking_type or s['type'] == speaking_type
+        ]
+        return jsonify(filtered)
+
+    return jsonify([])
+
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
