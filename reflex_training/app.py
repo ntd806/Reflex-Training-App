@@ -18,6 +18,7 @@ REPEAT_SENTENCES_FILE = 'repeat_sentences.json'
 YOUTUBE_LINKS_FILE = 'youtube_links.json'
 ENDING_WORDS_FILE = os.path.join(os.path.dirname(__file__), 'ending_words.json')
 IRREGULAR_VERBS_FILE = os.path.join(os.path.dirname(__file__), 'irregular_verbs.json')
+CURRENT_SPEAKING_FILE = os.path.join(os.path.dirname(__file__), 'current_speaking.json')
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -117,6 +118,18 @@ def load_irregular_verbs():
 def save_irregular_verbs(data):
     with open(IRREGULAR_VERBS_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+
+def load_current_speaking():
+    """Tải bài học hiện tại từ file"""
+    if os.path.exists(CURRENT_SPEAKING_FILE):
+        with open(CURRENT_SPEAKING_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_current_speaking(speaking):
+    """Lưu bài học hiện tại vào file"""
+    with open(CURRENT_SPEAKING_FILE, 'w', encoding='utf-8') as f:
+        json.dump(speaking, f, ensure_ascii=False, indent=4)
 
 def get_pronunciation_guide(word):
     guides = load_guides()
@@ -674,11 +687,13 @@ def toggle_irregular_verb_priority():
     return jsonify({"error": "Verb not found"}), 404
 
 @app.route('/speaking_describe_image', methods=['GET'])
-def get_speakings():
+def get_speaking_list():
+    """Trả về danh sách các bài học"""
     if os.path.exists('speaking_describe_image.json'):
         with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
-            return jsonify(json.load(f))
-    return jsonify([])
+            speakings = json.load(f)
+        return jsonify(speakings)
+    return jsonify([]), 404
 
 @app.route('/speaking_describe_image_page', methods=['GET'])
 def speaking_describe_image_page():
@@ -709,10 +724,10 @@ def view_speaking_detail(item_id):
     if os.path.exists('speaking_describe_image.json'):
         with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
             speakings = json.load(f)
-            item = next((s for s in speakings if s['id'] == item_id), None)
-            if item:
-                return render_template('speaking_detail.html', item=item)
-    return "Item not found", 404
+        item = next((s for s in speakings if s['id'] == item_id), None)
+        if item:
+            return render_template('speaking_detail.html', item=item)
+    return "Bài học không tồn tại", 404
 
 @app.route('/speaking_describe_image/search', methods=['GET'])
 def search_speakings():
@@ -748,7 +763,38 @@ def filter_speakings():
 
     return jsonify([])
 
+@app.route('/speaking_describe_image/practice', methods=['GET'])
+def get_current_speaking():
+    """Lấy bài học hiện tại hoặc bài đầu tiên"""
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+    else:
+        speakings = []
 
+    current_speaking = load_current_speaking()
+
+    if not current_speaking:
+        # Nếu chưa có bài học hiện tại, lấy bài đầu tiên
+        if speakings:
+            current_speaking = speakings[0]
+            save_current_speaking(current_speaking)
+        else:
+            # Nếu danh sách bài học trống, trả về lỗi
+            return jsonify({'error': 'No speaking lessons available'}), 404
+
+    return jsonify(current_speaking)
+
+@app.route('/speaking_describe_image/practice', methods=['POST'])
+def save_current_speaking_api():
+    """Lưu bài học hiện tại"""
+    data = request.json
+    speaking = data.get('speaking')
+    if not speaking:
+        return jsonify({'error': 'No speaking provided'}), 400
+
+    save_current_speaking(speaking)
+    return jsonify({'message': 'Current speaking saved successfully'})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(host='0.0.0.0', port=3000, debug=True)

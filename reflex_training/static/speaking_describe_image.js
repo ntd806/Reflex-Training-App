@@ -1,4 +1,5 @@
 let speakings = [];
+let currentSpeaking = null;
 
 function addSpeaking() {
     const title = $('#titleInput').val().trim();
@@ -86,3 +87,45 @@ $('#imageInput').on('change', function() {
 $(document).ready(function() {
     loadSpeakings();
 });
+
+function loadCurrentSpeaking() {
+    $.get('/speaking_describe_image/practice', function(speaking) {
+        if (!speaking || !speaking.title) {
+            alert('Không có bài học nào để học!');
+            return;
+        }
+        currentSpeaking = speaking;
+        renderCurrentSpeaking(speaking);
+    });
+}
+
+function saveCurrentSpeaking(speaking) {
+    $.ajax({
+        url: '/speaking_describe_image/practice',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ speaking: speaking }),
+        success: function() {
+            console.log('Bài học hiện tại đã được lưu.');
+        }
+    });
+}
+
+function renderCurrentSpeaking(speaking) {
+    $('#currentSpeaking').html(`
+        <h3>${speaking.title}</h3>
+        <p><b>Loại:</b> ${speaking.type}</p>
+        <p><b>Script:</b> ${speaking.script}</p>
+        <img src="${speaking.image}" alt="${speaking.title}" style="max-width:100%; margin-top:10px;">
+    `);
+}
+
+function nextSpeaking() {
+    $.get('/speaking_describe_image', function(speakings) {
+        const currentIndex = speakings.findIndex(s => s.id === currentSpeaking.id);
+        const nextIndex = (currentIndex + 1) % speakings.length; // Lấy bài tiếp theo (vòng lặp)
+        currentSpeaking = speakings[nextIndex];
+        renderCurrentSpeaking(currentSpeaking);
+        saveCurrentSpeaking(currentSpeaking);
+    });
+}

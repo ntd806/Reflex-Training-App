@@ -70,6 +70,13 @@
             <div id="speakingList" style="display: flex; flex-wrap: wrap; gap: 15px;"></div>
         </div>
     </div>
+    <div id="currentSpeaking" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9;">
+        <h3>Đang tải bài học...</h3>
+    </div>
+   
+    <div style="margin-top: 10px;">
+        <button onclick="nextSpeaking()">Bài tiếp theo</button>
+    </div>
 </div>
 <script src="{{ url_for('static', filename='speaking_describe_image.js') }}"></script>
 <script>
@@ -148,6 +155,58 @@ function searchSpeakings() {
     // Gửi yêu cầu tìm kiếm từ khóa đến backend
     $.get('/speaking_describe_image/search', { q: keyword }, function(data) {
         renderSpeakingList(data);
+    });
+}
+
+// Khi tài liệu đã sẵn sàng
+$(document).ready(function() {
+    loadCurrentSpeaking();
+});
+
+function loadCurrentSpeaking() {
+    $.get('/speaking_describe_image/practice', function(speaking) {
+        if (!speaking || speaking.error) {
+            $('#currentSpeaking').html('<h3>Không có bài học nào để hiển thị.</h3>');
+            currentSpeaking = null; // Đảm bảo currentSpeaking là null nếu không có bài học
+            return;
+        }
+        currentSpeaking = speaking; // Lưu bài học hiện tại
+        $('#currentSpeaking').html(`
+            <h3>${speaking.title}</h3>
+            <p><b>Loại:</b> ${speaking.type}</p>
+            <p><b>Script:</b> ${speaking.script}</p>
+            <img src="${speaking.image}" alt="${speaking.title}" style="max-width:100%; margin-top:10px;">
+        `);
+    }).fail(function() {
+        $('#currentSpeaking').html('<h3>Đã xảy ra lỗi khi tải bài học.</h3>');
+        currentSpeaking = null; // Đảm bảo currentSpeaking là null nếu xảy ra lỗi
+    });
+}
+
+function nextSpeaking() {
+    $.get('/speaking_describe_image', function(speakings) {
+        if (!speakings || !Array.isArray(speakings) || speakings.length === 0) {
+            alert('Không có bài học nào để chuyển tiếp!');
+            return;
+        }
+
+        if (!currentSpeaking) {
+            // Nếu không có bài học hiện tại, lấy bài đầu tiên
+            currentSpeaking = speakings[0];
+        } else {
+            // Tìm bài học tiếp theo
+            const currentIndex = speakings.findIndex(s => s.id === currentSpeaking.id);
+            const nextIndex = (currentIndex + 1) % speakings.length; // Lấy bài tiếp theo (vòng lặp)
+            currentSpeaking = speakings[nextIndex];
+        }
+
+        // Lưu bài học hiện tại
+        saveCurrentSpeaking(currentSpeaking);
+
+        // Chuyển hướng đến trang chi tiết của bài học
+        window.location.href = `/speaking_describe_image/${currentSpeaking.id}`;
+    }).fail(function() {
+        alert('Đã xảy ra lỗi khi tải danh sách bài học.');
     });
 }
 </script>

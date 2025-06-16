@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ item.title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .detail-container {
             display: flex;
@@ -64,6 +65,35 @@
         </div>
     </div>
     <a href="/speaking_describe_image_page" class="back-button">Quay lại</a>
+    <button onclick="nextSpeaking()" style="position: absolute; top: 20px; right: 20px;">Bài tiếp theo</button>
 </div>
+<script>
+    $(document).ready(function() {
+        console.log('jQuery đã được tải!');
+    });
+
+    function nextSpeaking() {
+        // Gửi yêu cầu đến API để lấy danh sách bài học
+        $.get('/speaking_describe_image', function(speakings) {
+            if (!speakings || !Array.isArray(speakings) || speakings.length === 0) {
+                alert('Không có bài học nào để chuyển tiếp!');
+                return;
+            }
+
+            // Tìm bài học hiện tại
+            const currentId = {{ item.id }};
+            const currentIndex = speakings.findIndex(s => s.id === currentId);
+
+            // Xác định bài học tiếp theo
+            const nextIndex = (currentIndex + 1) % speakings.length;
+            const nextSpeaking = speakings[nextIndex];
+
+            // Chuyển hướng đến trang chi tiết của bài học tiếp theo
+            window.location.href = `/speaking_describe_image/${nextSpeaking.id}`;
+        }).fail(function() {
+            alert('Đã xảy ra lỗi khi tải danh sách bài học.');
+        });
+    }
+</script>
 </body>
 </html>
