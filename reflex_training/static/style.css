@@ -36,10 +36,96 @@ button:hover {
 .flex-main {
     display: flex;
     gap: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
-.content {
-    margin-left: 30px;
-    margin-right: 20px;
+
+.flex-main > div {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Responsive cho màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .flex-main {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav a {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    nav a:hover {
+        background-color: #ddd;
+    }
+
+    #searchInput, #wordInput, #guideInput {
+        width: 100%;
+    }
+
+    #wordList {
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+}
+
+/* Responsive cho màn hình nhỏ hơn 480px */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a {
+        flex: 1 1 100%;
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .flex-main {
+        padding: 10px;
+    }
+
+    #searchInput, #wordInput, #guideInput {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 10px;
+        width: 100%;
+    }
+
+    #output {
+        font-size: 0.9em;
+    }
+
+    #wordList {
+        font-size: 0.9em;
+    }
 }
