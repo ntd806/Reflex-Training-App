@@ -24,15 +24,22 @@ def today_str():
     return datetime.date.today().isoformat()
 
 def load_words():
-    """Tải danh sách từ từ file"""
+    """Tải danh sách từ từ file và thêm hướng dẫn phát âm từ pronunciation_guides.json"""
+    words = []
+    guides = load_guides()  # Tải hướng dẫn phát âm từ pronunciation_guides.json
+
     if os.path.exists(WORDS_FILE):
         with open(WORDS_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
             # Nếu là danh sách string cũ thì chuyển sang object
             if data and isinstance(data[0], str):
-                data = [{"word": w, "priority": False, "shown_today": 0, "last_shown_date": ""} for w in data]
-            return data
-    return []
+                words = [{"word": w, "translation": "", "guide": guides.get(w, ""), "priority": False, "shown_today": 0, "last_shown_date": ""} for w in data]
+            else:
+                # Thêm hướng dẫn phát âm vào từng từ
+                for word_obj in data:
+                    word_obj["guide"] = guides.get(word_obj["word"], "")
+                    words.append(word_obj)
+    return words
 
 def save_words(words):
     """Lưu danh sách từ vào file"""
@@ -40,7 +47,7 @@ def save_words(words):
         json.dump(words, f, ensure_ascii=False, indent=4)
 
 def load_guides():
-    """Tải hướng dẫn phát âm từ file"""
+    """Tải hướng dẫn phát âm từ file pronunciation_guides.json"""
     if os.path.exists(GUIDES_FILE):
         with open(GUIDES_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)

@@ -80,7 +80,17 @@
                 <input type="text" id="searchInput" placeholder="Tìm kiếm từ..." style="width:70%;">
                 <button onclick="searchWordList()">Tìm</button>
             </div>
-            <div id="wordList" style="margin-top:15px;"></div>
+            <div id="wordList">
+    <ul>
+        {% for word in words %}
+        <li>
+            <b>{{ word.word }}</b>
+            <span style="color: gray;">({{ word.translation or 'Chưa có nghĩa' }})</span>
+            <span style="color: blue;">[{{ word.guide or 'Chưa có hướng dẫn' }}]</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
         </div>
     </div>
 </div>
@@ -97,6 +107,7 @@ function showWordList() {
             html += `<li>
                 <span style="cursor:pointer;color:#007bff;text-decoration:underline;" 
                     onclick="showWordDetail('${wordObj.word.replace(/'/g, "\\'")}')">${wordObj.word}</span>
+                <span style="margin-left:10px; color:gray;">(${wordObj.translation || 'Chưa có nghĩa'})</span>
                 <button onclick="deleteWord('${wordObj.word.replace(/'/g, "\\'")}')" 
                     style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
                 <button class="priority-btn" priority="${wordObj.priority ? 'true' : 'false'}" 
@@ -112,15 +123,32 @@ function showWordList() {
 }
 
 function showWordDetail(word) {
-    $.get(`/guides`, function(guides) {
-        let guide = guides[word] || "No guide available.";
+    $.get('/words', function(words) {
+        const wordObj = words.find(w => w.word === word);
+        if (!wordObj) {
+            document.getElementById('output').innerHTML = '<i>Không tìm thấy từ này.</i>';
+            return;
+        }
+
+        const translation = wordObj.translation || 'Chưa có nghĩa';
+        const guide = wordObj.guide || 'Chưa có hướng dẫn đọc';
         document.getElementById('output').innerHTML = `
-            <div style="font-size:1.3em;"><b>Practice this:</b> ${word}<br>
-            <b>Pronunciation Guide:</b> ${guide}</div>
+            <div style="font-size:1.3em; margin-bottom:10px;">
+                <b>Từ:</b> ${word}
+            </div>
+            <div style="font-size:1.3em; margin-bottom:10px;">
+                <b>Nghĩa:</b> ${translation}
+            </div>
+            <div style="font-size:1.3em; margin-bottom:10px;">
+                <b>Hướng dẫn đọc:</b> ${guide}
+            </div>
+            <div style="font-size:1.3em; margin-bottom:20px;">
+                <b>Ưu tiên:</b> ${wordObj.priority ? 'Có' : 'Không'}
+            </div>
             <div style="margin-top:10px; display:flex; align-items:center; justify-content: flex-end;">
                 <button 
-                    onclick="speak('${word.replace(/'/g,"\\'")}')" 
-                    style="font-size:1.1em; padding:10px 20px; float:right; margin-top:0; margin-bottom:0; margin-right:0; margin-left:20px; height:100%;">Read</button>
+                    onclick="speak('${word.replace(/'/g, "\\'")}')" 
+                    style="font-size:1.1em; padding:10px 20px;">Đọc</button>
             </div>
         `;
         currentText = word;
