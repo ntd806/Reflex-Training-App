@@ -803,5 +803,10 @@ def save_current_speaking_api():
     save_current_speaking(speaking)
     return jsonify({'message': 'Current speaking saved successfully'})
 
+@app.route('/random_currency', methods=['GET'])
+def random_currency_page():
+    """Render the Random Currency Generator page"""
+    return render_template('random_currency.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

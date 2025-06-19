@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Currency Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="content">
+    <h1>Random Currency Generator</h1>
+    <div style="margin-bottom: 20px;">
+        <label>Min Value: <input type="number" id="minValue" value="1000" style="width: 100px;"></label>
+        <label>Max Value: <input type="number" id="maxValue" value="1000000000" style="width: 120px;"></label>
+        <label>Currency Type:
+            <select id="currencyType" style="width: 150px;">
+                <option value="USD">USD - Mỹ</option>
+                <option value="CAD">CAD - Canada</option>
+                <option value="AUD">AUD - Úc</option>
+                <option value="GBP">GBP - Anh</option>
+                <option value="EUR">EUR - Châu Âu</option>
+            </select>
+        </label>
+        <label>Interval (seconds): <input type="number" id="intervalInput" value="5" min="1" style="width: 60px;"></label>
+        <button onclick="startAutoGenerate()">Start</button>
+        <button onclick="stopAutoGenerate()">Stop</button>
+        <button onclick="togglePause()">Pause/Resume</button>
+    </div>
+    <div id="currencyOutput" style="font-size: 2em; color: blue; margin-top: 20px;">$0.00</div>
+</div>
+<script src="{{ url_for('static', filename='random_currency.js') }}"></script>
+</body>
+</html>
