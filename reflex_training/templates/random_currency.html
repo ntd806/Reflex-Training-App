@@ -9,6 +9,21 @@
 </head>
 <body>
 <div class="content">
+     <!-- Menu điều hướng -->
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
+        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
+        <label style="margin-left:10px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
     <h1>Random Currency Generator</h1>
     <div style="margin-bottom: 20px;">
         <label>Min Value: <input type="number" id="minValue" value="1000" style="width: 100px;"></label>
@@ -27,8 +42,158 @@
         <button onclick="stopAutoGenerate()">Stop</button>
         <button onclick="togglePause()">Pause/Resume</button>
     </div>
+    <div style="margin-bottom: 20px;">
+        <label>Loại bài học:
+            <select id="lessonType" style="width: 150px;">
+                <option value="WFD">WFD</option>
+                <option value="RS">RS</option>
+                <option value="New Word">New Word</option>
+                <option value="Listening">Listening</option>
+            </select>
+        </label>
+        <label style="margin-left:10px;">Tên bài học:
+            <input type="text" id="lessonName" placeholder="Nhập tên bài học..." style="width: 180px;">
+        </label>
+        <button onclick="selectLesson()">Chọn bài</button>
+    </div>
     <div id="currencyOutput" style="font-size: 2em; color: blue; margin-top: 20px;">$0.00</div>
+    <div style="margin-top:30px;">
+        <h3>Thống kê bài học</h3>
+        <table border="1" cellpadding="6" style="border-collapse:collapse; min-width:350px;">
+            <thead>
+                <tr>
+                    <th>Tên bài</th>
+                    <th>Loại</th>
+                    <th>Số lần học</th>
+                    <th>Lần cuối</th>
+                    <th>Cần ôn lại</th>
+                </tr>
+            </thead>
+            <tbody id="lessonStats"></tbody>
+        </table>
+        <div id="pagination" style="margin-top:10px; text-align:center;"></div>
+    </div>
 </div>
 <script src="{{ url_for('static', filename='random_currency.js') }}"></script>
+<script>
+let lessonStats = {};
+let currentPage = 1;
+const rowsPerPage = 10;
+
+// Lấy dữ liệu từ server khi trang load
+function fetchLessonStats() {
+    $.get('/lesson_stats', function(stats) {
+        lessonStats = stats || {};
+        renderLessonStats();
+    });
+}
+
+function renderLessonStats(page = 1) {
+    const tbody = document.getElementById('lessonStats');
+    tbody.innerHTML = '';
+    const entries = Object.entries(lessonStats);
+    const totalPages = Math.ceil(entries.length / rowsPerPage);
+    currentPage = Math.max(1, Math.min(page, totalPages || 1));
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    entries.slice(start, end).forEach(([name, stat]) => {
+        let reviewStatus = '';
+        if (!stat.last || stat.count === 0) {
+            reviewStatus = '<span style="color:gray;">Chưa học</span>';
+        } else {
+            const lastDate = new Date(stat.last);
+            const now = new Date();
+            const diffDays = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
+            if (diffDays >= 3) {
+                reviewStatus = '<span style="color:red;font-weight:bold;">Cần ôn lại</span>';
+            } else {
+                reviewStatus = '<span style="color:green;">Chưa cần ôn lại</span>';
+            }
+        }
+        tbody.innerHTML += `<tr style="cursor:pointer;" onclick="loadLessonFromStats('${name}')">
+            <td>${name}</td>
+            <td>${stat.type}</td>
+            <td>${stat.count}</td>
+            <td>${stat.last || ''}</td>
+            <td>${reviewStatus}</td>
+        </tr>`;
+    });
+    renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+    const pagDiv = document.getElementById('pagination');
+    if (totalPages <= 1) {
+        pagDiv.innerHTML = '';
+        return;
+    }
+    let html = '';
+    if (currentPage > 1) {
+        html += `<button onclick="renderLessonStats(${currentPage - 1})">&laquo; Trước</button>`;
+    }
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<button onclick="renderLessonStats(${i})" style="margin:0 2px;${i===currentPage?'font-weight:bold;background:#007bff;color:#fff;':''}">${i}</button>`;
+    }
+    if (currentPage < totalPages) {
+        html += `<button onclick="renderLessonStats(${currentPage + 1})">Sau &raquo;</button>`;
+    }
+    pagDiv.innerHTML = html;
+}
+
+function updateLessonStats(name, type) {
+    const now = new Date().toLocaleString();
+    if (!lessonStats[name]) {
+        lessonStats[name] = { type: type, count: 1, last: now };
+    } else {
+        lessonStats[name].count += 1;
+        lessonStats[name].last = now;
+    }
+    // Gửi lên server thay vì localStorage
+    saveStatsToServer();
+    renderLessonStats(currentPage);
+}
+
+function saveStatsToServer() {
+    $.ajax({
+        url: '/lesson_stats',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ stats: lessonStats }),
+        success: function(res) {
+            // Có thể hiển thị thông báo nếu muốn
+        }
+    });
+}
+
+function selectLesson() {
+    const name = document.getElementById('lessonName').value.trim();
+    const type = document.getElementById('lessonType').value;
+    if (!name) {
+        alert('Vui lòng nhập tên bài học!');
+        return;
+    }
+    updateLessonStats(name, type);
+    document.getElementById('currencyOutput').innerHTML = `<b>Đang luyện tập:</b> ${name} (${type})`;
+}
+
+function onLessonPracticed() {
+    const name = document.getElementById('lessonName').value.trim();
+    const type = document.getElementById('lessonType').value;
+    if (name) updateLessonStats(name, type);
+}
+
+function loadLessonFromStats(name) {
+    const stat = lessonStats[name];
+    if (!stat) return;
+    document.getElementById('lessonName').value = name;
+    document.getElementById('lessonType').value = stat.type;
+    document.getElementById('currencyOutput').innerHTML = `<b>Đang luyện tập:</b> ${name} (${stat.type})`;
+    // Nếu muốn tự động bắt đầu luyện tập, gọi startAutoGenerate() ở đây
+    // startAutoGenerate();
+}
+
+// Gọi khi trang load để hiển thị thống kê từ server
+fetchLessonStats();
+</script>
 </body>
 </html>

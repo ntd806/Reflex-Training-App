@@ -19,6 +19,7 @@ YOUTUBE_LINKS_FILE = 'youtube_links.json'
 ENDING_WORDS_FILE = os.path.join(os.path.dirname(__file__), 'ending_words.json')
 IRREGULAR_VERBS_FILE = os.path.join(os.path.dirname(__file__), 'irregular_verbs.json')
 CURRENT_SPEAKING_FILE = os.path.join(os.path.dirname(__file__), 'current_speaking.json')
+LESSON_STATS_FILE = os.path.join(os.path.dirname(__file__), 'lesson_stats.json')
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -138,6 +139,16 @@ def save_current_speaking(speaking):
     with open(CURRENT_SPEAKING_FILE, 'w', encoding='utf-8') as f:
         json.dump(speaking, f, ensure_ascii=False, indent=4)
 
+def load_lesson_stats():
+    if os.path.exists(LESSON_STATS_FILE):
+        with open(LESSON_STATS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_lesson_stats(stats):
+    with open(LESSON_STATS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(stats, f, ensure_ascii=False, indent=4)
+
 def get_pronunciation_guide(word):
     guides = load_guides()
     for k, v in guides.items():
@@ -217,7 +228,15 @@ def search_word():
     """Tìm kiếm từ trong danh sách"""
     q = request.args.get('q', '').strip().lower()
     words = load_words()
-    result = [w for w in words if q in w.lower()]
+
+    # Ensure words is a list of strings or dictionaries with a 'word' key
+    result = []
+    for w in words:
+        if isinstance(w, str) and q in w.lower():
+            result.append(w)
+        elif isinstance(w, dict) and 'word' in w and q in w['word'].lower():
+            result.append(w)
+
     return jsonify(result)
 
 @app.route('/guides', methods=['GET'])
@@ -473,21 +492,12 @@ def delete_repeat_sentence(sentence):
 def toggle_repeat_sentence_priority():
     data = request.get_json()
     sentence = data.get('sentence')
-    if not sentence:
-        return jsonify({'error': 'No sentence provided'}), 400
     sentences = load_repeat_sentences()
-    found = False
-    for i, item in enumerate(sentences):
-        if isinstance(item, str):
-            if item == sentence:
-                sentences[i] = {'sentence': item, 'priority': True}
-                found = True
-        elif item.get('sentence') == sentence:
+    for item in sentences:
+        if item.get('sentence') == sentence:
             item['priority'] = not item.get('priority', False)
-            found = True
-    if found:
-        save_repeat_sentences(sentences)
-        return jsonify({'message': 'Updated'})
+            save_repeat_sentences(sentences)
+            return jsonify({'message': 'Priority toggled'})
     return jsonify({'error': 'Sentence not found'}), 404
 
 @app.route('/upload_sentences', methods=['POST'])
@@ -807,6 +817,18 @@ def save_current_speaking_api():
 def random_currency_page():
     """Render the Random Currency Generator page"""
     return render_template('random_currency.html')
+
+@app.route('/lesson_stats', methods=['POST'])
+def save_lesson_stats_api():
+    stats = request.json.get('stats')
+    if not isinstance(stats, dict):
+        return jsonify({'error': 'Invalid stats'}), 400
+    save_lesson_stats(stats)
+    return jsonify({'message': 'Saved'})
+
+@app.route('/lesson_stats', methods=['GET'])
+def get_lesson_stats_api():
+    return jsonify(load_lesson_stats())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

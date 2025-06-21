@@ -234,6 +234,28 @@ function deleteWord(word) {
         }
     });
 }
+
+function searchWordList() {
+    const query = document.getElementById('searchInput').value.trim();
+    $.get(`/words/search?q=${encodeURIComponent(query)}`, function(data) {
+        if (!data.length) {
+            document.getElementById('wordList').innerHTML = '<i>Không tìm thấy từ nào.</i>';
+            return;
+        }
+        let html = '<ul>';
+        data.forEach(word => {
+            if (typeof word === 'string') {
+                html += `<li>${word}</li>`;
+            } else if (typeof word === 'object' && word.word) {
+                html += `<li>${word.word} (${word.translation || 'Chưa có nghĩa'})</li>`;
+            }
+        });
+        html += '</ul>';
+        document.getElementById('wordList').innerHTML = html;
+    }).fail(function(xhr) {
+        alert('Lỗi khi tìm kiếm: ' + (xhr.responseJSON?.error || 'Không xác định'));
+    });
+}
 </script>
 </body>
 </html>
