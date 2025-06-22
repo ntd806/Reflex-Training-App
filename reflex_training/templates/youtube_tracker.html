@@ -195,6 +195,8 @@ function playYoutube(url, lastTime = 0) {
         return;
     }
 
+    lastUrl = url; // <-- Thêm dòng này để luôn lưu lại URL đang xem
+
     $('#playerSection').html(`
         <div style="width:100%;max-width:100%;">
             <div style="position:relative;width:100%;padding-bottom:56.25%;">
