@@ -227,7 +227,6 @@ function getRandomSentence() {
             return;
         }
         currentSentence = data.sentence;
-        // Ưu tiên lấy transcript từ response random
         let transcript = data.transcript || '';
         $('#randomSentence').html(
             `<div>${data.sentence}</div>` +
@@ -236,6 +235,7 @@ function getRandomSentence() {
         if ($('#autoSpeakCheckbox').is(':checked')) {
             setupSpeakRepeat();
         } else {
+            speak(currentSentence);
             clearSpeakRepeat();
         }
     });
@@ -251,6 +251,10 @@ function loadVoices() {
         option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
         voiceSelect.appendChild(option);
     });
+    // Chọn voice đầu tiên nếu chưa chọn
+    if (voiceSelect.options.length > 0 && voiceSelect.selectedIndex === -1) {
+        voiceSelect.selectedIndex = 0;
+    }
 }
 window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener('DOMContentLoaded', loadVoices);
@@ -259,55 +263,18 @@ function speak(text) {
     if (!text) return;
     window.speechSynthesis.cancel();
 
-    // Nếu không có dấu ngắt, đọc toàn bộ câu
-    if (!/[\.!\?\n,]/.test(text)) {
-        const utterance = new SpeechSynthesisUtterance(text.trim());
-        const voiceSelect = document.getElementById('voiceSelect');
-        if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {
-            utterance.voice = voices[voiceSelect.value];
-            utterance.lang = voices[voiceSelect.value].lang;
-        }
-        utterance.onend = function() {
-            if ($('#autoSpeakCheckbox').is(':checked')) {
-                setTimeout(getRandomSentence, ($('#sentencePause').val() ? parseInt($('#sentencePause').val()) : 3) * 1000);
-            }
-        };
-        window.speechSynthesis.speak(utterance);
-        return;
+    const utterance = new SpeechSynthesisUtterance(text.trim());
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voiceSelect && voices && voices.length && voiceSelect.value !== "") {
+        utterance.voice = voices[voiceSelect.value];
+        utterance.lang = voices[voiceSelect.value].lang;
     }
-
-    // Nếu có dấu ngắt, chia nhỏ và đọc từng phần
-    let parts = text.split(/([\.!\?\n,]+)/g).reduce((arr, cur, idx, src) => {
-        if (idx % 2 === 0) {
-            let next = src[idx + 1] || '';
-            let phrase = (cur + next).trim();
-            if (phrase) arr.push(phrase);
+    utterance.onend = function() {
+        if ($('#autoSpeakCheckbox').is(':checked')) {
+            setTimeout(getRandomSentence, ($('#sentencePause').val() ? parseInt($('#sentencePause').val()) : 3) * 1000);
         }
-        return arr;
-    }, []);
-    if (!parts.length) parts = [text];
-
-    let i = 0;
-    function speakPart() {
-        if (i >= parts.length) {
-            if ($('#autoSpeakCheckbox').is(':checked')) {
-                setTimeout(getRandomSentence, ($('#sentencePause').val() ? parseInt($('#sentencePause').val()) : 3) * 1000);
-            }
-            return;
-        }
-        const utterance = new SpeechSynthesisUtterance(parts[i]);
-        const voiceSelect = document.getElementById('voiceSelect');
-        if (voiceSelect && voices && voices.length && voices[voiceSelect.value]) {
-            utterance.voice = voices[voiceSelect.value];
-            utterance.lang = voices[voiceSelect.value].lang;
-        }
-        utterance.onend = function() {
-            i++;
-            speakPart();
-        };
-        window.speechSynthesis.speak(utterance);
-    }
-    speakPart();
+    };
+    window.speechSynthesis.speak(utterance);
 }
 function deleteSentence(s) {
     const sentence = decodeURIComponent(s);

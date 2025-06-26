@@ -12,7 +12,7 @@
             margin-top: 20px;
         }
         .detail-image {
-            flex: 2;
+            flex: 1;
             max-width: 50%;
         }
         .detail-image img {
@@ -21,7 +21,8 @@
             border: 1px solid #ccc;
         }
         .detail-script {
-            flex: 1;
+            flex: 2;
+            margin-right: 10px;
         }
         .back-button {
             display: inline-block;
@@ -51,6 +52,47 @@
             color: #333;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
+
+        @media (max-width: 768px) {
+            .detail-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .detail-image, .detail-script {
+                max-width: 100%;
+                margin-right: 0;
+            }
+            .page-title {
+                font-size: 1.5em;
+                margin-top: 10px;
+            }
+            .back-button {
+                font-size: 1em;
+                padding: 8px 12px;
+                bottom: 10px;
+                right: 10px;
+            }
+            .detail-script input[type="text"] {
+                width: 100% !important;
+            }
+            .detail-script button {
+                width: 100%;
+                margin-top: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .detail-container {
+                gap: 5px;
+            }
+            .page-title {
+                font-size: 1.1em;
+            }
+            .back-button {
+                font-size: 0.95em;
+                padding: 8px 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -61,6 +103,10 @@
             <img src="{{ item.image }}" alt="{{ item.title }}">
         </div>
         <div class="detail-script">
+            <div style="margin-top:15px;">
+                <input type="text" id="readWordInput" placeholder="Nhập từ hoặc cụm từ..." style="width:60%;padding:6px 10px;">
+                <button onclick="speakInputWord()" style="padding:6px 16px;">Đọc</button>
+            </div>
             <p>{{ item.script.replace('\n', '<br>')|safe }}</p>
         </div>
     </div>
@@ -71,6 +117,42 @@
     $(document).ready(function() {
         console.log('jQuery đã được tải!');
     });
+
+    function speak(text) {
+        if (!text) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voiceSelect = document.getElementById('voiceSelect');
+        if (voiceSelect && voices && voices.length && voiceSelect.value) {
+            utterance.voice = voices[voiceSelect.value];
+            utterance.lang = voices[voiceSelect.value].lang;
+        }
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function speakInputWord() {
+        const word = document.getElementById('readWordInput').value.trim();
+        speak(word);
+    }
+
+    // Nếu bạn có select#voiceSelect thì giữ lại phần loadVoices, nếu không có thì bỏ phần voiceSelect
+    let voices = [];
+    function loadVoices() {
+        voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+        const voiceSelect = document.getElementById('voiceSelect');
+        if (voiceSelect) {
+            voiceSelect.innerHTML = '';
+            voices.forEach((voice, idx) => {
+                const option = document.createElement('option');
+                option.value = idx;
+                option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+                voiceSelect.appendChild(option);
+            });
+        }
+    }
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        window.addEventListener('DOMContentLoaded', loadVoices);
+    }
 
     function nextSpeaking() {
         // Gửi yêu cầu đến API để lấy danh sách bài học
@@ -88,8 +170,17 @@
             const nextIndex = (currentIndex + 1) % speakings.length;
             const nextSpeaking = speakings[nextIndex];
 
-            // Chuyển hướng đến trang chi tiết của bài học tiếp theo
-            window.location.href = `/speaking_describe_image/${nextSpeaking.id}`;
+            // Lưu bài học tiếp theo trước khi chuyển tiếp
+            $.ajax({
+                url: '/speaking_describe_image/practice',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ speaking: nextSpeaking }),
+                complete: function() {
+                    // Chuyển hướng đến trang chi tiết của bài học tiếp theo
+                    window.location.href = `/speaking_describe_image/${nextSpeaking.id}`;
+                }
+            });
         }).fail(function() {
             alert('Đã xảy ra lỗi khi tải danh sách bài học.');
         });
