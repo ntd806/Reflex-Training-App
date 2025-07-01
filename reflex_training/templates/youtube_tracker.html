@@ -189,13 +189,15 @@ function populateVideoTypeFilter(links) {
 }
 
 function playYoutube(url, lastTime = 0) {
+    // Lưu lại thời gian video cũ trước khi chuyển video mới
+    saveYoutubeTime();
+
     const videoId = extractVideoId(url);
     if (!videoId) {
         $('#playerSection').html('<i>Invalid or unsupported YouTube URL!</i>');
         return;
     }
-
-    lastUrl = url; // <-- Thêm dòng này để luôn lưu lại URL đang xem
+    lastUrl = url;
 
     $('#playerSection').html(`
         <div style="width:100%;max-width:100%;">
@@ -246,14 +248,20 @@ function saveYoutubeTime() {
     if (!ytPlayer || !lastUrl) return;
     let current = 0;
     try {
-        current = ytPlayer.getCurrentTime ? Math.floor(ytPlayer.getCurrentTime()) : 0;
-    } catch {}
+        // Lấy thời gian hiện tại của video
+        if (ytPlayer.getCurrentTime) {
+            current = Math.floor(ytPlayer.getCurrentTime());
+        }
+    } catch (e) {
+        current = 0;
+    }
+    // Gửi thời gian lên server
     $.ajax({
         url: '/youtube_links/update',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({url: lastUrl, last_time: current}),
-        success: function() {}
+        async: false // Đảm bảo gửi xong trước khi đóng tab
     });
 }
 
