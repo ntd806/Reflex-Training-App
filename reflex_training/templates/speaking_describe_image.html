@@ -136,6 +136,8 @@ function renderSpeakingList(list) {
                 <h4>Number: ${item.title}</h4>
                 <p>Loại: ${item.type}</p>
                 <a href="/speaking_describe_image/${item.id}" target="_blank" style="display:block; margin-top:10px; text-align:center; background:#007bff; color:white; padding:5px 10px; text-decoration:none; border-radius:4px;">Xem chi tiết</a>
+                <button onclick="openEditModal(${item.id})" style="margin-top:8px;">Sửa</button>
+                <button onclick="deleteSpeaking(${item.id})" style="margin-top:8px; background:#d9534f; color:white;">Xoá</button>
             </div>
         `);
     });
@@ -210,6 +212,121 @@ function nextSpeaking() {
         alert('Đã xảy ra lỗi khi tải danh sách bài học.');
     });
 }
+
+// Modal sửa bài nói
+function openEditModal(id) {
+    const speaking = findSpeakingById(id);
+    if (!speaking) {
+        alert('Không tìm thấy bài nói!');
+        return;
+    }
+    $('#editTitle').val(speaking.title);
+    $('#editScript').val(speaking.script);
+    $('#editImage').val(speaking.image);
+    $('#editType').val(speaking.type);
+    $('#editPreviewImage').attr('src', speaking.image).show();
+    $('#editModal').data('editingId', id).show();
+}
+
+function closeEditModal() {
+    $('#editModal').hide();
+}
+
+function saveEditSpeaking() {
+    const title = $('#editTitle').val().trim();
+    const script = $('#editScript').val().trim();
+    const type = $('#editType').val();
+    const image = $('#editImage').val().trim();
+
+    if (!title || !script || !type || !image) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    // Lấy id đang sửa từ modal (nên lưu khi mở modal)
+    const id = $('#editModal').data('editingId');
+    if (!id) {
+        alert('Không xác định được bài nói để sửa!');
+        return;
+    }
+
+    const updatedSpeaking = {
+        id,
+        title,
+        script,
+        image,
+        type,
+        created_at: new Date().toISOString()
+    };
+
+    $.ajax({
+        url: `/speaking_describe_image/${id}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(updatedSpeaking),
+        success: function() {
+            alert('Đã cập nhật bài nói!');
+            closeEditModal();
+            loadSpeakings();
+            loadCurrentSpeaking();
+        }
+    });
+}
+
+// Tìm bài nói theo ID trong danh sách bài nói
+function findSpeakingById(id) {
+    let foundSpeaking = null;
+    $.ajax({
+        url: '/speaking_describe_image',
+        type: 'GET',
+        async: false, // Chờ kết quả trước khi tiếp tục
+        success: function(speakings) {
+            foundSpeaking = speakings.find(s => s.id === id);
+        }
+    });
+    return foundSpeaking;
+}
+
+function deleteSpeaking(id) {
+    if (!confirm('Bạn có chắc muốn xoá bài nói này?')) return;
+    $.ajax({
+        url: `/speaking_describe_image/${id}`,
+        type: 'DELETE',
+        success: function() {
+            alert('Đã xoá bài nói!');
+            loadSpeakings();
+            loadCurrentSpeaking();
+        },
+        error: function() {
+            alert('Xoá thất bại!');
+        }
+    });
+}
 </script>
+
+<!-- Thêm vào cuối <body> -->
+<div id="editModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; min-width:350px;">
+    <h3>Sửa bài nói</h3>
+    <label>Tiêu đề:</label>
+    <input type="text" id="editTitle" style="width:100%; margin-bottom:10px;">
+    <label>Script:</label>
+    <textarea id="editScript" style="width:100%; height:80px; margin-bottom:10px;"></textarea>
+    <label>Hình ảnh (URL hoặc Base64):</label>
+    <textarea id="editImage" style="width:100%; height:60px; margin-bottom:10px;"></textarea>
+    <img id="editPreviewImage" src="" alt="Preview" style="max-width:100%; display:none; margin-bottom:10px;">
+    <label>Loại bài nói:</label>
+    <select id="editType" style="width:100%; margin-bottom:10px;">
+        <option value="pie">Pie</option>
+        <option value="line">Line</option>
+        <option value="bar">Bar</option>
+        <option value="photo">Photo</option>
+        <option value="process">Process</option>
+        <option value="cycle">Cycle</option>
+    </select>
+    <div style="margin-top:10px; text-align:right;">
+        <button onclick="saveEditSpeaking()">Lưu</button>
+        <button onclick="closeEditModal()">Đóng</button>
+    </div>
+</div>
 </body>
 </html>

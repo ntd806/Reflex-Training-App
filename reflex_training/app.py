@@ -830,5 +830,55 @@ def save_lesson_stats_api():
 def get_lesson_stats_api():
     return jsonify(load_lesson_stats())
 
+@app.route('/speaking_describe_image/<int:item_id>', methods=['GET'])
+def get_speaking_item(item_id):
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+        for item in speakings:
+            if item.get('id') == item_id:
+                return jsonify(item)
+    return jsonify({'error': 'Item not found'}), 404
+
+@app.route('/speaking_describe_image/<int:item_id>', methods=['PUT'])
+def update_speaking(item_id):
+    data = request.json
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+    else:
+        return jsonify({'error': 'No data file'}), 404
+    updated = False
+    for idx, item in enumerate(speakings):
+        if item.get('id') == item_id:
+            data['id'] = item_id
+            speakings[idx] = data
+            updated = True
+            break
+    if not updated:
+        return jsonify({'error': 'Item not found'}), 404
+    with open('speaking_describe_image.json', 'w', encoding='utf-8') as f:
+        json.dump(speakings, f, ensure_ascii=False, indent=4)
+    return jsonify({'message': 'Updated successfully'})
+
+@app.route('/speaking_describe_image/<int:item_id>', methods=['DELETE'])
+def delete_speaking(item_id):
+    if os.path.exists('speaking_describe_image.json'):
+        with open('speaking_describe_image.json', 'r', encoding='utf-8') as f:
+            speakings = json.load(f)
+    else:
+        return jsonify({'error': 'No data file'}), 404
+
+    new_speakings = [item for item in speakings if item.get('id') != item_id]
+    if len(new_speakings) == len(speakings):
+        return jsonify({'error': 'Item not found'}), 404
+
+    with open('speaking_describe_image.json', 'w', encoding='utf-8') as f:
+        json.dump(new_speakings, f, ensure_ascii=False, indent=4)
+
+    return jsonify({'message': 'Deleted successfully'})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
