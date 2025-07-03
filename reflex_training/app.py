@@ -4,6 +4,7 @@ import json
 import os
 from urllib.parse import unquote
 import datetime
+from datetime import timedelta
 import pandas as pd
 import requests
 import time
@@ -353,13 +354,22 @@ def get_content(mode):
         words = load_words()
         max_show = int(request.args.get('max_show', 3))
         today = today_str()
+        # Bỏ qua phần tử không hợp lệ
+        valid_words = []
+        for w in words:
+            if isinstance(w, dict) and 'word' in w:
+                # Đảm bảo đủ trường
+                w.setdefault('shown_today', 0)
+                w.setdefault('last_shown_date', '')
+                w.setdefault('priority', False)
+                valid_words.append(w)
+        words = valid_words
         # Reset shown_today nếu sang ngày mới
         for w in words:
             if w['last_shown_date'] != today:
                 w['shown_today'] = 0
                 w['last_shown_date'] = today
         save_words(words)
-        # Ưu tiên lấy từ priority chưa đủ số lần/ngày
         priority_words = [w for w in words if w['priority'] and w['shown_today'] < max_show]
         normal_words = [w for w in words if not w['priority'] and w['shown_today'] < max_show]
         candidates = priority_words if priority_words else normal_words
@@ -879,6 +889,18 @@ def delete_speaking(item_id):
         json.dump(new_speakings, f, ensure_ascii=False, indent=4)
 
     return jsonify({'message': 'Deleted successfully'})
+
+@app.route('/words/by_day', methods=['GET'])
+def get_words_by_day():
+    """
+    Lấy các từ đã thực hành theo số ngày trước (days_ago).
+    Truyền days_ago=1 để lấy từ đã thực hành hôm qua, days_ago=3 cho 3 ngày trước, ...
+    """
+    days_ago = int(request.args.get('days_ago', 1))
+    words = load_words()
+    target_date = (datetime.datetime.now() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
+    filtered = [w for w in words if w.get('last_shown_date') == target_date]
+    return jsonify(filtered)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

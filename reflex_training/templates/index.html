@@ -73,6 +73,13 @@
                 </form>
                 <div id="excelStatus" style="color:green;margin-top:5px;"></div>
             </div>
+            <div style="margin-bottom:10px;">
+    <label>Lấy từ đã học cách đây 
+        <input type="number" id="daysAgoInput" value="1" min="1" max="30" style="width:50px;">
+        ngày
+    </label>
+    <button onclick="loadWordsByDay()">Lọc</button>
+</div>
         </div>
         
         <!-- Bên phải: Danh sách từ và tìm kiếm -->
@@ -254,6 +261,25 @@ function searchWordList() {
         document.getElementById('wordList').innerHTML = html;
     }).fail(function(xhr) {
         alert('Lỗi khi tìm kiếm: ' + (xhr.responseJSON?.error || 'Không xác định'));
+    });
+}
+
+function loadWordsByDay() {
+    const daysAgo = parseInt(document.getElementById('daysAgoInput').value) || 1;
+    $.get(`/words/by_day?days_ago=${daysAgo}`, function(words) {
+        if (!words.length) {
+            document.getElementById('wordList').innerHTML = `<i>Không có từ nào đã thực hành cách đây ${daysAgo} ngày.</i>`;
+            return;
+        }
+        let html = `<b>Các từ đã thực hành cách đây ${daysAgo} ngày:</b><ul style="margin-top:5px;">`;
+        words.forEach(wordObj => {
+            html += `<li>
+                <span style="color:#007bff;">${wordObj.word}</span>
+                <span style="margin-left:10px; color:gray;">(${wordObj.translation || 'Chưa có nghĩa'})</span>
+            </li>`;
+        });
+        html += '</ul>';
+        document.getElementById('wordList').innerHTML = html;
     });
 }
 </script>
