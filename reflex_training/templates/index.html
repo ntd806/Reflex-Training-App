@@ -113,6 +113,7 @@ function showWordList() {
         let html = '<b>Danh sách từ:</b><ul style="margin-top:5px;">';
         words.forEach(wordObj => {
             html += `<li>
+                <input type="checkbox" ${wordObj.learned ? 'checked' : ''} onchange="toggleLearnedWord('${wordObj.word.replace(/'/g, "\\'")}', this.checked)">
                 <span style="cursor:pointer;color:#007bff;text-decoration:underline;" 
                     onclick="showWordDetail('${wordObj.word.replace(/'/g, "\\'")}')">${wordObj.word}</span>
                 <span style="margin-left:10px; color:gray;">(${wordObj.translation || 'Chưa có nghĩa'})</span>
@@ -280,6 +281,63 @@ function loadWordsByDay() {
         });
         html += '</ul>';
         document.getElementById('wordList').innerHTML = html;
+    });
+}
+
+function loadContent(mode, autoSpeak = false) {
+    const params = {};
+    if (mode === 'word') {
+        params.max_show = document.getElementById('maxShowPerDay').value || 3;
+    }
+    $.get({
+        url: `/get_content/${mode}`,
+        data: params,
+        success: function(data) {
+            if (mode === 'word') {
+                document.getElementById('output').innerHTML = `
+                    <div style="font-size:1.3em; margin-bottom:10px;">
+                        <b>Từ:</b> ${data.text}
+                    </div>
+                    <div style="font-size:1.3em; margin-bottom:10px;">
+                        <b>Nghĩa:</b> ${data.translation || 'Chưa có nghĩa'}
+                    </div>
+                    <div style="font-size:1.3em; margin-bottom:10px;">
+                        <b>Hướng dẫn đọc:</b> ${data.guide || 'Chưa có hướng dẫn đọc'}
+                    </div>
+                    <div style="margin-top:10px;">
+                        <button onclick="speak('${data.text.replace(/'/g, "\\'")}')" style="font-size:1.1em; padding:10px 20px;">Đọc</button>
+                    </div>
+                `;
+            } else {
+                document.getElementById('output').innerHTML = `
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="flex: 1; font-size: 1.3em;">${data.content}</div>
+                        <div style="margin-left: 20px;">
+                            <button onclick="readCurrent()" style="font-size:1.1em; padding:15px 25px;">Read</button>
+                        </div>
+                    </div>
+                `;
+            }
+            currentText = data.text;
+            currentMode = data.next_mode;
+            if (autoSpeak && document.getElementById('autoSpeakCheckbox').checked) {
+                setupSpeakRepeat();
+            } else {
+                clearSpeakRepeat();
+            }
+        }
+    });
+}
+
+function toggleLearnedWord(word, learned) {
+    $.ajax({
+        url: '/words/mark_learned',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ word: word, learned: learned }),
+        success: function() {
+            // Optionally, update UI or show a message
+        }
     });
 }
 </script>

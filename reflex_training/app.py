@@ -358,7 +358,6 @@ def get_content(mode):
         valid_words = []
         for w in words:
             if isinstance(w, dict) and 'word' in w:
-                # Đảm bảo đủ trường
                 w.setdefault('shown_today', 0)
                 w.setdefault('last_shown_date', '')
                 w.setdefault('priority', False)
@@ -370,9 +369,9 @@ def get_content(mode):
                 w['shown_today'] = 0
                 w['last_shown_date'] = today
         save_words(words)
+        # Chỉ lấy từ ưu tiên
         priority_words = [w for w in words if w['priority'] and w['shown_today'] < max_show]
-        normal_words = [w for w in words if not w['priority'] and w['shown_today'] < max_show]
-        candidates = priority_words if priority_words else normal_words
+        candidates = priority_words
         if not candidates:
             return jsonify({'content': 'Đã hoàn thành hết các từ ưu tiên/ngày!', 'text': '', 'next_mode': 'word'})
         word_obj = random.choice(candidates)
@@ -380,7 +379,13 @@ def get_content(mode):
         word_obj['last_shown_date'] = today
         save_words(words)
         guide = get_pronunciation_guide(word_obj['word'])
-        return jsonify({'content': f"Practice this: {word_obj['word']}<br>Pronunciation Guide: {guide}", 'text': word_obj['word'], 'next_mode': 'word'})
+        return jsonify({
+            'content': f"Practice this: {word_obj['word']}",
+            'text': word_obj['word'],
+            'guide': guide,
+            'translation': word_obj.get('translation', ''),
+            'next_mode': 'word'
+        })
     return jsonify({'content': 'Invalid mode', 'text': '', 'next_mode': mode})
 
 @app.route('/words/priority/<word>', methods=['POST'])
@@ -901,6 +906,24 @@ def get_words_by_day():
     target_date = (datetime.datetime.now() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
     filtered = [w for w in words if w.get('last_shown_date') == target_date]
     return jsonify(filtered)
+
+@app.route('/words/mark_learned', methods=['POST'])
+def mark_word_learned():
+    data = request.json
+    word = data.get('word')
+    learned = data.get('learned', False)
+    words = load_words()
+    updated = False
+    for w in words:
+        if w.get('word') == word:
+            w['learned'] = learned
+            updated = True
+            break
+    if updated:
+        save_words(words)
+        return jsonify({'message': 'Updated'})
+    else:
+        return jsonify({'error': 'Word not found'}), 404
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
