@@ -976,5 +976,27 @@ def mark_sentence_learned():
     else:
         return jsonify({'error': 'Sentence not found'}), 404
 
+@app.route('/repeat_sentences/mark_learned', methods=['POST'])
+def mark_repeat_sentence_learned():
+    data = request.json
+    sentence = data.get('sentence')
+    learned = data.get('learned', False)
+    sentences = load_repeat_sentences()
+    updated = False
+    for s in sentences:
+        if (isinstance(s, dict) and s.get('sentence') == sentence) or (isinstance(s, str) and s == sentence):
+            if isinstance(s, dict):
+                s['learned'] = learned
+            else:
+                idx = sentences.index(s)
+                sentences[idx] = {'sentence': s, 'learned': learned}
+            updated = True
+            break
+    if updated:
+        save_repeat_sentences(sentences)
+        return jsonify({'message': 'Updated'})
+    else:
+        return jsonify({'error': 'Sentence not found'}), 404
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

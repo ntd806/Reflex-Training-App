@@ -355,6 +355,30 @@ $('#excelForm').on('submit', function(e) {
     });
 });
 
+function editTranscript(s) {
+    const sentence = decodeURIComponent(s);
+    $.get('/sentences', function(sentences) {
+        const found = sentences.find(item => (typeof item === 'object' && item.sentence === sentence));
+        $('#transcriptInput').val(found && found.transcript ? found.transcript : '');
+        $('#transcriptSentence').val(sentence);
+        $('#transcriptModal').show();
+    });
+}
+
+function saveTranscript() {
+    const sentence = $('#transcriptSentence').val();
+    const transcript = $('#transcriptInput').val();
+    $.ajax({
+        url: '/sentences/transcript/' + encodeURIComponent(sentence),
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({transcript}),
+        success: function() {
+            $('#transcriptModal').hide();
+            loadSentences();
+        }
+    });
+}
 </script>
 </body>
 </html>
