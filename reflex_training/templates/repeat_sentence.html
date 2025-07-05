@@ -65,6 +65,8 @@
                 <button onclick="searchSentenceList()">Tìm</button>
                 <button onclick="showUnlearnedSentences()">Chưa học</button>
             </div>
+            <button onclick="showLearnedRepeatSentences()" style="margin-bottom:10px;">Câu đã học</button>
+            <div id="learnedSentenceList" style="margin-top:10px;"></div>
             <div id="sentenceList" style="margin-top:15px;"></div>
         </div>
     </div>
@@ -182,6 +184,24 @@ function searchSentenceList() {
 }
 function showUnlearnedSentences() {
     loadSentences(true);
+}
+function showLearnedRepeatSentences() {
+    $.get('/repeat_sentences/learned_review', function(sentences) {
+        if (!sentences.length) {
+            $('#learnedSentenceList').html('<i>Không có câu đã học nào.</i>');
+            return;
+        }
+        let html = '<b>Câu đã học:</b><ul style="margin-top:5px;">';
+        sentences.forEach(s => {
+            html += `<li>
+                <b>${s.sentence}</b>
+                <span style="color:gray;">[Lần cuối: ${s.last_shown_date || '---'}]</span>
+                ${s.need_review ? '<span style="color:red;font-weight:bold;"> - Cần ôn lại</span>' : ''}
+            </li>`;
+        });
+        html += '</ul>';
+        $('#learnedSentenceList').html(html);
+    });
 }
 // Khi practice câu, tự động đánh dấu đã practice (ưu tiên)
 function showSentence(s) {

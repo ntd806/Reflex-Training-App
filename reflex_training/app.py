@@ -998,5 +998,61 @@ def mark_repeat_sentence_learned():
     else:
         return jsonify({'error': 'Sentence not found'}), 404
 
+@app.route('/repeat_sentences/learned_review', methods=['GET'])
+def get_learned_repeat_sentences():
+    from datetime import datetime
+    sentences = load_repeat_sentences()
+    today = datetime.today().date()
+    result = []
+    for s in sentences:
+        if not isinstance(s, dict) or not s.get('sentence'):
+            continue
+        if s.get('learned'):
+            last = s.get('last_shown_date', '')
+            diff = None
+            if last:
+                try:
+                    last_date = datetime.strptime(last, '%Y-%m-%d').date()
+                    diff = (today - last_date).days
+                except Exception:
+                    diff = None
+            need_review = diff is not None and diff >= 3
+            result.append({
+                'sentence': s['sentence'],
+                'transcript': s.get('transcript', ''),
+                'last_shown_date': last,
+                'need_review': need_review,
+                'days_since': diff
+            })
+    return jsonify(result)
+
+@app.route('/sentences/learned_review', methods=['GET'])
+def get_learned_sentences_review():
+    from datetime import datetime
+    sentences = load_sentences()
+    today = datetime.today().date()
+    result = []
+    for s in sentences:
+        if not isinstance(s, dict) or not s.get('sentence'):
+            continue
+        if s.get('learned'):
+            last = s.get('last_shown_date', '')
+            diff = None
+            if last:
+                try:
+                    last_date = datetime.strptime(last, '%Y-%m-%d').date()
+                    diff = (today - last_date).days
+                except Exception:
+                    diff = None
+            need_review = diff is not None and diff >= 3
+            result.append({
+                'sentence': s['sentence'],
+                'transcript': s.get('transcript', ''),
+                'last_shown_date': last,
+                'need_review': need_review,
+                'days_since': diff
+            })
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

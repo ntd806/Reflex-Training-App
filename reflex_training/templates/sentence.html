@@ -66,8 +66,10 @@
                 <input type="text" id="searchInput" placeholder="Tìm kiếm câu..." style="width:70%;">
                 <button onclick="searchSentenceList()">Tìm</button>
                 <button onclick="showUnlearnedSentences()">Chưa học</button>
+                <button onclick="showLearnedSentences()" style="margin-bottom:10px;">Câu đã học</button>
             </div>
             <div id="sentenceList" style="margin-top:15px;"></div>
+            <div id="learnedSentenceList" style="margin-top:10px;"></div>
         </div>
     </div>
     <!-- Thêm vào sau phần nhập câu -->
@@ -145,7 +147,8 @@ function loadSentences(filterUnlearned = false, search = '') {
             let transcript = item.transcript || '';
             let priority = typeof item === 'object' && item.priority;
             let learned = typeof item === 'object' && item.learned;
-            if (filterUnlearned && learned) return;
+            // Sửa điều kiện lọc chưa học:
+            if (filterUnlearned && learned === true) return;
             if (search && !s.toLowerCase().includes(search.toLowerCase())) return;
             html += `<li>
                 <input type="checkbox" ${learned ? 'checked' : ''} onchange="toggleLearnedSentence('${encodeURIComponent(s)}', this.checked)">
@@ -197,6 +200,24 @@ function searchSentenceList() {
 }
 function showUnlearnedSentences() {
     loadSentences(true);
+}
+function showLearnedSentences() {
+    $.get('/sentences/learned_review', function(sentences) {
+        if (!sentences.length) {
+            $('#learnedSentenceList').html('<i>Không có câu đã học nào.</i>');
+            return;
+        }
+        let html = '<b>Câu đã học:</b><ul style="margin-top:5px;">';
+        sentences.forEach(s => {
+            html += `<li>
+                <b>${s.sentence}</b>
+                <span style="color:gray;">[Lần cuối: ${s.last_shown_date || '---'}]</span>
+                ${s.need_review ? '<span style="color:red;font-weight:bold;"> - Cần ôn lại</span>' : ''}
+            </li>`;
+        });
+        html += '</ul>';
+        $('#learnedSentenceList').html(html);
+    });
 }
 // Khi practice câu, tự động đánh dấu đã practice (ưu tiên)
 function showSentence(s) {
