@@ -138,16 +138,17 @@ function loadSentences(filterUnlearned = false, search = '') {
             $('#sentenceList').html('<i>Chưa có mẫu câu nào.</i>');
             return;
         }
-        // Đảo ngược để câu mới nhất lên đầu
         sentences = sentences.slice().reverse();
         let html = '<b>Danh sách mẫu câu:</b><ul>';
         sentences.forEach((item, idx) => {
             let s = typeof item === 'string' ? item : item.sentence;
             let transcript = item.transcript || '';
             let priority = typeof item === 'object' && item.priority;
-            if (filterUnlearned && priority) return;
+            let learned = typeof item === 'object' && item.learned;
+            if (filterUnlearned && learned) return;
             if (search && !s.toLowerCase().includes(search.toLowerCase())) return;
             html += `<li>
+                <input type="checkbox" ${learned ? 'checked' : ''} onchange="toggleLearnedSentence('${encodeURIComponent(s)}', this.checked)">
                 <span style="cursor:pointer;" onclick="showSentence('${encodeURIComponent(s)}')">${s}</span>
                 <div style="color:#666; font-size:0.95em; margin-left:10px; margin-top:2px;">${transcript ? 'Transcript: ' + transcript : ''}</div>
                 <button onclick="editTranscript('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Sửa transcript</button>
@@ -303,6 +304,18 @@ function togglePause() {
         }
     }
 }
+function toggleLearnedSentence(sentence, learned) {
+    sentence = decodeURIComponent(sentence);
+    $.ajax({
+        url: '/sentences/mark_learned',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ sentence: sentence, learned: learned }),
+        success: function() {
+            // Có thể reload hoặc cập nhật UI nếu muốn
+        }
+    });
+}
 $('#autoSpeakCheckbox, #repeatSpeakInterval, #repeatCount').on('change', function() {
     if (currentSentence && $('#autoSpeakCheckbox').is(':checked')) {
         setupSpeakRepeat();
@@ -341,6 +354,7 @@ $('#excelForm').on('submit', function(e) {
         }
     });
 });
+
 </script>
 </body>
 </html>

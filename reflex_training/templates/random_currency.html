@@ -73,6 +73,8 @@
         </table>
         <div id="pagination" style="margin-top:10px; text-align:center;"></div>
     </div>
+    <!-- Thêm vào vị trí bạn muốn hiển thị danh sách từ đã học, ví dụ dưới bảng thống kê -->
+    <div id="wordList" style="margin-top:20px;"></div>
 </div>
 <script src="{{ url_for('static', filename='random_currency.js') }}"></script>
 <script>
@@ -182,6 +184,25 @@ function onLessonPracticed() {
     if (name) updateLessonStats(name, type);
 }
 
+function showLearnedWordsReview() {
+    $.get('/words/learned_review', function(words) {
+        if (!words.length) {
+            document.getElementById('wordList').innerHTML = '<i>Không có từ đã học nào.</i>';
+            return;
+        }
+        let html = '<b>Từ đã học:</b><ul style="margin-top:5px;">';
+        words.forEach(w => {
+            html += `<li>
+                <b>${w.word}</b> (${w.translation || 'Chưa có nghĩa'}) 
+                <span style="color:gray;">[Lần cuối: ${w.last_shown_date || '---'}]</span>
+                ${w.need_review ? '<span style="color:red;font-weight:bold;"> - Cần ôn lại</span>' : ''}
+            </li>`;
+        });
+        html += '</ul>';
+        document.getElementById('wordList').innerHTML = html;
+    });
+}
+
 function loadLessonFromStats(name) {
     const stat = lessonStats[name];
     if (!stat) return;
@@ -194,6 +215,7 @@ function loadLessonFromStats(name) {
 
 // Gọi khi trang load để hiển thị thống kê từ server
 fetchLessonStats();
+showLearnedWordsReview();
 </script>
 </body>
 </html>

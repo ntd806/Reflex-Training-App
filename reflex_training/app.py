@@ -925,5 +925,56 @@ def mark_word_learned():
     else:
         return jsonify({'error': 'Word not found'}), 404
 
+@app.route('/words/learned_review', methods=['GET'])
+def get_learned_words_review():
+    from datetime import datetime
+    words = load_words()
+    today = datetime.today().date()
+    result = []
+    for w in words:
+        if not isinstance(w, dict) or not w.get('word'):
+            continue
+        if w.get('learned'):
+            last = w.get('last_shown_date', '')
+            diff = None
+            if last:
+                try:
+                    last_date = datetime.today().strptime(last, '%Y-%m-%d').date()
+                    diff = (today - last_date).days
+                except Exception:
+                    diff = None
+            need_review = diff is not None and diff >= 3
+            result.append({
+                'word': w['word'],
+                'translation': w.get('translation', ''),
+                'last_shown_date': last,
+                'need_review': need_review,
+                'days_since': diff
+            })
+    return jsonify(result)
+
+@app.route('/sentences/mark_learned', methods=['POST'])
+def mark_sentence_learned():
+    data = request.json
+    sentence = data.get('sentence')
+    learned = data.get('learned', False)
+    sentences = load_sentences()
+    updated = False
+    for s in sentences:
+        if (isinstance(s, dict) and s.get('sentence') == sentence) or (isinstance(s, str) and s == sentence):
+            if isinstance(s, dict):
+                s['learned'] = learned
+            else:
+                # Nếu là string, chuyển thành object
+                idx = sentences.index(s)
+                sentences[idx] = {'sentence': s, 'learned': learned}
+            updated = True
+            break
+    if updated:
+        save_sentences(sentences)
+        return jsonify({'message': 'Updated'})
+    else:
+        return jsonify({'error': 'Sentence not found'}), 404
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
