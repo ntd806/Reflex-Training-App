@@ -59,6 +59,11 @@
                 
             </div>
             <div id="randomSentence" style="margin-top:20px; font-size:1.3em; color:blue;"></div>
+            <div style="margin-top:15px;">
+                <input type="text" id="spellCheckInput" placeholder="Nhập lại câu bạn vừa nghe..." style="width:90%;">
+                <button onclick="checkSpelling()">Kiểm tra chính tả</button>
+            </div>
+            <div id="spellCheckResult" style="margin-top:10px; font-size:1.1em;"></div>
         </div>
         <!-- Bên phải: Danh sách và tìm kiếm -->
         <div style="flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc;">
@@ -156,7 +161,7 @@ function loadSentences(filterUnlearned = false, search = '') {
                 <div style="color:#666; font-size:0.95em; margin-left:10px; margin-top:2px;">${transcript ? 'Transcript: ' + transcript : ''}</div>
                 <button onclick="editTranscript('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Sửa transcript</button>
                 <button onclick="deleteSentence('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">Xoá</button>
-                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s)}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
+                <button class="priority-btn" priority="${priority ? 'true' : 'false'}" onclick="togglePriority('${encodeURIComponent(s).replace(/'/g, "\\'")}')" style="font-size:0.9em;padding:2px 8px;margin-left:8px;">${priority ? 'Bỏ ưu tiên' : 'Ưu tiên'}</button>
             </li>`;
         });
         html += '</ul>';
@@ -358,7 +363,6 @@ $('#excelForm').on('submit', function(e) {
     }
     const formData = new FormData();
     formData.append('excelFile', fileInput.files[0]);
-    // Chọn target phù hợp với từng trang
     formData.append('target', 'sentences'); // hoặc 'repeat_sentences' hoặc 'words'
     $.ajax({
         url: '/upload_sentences',
@@ -368,7 +372,7 @@ $('#excelForm').on('submit', function(e) {
         contentType: false,
         success: function(res) {
             $('#excelStatus').css('color','green').text(res.message);
-            loadSentences && loadSentences();
+            if (typeof loadSentences === 'function') loadSentences();
         },
         error: function(xhr) {
             $('#excelStatus').css('color','red').text(xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : 'Lỗi!');
@@ -399,6 +403,52 @@ function saveTranscript() {
             loadSentences();
         }
     });
+}
+function checkSpelling() {
+    const userInput = $('#spellCheckInput').val().trim();
+    const correct = currentSentence ? currentSentence.trim() : '';
+    if (!correct) {
+        $('#spellCheckResult').html('<span style="color:red;">Không có câu gốc để kiểm tra!</span>');
+        return;
+    }
+    if (!userInput) {
+        $('#spellCheckResult').html('<span style="color:red;">Vui lòng nhập câu!</span>');
+        return;
+    }
+
+    const userWords = userInput.split(/\s+/);
+    const correctWords = correct.split(/\s+/);
+    let result = '';
+    let hasError = false;
+    let errorPositions = [];
+
+    for (let i = 0; i < correctWords.length; i++) {
+        if (userWords[i] === undefined) {
+            result += `<span style="background:#ffd6d6;color:red;">(thiếu)</span> `;
+            hasError = true;
+            errorPositions.push(i + 1);
+        } else if (userWords[i].toLowerCase() !== correctWords[i].toLowerCase()) {
+            result += `<span style="background:#ffd6d6;color:red;">${userWords[i]}</span> `;
+            hasError = true;
+            errorPositions.push(i + 1);
+        } else {
+            result += `<span>${userWords[i]}</span> `;
+        }
+    }
+    // Nếu thừa từ
+    for (let i = correctWords.length; i < userWords.length; i++) {
+        result += `<span style="background:#ffd6d6;color:red;">${userWords[i]}</span> `;
+        hasError = true;
+        errorPositions.push(i + 1);
+    }
+
+    if (!hasError) {
+        $('#spellCheckResult').html('<span style="color:green;">Chính xác!</span>');
+    } else {
+        $('#spellCheckResult').html(
+            `Sai ở vị trí: <b>${errorPositions.join(', ')}</b><br>${result}`
+        );
+    }
 }
 </script>
 </body>
