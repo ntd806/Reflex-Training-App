@@ -21,6 +21,8 @@ ENDING_WORDS_FILE = os.path.join(os.path.dirname(__file__), 'ending_words.json')
 IRREGULAR_VERBS_FILE = os.path.join(os.path.dirname(__file__), 'irregular_verbs.json')
 CURRENT_SPEAKING_FILE = os.path.join(os.path.dirname(__file__), 'current_speaking.json')
 LESSON_STATS_FILE = os.path.join(os.path.dirname(__file__), 'lesson_stats.json')
+SCHEDULE_FILE = 'schedual.json'
+SCHEDULE_STATUS_FILE = 'schedual_status.json'
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -1053,6 +1055,54 @@ def get_learned_sentences_review():
                 'days_since': diff
             })
     return jsonify(result)
+
+def load_schedule():
+    with open(SCHEDULE_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def load_status():
+    if os.path.exists(SCHEDULE_STATUS_FILE):
+        with open(SCHEDULE_STATUS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_status(status):
+    with open(SCHEDULE_STATUS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(status, f, ensure_ascii=False, indent=4)
+
+@app.route('/schedule', methods=['GET'])
+def get_schedule():
+    schedule = load_schedule()
+    status = load_status()
+    today = datetime.date.today()
+    week_day = today.strftime('%A')
+    # Trả về lịch, trạng thái, ngày hiện tại
+    return jsonify({
+        'schedule': schedule,
+        'status': status,
+        'today': today.isoformat(),
+        'week_day': week_day
+    })
+
+@app.route('/schedule/mark_done', methods=['POST'])
+def mark_schedule_done():
+    data = request.json
+    day = data['day']
+    idx = data['idx']
+    date_str = data['date']
+    status = load_status()
+    if date_str not in status:
+        status[date_str] = {}
+    if day not in status[date_str]:
+        status[date_str][day] = []
+    if idx not in status[date_str][day]:
+        status[date_str][day].append(idx)
+    save_status(status)
+    return jsonify({'message': 'Marked as done', 'status': status})
+
+@app.route('/schedule_ui', methods=['GET'])
+def get_schedule_ui():
+    return render_template('schedule.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

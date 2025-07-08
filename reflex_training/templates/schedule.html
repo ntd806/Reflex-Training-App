@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch biểu học tập</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fa; margin: 0; }
+        .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px #0001; padding: 30px; }
+        h2 { color: #007bff; margin-top: 30px; }
+        .today-row { background: #e3f2fd !important; }
+        .done { text-decoration: line-through; color: #888; }
+        .stat { margin: 18px 0 10px 0; font-size: 1.1em; }
+        .progress-bar-bg { background: #e0e0e0; border-radius: 8px; height: 18px; width: 100%; margin-top: 6px; }
+        .progress-bar { background: #4caf50; height: 100%; border-radius: 8px; transition: width 0.5s; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { padding: 10px 8px; border: 1px solid #e0e0e0; text-align: left; }
+        th { background: #f1f8ff; color: #007bff; }
+        tr.done { background: #f6f6f6; }
+        tr.today-row td { font-weight: bold; }
+        .checkbox-cell { text-align: center; }
+        @media (max-width: 700px) {
+            .container { padding: 10px; }
+            table, th, td { font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Lịch biểu hôm nay</h2>
+    <div id="todaySchedule"></div>
+    <h2>Lịch biểu tuần</h2>
+    <div id="weekSchedule"></div>
+    <h2>Thống kê tiến độ</h2>
+    <div id="stats"></div>
+</div>
+<script>
+let scheduleData = {}, statusData = {}, today = '', weekDay = '';
+
+function loadSchedule() {
+    $.get('/schedule', function(res) {
+        scheduleData = res.schedule;
+        statusData = res.status;
+        today = res.today;
+        weekDay = res.week_day;
+        renderToday();
+        renderWeek();
+        renderStats();
+    });
+}
+
+function renderToday() {
+    const plan = scheduleData.weekly_plan[weekDay] || [];
+    const doneIdx = (statusData[today] && statusData[today][weekDay]) || [];
+    let html = '<table><tr><th>Hoàn thành</th><th>Hoạt động</th><th>Thời lượng</th></tr>';
+    plan.forEach((item, idx) => {
+        const isDone = doneIdx && doneIdx.includes(idx);
+        html += `<tr${isDone ? ' class="done"' : ''}>
+            <td class="checkbox-cell">
+                <input type="checkbox" ${isDone ? 'checked disabled' : ''} onchange="markDone('${weekDay}',${idx},'${today}')">
+            </td>
+            <td>${item.activity}</td>
+            <td>${item.duration}</td>
+        </tr>`;
+    });
+    html += '</table>';
+    if (plan.length === 0) html = '<i>Không có lịch cho hôm nay.</i>';
+    $('#todaySchedule').html(html);
+}
+
+function renderWeek() {
+    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    let html = `
+    <table style="width:100%;max-width:900px;">
+        <thead>
+            <tr>
+                <th style="width:110px;">Thứ</th>
+                <th>Hoạt động</th>
+                <th>Thời lượng</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+    weekDays.forEach(day => {
+        const plan = scheduleData.weekly_plan[day] || [];
+        const doneIdx = (statusData[today] && statusData[today][day]) || [];
+        const isToday = (day === weekDay);
+        if (plan.length === 0) {
+            html += `<tr${isToday ? ' class="today-row"' : ''}>
+                <td>${isToday ? '<b>' + day + '</b>' : day}</td>
+                <td colspan="3"><i>Không có lịch</i></td>
+            </tr>`;
+        } else {
+            plan.forEach((item, idx) => {
+                const isDone = doneIdx && doneIdx.includes(idx);
+                html += `<tr class="${isDone ? 'done' : ''}${isToday ? ' today-row' : ''}">
+                    <td ${idx === 0 ? `rowspan="${plan.length}" style="vertical-align:middle;text-align:center;"` : 'style="display:none;"'}>
+                        ${idx === 0 ? (isToday ? '<b>' + day + '</b>' : day) : ''}
+                    </td>
+                    <td>${item.activity}</td>
+                    <td>${item.duration}</td>
+                    <td style="text-align:center;">${isDone ? '<span style="color:green;">✔ Đã xong</span>' : ''}</td>
+                </tr>`;
+            });
+        }
+    });
+    html += '</tbody></table>';
+    $('#weekSchedule').html(html);
+}
+
+function markDone(day, idx, date) {
+    $.ajax({
+        url: '/schedule/mark_done',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ day: day, idx: idx, date: date }),
+        success: function(res) {
+            statusData = res.status;
+            renderToday();
+            renderWeek();
+            renderStats();
+        }
+    });
+}
+
+function renderStats() {
+    // Tuần hiện tại
+    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const now = new Date(today);
+    const firstDay = new Date(now);
+    firstDay.setDate(now.getDate() - now.getDay() + 1); // Monday
+    let weekDone = 0, weekTotal = 0, monthDone = 0, monthTotal = 0;
+    let month = now.getMonth(), year = now.getFullYear();
+
+    // Thống kê tuần
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(firstDay);
+        d.setDate(firstDay.getDate() + i);
+        const dStr = d.toISOString().slice(0,10);
+        const dayName = weekDays[i];
+        const plan = scheduleData.weekly_plan[dayName] || [];
+        weekTotal += plan.length;
+        const doneIdx = (statusData[dStr] && statusData[dStr][dayName]) || [];
+        weekDone += doneIdx.length;
+    }
+
+    // Thống kê tháng
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        for (const dayName of weekDays) {
+            const plan = scheduleData.weekly_plan[dayName] || [];
+            monthTotal += plan.length;
+            const doneIdx = (statusData[dStr] && statusData[dStr][dayName]) || [];
+            monthDone += doneIdx.length;
+        }
+    }
+
+    let weekPercent = weekTotal ? Math.round(weekDone*100/weekTotal) : 0;
+    let monthPercent = monthTotal ? Math.round(monthDone*100/monthTotal) : 0;
+
+    let html = `
+    <table style="width:100%;max-width:500px;">
+        <thead>
+            <tr>
+                <th>Thống kê</th>
+                <th>Hoàn thành</th>
+                <th>Tổng</th>
+                <th>Tỷ lệ (%)</th>
+                <th>Tiến độ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tuần này</td>
+                <td>${weekDone}</td>
+                <td>${weekTotal}</td>
+                <td>${weekPercent}%</td>
+                <td>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" style="width:${weekPercent}%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Tháng này</td>
+                <td>${monthDone}</td>
+                <td>${monthTotal}</td>
+                <td>${monthPercent}%</td>
+                <td>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" style="width:${monthPercent}%;"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    `;
+    $('#stats').html(html);
+}
+
+window.markDone = markDone;
+$(function(){ loadSchedule(); });
+</script>
+</body>
+</html>
