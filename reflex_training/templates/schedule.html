@@ -27,6 +27,21 @@
     </style>
 </head>
 <body>
+        <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
+        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
+        <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
+        <label style="margin-left:10px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
 <div class="container">
     <h2>Lịch biểu hôm nay</h2>
     <div id="todaySchedule"></div>
@@ -45,7 +60,7 @@ function loadSchedule() {
         today = res.today;
         weekDay = res.week_day;
         renderToday();
-        renderWeek();
+        renderWeekGrid(); // gọi hàm mới
         renderStats();
     });
 }
@@ -53,19 +68,26 @@ function loadSchedule() {
 function renderToday() {
     const plan = scheduleData.weekly_plan[weekDay] || [];
     const doneIdx = (statusData[today] && statusData[today][weekDay]) || [];
-    let html = '<table><tr><th>Hoàn thành</th><th>Hoạt động</th><th>Thời lượng</th></tr>';
+    if (plan.length === 0) {
+        $('#todaySchedule').html('<i>Không có lịch cho hôm nay.</i>');
+        return;
+    }
+    let html = '<table><tr>';
+    // Tiêu đề cột
+    plan.forEach((item, idx) => {
+        html += `<th>${item.duration}</th>`;
+    });
+    html += '</tr><tr>';
+    // Hoạt động + checkbox hoàn thành
     plan.forEach((item, idx) => {
         const isDone = doneIdx && doneIdx.includes(idx);
-        html += `<tr${isDone ? ' class="done"' : ''}>
-            <td class="checkbox-cell">
-                <input type="checkbox" ${isDone ? 'checked disabled' : ''} onchange="markDone('${weekDay}',${idx},'${today}')">
-            </td>
-            <td>${item.activity}</td>
-            <td>${item.duration}</td>
-        </tr>`;
+        html += `<td style="text-align:center;">
+            <div>${item.activity}</div>
+            <input type="checkbox" ${isDone ? 'checked disabled' : ''} onchange="markDone('${weekDay}',${idx},'${today}')">
+            ${isDone ? '<span style="color:green;">✔</span>' : ''}
+        </td>`;
     });
-    html += '</table>';
-    if (plan.length === 0) html = '<i>Không có lịch cho hôm nay.</i>';
+    html += '</tr></table>';
     $('#todaySchedule').html(html);
 }
 
@@ -107,6 +129,63 @@ function renderWeek() {
         }
     });
     html += '</tbody></table>';
+    $('#weekSchedule').html(html);
+}
+
+function renderWeekGrid() {
+    // Các thứ trong tuần, viết tắt
+    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const weekShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const weeklyPlan = scheduleData.weekly_plan;
+    let maxRows = 0;
+    weekDays.forEach(day => {
+        if (weeklyPlan[day] && weeklyPlan[day].length > maxRows) maxRows = weeklyPlan[day].length;
+    });
+
+    // Tạo mảng 2 chiều: rows[row][col] = {duration, activity}
+    let rows = [];
+    for (let i = 0; i < maxRows; i++) {
+        let row = [];
+        for (let d = 0; d < weekDays.length; d++) {
+            const plan = weeklyPlan[weekDays[d]] || [];
+            row.push(plan[i] || null);
+        }
+        rows.push(row);
+    }
+
+    // Tạo bảng HTML
+    let html = `<table>
+        <tr>
+            <th></th>
+            ${weekShort.map(d => `<th>${d}</th>`).join('')}
+        </tr>
+    `;
+    for (let r = 0; r < rows.length; r++) {
+        // Lấy duration của dòng này (nếu có)
+        let duration = '';
+        for (let c = 0; c < weekDays.length; c++) {
+            if (rows[r][c] && rows[r][c].duration) {
+                duration = rows[r][c].duration;
+                break;
+            }
+        }
+        html += `<tr>
+            <td class="time">${duration || ''}</td>`;
+        for (let c = 0; c < weekDays.length; c++) {
+            const cell = rows[r][c];
+            let cellHtml = '';
+            let isDone = false;
+            if (cell && cell.activity) {
+                // Kiểm tra trạng thái hoàn thành cho từng ô
+                const doneIdx = (statusData[today] && statusData[today][weekDays[c]]) || [];
+                isDone = doneIdx.includes(r);
+                cellHtml = `<span${isDone ? ' style="color:green;font-weight:bold;"' : ''}>${cell.activity}${isDone ? ' ✔' : ''}</span>`;
+            }
+            html += `<td${isDone ? ' class="done"' : ''}>${cellHtml}</td>`;
+        }
+        html += `</tr>`;
+    }
+    html += `</table>`;
     $('#weekSchedule').html(html);
 }
 
