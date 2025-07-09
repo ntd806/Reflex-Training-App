@@ -37,12 +37,15 @@
         <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
         <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
         <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
+        <a href="/essay_vocab" style="margin-right:20px;">essay vocab</a>
         <label style="margin-left:10px;">
             Giọng đọc
             <select id="voiceSelect" style="min-width:120px;"></select>
         </label>
     </nav>
 <div class="container">
+    <h2>Giải thích các hoạt động</h2>
+    <div id="activityDefinitions"></div>
     <h2>Lịch biểu hôm nay</h2>
     <div id="todaySchedule"></div>
     <h2>Lịch biểu tuần</h2>
@@ -62,6 +65,7 @@ function loadSchedule() {
         renderToday();
         renderWeekGrid(); // gọi hàm mới
         renderStats();
+        renderActivityDefinitions(); // gọi hàm renderActivityDefinitions
     });
 }
 
@@ -133,10 +137,10 @@ function renderWeek() {
 }
 
 function renderWeekGrid() {
-    // Các thứ trong tuần, viết tắt
     const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
     const weekShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     const weeklyPlan = scheduleData.weekly_plan;
+    const activityDefs = scheduleData.activity_definitions || {};
     let maxRows = 0;
     weekDays.forEach(day => {
         if (weeklyPlan[day] && weeklyPlan[day].length > maxRows) maxRows = weeklyPlan[day].length;
@@ -153,15 +157,14 @@ function renderWeekGrid() {
         rows.push(row);
     }
 
-    // Tạo bảng HTML
+    // Tạo bảng HTML với tooltip cho hoạt động
     let html = `<table>
         <tr>
             <th></th>
-            ${weekShort.map(d => `<th>${d}</th>`).join('')}
+            ${weekShort.map((d, i) => `<th title="${weekDays[i]}">${d}</th>`).join('')}
         </tr>
     `;
     for (let r = 0; r < rows.length; r++) {
-        // Lấy duration của dòng này (nếu có)
         let duration = '';
         for (let c = 0; c < weekDays.length; c++) {
             if (rows[r][c] && rows[r][c].duration) {
@@ -169,19 +172,23 @@ function renderWeekGrid() {
                 break;
             }
         }
+        // Tooltip cho duration nếu có
+        let durationTitle = activityDefs[duration] ? ` title="${activityDefs[duration]}"` : '';
         html += `<tr>
-            <td class="time">${duration || ''}</td>`;
+            <td class="time"${durationTitle}>${duration || ''}</td>`;
         for (let c = 0; c < weekDays.length; c++) {
             const cell = rows[r][c];
             let cellHtml = '';
             let isDone = false;
+            let tdTitle = cell && cell.activity && activityDefs[cell.activity] ? ` title="${activityDefs[cell.activity]}"` : '';
             if (cell && cell.activity) {
-                // Kiểm tra trạng thái hoàn thành cho từng ô
                 const doneIdx = (statusData[today] && statusData[today][weekDays[c]]) || [];
                 isDone = doneIdx.includes(r);
-                cellHtml = `<span${isDone ? ' style="color:green;font-weight:bold;"' : ''}>${cell.activity}${isDone ? ' ✔' : ''}</span>`;
+                // Tooltip cho activity nếu có
+                let actTitle = activityDefs[cell.activity] ? ` title="${activityDefs[cell.activity]}"` : '';
+                cellHtml = `<span${actTitle}${isDone ? ' style="color:green;font-weight:bold;"' : ''}>${cell.activity}${isDone ? ' ✔' : ''}</span>`;
             }
-            html += `<td${isDone ? ' class="done"' : ''}>${cellHtml}</td>`;
+            html += `<td${isDone ? ' class="done"' : ''}${tdTitle}>${cellHtml}</td>`;
         }
         html += `</tr>`;
     }
@@ -278,6 +285,20 @@ function renderStats() {
     </table>
     `;
     $('#stats').html(html);
+}
+
+function renderActivityDefinitions() {
+    const defs = scheduleData.activity_definitions || {};
+    if (!defs || Object.keys(defs).length === 0) {
+        $('#activityDefinitions').html('<i>Không có giải thích hoạt động.</i>');
+        return;
+    }
+    let html = '<table style="max-width:600px;"><tr><th>Mã</th><th>Giải thích</th></tr>';
+    Object.entries(defs).forEach(([key, value]) => {
+        html += `<tr><td style="font-weight:bold;">${key}</td><td>${value}</td></tr>`;
+    });
+    html += '</table>';
+    $('#activityDefinitions').html(html);
 }
 
 window.markDone = markDone;

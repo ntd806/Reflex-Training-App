@@ -1104,5 +1104,15 @@ def mark_schedule_done():
 def get_schedule_ui():
     return render_template('schedule.html')
 
+@app.route('/essay_vocab_data')
+def essay_vocab_data():
+    with open('essay.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    return jsonify(data)
+
+@app.route('/essay_vocab')
+def essay_vocab_page():
+    return render_template('essay_vocab.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

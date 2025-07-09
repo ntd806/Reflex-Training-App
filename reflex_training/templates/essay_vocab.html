@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Học từ vựng theo chủ đề</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fa; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px #0001; padding: 30px; }
+        h2 { color: #007bff; }
+        .vocab-box { margin: 30px 0; padding: 20px; background: #e3f2fd; border-radius: 8px; font-size: 1.3em; }
+        .vocab-en { color: #007bff; font-weight: bold; }
+        .vocab-vi { color: #333; margin-top: 10px; }
+        .controls { margin-top: 20px; }
+        select, button { font-size: 1em; padding: 6px 12px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #007bff; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <nav style="margin-bottom:20px;">
+        <a href="/" style="margin-right:20px;">Trang chính</a>
+        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
+        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
+        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
+        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
+        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
+        <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
+        <a href="/essay_vocab" style="margin-right:20px;">essay vocab</a>
+        <label style="margin-left:15px;">
+            Giọng đọc
+            <select id="voiceSelect" style="min-width:120px;"></select>
+        </label>
+    </nav>
+<div class="container">
+    <h2>Học từ vựng theo chủ đề</h2>
+    <div class="controls">
+        <label>Chủ đề:
+            <select id="topicSelect"></select>
+        </label>
+        <label style="margin-left:15px;">Loại:
+            <select id="typeSelect">
+                <option value="Doing Something">Doing Something</option>
+                <option value="Clause">Clause</option>
+                <option value="Verb-ing">Verb-ing</option>
+                <option value="Noun">Noun</option>
+            </select>
+        </label>
+        <button id="nextBtn" style="margin-left:15px;">Tiếp theo</button>
+        <button id="readBtn" style="margin-left:10px;">Đọc</button>
+    </div>
+    <div class="vocab-box" id="vocabBox">
+        <div class="vocab-en" id="vocabEn">Chọn chủ đề để bắt đầu</div>
+        <div class="vocab-vi" id="vocabVi"></div>
+    </div>
+</div>
+<script>
+let essayData = {};
+let currentList = [];
+let currentIdx = -1;
+let voices = [];
+
+function loadEssayData() {
+    $.get('/essay_vocab_data', function(data) {
+        essayData = data;
+        const topics = Object.keys(essayData);
+        const topicSelect = $('#topicSelect');
+        topicSelect.empty();
+        topics.forEach(topic => {
+            topicSelect.append(`<option value="${topic}">${topic}</option>`);
+        });
+        topicSelect.val(topics[0]);
+        updateCurrentList();
+    });
+}
+
+function updateCurrentList() {
+    const topic = $('#topicSelect').val();
+    const type = $('#typeSelect').val();
+    currentList = (essayData[topic] && essayData[topic][type]) || [];
+    currentIdx = -1;
+    showNext();
+}
+
+function showNext() {
+    if (!currentList.length) {
+        $('#vocabEn').text('Không có dữ liệu.');
+        $('#vocabVi').text('');
+        return;
+    }
+    currentIdx = Math.floor(Math.random() * currentList.length);
+    const item = currentList[currentIdx];
+    $('#vocabEn').text(item.English);
+    $('#vocabVi').text(item.Vietnamese);
+}
+
+function speak(text) {
+    if (!text) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voices.length && voiceSelect && voiceSelect.value) {
+        utter.voice = voices[voiceSelect.value];
+        utter.lang = voices[voiceSelect.value].lang;
+    }
+    window.speechSynthesis.speak(utter);
+}
+
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (!voiceSelect) return;
+    voiceSelect.innerHTML = '';
+    voices.forEach((voice, idx) => {
+        const option = document.createElement('option');
+        option.value = idx;
+        option.text = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+        voiceSelect.appendChild(option);
+    });
+    if (voiceSelect.options.length > 0 && voiceSelect.selectedIndex === -1) {
+        voiceSelect.selectedIndex = 0;
+    }
+}
+
+$('#topicSelect, #typeSelect').on('change', updateCurrentList);
+$('#nextBtn').on('click', showNext);
+$('#readBtn').on('click', function() {
+    const text = $('#vocabEn').text();
+    speak(text);
+});
+
+$(function() {
+    loadEssayData();
+    loadVoices();
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+});
+</script>
+</body>
+</html>
