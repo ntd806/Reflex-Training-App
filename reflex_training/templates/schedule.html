@@ -146,6 +146,17 @@ function renderWeekGrid() {
         if (weeklyPlan[day] && weeklyPlan[day].length > maxRows) maxRows = weeklyPlan[day].length;
     });
 
+    // Tìm ngày gần nhất ứng với từng thứ trong tuần hiện tại
+    const now = new Date(today);
+    const weekDates = [];
+    const monday = new Date(now);
+    monday.setDate(now.getDate() - now.getDay() + 1); // Monday
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        weekDates.push(d.toISOString().slice(0,10));
+    }
+
     // Tạo mảng 2 chiều: rows[row][col] = {duration, activity}
     let rows = [];
     for (let i = 0; i < maxRows; i++) {
@@ -172,7 +183,6 @@ function renderWeekGrid() {
                 break;
             }
         }
-        // Tooltip cho duration nếu có
         let durationTitle = activityDefs[duration] ? ` title="${activityDefs[duration]}"` : '';
         html += `<tr>
             <td class="time"${durationTitle}>${duration || ''}</td>`;
@@ -180,15 +190,16 @@ function renderWeekGrid() {
             const cell = rows[r][c];
             let cellHtml = '';
             let isDone = false;
-            let tdTitle = cell && cell.activity && activityDefs[cell.activity] ? ` title="${activityDefs[cell.activity]}"` : '';
+            // Lấy trạng thái done đúng ngày trong tuần
+            const dayName = weekDays[c];
+            const dateStr = weekDates[c];
+            const doneIdx = (statusData[dateStr] && statusData[dateStr][dayName]) || [];
             if (cell && cell.activity) {
-                const doneIdx = (statusData[today] && statusData[today][weekDays[c]]) || [];
                 isDone = doneIdx.includes(r);
-                // Tooltip cho activity nếu có
                 let actTitle = activityDefs[cell.activity] ? ` title="${activityDefs[cell.activity]}"` : '';
                 cellHtml = `<span${actTitle}${isDone ? ' style="color:green;font-weight:bold;"' : ''}>${cell.activity}${isDone ? ' ✔' : ''}</span>`;
             }
-            html += `<td${isDone ? ' class="done"' : ''}${tdTitle}>${cellHtml}</td>`;
+            html += `<td${isDone ? ' class="done"' : ''}>${cellHtml}</td>`;
         }
         html += `</tr>`;
     }
@@ -205,7 +216,7 @@ function markDone(day, idx, date) {
         success: function(res) {
             statusData = res.status;
             renderToday();
-            renderWeek();
+            renderWeekGrid();
             renderStats();
         }
     });
