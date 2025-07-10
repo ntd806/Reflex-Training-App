@@ -1,0 +1,433 @@
+[
+    {
+        "sentence": "We are changing classroom because this one is too small",
+        "transcript": "Chúng ta đang đổi phòng học vì phòng này quá nhỏ",
+        "priority": false,
+        "shown_today": 13,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The United Kingdom is a constitutional monarchy and parliamentary democracy",
+        "transcript": "Vương quốc Anh là một nước quân chủ lập hiến và dân chủ nghị viện",
+        "priority": false,
+        "shown_today": 7,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "A full bibliography is needed at the end of all assignments",
+        "transcript": "Một danh mục tài liệu đầy đủ là cần thiết ở cuối tất cả các bài tập",
+        "priority": true,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "Higher fees cause students to look more critically into what universities offer",
+        "transcript": "Học phí cao khiến sinh viên xem xét kỹ hơn những gì các trường đại học cung cấp",
+        "priority": true,
+        "shown_today": 2,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The topic of next week's colloquium will be nuclear disarmament",
+        "transcript": "Chủ đề của buổi hội thảo tuần tới sẽ là giải trừ vũ khí hạt nhân",
+        "priority": true,
+        "shown_today": 4,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "Their program depends entirely on private funding",
+        "transcript": "Chương trình của họ hoàn toàn phụ thuộc vào nguồn tài trợ tư nhân",
+        "priority": true,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "You can download all lecture handouts from the course website",
+        "transcript": "Bạn có thể tải tất cả tài liệu bài giảng từ trang web của khóa học",
+        "priority": true,
+        "shown_today": 4,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The psychology department is looking for volunteers to be involved in research projects",
+        "transcript": "Khoa tâm lý học đang tìm kiếm các tình nguyện viên tham gia vào các dự án nghiên cứu",
+        "priority": true,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "Most students have the opportunity to share a common lunch break around noon",
+        "transcript": "Hầu hết sinh viên có cơ hội cùng nhau nghỉ trưa vào khoảng giữa trưa",
+        "priority": true,
+        "shown_today": 9,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "Evidence is necessary to prove that an experiment has been susceptible all",
+        "transcript": "Bằng chứng là cần thiết để chứng minh rằng một thí nghiệm đã bị ảnh hưởng hoàn toàn",
+        "priority": true,
+        "shown_today": 6,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "The hypothesis needs to be tested in a more rigorous way",
+        "transcript": "Giả thuyết cần được kiểm tra một cách nghiêm ngặt hơn",
+        "priority": true,
+        "shown_today": 9,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "Developments in information technology have greatly changed the way people work",
+        "transcript": "Những phát triển trong công nghệ thông tin đã thay đổi đáng kể cách con người làm việc",
+        "priority": true,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-09"
+    },
+    {
+        "sentence": "A computer virus destroyed all of my files",
+        "transcript": "Một loại virus máy tính đã phá hủy tất cả các tệp của tôi",
+        "priority": true,
+        "shown_today": 0,
+        "last_shown_date": ""
+    },
+    {
+        "sentence": "In English, the months of the year are always capitalised",
+        "transcript": "Trong tiếng Anh, các tháng trong năm luôn được viết hoa",
+        "priority": true,
+        "shown_today": 8,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The preliminary bibliography will be due in the week before Spring break",
+        "transcript": "Danh mục tài liệu tham khảo sơ bộ sẽ phải nộp trong tuần trước kỳ nghỉ Xuân",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "The Moon is positioned between the Sun and the Earth, causing a solar eclipse",
+        "transcript": "Mặt Trăng nằm giữa Mặt Trời và Trái Đất, gây ra nhật thực",
+        "priority": false,
+        "shown_today": 9,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The Earth is positioned between the Sun and the Moon, resulting in a lunar eclipse",
+        "transcript": "Trái Đất nằm giữa Mặt Trời và Mặt Trăng, dẫn đến nguyệt thực",
+        "priority": false,
+        "shown_today": 4,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The three celestial bodies are aligned in a straight line",
+        "transcript": "Ba thiên thể được xếp thành một đường thẳng",
+        "priority": false,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Moon lies between the Sun and the Earth",
+        "transcript": "Mặt Trăng nằm giữa Mặt Trời và Trái Đất",
+        "priority": false,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Earth is in the middle of the Sun and the Moon",
+        "transcript": "Trái Đất nằm ở giữa Mặt Trời và Mặt Trăng",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Moon passes in front of the Earth’s view of the Sun",
+        "transcript": "Mặt Trăng đi qua trước tầm nhìn của Trái Đất về Mặt Trời",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The Moon moves behind the Earth and enters its shadow",
+        "transcript": "Mặt Trăng di chuyển phía sau Trái Đất và đi vào bóng của nó",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Moon casts a shadow on the Earth’s surface",
+        "transcript": "Mặt Trăng tạo bóng trên bề mặt Trái Đất",
+        "priority": false,
+        "shown_today": 4,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The Moon blocks the sunlight, leading to a total eclipse",
+        "transcript": "Mặt Trăng chặn ánh sáng Mặt Trời, dẫn đến nhật thực toàn phần",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The Moon falls into the Earth’s shadow, creating a lunar eclipse",
+        "transcript": "Mặt Trăng rơi vào bóng của Trái Đất, tạo ra nguyệt thực",
+        "priority": false,
+        "shown_today": 4,
+        "last_shown_date": "2025-06-18"
+    },
+    {
+        "sentence": "The side of the Moon facing the Sun is fully illuminated",
+        "transcript": "Mặt của Mặt Trăng hướng về Mặt Trời được chiếu sáng hoàn toàn",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Sun is located on the left side of the image",
+        "transcript": "Mặt Trời nằm ở phía bên trái của hình ảnh",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-13"
+    },
+    {
+        "sentence": "The Earth is positioned in the center of the diagram",
+        "transcript": "Trái Đất được đặt ở trung tâm của sơ đồ",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "At the bottom, we can see the lunar eclipse",
+        "transcript": "Ở phía dưới, chúng ta có thể thấy nguyệt thực",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The Moon is shown above the Earth",
+        "transcript": "Mặt Trăng được hiển thị phía trên Trái Đất",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-17"
+    },
+    {
+        "sentence": "Each object is marked with a white outline for clarity",
+        "transcript": "Mỗi đối tượng được đánh dấu bằng đường viền trắng để rõ ràng",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "This map shows the location of major rivers in South America",
+        "transcript": "Bản đồ này cho thấy vị trí của các con sông lớn ở Nam Mỹ",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-17"
+    },
+    {
+        "sentence": "A globe is a three-dimensional representation of the Earth",
+        "transcript": "Quả địa cầu là mô hình ba chiều của Trái Đất",
+        "priority": false,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The student used an atlas to find the capital cities of all European countries",
+        "transcript": "Học sinh đã sử dụng atlas để tìm thủ đô của tất cả các nước châu Âu",
+        "priority": false,
+        "shown_today": 5,
+        "last_shown_date": "2025-06-18"
+    },
+    {
+        "sentence": "The legend explains the meaning of colors and symbols on the map",
+        "transcript": "Chú giải giải thích ý nghĩa của màu sắc và ký hiệu trên bản đồ",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The compass rose helps users identify north, south, east, and west",
+        "transcript": "La bàn hoa giúp người dùng xác định hướng bắc, nam, đông và tây",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "The scale indicates the ratio between distances on the map and actual distances on Earth",
+        "transcript": "Tỷ lệ cho biết tỷ số giữa khoảng cách trên bản đồ và khoảng cách thực tế trên Trái Đất",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "You can use coordinates to pinpoint any location on Earth",
+        "transcript": "Bạn có thể sử dụng tọa độ để xác định chính xác bất kỳ vị trí nào trên Trái Đất",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": ""
+    },
+    {
+        "sentence": "The map uses a grid system to help locate specific areas",
+        "transcript": "Bản đồ sử dụng hệ thống lưới để giúp xác định các khu vực cụ thể",
+        "priority": false,
+        "shown_today": 6,
+        "last_shown_date": "2025-06-17"
+    },
+    {
+        "sentence": "This map shows areas of high elevation in dark brown",
+        "transcript": "Bản đồ này hiển thị các khu vực có độ cao lớn bằng màu nâu đậm",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "Contour lines indicate elevation changes across the terrain",
+        "transcript": "Đường đồng mức biểu thị sự thay đổi độ cao trên địa hình",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The boundary between the two provinces is marked in red",
+        "transcript": "Ranh giới giữa hai tỉnh được đánh dấu bằng màu đỏ",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-13"
+    },
+    {
+        "sentence": "The country shares its northern border with Canada",
+        "transcript": "Đất nước này có biên giới phía bắc giáp với Canada",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "Canberra is the capital city of Australia",
+        "transcript": "Canberra là thủ đô của Úc",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-13"
+    },
+    {
+        "sentence": "California is the most populous state in the United States",
+        "transcript": "California là bang đông dân nhất ở Hoa Kỳ",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "The international date line marks the place where each calendar day begins",
+        "transcript": "Đường đổi ngày quốc tế đánh dấu nơi mỗi ngày lịch bắt đầu",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The prime meridian passes through Greenwich, England, and is considered 0° longitude",
+        "transcript": "Kinh tuyến gốc đi qua Greenwich, Anh, và được coi là kinh độ 0°",
+        "priority": false,
+        "shown_today": 5,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "The equator divides the Earth into the Northern and Southern Hemispheres",
+        "transcript": "Xích đạo chia Trái Đất thành Bắc bán cầu và Nam bán cầu",
+        "priority": false,
+        "shown_today": 7,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "Latitude lines run horizontally and help measure distances north or south of the equator",
+        "transcript": "Các đường vĩ độ chạy ngang và giúp đo khoảng cách phía bắc hoặc phía nam của xích đạo",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "Longitude lines run vertically and are used to measure east-west positions",
+        "transcript": "Các đường kinh độ chạy dọc và được sử dụng để đo vị trí đông-tây",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "Australia is located in the Southern Hemisphere",
+        "transcript": "Úc nằm ở Nam bán cầu",
+        "priority": false,
+        "shown_today": 2,
+        "last_shown_date": "2025-07-01"
+    },
+    {
+        "sentence": "Climate change must be addressed on a global scale to be effective",
+        "transcript": "Biến đổi khí hậu phải được giải quyết trên quy mô toàn cầu để hiệu quả",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-17"
+    },
+    {
+        "sentence": "A regional map provides more detailed information about a specific area within a country",
+        "transcript": "Bản đồ khu vực cung cấp thông tin chi tiết hơn về một khu vực cụ thể trong một quốc gia",
+        "priority": false,
+        "shown_today": 7,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "National borders are often marked on maps using solid or dashed lines",
+        "transcript": "Biên giới quốc gia thường được đánh dấu trên bản đồ bằng đường liền hoặc đường nét đứt",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "There are nearly 200 countries in the world today, each with its own government",
+        "transcript": "Hiện nay có gần 200 quốc gia trên thế giới, mỗi quốc gia có chính phủ riêng",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-20"
+    },
+    {
+        "sentence": "Asia is the largest continent in both area and population",
+        "transcript": "Châu Á là châu lục lớn nhất về cả diện tích và dân số",
+        "priority": false,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-10"
+    },
+    {
+        "sentence": "A world map displays all continents, countries, and oceans on a single surface",
+        "transcript": "Bản đồ thế giới hiển thị tất cả các châu lục, quốc gia và đại dương trên một bề mặt duy nhất",
+        "priority": false,
+        "shown_today": 3,
+        "last_shown_date": "2025-06-17"
+    },
+    {
+        "sentence": "City living in the 21st century is increasingly stressful",
+        "transcript": "Cuộc sống ở thành phố trong thế kỷ 21 ngày càng căng thẳng",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-25",
+        "learned": true
+    },
+    {
+        "sentence": "Organic food is produced without chemicals and processed without additives",
+        "transcript": "Thực phẩm hữu cơ được sản xuất không có hóa chất và chế biến không có phụ gia",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-20",
+        "learned": true
+    },
+    {
+        "sentence": "Students will not be given credit for work handed in after the due date",
+        "transcript": "Sinh viên sẽ không được tính điểm cho bài làm nộp sau hạn chót",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-06-20",
+        "learned": true
+    },
+    {
+        "sentence": "Evidence is after necessary to prove that an experiment has been susceptible all",
+        "transcript": "Bằng chứng là sau cần thiết để chứng minh rằng một thí nghiệm đã bị ảnh hưởng hoàn toàn",
+        "priority": true,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "learned": true
+    }
+]

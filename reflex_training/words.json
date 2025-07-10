@@ -1,0 +1,1773 @@
+[
+    {
+        "word": "get it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "hiểu, nắm được",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "need it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cần nó",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "pass it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đưa nó, vượt qua",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "has it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "có nó",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "of it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "của nó",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "of each",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "của mỗi",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "call it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "gọi nó",
+        "guide": "kô‿lịt → Nối trơn, 'call' nhấn mạnh, 'ít' yếu đi, nghe như 'CÔ-ít' nhanh"
+    },
+    {
+        "word": "in it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong nó",
+        "guide": "in‿ít → Nối trơn, nghe như 'IN-nít' khi nói nhanh, nhấn nhẹ ở 'in'"
+    },
+    {
+        "word": "for it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "vì nó, cho nó",
+        "guide": "pho‿ít → 'for' yếu thành 'pho', nối liền với 'ít', nghe như 'PHO-ít'"
+    },
+    {
+        "word": "back out",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "rút lui, từ bỏ",
+        "guide": "băc‿áo → Nối trơn, nhấn 'BĂC', 'áo' nhẹ, nghe như 'BĂC-áo'"
+    },
+    {
+        "word": "I'm in",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tôi tham gia",
+        "guide": "aim‿in → Nối liền, 'I'm' và 'in' hợp thành 'AIM-in' nhanh, nhấn 'aim'"
+    },
+    {
+        "word": "go out",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đi ra ngoài",
+        "guide": "gô‿áo → Nối trơn, nhấn 'GÔ', 'áo' nhẹ, nghe như 'GÔ-áo'"
+    },
+    {
+        "word": "I am",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tôi là",
+        "guide": "ai‿ăm → Nối trơn, 'am' yếu thành 'ăm', nghe như 'AI-ăm' nhanh"
+    },
+    {
+        "word": "idea of",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ý tưởng về",
+        "guide": "ai-đi-ờ‿ơv → 'of' yếu thành 'ơv', nối trơn, nhấn 'ĐI', nghe như 'ai-ĐI-ờ-v'"
+    },
+    {
+        "word": "don't you",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "bạn không",
+        "guide": "đôn‿chiu → Nối trơn, 'you' yếu thành 'chiu', nhấn 'ĐÔN', nghe như 'ĐÔN-chiu'"
+    },
+    {
+        "word": "did you",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "bạn đã",
+        "guide": "đíd‿chiu → Nối trơn, 'you' yếu thành 'chiu', nhấn 'ĐÍD', nghe như 'ĐÍD-chiu'"
+    },
+    {
+        "word": "miss you",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nhớ bạn",
+        "guide": "mít‿chiu → Nối trơn, 'you' yếu thành 'chiu', nhấn 'MÍT', nghe như 'MÍT-chiu'"
+    },
+    {
+        "word": "as you",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "như bạn",
+        "guide": "ă‿chiu → 'as' yếu thành 'ă', nối trơn, nhấn 'chiu', nghe như 'Ă-chiu'"
+    },
+    {
+        "word": "what she",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cô ấy gì",
+        "guide": "quớt‿si → Nối trơn, 'she' yếu thành 'si', nhấn 'QUỚT', nghe như 'QUỚT-si'"
+    },
+    {
+        "word": "would she",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cô ấy sẽ",
+        "guide": "quúd‿si → Nối trơn, 'would' yếu thành 'quúd', nhấn 'QUÚD', nghe như 'QUÚD-si'"
+    },
+    {
+        "word": "act fast",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "hành động nhanh",
+        "guide": "ăc‿phăxt → Nối trơn, nhấn 'ĂC' và 'PHĂXT', nghe như 'ĂC-phăxt'"
+    },
+    {
+        "word": "big game",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trận đấu lớn",
+        "guide": "bíc‿gêm → Nối trơn, nhấn 'BÍC', 'gêm' nhẹ, nghe như 'BÍC-gêm'"
+    },
+    {
+        "word": "They are asking",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "họ đang hỏi",
+        "guide": "đây‿ơ‿ác-xin → 'are' yếu thành 'ơ', nối trơn, nhấn 'ÁC-xin', nghe như 'ĐÂY-ơ-ác-xin'"
+    },
+    {
+        "word": "They are good",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "họ tốt",
+        "guide": "đây‿ơ‿gúd → 'are' yếu thành 'ơ', nối trơn, nhấn 'GÚD', nghe như 'ĐÂY-ơ-gúd'"
+    },
+    {
+        "word": "It's an apple",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là một quả táo",
+        "guide": "ít‿xờ‿n‿ép-pồ → 'an' yếu thành 'xờ-n', nối trơn, nhấn 'ÉP-pồ', nghe như 'ÍT-xờ-n-ép-pồ'"
+    },
+    {
+        "word": "That's a book",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là một cuốn sách",
+        "guide": "đát‿xờ‿búc → 'a' yếu thành 'xờ', nối trơn, nhấn 'BÚC', nghe như 'ĐÁT-xờ-búc'",
+        "learned": true
+    },
+    {
+        "word": "the apple",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "quả táo",
+        "guide": "đờ‿ép-pồ → 'the' yếu thành 'đờ', nối trơn, nhấn 'ÉP-pồ', nghe như 'ĐỜ-ép-pồ'",
+        "learned": true
+    },
+    {
+        "word": "Cats are cute.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "mèo thì dễ thương",
+        "guide": "cát‿xờ‿kiút → 'are' yếu thành 'xờ', nối trơn, nhấn 'KIÚT', nghe như 'CÁT-xờ-kiút'",
+        "learned": true
+    },
+    {
+        "word": "Books are heavy.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "sách thì nặng",
+        "guide": "búc‿xờ‿hév-i → 'are' yếu thành 'xờ', nối trơn, nhấn 'HÉV-i', nghe như 'BÚC-xờ-hév-i'",
+        "learned": true
+    },
+    {
+        "word": "It's a good idea.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là một ý tưởng hay",
+        "guide": "ít‿xờ‿gúd‿ai-đi-ờ → 'a' yếu thành 'xờ', nối trơn, nhấn 'AI-đi-ờ', nghe như 'ÍT-xờ-gúd-ai-đi-ờ'",
+        "learned": true
+    },
+    {
+        "word": "It's an honor.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là một vinh dự",
+        "guide": "ít‿xờ‿n‿ôn-nờ → 'an' yếu thành 'xờ-n', nối trơn, nhấn 'ÔN-nờ', nghe như 'ÍT-xờ-n-ôn-nờ'",
+        "learned": true
+    },
+    {
+        "word": "It's the book.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là cuốn sách",
+        "guide": "ít‿đờ‿búc → 'the' yếu thành 'đờ', nối trơn, nhấn 'BÚC', nghe như 'ÍT-đờ-búc'",
+        "learned": true
+    },
+    {
+        "word": "It's the end.",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đó là kết thúc",
+        "guide": "ít‿đờ‿én → 'the' yếu thành 'đờ', nối trơn, nhấn 'ÉN', nghe như 'ÍT-đờ-én'",
+        "learned": true
+    },
+    {
+        "word": "in good",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong trạng thái tốt",
+        "guide": "/ɪŋgʊd/ -> /n/ chuyển thành âm mũi trước /g/"
+    },
+    {
+        "word": "this and that",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cái này cái kia",
+        "guide": "/ðɪs‿ən‿ðæt/ → /ðɪs‿n̩‿ðæt/\t“and” rút gọn rất mạnh"
+    },
+    {
+        "word": "cats and dogs",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "mèo và chó",
+        "guide": "/kæts‿n̩‿dɒgz/\t“and” gần như chỉ còn là âm /n/"
+    },
+    {
+        "word": "pros and cons",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ưu và nhược điểm",
+        "guide": "/prəʊz‿n̩‿kɒnz/\t/z/ nối trơn sang âm /n/"
+    },
+    {
+        "word": "this or that",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cái này hoặc cái kia",
+        "guide": "/ðɪs‿ɔː‿ðæt/ hoặc /ðɪsɔːðæt/\t“s” nối trơn với “or”"
+    },
+    {
+        "word": "pass or fail",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đỗ hoặc trượt",
+        "guide": "/pɑːs‿ɔː‿feɪl/\tÂm “s” kéo dài sang “or”"
+    },
+    {
+        "word": "toss or keep",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ném hoặc giữ",
+        "guide": "/tɒsɔːkiːp/\tPhát âm liền mạch, không ngắt"
+    },
+    {
+        "word": "professor is hosting",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giáo sư đang tổ chức",
+        "guide": "no"
+    },
+    {
+        "word": "full of it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đầy rẫy, ba hoa",
+        "guide": "Nối trơn thành: “full‿of‿it” → /ˈfʊləvɪt/"
+    },
+    {
+        "word": "what he",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "anh ấy gì",
+        "guide": "chỉ đọc “wot-ee” → sau đó nhanh hơn thành “waddy”"
+    },
+    {
+        "word": "part of a",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "một phần của",
+        "guide": "Tổng thể thành /ˈpɑːɾəvə/ (nghe như: \"parda-va\")"
+    },
+    {
+        "word": "in the age of the",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong thời đại của",
+        "guide": "in‿thee‿age‿uhv‿thuh"
+    },
+    {
+        "word": "keep it in the",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giữ nó trong",
+        "guide": "kíp‿ít‿in‿đờ → 'in' và 'the' yếu thành 'in-đờ', nối trơn, nhấn 'KÍP', nghe như 'KÍP-ít-in-đờ'"
+    },
+    {
+        "word": "bridges and removes",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "xây cầu và loại bỏ",
+        "guide": "bridges'n removes"
+    },
+    {
+        "word": "globalization",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "toàn cầu hóa",
+        "guide": "glô-bờ-lai-ZÊY-sần → Nhấn mạnh 'ZÊY', đọc tự nhiên như 'GLÔ-bờ-lai-ZÊY-sần'"
+    },
+    {
+        "word": "containment is a",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "kiềm chế là một",
+        "guide": "cờn-tên-mần‿ít‿xờ → 'is' yếu thành 'ít', 'a' yếu thành 'xờ', nối trơn, nhấn 'CỜN-tên-mần', nghe như 'CỜN-tên-mần-ít-xờ'"
+    },
+    {
+        "word": "jet and the",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "máy bay phản lực và",
+        "guide": "jét‿n‿đờ → 'and' yếu thành 'n', 'the' thành 'đờ', nối trơn, nhấn 'JÉT', nghe như 'JÉT-n-đờ'"
+    },
+    {
+        "word": "where the only",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nơi mà chỉ",
+        "guide": "quê‿đờ‿ÔN-li → 'the' yếu thành 'đờ', nối trơn, nhấn 'ÔN-li', nghe như 'QUÊ-đờ-ÔN-li'"
+    },
+    {
+        "word": "until it accepts the norms of international",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cho đến khi chấp nhận các chuẩn mực quốc tế",
+        "guide": "un-tíl‿ít‿ăc-sép‿đờ‿nôm‿xờ‿in-tờ-năy-sần-nờ → Nối trơn, 'the' và 'of' yếu, nhấn 'UN-tíl' và 'ĂC-sép', nghe như 'UN-tíl-ít-ăc-sép-đờ-nôm-xờ-in-tờ-năy-sần-nờ'"
+    },
+    {
+        "word": "in a reservoir",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong một hồ chứa",
+        "guide": "re zờ woa"
+    },
+    {
+        "word": "which has",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "mà có",
+        "guide": "Hãy tưởng tượng bạn đang nói \"quýt chà\" hoặc \"quít-gia\" rất nhanh và liền mạch"
+    },
+    {
+        "word": "There will always be",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "luôn luôn có",
+        "guide": "Giống âm Việt: “quờ loa-quây” hoặc “quy lồ-quây”"
+    },
+    {
+        "word": "take a seat",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ngồi xuống",
+        "guide": "téc‿xờ‿sít → 'a' yếu thành 'xờ', nối trơn, nhấn 'SÍT', nghe như 'TÉC-xờ-sít'"
+    },
+    {
+        "word": "make a decision",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đưa ra quyết định",
+        "guide": "méc‿xờ‿đi-SÍ-dần → 'a' yếu thành 'xờ', nối trơn, nhấn 'ĐI-SÍ-dần', nghe như 'MÉC-xờ-đi-SÍ-dần'"
+    },
+    {
+        "word": "give it a try",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "thử nó",
+        "guide": "gív‿ít‿xờ‿trai → 'a' yếu thành 'xờ', nối trơn, nhấn 'TRAI', nghe như 'GÍV-ít-xờ-trai'"
+    },
+    {
+        "word": "turn it off",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tắt nó",
+        "guide": "tơn‿ít‿ốp → Nối trơn, nhấn 'TƠN' và 'ỐP', nghe như 'TƠN-ít-ốp'"
+    },
+    {
+        "word": "turn it on",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "bật nó",
+        "guide": "tơn‿ít‿ôn → Nối trơn, nhấn 'TƠN' và 'ÔN', nghe như 'TƠN-ít-ôn'"
+    },
+    {
+        "word": "call me back",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "gọi lại cho tôi",
+        "guide": "cô‿mí‿băc → Nối trơn, nhấn 'CÔ' và 'BĂC', nghe như 'CÔ-mí-băc'"
+    },
+    {
+        "word": "hold on",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "chờ chút",
+        "guide": "hôu‿ôn → Nối trơn, nhấn 'HÔU', nghe như 'HÔU-ôn'"
+    },
+    {
+        "word": "let me know",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cho tôi biết",
+        "guide": "lét‿mí‿nô → Nối trơn, 'me' yếu, nhấn 'NÔ', nghe như 'LÉT-mí-nô'"
+    },
+    {
+        "word": "keep in touch",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giữ liên lạc",
+        "guide": "kíp‿in‿tát → Nối trơn, nhấn 'TÁT', nghe như 'KÍP-in-tát'"
+    },
+    {
+        "word": "take your time",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cứ từ từ",
+        "guide": "téc‿diờ‿táim → 'your' yếu thành 'diờ', nối trơn, nhấn 'TÁIM', nghe như 'TÉC-diờ-táim'"
+    },
+    {
+        "word": "education plays a crucial role in shaping",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giáo dục đóng vai trò quan trọng trong việc định hình",
+        "guide": "é-điu-kây-sần‿plây‿xờ‿CRÚ-sần‿rôu‿in‿SÊY-pin → Nối trơn, nhấn 'É-điu-kây-sần', 'CRÚ-sần', 'SÊY-pin', nghe như 'É-điu-kây-sần-plây-xờ-CRÚ-sần-rôu-in-SÊY-pin'"
+    },
+    {
+        "word": "complex concepts",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "khái niệm phức tạp",
+        "guide": "CÔM-pléc‿CÔN-xép → Nối trơn, nhấn 'CÔM-pléc' và 'CÔN-xép', nghe như 'CÔM-pléc-CÔN-xép'"
+    },
+    {
+        "word": "diplomacy",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ngoại giao",
+        "guide": "đi-PLÔ-mờ-si → Nhấn mạnh 'PLÔ', đọc như 'ĐI-PLÔ-mờ-si'"
+    },
+    {
+        "word": "thousand",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nghìn",
+        "guide": "000"
+    },
+    {
+        "word": "hundred",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trăm",
+        "guide": "00"
+    },
+    {
+        "word": "degree Celcius",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "độ C",
+        "guide": "oC"
+    },
+    {
+        "word": "trend in the numbers of",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "xu hướng trong số lượng",
+        "guide": "tren‿in‿đờ‿NĂM-bơ‿xờ → 'the' và 'of' yếu, nối trơn, nhấn 'TREN' và 'NĂM-bơ', nghe như 'TREN-in-đờ-NĂM-bơ-xờ'"
+    },
+    {
+        "word": "between the numbers of",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giữa số lượng",
+        "guide": "bi-TUIN‿đờ‿NĂM-bơ‿xờ → 'the' và 'of' yếu, nối trơn, nhấn 'BI-TUIN', nghe như 'BI-TUIN-đờ-NĂM-bơ-xờ'"
+    },
+    {
+        "word": "there's a downward trend",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "có xu hướng giảm",
+        "guide": "đe‿xờ‿ĐÁO-quớt‿tren → 'there’s' yếu thành 'đe', nối trơn, nhấn 'ĐÁO-quớt', nghe như 'ĐE-xờ-ĐÁO-quớt-tren'"
+    },
+    {
+        "word": "there's an upward trend",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "có xu hướng tăng",
+        "guide": "đe‿xờ‿n‿ÁP-quớt‿tren → 'there’s' yếu thành 'đe', nối trơn, nhấn 'ÁP-quớt', nghe như 'ĐE-xờ-n-ÁP-quớt-tren'"
+    },
+    {
+        "word": "there's a significant difference",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "có sự khác biệt đáng kể",
+        "guide": "đe‿xờ‿sig-NÍ-phi-cần‿ĐÍF-rần → 'there’s' yếu thành 'đe', nối trơn, nhấn 'SIG-NÍ-phi-cần' và 'ĐÍF-rần', nghe như 'ĐE-xờ-sig-NÍ-phi-cần-ĐÍF-rần'"
+    },
+    {
+        "word": "Food is one of the most important",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "thực phẩm là một trong những thứ quan trọng nhất",
+        "guide": "Nghe như: 👉 “Fuudiz wunnəv thuh most imPÓO-t’nt”"
+    },
+    {
+        "word": "where it",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nơi mà nó",
+        "guide": "quê‿ít → Nối trơn, nhấn 'QUÊ', nghe như 'QUÊ-ít'"
+    },
+    {
+        "word": "spend a lot",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "chi tiêu nhiều",
+        "guide": "xpen‿xờ‿lót → 'a' yếu thành 'xờ', nối trơn, nhấn 'XPEN' và 'LÓT', nghe như 'XPEN-xờ-lót'"
+    },
+    {
+        "word": "things you'll ever buy",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "những thứ bạn sẽ mua",
+        "guide": "thíng‿diờ‿É-vơ‿bai → 'you’ll' và 'ever' yếu, nối trơn, nhấn 'BAI', nghe như 'THÍNG-diờ-É-vơ-bai'"
+    },
+    {
+        "word": "comes from",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đến từ",
+        "guide": "côm‿frôm → Nối trơn, nhấn 'CÔM', nghe như 'CÔM-frôm'"
+    },
+    {
+        "word": "computers to buy",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "máy tính để mua",
+        "guide": "côm-PIÚ-tơ‿tơ‿bai → 'to' yếu thành 'tơ', nối trơn, nhấn 'CÔM-PIÚ-tơ' và 'BAI', nghe như 'CÔM-PIÚ-tơ-tơ-bai'"
+    },
+    {
+        "word": "same as investment",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "giống như đầu tư",
+        "guide": "“same‿az‿investment” → “sêm‿màz‿in-vest-ment”"
+    },
+    {
+        "word": "while investment is about",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong khi đầu tư là về",
+        "guide": "Nghe tự nhiên như: \"wail‿in-vest-mən‿niz‿ə-bao(t)\""
+    },
+    {
+        "word": "the difference is important",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "sự khác biệt là quan trọng",
+        "guide": "Nghe như: \"thə dif-rən-siz im-PÓO-t’n(t)\""
+    },
+    {
+        "word": "leak out of the economic",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "rò rỉ ra khỏi nền kinh tế",
+        "guide": "Nghe tự nhiên như: \"liik‿aʊɾə‿vđi‿e-kə-nó-mịk\""
+    },
+    {
+        "word": "Aged",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "già, lớn tuổi",
+        "guide": ""
+    },
+    {
+        "word": "you'll ever buy",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "bạn sẽ từng mua",
+        "guide": "“yool‿ev-və‿bai” (nối /l/ và /e/; rút gọn ever)"
+    },
+    {
+        "word": "the most important",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "quan trọng nhất",
+        "guide": "/ðə‿məʊst‿ɪmˈpɔːtənt/ → “thə‿mốs‿im-PÓO-t’n”",
+        "learned": true
+    },
+    {
+        "word": "one of the",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "một trong những",
+        "guide": "/wʌn‿əv‿ðə/ → “wăn-nə‿đə”",
+        "learned": true
+    },
+    {
+        "word": "Food is",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "thực phẩm là",
+        "guide": "“fùu-diz” → Nối âm /d/ + /ɪ/",
+        "learned": true
+    },
+    {
+        "word": "Business school admissions officers said",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cán bộ tuyển sinh trường kinh doanh nói",
+        "guide": "bíz-nə-skool‿əd-mí-shənz‿ó-fi-səz‿sed",
+        "learned": true
+    },
+    {
+        "word": "Schools host",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trường học tổ chức",
+        "guide": "xkun‿hôxt → Nối trơn, nhấn 'HÔXT', nghe như 'XKUN-hôxt'",
+        "learned": true
+    },
+    {
+        "word": "bibliography",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tài liệu tham khảo",
+        "guide": "Đọc tự nhiên: \"bíp-li-O-gra-phì\" (BrE) Hoặc \"bíp-li-A-gra-phì\" (AmE)",
+        "learned": true
+    },
+    {
+        "word": "at the end of all assignments",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "vào cuối tất cả các bài tập",
+        "guide": "ẹt‿thờ‿en‿nờ‿vồ‿ə-sain-mənts",
+        "learned": true
+    },
+    {
+        "word": "is increasingly",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "ngày càng",
+        "guide": "Âm /z/ ở cuối “is” nối trực tiếp với /ɪ/ đầu từ “increasingly”",
+        "learned": true
+    },
+    {
+        "word": "abilities",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "khả năng",
+        "guide": "ơ-BÍ-lì-tì → Nhấn mạnh 'BÍ', đọc như 'Ơ-BÍ-lì-tì'",
+        "learned": true
+    },
+    {
+        "word": "cognitive",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nhận thức",
+        "guide": "CÓC-nì-tiv → Nhấn mạnh 'CÓC', đọc như 'CÓC-nì-tiv'",
+        "learned": true
+    },
+    {
+        "word": "greatly",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "rất nhiều",
+        "guide": "GRÊY-tli → Nhấn mạnh 'GRÊY', đọc như 'GRÊY-tli'",
+        "learned": true
+    },
+    {
+        "word": "symtomps",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "triệu chứng",
+        "guide": "XÍM-tơm → Nhấn mạnh 'XÍM', đọc như 'XÍM-tơm' (lưu ý: đúng chính tả là 'symptoms')",
+        "learned": true
+    },
+    {
+        "word": "dietbetes",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "bệnh tiểu đường",
+        "guide": "đai-Ơ-BÍ-tìz → Nhấn mạnh 'BÍ', đọc như 'ĐAI-Ơ-BÍ-tìz' (lưu ý: đúng chính tả là 'diabetes')",
+        "learned": true
+    },
+    {
+        "word": "deficiency",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "sự thiếu hụt",
+        "guide": "đi-FÍ-sần-si → Nhấn mạnh 'FÍ', đọc như 'ĐI-FÍ-sần-si'",
+        "learned": true
+    },
+    {
+        "word": "identify",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "xác định",
+        "guide": "ai-ĐEN-tì-fai → Nhấn mạnh 'ĐEN', đọc như 'AI-ĐEN-tì-fai'",
+        "learned": true
+    },
+    {
+        "word": "the most common",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "thông dụng nhất",
+        "guide": "tờ‿MÔXT‿CÔM-mần → 'the' yếu thành 'đờ', nối trơn, nhấn 'CÔM-mần', nghe như 'ĐỜ-MÔXT-CÔM-mần'",
+        "learned": true
+    },
+    {
+        "word": "the most effective",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "hiệu quả nhất",
+        "guide": "tờ‿MÔXT‿i-FÉC-tiv → 'the' yếu thành 'đờ', nối trơn, nhấn 'I-FÉC-tiv', nghe như 'ĐỜ-MÔXT-i-FÉC-tiv'",
+        "learned": true
+    },
+    {
+        "word": "rehearse",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tập dượt",
+        "guide": "rờ hơrs",
+        "learned": true
+    },
+    {
+        "word": "curiosity",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "sự tò mò",
+        "guide": "kiu ờ ó sờ ty",
+        "learned": true
+    },
+    {
+        "word": "exceed",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "vượt quá",
+        "guide": "ic-XÍT → Nhấn mạnh 'XÍT', đọc như 'IC-XÍT'",
+        "learned": true
+    },
+    {
+        "word": "$35,000",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "35,000 đô la",
+        "guide": "TƠ-đÌ-FAI‿THÁO-sần → Nhấn 'TƠ-đÌ' và 'TÁO-sần', đọc như 'thirty-five thousand'",
+        "learned": true
+    },
+    {
+        "word": "$1.15 trillion",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "1,15 nghìn tỷ đô la",
+        "guide": "QUÂN‿PÔIN‿QUÂN‿FAI‿TRÍ-lì-ần → Nhấn 'FAI' và 'TRÍ-lì', đọc như 'one point one five trillion'",
+        "learned": true
+    },
+    {
+        "word": "all over the world",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trên toàn thế giới",
+        "guide": "o‿lô-vờ‿thờ‿wờld or ô‿lô-vờ‿thờ‿wờld",
+        "learned": true
+    },
+    {
+        "word": "colloquium",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "hội thảo chuyên đề",
+        "guide": "cờ-LÔ-kwi-ùm",
+        "learned": true
+    },
+    {
+        "word": "disarmament",
+        "priority": false,
+        "shown_today": 0,
+        "translation": "giải trừ quân bị, giảm vũ khí, giải giới",
+        "last_shown_date": "2025-07-10",
+        "guide": "địt-XA-mờ-mần(t)",
+        "learned": true
+    },
+    {
+        "word": "mobility",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tính di động, khả năng di chuyển",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "infinite",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "vô hạn, vô tận",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "structure is essential",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cấu trúc là thiết yếu",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "put into",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "đặt vào, đưa vào",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "items of",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "các mục của",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "English as a",
+        "priority": true,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-10",
+        "translation": "tiếng Anh như là",
+        "guide": "Nói liền: ing-glịt-shẹt-zờ",
+        "learned": true
+    },
+    {
+        "word": "In the past",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "trong quá khứ",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "Find out about",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "tìm hiểu về",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "that are in",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "mà ở trong",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "that offers you a host of possibilities",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "mà mang lại cho bạn nhiều khả năng",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "clubs and societies",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "câu lạc bộ và hội nhóm",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "is a lot more than",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "là nhiều hơn",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "what appear",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cái gì xuất hiện",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "exempt",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "miễn, loại trừ",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "massage",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "mát-xa",
+        "learned": true
+    },
+    {
+        "word": "message",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "tin nhắn, thông điệp",
+        "learned": true
+    },
+    {
+        "word": "evident",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "hiển nhiên, rõ ràng",
+        "learned": true
+    },
+    {
+        "word": "attention",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "sự chú ý",
+        "learned": true
+    },
+    {
+        "word": "reluctance",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "sự miễn cưỡng, sự lưỡng lự",
+        "learned": true
+    },
+    {
+        "word": "effort",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "nỗ lực, cố gắng",
+        "learned": true
+    },
+    {
+        "word": "combat",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "chiến đấu, chống lại",
+        "learned": true
+    },
+    {
+        "word": "decay",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "sự suy tàn, mục nát",
+        "learned": true
+    },
+    {
+        "word": "politicians",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "chính trị gia",
+        "learned": true
+    },
+    {
+        "word": "hectares",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "hecta",
+        "learned": true
+    },
+    {
+        "word": "raised in captivity",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "nuôi nhốt",
+        "learned": true
+    },
+    {
+        "word": "counterpart",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "đối tác, bản tương ứng",
+        "learned": true
+    },
+    {
+        "word": "aerial",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "trên không, thuộc không khí",
+        "learned": true
+    },
+    {
+        "word": "promptly",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "ngay lập tức",
+        "learned": true
+    },
+    {
+        "word": "thorough",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "kỹ lưỡng, cẩn thận",
+        "learned": true
+    },
+    {
+        "word": "criterion",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "tiêu chí",
+        "learned": true
+    },
+    {
+        "word": "a criterion referenced approach",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "phương pháp dựa trên tiêu chí",
+        "learned": true
+    },
+    {
+        "word": "explanations",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "giải thích, lời giải thích",
+        "learned": true
+    },
+    {
+        "word": "discrimination",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "địt-xờ-kri-mì-Nấy-shần → Nhấn mạnh 'Nấy', đọc như 'ĐỊT-XỜ-KRI-MÌ-NÉI-shần'",
+        "translation": "sự phân biệt đối xử",
+        "learned": true
+    },
+    {
+        "word": "perks",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "lợi ích, đặc quyền dành cho người làm công",
+        "learned": true
+    },
+    {
+        "word": "Welfare",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "phúc lợi mang tính dành cho người nghèo ngoài xã hội",
+        "learned": true
+    },
+    {
+        "word": "capability",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "khả năng, năng lực",
+        "learned": true
+    },
+    {
+        "word": "through",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "xuyên qua, thông qua",
+        "learned": true
+    },
+    {
+        "word": "authority",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "quyền lực, thẩm quyền",
+        "learned": true
+    },
+    {
+        "word": "delegate",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "đại biểu, ủy quyền",
+        "learned": true
+    },
+    {
+        "word": "redundant",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "dư thừa, không cần thiết",
+        "learned": true
+    },
+    {
+        "word": "resumes",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "hồ sơ, lý lịch",
+        "learned": true
+    },
+    {
+        "word": "endorse",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "translation": "ủng hộ, tán thành",
+        "learned": true
+    },
+    {
+        "word": "landscape of the city",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "lén-skéip‿ơv‿đờ‿sì-ti → 'of' yếu thành 'ơv', nối trơn, nhấn 'LÉN-skéip' và 'SÌ-ti', nghe như 'LÉN-skéip-ơv-đờ-sì-ti'",
+        "translation": "cảnh quan của thành phố",
+        "learned": true
+    },
+    {
+        "word": "demand",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "nhu cầu",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "supply",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cung cấp",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "demand and supply",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "translation": "cung và cầu",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "substantial",
+        "translation": "đáng kể",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "detrimental",
+        "translation": "có hại",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "considerably",
+        "translation": "đáng kể, khá nhiều",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "individuals",
+        "translation": "cá nhân",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "accusations",
+        "translation": "lời buộc tội",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "dodging",
+        "translation": "né tránh",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "necessarily",
+        "translation": "nhất thiết",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "nét-sờ-sé-ri-lì → Nhấn mạnh 'SÉ', đọc như 'NÉT-SỜ-SÉ-RI-LÌ'",
+        "learned": true
+    },
+    {
+        "word": "historically",
+        "translation": "về mặt lịch sử",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "emergence",
+        "translation": "sự xuất hiện",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "cite",
+        "translation": "trích dẫn",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "a major religion",
+        "translation": "một tôn giáo lớn",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "codified",
+        "translation": "được hệ thống hóa",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "spread",
+        "translation": "lan truyền",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "humanity",
+        "translation": "nhân loại",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "commerce",
+        "translation": "thương mại",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "vying",
+        "translation": "cạnh tranh",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "trajectory",
+        "translation": "quỹ đạo, hướng đi",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "shifted",
+        "translation": "chuyển đổi",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "houses all around you",
+        "translation": "những ngôi nhà xung quanh bạn",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "(hoặc: “hao-zịt-zồ‿rao(n)‿ju” – nói nhanh mượt)",
+        "learned": true
+    },
+    {
+        "word": "turned out",
+        "translation": "hóa ra",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "What if the answer",
+        "translation": "Điều gì sẽ xảy ra nếu câu trả lời",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "had always",
+        "translation": "luôn luôn có",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "friends",
+        "translation": "bạn bè",
+        "priority": true,
+        "shown_today": 2,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "thoroughly regarded as both constructive and positive",
+        "translation": "được xem xét kỹ lưỡng là vừa mang tính xây dựng vừa tích cực",
+        "priority": true,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "leads to considerably more detrimental effects",
+        "translation": "dẫn đến những tác động tiêu cực đáng kể hơn",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "regime",
+        "translation": "chế độ",
+        "priority": true,
+        "shown_today": 0,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "what it is to",
+        "translation": "nó là gì để",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "(hoặc giọng Mỹ nhanh: “wʌt‿ɪɾ‿ɪz‿tə” → “quʌ-địt-đìz-tờ”)",
+        "learned": true
+    },
+    {
+        "word": "persist",
+        "translation": "kiên trì",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "domestic",
+        "translation": "nội địa",
+        "priority": true,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "masculinity",
+        "translation": "tính nam",
+        "priority": true,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "to challenge who does what",
+        "translation": "thách thức ai làm gì",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "/tə ˈʧæ.lənʤ huː dʌz wɒt/",
+        "learned": true
+    },
+    {
+        "word": "what it is to be a woman or a man",
+        "translation": "nó là gì để trở thành một người phụ nữ hoặc một người đàn ông",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "what‿it‿is‿to‿be",
+        "learned": true
+    },
+    {
+        "word": "tantamount",
+        "translation": "tương đương",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "of a",
+        "translation": "của một",
+        "priority": true,
+        "shown_today": 3,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "as a",
+        "translation": "như một",
+        "priority": true,
+        "shown_today": 1,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "success or failure",
+        "translation": "thành công hoặc thất bại",
+        "priority": true,
+        "shown_today": 2,
+        "last_shown_date": "2025-07-10",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "intellectual",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "familiarity",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "manpower",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "diverted",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "facilitating",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "preparation",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "Domestication is an evolutionary",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "political",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "to survive and prosper",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "in an alliance",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "humans than",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "on their own",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": "on‿ner‿own → Nối trơn, nhấn 'OWN', nghe như 'ON-ner-own' hoặc chỉ cần on ne ôn"
+    },
+    {
+        "word": "in exchange for which",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": ""
+    }
+]

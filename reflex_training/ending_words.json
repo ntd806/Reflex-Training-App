@@ -1,0 +1,408 @@
+{
+    "sWords": [
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720776,
+            "word": "friends"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720775,
+            "word": "teachers"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720774,
+            "word": "bushes"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720773,
+            "word": "judges"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720772,
+            "word": "foxes"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720771,
+            "word": "cups"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720770,
+            "word": "books"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720769,
+            "word": "girls"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720768,
+            "word": "boys"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720767,
+            "word": "dogs"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720766,
+            "word": "wishes"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720765,
+            "word": "buzzes"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720764,
+            "word": "matches"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720763,
+            "word": "baths"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720762,
+            "word": "tables"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720761,
+            "word": "cars"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720760,
+            "word": "maps"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720759,
+            "word": "cups"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720758,
+            "word": "boxes"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720757,
+            "word": "houses"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720756,
+            "word": "plays"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720755,
+            "word": "pens"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720754,
+            "word": "garages"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720753,
+            "word": "roses"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720752,
+            "word": "buses"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720751,
+            "word": "laughs"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720750,
+            "word": "books"
+        },
+        {
+            "ending": "/z/",
+            "priority": false,
+            "timestamp": 1749720749,
+            "word": "dogs"
+        },
+        {
+            "ending": "/ɪz/",
+            "priority": false,
+            "timestamp": 1749720748,
+            "word": "watches"
+        },
+        {
+            "ending": "/s/",
+            "priority": false,
+            "timestamp": 1749720747,
+            "word": "cats"
+        }
+    ],
+    "edWords": [
+        {
+            "word": "diverted",
+            "priority": false,
+            "timestamp": 1752118578,
+            "ending": "/ɪd/"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1750250001,
+            "word": "administered"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1750249837,
+            "word": "balanced"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1750133075,
+            "word": "talented"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1750132928,
+            "word": "intimidated"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720980,
+            "word": "opted"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720979,
+            "word": "offered"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720806,
+            "word": "invited"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720805,
+            "word": "agreed"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720804,
+            "word": "visited"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720803,
+            "word": "started"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720802,
+            "word": "moved"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720801,
+            "word": "fixed"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720800,
+            "word": "watched"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720799,
+            "word": "repaired"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720798,
+            "word": "enjoyed"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720797,
+            "word": "missed"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720796,
+            "word": "waited"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720795,
+            "word": "ended"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720794,
+            "word": "hoped"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720793,
+            "word": "lived"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720792,
+            "word": "danced"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720791,
+            "word": "visited"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720790,
+            "word": "painted"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720789,
+            "word": "loved"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720788,
+            "word": "kissed"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720787,
+            "word": "watched"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720786,
+            "word": "opened"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720785,
+            "word": "called"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720784,
+            "word": "cleaned"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720783,
+            "word": "added"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720782,
+            "word": "needed"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720781,
+            "word": "stopped"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720780,
+            "word": "laughed"
+        },
+        {
+            "ending": "/d/",
+            "priority": false,
+            "timestamp": 1749720779,
+            "word": "played"
+        },
+        {
+            "ending": "/ɪd/",
+            "priority": false,
+            "timestamp": 1749720778,
+            "word": "wanted"
+        },
+        {
+            "ending": "/t/",
+            "priority": false,
+            "timestamp": 1749720777,
+            "word": "walked"
+        }
+    ]
+}

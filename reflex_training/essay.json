@@ -1,0 +1,350 @@
+{
+  "Environment": {
+    "Doing Something": [
+      {
+        "English": "Ignoring the importance of environmental conservation",
+        "Vietnamese": "Phớt lờ tầm quan trọng của việc bảo tồn môi trường"
+      },
+      {
+        "English": "Overusing non-renewable energy sources",
+        "Vietnamese": "Lạm dụng các nguồn năng lượng không tái tạo"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "Climate change is accelerating due to rising greenhouse gas emissions.",
+        "Vietnamese": "Biến đổi khí hậu đang gia tăng do lượng khí nhà kính ngày càng nhiều."
+      },
+      {
+        "English": "Deforestation directly contributes to habitat loss and biodiversity decline.",
+        "Vietnamese": "Nạn phá rừng trực tiếp gây ra mất môi trường sống và suy giảm đa dạng sinh học."
+      },
+      {
+        "English": "Industrial sources remain the primary contributors to air and water pollution.",
+        "Vietnamese": "Các nguồn công nghiệp vẫn là nguyên nhân chính gây ô nhiễm không khí và nước."
+      },
+      {
+        "English": "Public awareness about environmental friendliness is still limited.",
+        "Vietnamese": "Nhận thức cộng đồng về sự thân thiện với môi trường vẫn còn hạn chế."
+      },
+      {
+        "English": "Environmental impacts can become irreversible if left unchecked.",
+        "Vietnamese": "Tác động môi trường có thể trở nên không thể phục hồi nếu không được kiểm soát."
+      },
+      {
+        "English": "Urban expansion often leads to the destruction of natural ecosystems.",
+        "Vietnamese": "Sự mở rộng đô thị thường dẫn đến phá hủy hệ sinh thái tự nhiên."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "reducing pollutants from industrial and household sources",
+        "Vietnamese": "giảm các chất gây ô nhiễm từ nguồn công nghiệp và hộ gia đình"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "sustainable development",
+        "Vietnamese": "phát triển bền vững"
+      },
+      {
+        "English": "environmental protection",
+        "Vietnamese": "bảo vệ môi trường"
+      },
+      {
+        "English": "ecological balance",
+        "Vietnamese": "cân bằng sinh thái"
+      }
+    ]
+  },
+  "Education": {
+    "Doing Something": [
+      {
+        "English": "Emphasizing standardized assessments over creativity",
+        "Vietnamese": "Đề cao kiểm tra tiêu chuẩn hơn là sự sáng tạo"
+      },
+      {
+        "English": "Ignoring students’ individual learning needs",
+        "Vietnamese": "Bỏ qua nhu cầu học tập riêng của từng học sinh"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "A rigid curriculum limits students’ ability to explore new concepts.",
+        "Vietnamese": "Chương trình học cứng nhắc hạn chế khả năng khám phá ý tưởng mới của học sinh."
+      },
+      {
+        "English": "Intense competition leads to unnecessary pressure among learners.",
+        "Vietnamese": "Cạnh tranh gay gắt tạo áp lực không cần thiết cho người học."
+      },
+      {
+        "English": "Gender bias still exists in educational institutions in some regions.",
+        "Vietnamese": "Thiên kiến giới tính vẫn tồn tại trong các cơ sở giáo dục ở một số khu vực."
+      },
+      {
+        "English": "Creativity skills are often undervalued in academic environments.",
+        "Vietnamese": "Kỹ năng sáng tạo thường bị xem nhẹ trong môi trường học thuật."
+      },
+      {
+        "English": "Many students struggle due to ineffective delivery methods.",
+        "Vietnamese": "Nhiều học sinh gặp khó khăn do phương pháp giảng dạy không hiệu quả."
+      },
+      {
+        "English": "Personal relationships with fellow students help foster collaboration.",
+        "Vietnamese": "Mối quan hệ cá nhân với bạn học giúp thúc đẩy sự hợp tác."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "promoting critical thinking in classrooms",
+        "Vietnamese": "thúc đẩy tư duy phản biện trong lớp học"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "academic achievement",
+        "Vietnamese": "thành tích học tập"
+      },
+      {
+        "English": "effective studying",
+        "Vietnamese": "học tập hiệu quả"
+      },
+      {
+        "English": "high-quality education",
+        "Vietnamese": "giáo dục chất lượng cao"
+      }
+    ]
+  },
+  "Technology": {
+    "Doing Something": [
+      {
+        "English": "Relying excessively on artificial intelligence",
+        "Vietnamese": "Phụ thuộc quá mức vào trí tuệ nhân tạo"
+      },
+      {
+        "English": "Neglecting data security in online platforms",
+        "Vietnamese": "Bỏ qua an ninh dữ liệu trên các nền tảng trực tuyến"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "Automation is replacing human jobs in various industries.",
+        "Vietnamese": "Tự động hóa đang thay thế công việc của con người trong nhiều ngành công nghiệp."
+      },
+      {
+        "English": "Cybersecurity threats are growing due to weak protection systems.",
+        "Vietnamese": "Mối đe dọa an ninh mạng gia tăng do hệ thống bảo vệ yếu kém."
+      },
+      {
+        "English": "The overuse of mobile devices may impair attention span.",
+        "Vietnamese": "Việc lạm dụng thiết bị di động có thể làm giảm khả năng tập trung."
+      },
+      {
+        "English": "Many people lack the technical skills needed for modern tools.",
+        "Vietnamese": "Nhiều người thiếu kỹ năng kỹ thuật cần thiết cho các công cụ hiện đại."
+      },
+      {
+        "English": "Online resources enhance accessibility to education and work.",
+        "Vietnamese": "Tài nguyên trực tuyến nâng cao khả năng tiếp cận giáo dục và công việc."
+      },
+      {
+        "English": "Artificial intelligence can make critical decisions faster and more accurately than humans.",
+        "Vietnamese": "Trí tuệ nhân tạo có thể đưa ra quyết định nhanh và chính xác hơn con người."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "analyzing large datasets using advanced computing tools",
+        "Vietnamese": "phân tích dữ liệu lớn bằng công cụ tính toán tiên tiến"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "digital transformation",
+        "Vietnamese": "chuyển đổi số"
+      },
+      {
+        "English": "technical advancement",
+        "Vietnamese": "tiến bộ kỹ thuật"
+      },
+      {
+        "English": "user interface",
+        "Vietnamese": "giao diện người dùng"
+      }
+    ]
+  },
+  "Work and Career": {
+    "Doing Something": [
+      {
+        "English": "Prioritizing salary over job satisfaction",
+        "Vietnamese": "Ưu tiên mức lương hơn sự hài lòng trong công việc"
+      },
+      {
+        "English": "Encouraging excessive competition in the workplace",
+        "Vietnamese": "Khuyến khích cạnh tranh quá mức nơi công sở"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "Motivation among employees decreases without proper reinforcement.",
+        "Vietnamese": "Động lực của nhân viên giảm nếu không được khuyến khích đúng cách."
+      },
+      {
+        "English": "Work-life balance is becoming harder to maintain in fast-paced industries.",
+        "Vietnamese": "Cân bằng công việc và cuộc sống ngày càng khó duy trì trong các ngành có tốc độ cao."
+      },
+      {
+        "English": "Peer admiration can drive individuals to improve performance.",
+        "Vietnamese": "Sự ngưỡng mộ từ đồng nghiệp có thể thúc đẩy cá nhân nâng cao hiệu suất."
+      },
+      {
+        "English": "Remote working offers flexibility but can isolate employees.",
+        "Vietnamese": "Làm việc từ xa mang lại sự linh hoạt nhưng cũng có thể khiến nhân viên bị cô lập."
+      },
+      {
+        "English": "Mental health issues are growing due to high expectations.",
+        "Vietnamese": "Vấn đề sức khỏe tinh thần ngày càng gia tăng do kỳ vọng cao."
+      },
+      {
+        "English": "Repetitive tasks reduce job satisfaction over time.",
+        "Vietnamese": "Công việc lặp đi lặp lại làm giảm sự hài lòng theo thời gian."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "improving work efficiency through performance assessments",
+        "Vietnamese": "cải thiện hiệu suất công việc thông qua đánh giá năng lực"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "employment opportunities",
+        "Vietnamese": "cơ hội việc làm"
+      },
+      {
+        "English": "workplace culture",
+        "Vietnamese": "văn hóa nơi làm việc"
+      },
+      {
+        "English": "career advancement",
+        "Vietnamese": "sự thăng tiến trong sự nghiệp"
+      }
+    ]
+  },
+  "Transportation": {
+    "Doing Something": [
+      {
+        "English": "Increasing private car ownership in urban areas",
+        "Vietnamese": "Gia tăng sở hữu xe cá nhân tại khu vực thành thị"
+      },
+      {
+        "English": "Failing to improve public transportation infrastructure",
+        "Vietnamese": "Không cải thiện cơ sở hạ tầng giao thông công cộng"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "Urban living often results in traffic congestion and delays.",
+        "Vietnamese": "Sống ở đô thị thường dẫn đến tắc nghẽn giao thông và chậm trễ."
+      },
+      {
+        "English": "Public transport is underfunded and lacks efficiency.",
+        "Vietnamese": "Giao thông công cộng thiếu vốn và hiệu quả."
+      },
+      {
+        "English": "Travel offences are rising due to poor driving behavior.",
+        "Vietnamese": "Vi phạm giao thông gia tăng do thói quen lái xe kém."
+      },
+      {
+        "English": "The cost of airfares deters low-income travelers.",
+        "Vietnamese": "Giá vé máy bay cao làm người thu nhập thấp ngần ngại đi lại."
+      },
+      {
+        "English": "Road conditions in remote regions remain hazardous.",
+        "Vietnamese": "Tình trạng đường xá ở vùng xa vẫn còn nguy hiểm."
+      },
+      {
+        "English": "A short commute enhances productivity and work-life balance.",
+        "Vietnamese": "Quãng đường đi làm ngắn giúp tăng năng suất và cân bằng cuộc sống."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "reducing energy consumption through shared transport systems",
+        "Vietnamese": "giảm tiêu thụ năng lượng nhờ hệ thống giao thông chia sẻ"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "traffic congestion",
+        "Vietnamese": "tắc nghẽn giao thông"
+      },
+      {
+        "English": "infrastructure development",
+        "Vietnamese": "phát triển cơ sở hạ tầng"
+      },
+      {
+        "English": "transport networks",
+        "Vietnamese": "mạng lưới giao thông"
+      }
+    ]
+  },
+  "Language": {
+    "Doing Something": [
+      {
+        "English": "Promoting only dominant global languages",
+        "Vietnamese": "Chỉ thúc đẩy các ngôn ngữ toàn cầu đang chiếm ưu thế"
+      },
+      {
+        "English": "Ignoring the preservation of minority languages",
+        "Vietnamese": "Bỏ qua việc bảo tồn ngôn ngữ thiểu số"
+      }
+    ],
+    "Clause": [
+      {
+        "English": "Language acquisition becomes more difficult with age.",
+        "Vietnamese": "Việc tiếp thu ngôn ngữ trở nên khó hơn theo tuổi tác."
+      },
+      {
+        "English": "Technical language is essential in professional communication.",
+        "Vietnamese": "Ngôn ngữ kỹ thuật là cần thiết trong giao tiếp chuyên môn."
+      },
+      {
+        "English": "Minority languages are vanishing at an alarming rate.",
+        "Vietnamese": "Các ngôn ngữ thiểu số đang biến mất với tốc độ đáng báo động."
+      },
+      {
+        "English": "Vocabulary expansion is key to expressive delivery.",
+        "Vietnamese": "Mở rộng vốn từ là chìa khóa cho khả năng diễn đạt hiệu quả."
+      },
+      {
+        "English": "Cultural preservation is tied to linguistic heritage.",
+        "Vietnamese": "Việc bảo tồn văn hóa gắn liền với di sản ngôn ngữ."
+      },
+      {
+        "English": "Native tongue influences pronunciation and fluency.",
+        "Vietnamese": "Tiếng mẹ đẻ ảnh hưởng đến phát âm và sự trôi chảy."
+      }
+    ],
+    "Verb-ing": [
+      {
+        "English": "enhancing communication through language exchange programs",
+        "Vietnamese": "cải thiện giao tiếp qua các chương trình trao đổi ngôn ngữ"
+      }
+    ],
+    "Noun": [
+      {
+        "English": "effective communication",
+        "Vietnamese": "giao tiếp hiệu quả"
+      },
+      {
+        "English": "bilingual education",
+        "Vietnamese": "giáo dục song ngữ"
+      },
+      {
+        "English": "linguistic diversity",
+        "Vietnamese": "sự đa dạng ngôn ngữ"
+      }
+    ]
+  }
+}

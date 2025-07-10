@@ -1,0 +1,32 @@
+{
+    "repeat-sentence-01-06-2025": {
+        "count": 2,
+        "last": "6/24/2025, 4:24:37 PM",
+        "type": "RS"
+    },
+    "repeat-sentence-03-06-2025": {
+        "count": 2,
+        "last": "6/24/2025, 4:24:33 PM",
+        "type": "RS"
+    },
+    "write-from-dictation-01-06-2025": {
+        "count": 2,
+        "last": "6/24/2025, 4:09:39 PM",
+        "type": "WFD"
+    },
+    "write-from-dictation-04-06-2025": {
+        "count": 1,
+        "last": "6/24/2025, 4:09:22 PM",
+        "type": "WFD"
+    },
+    "write-from-dictation-19-06-2025": {
+        "count": 1,
+        "last": "7/9/2025, 11:00:21 AM",
+        "type": "WFD"
+    },
+    "write-from-dictation-20-06-2025": {
+        "count": 2,
+        "last": "7/10/2025, 11:50:51 AM",
+        "type": "WFD"
+    }
+}

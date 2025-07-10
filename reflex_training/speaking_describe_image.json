@@ -1,0 +1,346 @@
+[
+    {
+        "id": 1750045614356,
+        "title": "2",
+        "script": "The bar chart demonstrates integration challenges by age group,\n\nincluding learning the local language, making friends, and finding somewhere to live, measured in percent.\n\nAccording to the bar chart, people over 55 years old had the highest number,\n\nthat is nearly 55%.\n\nHowever, those aged 18 to 34 had the lowest number,\n\nthat is nearly 30%.\n\nBesides, there is another data such as making friends and finding somewhere to live for people over 55,\n\nthat is nearly 20%.\n\nIn general, there is a big difference in integration challenges by age group.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/cwiviuykvvjta7iyzbuk1p-Integration-challenges.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=P%2BmHRx5RTYi%2F5zxwHqQkjCSW2Vx%2F8%2BTsdAI92vWAKHQEcMqr826yZ0KyLzfrT9Q2UtJ1kEGlhb2v0psbEhgK33yqqkkQj1mFrVAuI%2F17saGYKqIv5HxnAegkmz2o0VXWiz3gqE5P0USw0%2Ffu7uogsSwrgsNdgizD7fJ95KSpxCO2P8bo4CW3%2FBQAesH%2Fuiz823LF5wEtIbCCWyVfae2OE8E7EonC8Ie%2BOsFeiVZZFe2twTnnCPoCGM29a6TP2my4vdwk8ZzFvnKLmeIKFpbuV0uMUFA50i9kO42RXar3ofoO%2FxJMb7wD26topRKrN67MBdC3koD37AgUFvKVtTA64Q%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:55:01.110Z"
+    },
+    {
+        "id": 1750059535966,
+        "title": "01",
+        "script": "This photo shows the map of Australia including main regions such as Western Australia, Southern Australia and Queensland.\n\nOn the left of the photo, we can see Western Australia.\nOn the middle of the photo, we can see Southern Australia and Northern Territory.\nOn the right of the photo, we can see Queensland and New South Wales.\n\nOverall, This picture shows the map of Australia including main regions.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/hk92ryuf3v5haamzibvne-australia_map_states.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=ehkCgV05lCdLnlMc%2BK3lMmD2eViwrs%2FfFSEQY1xLjL2ypUAN84Ym%2FGhqyE9FBTJAtHbU%2Fqhd%2B9HwfxOvAGmctePOGzBMCWD5WlFxRaQZ4zhCMtkTnoN%2BgfogGRTrHKT3JZoj6eCTFBVd7zdiOgFZ%2Bx8GgKO%2BVTXTLmqzOfy7M8wAJ4w5w3gvDfQG6IwGfZ2tgR%2BtO1qJ8G1AXVtFSy239TECIzNtUshtiDW3BYgNq6RBHsK4AFn%2BORQCcPbqi7ts0W6bGYMjKmrpCjubLhOdu5hlrHk5TwveAwOgztlChmutZsfZtojAYHKHhdoexj%2B6pyYNlL5OiPiemMytVV8Y%2FQ%3D%3D",
+        "type": "photo",
+        "created_at": "2025-07-02T08:11:38.946Z"
+    },
+    {
+        "id": 1750061925411,
+        "title": "03",
+        "script": "The bar chart demonstrates population distribution in Australia in 2016 by age group and gender,\n\nincluding ages 25–34, ages 90–100, and ages 1–15, measured in thousands.\n\nAccording to the bar chart, people aged 25 to 34 had the highest number,\n\nthat is nearly 700 thousand.\n\nHowever, those aged 90 to 100 had the lowest number,\n\nthat is nearly 10 thousand.\n\nBesides, there is another data such as ages 1 to 15,\n\nthat is nearly 650 thousand.\n\nIn general, there is a big difference in population distribution by age group and gender in Australia.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/m233r0jwmvi3nkb1y9l5ne-australia-population.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=AhEP2peY7PhS8ujm1%2BSYtjjX8mDlmg0dPBPRKqRoqVt5YQ4dy9%2BgJPR8mkK6HmKU0uhaVTfoZZgC6TsELM2FlAhT3sU8m4MKqDMga6AFjD4pHoxRzyZFjQLSl3CLRlUbmhM3cs25eDVlVd62Pd7am9GCbEwVTr%2BkefeD6kW4SdH1n0s4%2BxXaPhFNuSxAtYg5E7Pcc4yIAVh6twk3jPDVybJT5EPYrE01tWKWdKv2iLNPWW6eOUZWEh1s9izfBMi4wWIcUe%2BZm1HDdruSXvZj5myn0o6DGxRxXfbm4HF3q29Vl3Vtk9KkPP3UfqrB7Ut3JXRrASl1OtHbOqnOgy08%2Bw%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:55:39.743Z"
+    },
+    {
+        "id": 1750062458065,
+        "title": "04",
+        "script": "The bar chart demonstrates success and failure rates in Canada from 1999 to 2002,\n\nincluding success rates in 2002, success rates in 1999, and failure rates in 2000–2001, measured in percent.\n\nAccording to the bar chart, the success rate in 2002 had the highest number,\n\nthat is nearly 87.5%.\n\nHowever, the success rate in 1999 had the lowest number,\n\nthat is nearly 66%.\n\nBesides, there is another data such as failure rates in 2000,\n\nthat is nearly 30%.\n\nIn general, there is a big difference in success and failure rates across the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/3441g9h00huewcmnovy4wt-evoltion-of-success-rate-in-canada.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=TfyLaX%2BSFAU79iNV4%2B2oa1vn9t2dvB8HVXeHiI9e%2BQ7oQRnMHAUqxliqxx0vEovXuUotndLU8WSoQuTSLDn2a90PIKEIafjI5bhdkFp8Vl%2BhtVdEvpWy5yO0CAzMTETP6Ne18MAfiem7T8fcG7h6PFcE4cw6iyF3ZKDelXddpMWqVzuzdaZz735UDUY%2BpZMc3EdrpnZCGiSpqgImeF1KPMCxulz4nfRcYm9fRW5J14qfwi%2FtMaVptchzaPteHlipUgjtq1X%2FDiUmaIcpaNAK4arQELke4qf5Dx%2BLlIL3iSRSLvuMDXlFbSfMS7eHB5XnYwZ7kEN1qhq9RpKPeaKUMg%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:55:56.962Z"
+    },
+    {
+        "id": 1750063200189,
+        "title": "05",
+        "script": "The bar chart demonstrates poverty rates in the United States in 2012 by age group and gender,\n\nincluding under age 18, ages 65 and older, and ages 18–64, measured in percent.\n\nAccording to the bar chart, those under age 18 had the highest number,\n\nthat is nearly 22.3%.\n\nHowever, those aged 65 and older had the lowest number,\n\nthat is nearly 6.6% for males.\n\nBesides, there is another data such as ages 18 to 64,\n\nthat is nearly 15.4% for females.\n\nIn general, there is a big difference in poverty rates across age groups and genders.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/w2lxufffc383ikfg6gpfvd-poverty-rates-by-gender.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=NKM154vF4mv4PwwcOfhM3POCxHIBcRCRtdF5DJLpTK3tA6r%2F4Uj0h%2BrniQ%2F7iDlqNtveF6OEcsl9o8Bm13vjJ6pHWGzzhhh9XtrkTTN5TA8Ft2NjADbHDWBaxj%2FsvnDIRV3ZHK%2B1Ut0wXzreBYZv3s572Pz58Sz3KczlxeEtD2iGZx3oJtHzJuXx1Qz4bHy1ENc5bwEfDmEV0JYz8XDiTF%2FvrLM8jJzZNQj2nOmcZaKujP%2FewyQgMobj6rQXE%2Bu7jjbYtxihA839P13tHfA93IvM9A3VjfZvInNmq6THv0DM91caRg5naBbbXgSD0fp2fJDth%2FnReMD8vFvhREi9%2BA%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:56:13.255Z"
+    },
+    {
+        "id": 1750063930965,
+        "title": "06",
+        "script": "The bar chart demonstrates fertility rates in six Gulf countries in 1990 and 2000,\n\nincluding Oman, Bahrain, and Saudi Arabia, measured in births per woman.\n\nAccording to the bar chart, Oman had the highest number,\n\nthat is nearly 7 births.\n\nHowever, Bahrain had the lowest number,\n\nthat is nearly 3.5 births.\n\nBesides, there is another data such as Saudi Arabia,\n\nthat is nearly 6.8 births in 1990.\n\nIn general, there is a big difference in fertility rates across Gulf countries.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/wjwy4dl68ucnlt5211e5km-women-fertility-rate.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=Vp48VCn1MlKPkAXRxW1pGFQQujTVAEzZB8tm52x29N%2F%2BhN1Ntw5B1vEbrCsC24MsYxnTvEKpzPLFXz6qngPgYbPWdqaX6Y8G%2F63RV8jv6Z6cuLS6aq%2B6mJrgDGvMutbyljbmiIUBL2nUfwXtXCtZUk3Va%2FwhbjN9ZjIqZAoAYjIY9ea%2B0bpEMexB78AD9QFkd00dkboDeOm6oIfE1Uj37%2FeYnhSSlOxkBvwx%2B%2FsAtKiJEFuNAQ1OhVM1F7E4DdbqFJlIKgSQhsWwA1SZZWD7WVkTWbkBfNRGe%2FKNEmeUkoOgh6cgwj4g%2FHB1Q1n%2FP%2FnSr3GPSdVhFPsBQLcTtOSAGA%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:56:39.194Z"
+    },
+    {
+        "id": 1750064835928,
+        "title": "07",
+        "script": "The bar chart demonstrates household ownership of consumer goods in Georgia in 2008 and 2013,\n\nincluding Color TV, Air conditioner, and Refrigerator, measured in percent.\n\nAccording to the bar chart, Color TV had the highest number,\n\nthat is nearly 91% in 2013.\n\nHowever, Air conditioner had the lowest number,\n\nthat is nearly 5% in 2008.\n\nBesides, there is another data such as Refrigerator,\n\nthat is nearly 77% in 2013.\n\nIn general, there is a big difference in household ownership of consumer goods over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/i0yf4papxkjxjzx4cz5gb-household-ownership-of-cosumer-goods.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=MDeVD5VjG8lgcSec%2BaTF4AyMrcExgWrkpVugSaduKN45DSTHOPknhLJgYiHJMNusx4t3QDs1JgxrciJVGHZpaTTdL8GgZ99y01C6c9o3ZZ8GHdAyNU9lKOjJUTtBQlS6FD6EkziSqryoU9PAo%2Bli7%2F8nPjSQ29sinvHkUPaKsh6vq4eoIqJxzvHjsQkly8MFj%2FWSMSWm%2BNNlPVM4dJUMXGpJnu6XKIoWvvVDLOt1ntxidKNKETzwJIzzDBv54FLDUlBTPIHj9Uc%2FlVRWHyxwCA7YR2Id9lwh5RVDDqDom9HSNosRuyh9xNkTRqqpE3aL2QnB7aRGGqy%2F4Q0XMxWiYQ%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:56:52.147Z"
+    },
+    {
+        "id": 1750065004944,
+        "title": "08",
+        "script": "The bar chart demonstrates the percentage of households with internet access in the UK from 2006 to 2009,\n\nincluding the years 2009, 2006, and 2007–2008, measured in percent.\n\nAccording to the bar chart, the year 2009 had the highest number,\n\nthat is nearly 75%.\n\nHowever, the year 2006 had the lowest number,\n\nthat is nearly 57%.\n\nBesides, there is another data such as the year 2007,\n\nthat is nearly 62%.\n\nIn general, there is a big difference in the percentage of households with internet access over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/obzr2xyu1zf13kbm8f51i-Househols-with-access-to-internet.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=hmkeIcWUkE8hh6xzRxWdnL%2BKNkEEhCWwUbf%2FeYcSfOsGjBMpt3IFZ%2Fujy0h7ZPmLHVHXUHD2UOfazRC4CYbafDuAKS2DX4SqJ0zq%2B%2BPS3dLgyz11h6bUPa8r%2BXuQ2iNz3ijbnez%2FuqJCcRmoLDb3IEtNRJJRiCvxSUiWGfZxOlCZpihQYSHNNgoYG8XVOigImH9hCd7DOhjCe7UEPUu6PZjya6fRoNU8q0b7uIGYfmcppqFejpPB4JnSyjc4%2BB4voZ57fT%2F1epYPYZX1L4aa%2Fx4PYEcYiREneiuZjh%2B3m%2FEfDGmj%2BrIkwXprG3JqW1Q%2F8ox2lpDLf4%2B5nJSZE%2F9Ukg%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:57:41.465Z"
+    },
+    {
+        "id": 1750579811984,
+        "title": "09",
+        "script": "The bar chart demonstrates unemployment rates by educational attainment in 2016,\n\nincluding professional or doctoral degree, less than high school diploma, and other education levels, measured in percent.\n\nAccording to the bar chart, those with less than a high school diploma had the highest number,\n\nthat is nearly 7.4%.\n\nHowever, those with a professional or doctoral degree had the lowest number,\n\nthat is nearly 1.6%.\n\nBesides, there is another data such as other education levels,\n\nthat is nearly 2.4%.\n\nIn general, there is a big difference in unemployment rates by educational attainment.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/apxvxn8ozynmgfne5h74fq-unemployment-rates-earnings-by-educational-attainment-2016.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=cbLoVXfooKIdMYAdMb7UxhpbEQpmrzKG38TJH1dOb0wYdAJyleWfbXw9IpfB5RiB4x5Ngqx7b0dfJ3dDCGZAAtgLm2QkzaGC3iVh3zW64NIYycgvJ%2FJ0xpktC8G99lMgRF1EV6XcdRy60LqJBIxPve03eNgc6m7J92Q8cwfUilPwN8uS%2BcryMNAdAy%2BhUncVaw5blHIFysaD3x2h0248UsCQHyTtdUcidyCKgf9n03KXB87jzPCAeI7jNRt6iSP4pH7nYwM8HqTWq4WdyZevkUVwrLUn8jjx7%2F0x%2FehJseF8CpsCDO4%2Fub7F3Z7tJj7Hbylv6bar4F1WhWFiv5gVzQ%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:57:55.739Z"
+    },
+    {
+        "id": 1750580419334,
+        "title": "10",
+        "script": "The cycle shows the software reengineering process, including four steps.\n\nFirst, the process begins with inventory analysis to check existing software components.\nNext, reverse engineering is used to understand the current system, followed by restructuring of documents, code, and data.\nAfter that, forward engineering is done to create improved software systems.\nFinally, the cycle returns to inventory analysis for future updates.\n\nOverall, there are four steps in the cycle of software reengineering.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/kdusc4rrwdqwlzdh0tvfwa-A_software_reengineering_process_model.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=ez7knNzGmVzOvdXncMN6Ixt4eox1Aaxu51xkP1Y57KxwymzbnPsf7OVUJgjuNBNq%2B4Sd0%2BXVCGp7X%2B41I1ByT3NRUebF4LEf5sEOHvNCSc%2Fp8pTXYJEJHITLU%2Bs7tME2jpcXRnbMhwmNZSxwsv15r54rGfbZNXErcLdx8okhqiG4dVQQ21DFkcGKumt5GOQPJu4Q6JFm9OAe%2Fq0GlRu1RdoqCbNnGxRwnn7h28rVROuLd3drTL8RKowlKfeMOQr7V6OpctDY4heYpsbPx%2Fu7nxkGNEqX305z8m1XSXfppxJbndBYqlkJvt1Axnfb2YveGepeZ3xfbxLzSvRYGIWEHA%3D%3D",
+        "type": "cycle",
+        "created_at": "2025-07-02T07:41:40.927Z"
+    },
+    {
+        "id": 1750580650729,
+        "title": "12",
+        "script": "This picture shows the parts of a tree, including the leaves, branches, trunk, and roots.\n\nAt the top of the picture, there are leaves, which are green and thin, and help the tree make food from sunlight.\n\nBelow the leaves, there are twigs and branches, which are brown and strong, and carry water and support the leaves.\n\nIn the middle, there is a trunk, which is thick and tall, and helps move water from the roots to the top.\n\nBelow the ground, there are roots, which are long and spread out, and help the tree stay in place and take in water.\n\nThere is also a crown, which is the upper part of the tree, and it is wide and full of leaves.\n\nOverall, this picture shows the main parts of a tree, with clear shapes and colors to describe how the tree is built.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fztf75v5q5zdhmfmeejn8gt-treeparts.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=PIWHyWcFhh95nVMjEg14%2BNRmQvaLOYw5xU08i2tHsCpmZPwALTLHK0TNowIruXJcMeDXUWuzigwMPM%2BdWqnrrnsUxPSR8TaSneJ8fHQ6qNYUkpOBwGdbmlFAkZ73IVA%2FoZ2davLHrZQA2kt%2Fii7r3Sa4bSUD4p6%2BkEGHusutL%2B%2Bs71Bf1HoFL8X3ud%2BYe52ljd0XjRopBZUXh0W2bnYYQwyiB3Exs094sETv78J%2BjvT31%2BEsnVUeAAMAxXmm8ecrPndwMFUTylKm5BRXs77tbpzpEvKzEzxb446rMauHshxYKu1bfu3y2oyRuV7FpAPX10hwofvpDX8MeP9k7VkVHA%3D%3D",
+        "type": "photo",
+        "created_at": "2025-07-02T07:56:00.455Z"
+    },
+    {
+        "id": 1750580796732,
+        "title": "13",
+        "script": "The bar chart demonstrates population growth in ten major U.S. cities from 2011 to 2012,\n\nincluding New York City, Fort Worth, and Houston, measured in number of people.\n\nAccording to the bar chart, New York City had the highest number,\n\nthat is nearly 67,058 people.\n\nHowever, Fort Worth had the lowest number,\n\nthat is nearly 16,328 people.\n\nBesides, there is another data such as Houston,\n\nthat is nearly 34,600 people.\n\nIn general, there is a big difference in population growth across U.S. cities.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2F23y7mtmrl4vlwx6opsh54q-ChartOfTheDay_1153__n.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=S2h4x6iGCl3Uuid5bXZwOeOLFVDXJCoOCYjRRYcsjLGNTL3z0pf1hpE3yV%2FPGZfRqrKtRno0qQJop2%2Bo0JnFVvd8nmJ7OqpryPWkZ%2FNDZS%2BBT8TQoisZ0ZLJ3iaxfLML8XXnMdSpKjrJHjAskAs0bsk9KABTRQwCEbR8hsHgHcxZmIfiVrhe1fM3RvEL2iKL06hqjCvcNZZaCITzd9Nr7JH2qCnJ9uhJZXR%2BsqJCUG9FCn0Bt4opZEvTwHwitmANUAATq68Jy%2BMDRZGiQY4BkBgs5uyK8JOWphgxUG%2BTwBBJ%2FdqL3LkSO6cOai%2BDQh7BnO2cj0SOgx9cxR5OUSdCpw%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T06:59:16.992Z"
+    },
+    {
+        "id": 1750580857780,
+        "title": "14",
+        "script": "The pie chart demonstrates the distribution of world languages by number of speakers,\n\nincluding Chinese, German, and Spanish, measured in percentage.\n\nAccording to the pie chart, Chinese had the highest number,\n\nthat is nearly 24%.\n\nHowever, German had the lowest number,\n\nthat is nearly 2%.\n\nBesides, there is another data such as Spanish,\n\nthat is nearly 6%.\n\nIn general, there is a big difference in the distribution of world languages by speakers.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fq7v3xyy11btt4lwzktcsq-500px-World_population_distribution.svg.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=WGfz13CAxM0iUJuW9oMHd1%2FRbe83nNh5UeVdrkuhNEeY3DvYADSBxGhuFEb7j1G4a2ARtjV2mODN%2FTjPMfOTv1w6jEHtXQT8u7Q4YHz9f%2FSHJU7FbB1MzXo44BYsU9KjB3Z3nvXcIAaUiUSRXrt6Jfef%2FpEQWUvNmLpBsJPMAipIah1%2Ft3l6TR%2ByBUPK3Bwnd%2F3Tr%2BavybZGOxB2xacNvezev%2B1izpP3CAEbGpnW%2Fg5oyVe%2Fh6%2BsUT24X5q7umUfgmsnK%2FEc5K7PekmTfMoBzHeTyucKaOmiU7zRvsESULH4ZkDIlUfkVkvqpx8JcX0zwinyjr0hboAKc2KNMOJAXQ%3D%3D",
+        "type": "pie",
+        "created_at": "2025-07-02T06:59:37.085Z"
+    },
+    {
+        "id": 1750581019703,
+        "title": "15",
+        "script": "The pie charts show the global market share of desktop browsers and mobile operating systems,\n\nincluding Chrome, Android, and Safari, measured in percentage.\n\nAccording to the pie charts, Chrome and Android had the highest number,\n\nthat is nearly 43% each.\n\nHowever, browsers like Firefox and operating systems like Symbian had the lowest number,\n\nthat is nearly 3%.\n\nBesides, there is another data such as Safari,\n\nthat is nearly 7%.\n\nIn general, there is a big difference in the market share of desktop browsers and mobile operating systems.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Ffh8v68qz3vlbghaa1026fd-CP-Australia-2018-F1-trans-new.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=VGnF%2BndM%2B66HxSS5JYVMdvDlF%2FgFEM7E2xNqxyH4BjU3fzri6ECRV%2FrLqQLbn2bihwO5ZkpLW2ILe3p%2F6C5esUYtnK7x5nC4woa92YjrqabP%2BJCSjhMbZMy9GfRY03h18OxRzjmCEjLUaQmO3HU8rQsqYax0%2BtLXgfnlgLVDfXSmgtiPk3LpVtarIE2MBA2iyG7uXkVZGX8%2FbiX%2BFsr9ra72LQfJIgxCK8Pdh4Vj0WoPBltWqn4Pd5J%2FyK6yhBL%2FwaogIa2JgQaVS6k6%2BuvUr1lFXsewldsWwTRvKgXx8TWI91q47ourfSef1Rw1roUIe0V%2BX5FoYorNQz8oXJDjWg%3D%3D",
+        "type": "pie",
+        "created_at": "2025-07-02T06:59:59.345Z"
+    },
+    {
+        "id": 1750581175906,
+        "title": "16",
+        "script": "The line chart demonstrates the sales trend of a product over time,\n\nincluding Maturity, Introduction, and Decline stages, measured in sales volume.\n\nAccording to the line chart, the Maturity stage had the highest number,\n\nthat is nearly the peak of the curve.\n\nHowever, the Introduction stage had the lowest number,\n\nthat is nearly the starting point.\n\nBesides, there is another data such as the Growth long stage,\n\nthat is nearly a sharp increase.\n\nIn general, there is a big difference in the sales trend across the product life cycle.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fo44pl3ax03qoqlyvsp6u-DI16.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=LbItg3VZBTttPnZTDankH9ct6P34hSCy%2FWfunrQm22UGH1ELHHTRb4y6za%2FzH4F4W4YT4YJsC2idVMQBOvtqxwCf0xtfbnmKynqgxIRjD4P1MSdqKUboKUrVV247uhxL9ZTLX2grL7X0BtRCbJrb2iPt1Z4Ps1lTzsbo0ENtu1xSy4dk%2ByUCaXs0rB33V52xRYxOWM0ci2k8auUmpc5p98dJrHOv3kVSngUlKizeLv34fFBaLdxTfnjAFqpdCPLxZdWFCSBoYNho61owg%2FSoVwAk3geGcMAIpEPBTFEsnaYUUgrdDXwpg1fU%2BFg8VRGkgiTAVG8dq0y36ot3%2FKEvZg%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:00:12.628Z"
+    },
+    {
+        "id": 1750581939612,
+        "title": "17",
+        "script": "The cycle shows the process of generating hydroelectric power, including four steps.\n\nFirst, the process begins with water being stored in a reservoir.\n\nNext, the water moves through a turbine.\n\nAfter that, the electricity travels through underground cables to houses and factories.\n\nFinally, the water returns to the reservoir.\n\nOverall, there are four steps in the cycle of generating hydroelectric power.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fd82pcck0xsttw7la87ezu8-271213_1_o.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=EEqhCNJE%2F11eRwWDXSTsJXubHB2yEK1sDuTnwROwqUx9P%2Bu0HpFm4xeCfEPX1m8fui32gZ4BR8ITNBGXqo%2Fd63NJDA5kl%2Fhcoj7OZrIrxbtjOn1lwPOvpCvUfmpBovsXzg3tcuRkTlSn60xgvj243Cs9hRAAlq6EhPCK9IjTkuj5P0jkfPYoT2GgmIRxqW%2BaC3g2nDm79vvuOtUFFjloDHmEcsKO1Igxl%2B4%2FzBCnyLzjHAScHkTDd02c9pKLtRZQ32UfGeeyGAHj%2B%2Fk5zC90cijy1E3TuDsK3b3wp5C%2BJEIx%2FUv2vrSiPYCPRkVqbWBvSdTi%2BDrB2SU%2F3Da9z%2BdzJQ%3D%3D",
+        "type": "cycle",
+        "created_at": "2025-07-02T07:42:24.367Z"
+    },
+    {
+        "id": 1750582004989,
+        "title": "18",
+        "script": "The cycle shows how hydroelectric power is generated in four steps.\n\nFirst, water is stored in a reservoir.\nNext, it flows through a turbine to make electricity.\nThen, the electricity is sent through underground cables to homes and factories.\nFinally, the water returns to the reservoir.\n\nOverall, the cycle has four steps, starting with water storage and ending with reuse",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2F5svjnvaeetjcbkmt80tw2r-kisspng-supply-chain-management-international-english-lang-supply-5adcbfbedb4a91.1185813615244164468982.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=DwyC66%2B7cMwUUHoLCiR4XC6fwnIBAC5w5SRK7o0ehSdqCJw2JWadZuLBeVPfiUn8uSKYS7V38emMzoJCkvwAjxMy%2B%2FhQLVx5dXfPgK%2BqflWjIPgbuW%2F4C7pIWEn15V4C3XWdT2Z6Hdh0EABjR0arvaoPAu4Vcns0lwYlCCr%2FXKrERF%2FQGnx%2FDrjEYq18MmhAkMTNF1fqsoZDH62IKzNLoAfbME%2B0q7sf5F0v6SpebqNOKKc4KR6VT9xrziMCKKgGe7vgBD3U8PkHWL41K3EoCFBbQGlS%2F9DNIvChN3GblPinqSijM08JYJYdw0efmU4K8uMkCfe24WDXWTQLXgIJfQ%3D%3D",
+        "type": "cycle",
+        "created_at": "2025-07-02T07:35:30.762Z"
+    },
+    {
+        "id": 1750582248502,
+        "title": "19",
+        "script": "This photo shows a comparison of computers, including an old computer and a modern computer.\n\nOn the left side of the photo, there is an old computer, which is tall, green, and black, with large round parts and a small screen.\n\nOn the right side, there is a modern computer, which is black and simple, with a Dell monitor, keyboard, and mouse.\n\nIn the middle of the photo, there is a label, which is clear and bold, saying “Computers then and now.”\n\nAt the bottom, there is a white surface, which is clean and neat, under the modern setup.\n\nOverall, this photo shows a clear comparison between old and modern computers.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fa7wif4hs0ml44lqbiomqec-DI19.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=RIS%2B3kBdVkFGQI61DpYjwkE69YQBUlg2D%2Beeqw%2Fn8rDlOQy1sFB9lGH69waKDRnF3EaXu2yDFq5lolkllqA2VzWeeMiGtOJyWBxo%2FXdK6rjG0i32eDKXeUnmBoXYupAuYBG5XM2qmo4bhOooZ2P4MS0J%2Bxr08TYaiEdYS9w8bWJUJ91%2BsXR%2BE0WYL2lqRX4wm66ddRTlL3s%2Fv1hI26y905x2s9cJtuZAR40VucArRLlWuTKAVlESViOsIhnL6B9%2FzHqJATvUpWJcOzIU8KKKSZrYZlgGYECPUHk0XR2F7aHFfr4x%2F5QOui%2F0Pd0cAtNKthHxgjHN1EMA%2B24Dp4j0ew%3D%3D",
+        "type": "photo",
+        "created_at": "2025-07-02T07:52:26.496Z"
+    },
+    {
+        "id": 1750582322518,
+        "title": "20",
+        "script": "This photo shows a global temperature trend map over a century, using colors to show changes from cool to warm.\n\nOn the left side of the photo, there is the western part of the world, which is blue and cool, showing areas with lower temperatures.\n\nOn the right side, there is the eastern part, which is red and warm, showing areas with higher temperatures.\n\nIn the middle, there are regions like South America and Africa, which are orange and yellow, showing moderate temperature changes.\n\nAt the bottom, there is a color scale, which is clear and colorful, showing a range from blue (-0.8°C) to red (2.4°C).\n\nOverall, this photo shows a world map with temperature trends, highlighting areas that are cooler, warmer, or in between.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2F9d1yidvro4bonch6wacps-Rahmstorf_2015_1rc.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=i2x5AMu0869fQcoYeF1XGQABEMu7N3EDeMoevBXII%2Fpyzv2G0srpoJBp%2FwqWnqsjqKcVbD%2FxEqcudEBF60BUpJFlTls2O161eucPlHu6yc1UwkjFncDk5z33VTWes3zOYrRFfrPtpvQNv%2BzD8VTSXUIuwMXN%2Fg0NIvMzBcpoDT2GA%2FbgitBxpznYOIhcrLG4bdjJo%2F13QWmV8AHdg5DMgvJWII5nP4cl6Ej2OzC%2FUmn2uFaaL%2FmxRZtyxkpRxj0jSjvxV8TWTUAHcSncAYxcRLTjR5sSJVavPEfwTaryLJpEJH%2BSJmuniB6XnCsptxJDDPYlywzA1f2OwdCuywEzgw%3D%3D",
+        "type": "photo",
+        "created_at": "2025-07-02T07:54:39.651Z"
+    },
+    {
+        "id": 1750583641004,
+        "title": "300",
+        "script": "This photo demonstrates a beautiful beach city scene in Hawaii during the daytime, \nincluding features such as tall buildings, a sandy beach, and clear water.\n\n\nOn the left side of the image, there are tall buildings and hotels with many windows, surrounded by palm trees.\n\nOn the right, there is a green mountain overlooking the sea. \nIn the middle, there is a long beach with people, colorful umbrellas, and boats in the water.\n \nAt the bottom, there is a clear blue sea with some swimmers enjoying the day.\n\n\nOverall, the photo presents a lively beach city, showing a mix of nature and urban life.",
+        "image": "https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/510256182_122154420620616904_7672727407396333904_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=yIMVJTjES-kQ7kNvwGAcRmo&_nc_oc=AdmFXMlFl15CaDLHoafWWOhsZCrC4bxc5wyzG72xWZWef-7uA2qHz0Mu2R5NkjfmXFQ6s9MBH8pP-n1AdyBV-XcD&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=n_MfBanw08OYpqZPpATRTQ&oh=00_AfPt-rNG5RQV5rU-52gHxgQ-fXg0TUDLGoQuwjOIeqLnhA&oe=685D96AF",
+        "type": "photo",
+        "created_at": "2025-07-02T07:46:16.322Z"
+    },
+    {
+        "id": 1750780691373,
+        "title": "11",
+        "script": "This picture shows two types of eclipse, including a solar eclipse at the top and a lunar eclipse at the bottom.\n\nOn the top of the picture, we can see a solar eclipse. The yellow Sun is on the left, the grey Moon is in the middle, and the blue and green Earth is on the right. The Moon blocks the sunlight and creates a shadow on the Earth.\n\nOn the bottom of the picture, we can see a lunar eclipse. The orange Sun is on the left, the Earth is in the middle, and the dark grey Moon is on the right. The Earth blocks the sunlight and makes a shadow on the Moon.\n\nOverall, this picture shows the difference between solar and lunar eclipses using clear colors and simple positions.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/n52g6d6y0hd72ed2cfjr9j-solar-eclipse-model-for-solar-eclipse-STEM-activities.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=aC5lrKrJjJC4PXRAQsNCB5AUQ7WvitBen13hXz2wWaa2AmpNRNBqulmrtBfKd4idILHp1wxCB4ky6CThNtRq09e0Isb6TAWlTKxWhFsAEmgGksOZoVTtFb6dWpNfDXOuPsrAaYCS82fFslRzJO5ET7q%2B6fgdzrIkGPEaH3cUIWTopK6VFK06ZhGBefiqEvgGLd4mDVzgI6pjcanl5CfDNES2R3H1cquJ8zXyVI0Qb7hfspupYrlA1nudYTqTQ9G8mTDmIhcWMDmevT6cunqDW5hNYerKvfwnyN4UMiBhWifN4f2KEZCTKvr2r7JpA7mA0UkiarKtCrHmylFyNbhCCA%3D%3D",
+        "type": "photo",
+        "created_at": "2025-07-02T07:44:14.179Z"
+    },
+    {
+        "id": 1750950123047,
+        "title": "21",
+        "script": "The line chart demonstrates world population development from 1750 to 2050,\n\nincluding developing countries, industrialized countries, and pre-1900 populations, measured in billions.\n\nAccording to the line chart, developing countries had the highest number,\n\nthat is nearly 9 billion.\n\nHowever, industrialized countries had the lowest number,\n\nthat is nearly 1 billion.\n\nBesides, there is another data such as pre-1900 populations,\n\nthat is nearly 1 billion.\n\nIn general, there is a big difference in world population development over time.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-21.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=KNF%2B9ogTkfhIVVUL0A4gAdHhQoKJEunAYCoA30iYIyIv9GuMk24S8S2XzPg8cwiwW0qU79BQ1l5oIXLUZn1sVTJqLzUh48Hl2dhbiJWtMhlVtGfc5%2FuS8KDMNexXx%2B4s1JJ0P7WpiFdatuYxwj9Yh9dj1iAPAelugJRcjaX0rM3QHzywQywSALS2HTlV6uEoXgIOvNxuBDs9SZHwyaRuW%2FclTFCTc9kwgQI5GzkqKRV%2FnoPMCkzzPigXA8drZqrDt0TBd48PrRuIHgoNwhbhIW8nFarpeXMZ21L9TMP1DUAXTALw75mw6szIwwSRKqISzEy%2BCBCXmOkCyYFBf6CcFg%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:01:05.338Z"
+    },
+    {
+        "id": 1750950335900,
+        "title": "22",
+        "script": "The bar chart demonstrates unemployment rates by educational attainment in 2012,\n\nincluding less than high school diploma, professional degree, and some college, measured in percent.\n\nAccording to the bar chart, those with less than a high school diploma had the highest number,\n\nthat is nearly 12.4%.\n\nHowever, those with a professional degree had the lowest number,\n\nthat is nearly 2.1%.\n\nBesides, there is another data such as some college but no degree,\n\nthat is nearly 7.7%.\n\nIn general, there is a big difference in unemployment rates by educational attainment.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-22.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=aUaFS4UY9snblj1npGUxREn8pT6zi5DhltFw83dhvSzmHrIxc0uCdYO8lDSmE9j7FLa43NzBMhByCM1Qf%2BPaao%2FDYJBuqWoNrrfrVaqRZI6JnydAsp8lo6ce7bi7QzdAUbuawtN5Yvex6ScsDQNicokRTRTYzTzjN0sZ3I9iWzX93BkCmU3r7OlZK%2FofG349Jn6gnx0GONB5MNuNBvW0T8pYHaBv5fphp4Bz%2FKJsFNWK3jhNWE%2B%2FjBZjkjep%2Bt1W%2F%2BWPG92FX7URVBwEh4XAdvOEeQWVG6Xz4Kc5DfTjtB3GBwWZPvBUVZ5QhbU3Ux%2FFzQ3Kjd4neK8i7pdwXTPQXA%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T07:01:37.632Z"
+    },
+    {
+        "id": 1750950542912,
+        "title": "23",
+        "script": "The bar chart demonstrates population distribution by age group in the UK in 1911, 2001, and 2011,\n\nincluding ages 15–64, ages 0–14, and ages 65 and over, measured in percentage.\n\nAccording to the bar chart, those aged 15 to 64 had the highest number,\n\nthat is nearly 65%.\n\nHowever, those aged 0 to 14 in 2001 and 2011 had the lowest number,\n\nthat is nearly 18%.\n\nBesides, there is another data such as those aged 65 and over in 2011,\n\nthat is nearly 16%.\n\nIn general, there is a big difference in population distribution by age group over time.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-23.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=DNPNZFvp1zTwXbu3lYHbyjdCZP8jlfVvtuugANZjhfQPWobLqMNqF%2FpHu124BUoWM%2BnoJwvtI0oaEss2pfah0IPyzCWDng3tMn4XGS7Nz4fhqN3H4%2B476vw6a2HjEARB8j0YT%2Br2HMe7xflOkjJypZXy8inl0l9N0CooOMT2h1aJmj0d%2BFvBTWrgotCfr5sLJ%2FzvhjdzvT0q9itPJL2ww8nemLRuDdqeuXOHpwYKPysbjCDxwgxTd07NoFn2yz8AB420MPljdppQs3TZq9PtKz6Ru0oX8aYvHtFIWeDg%2BcvZeo2Wb1FLwNO%2FgPCooc5B36r%2BdZPt%2BJ%2FIIbL9vMfI7w%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T07:02:04.970Z"
+    },
+    {
+        "id": 1750950750537,
+        "title": "24",
+        "script": "The bar chart demonstrates average annual rainfall in four U.S. cities,\n\nincluding New York, Phoenix, and Dallas, measured in inches.\n\nAccording to the bar chart, New York had the highest number,\n\nthat is nearly 47.25 inches.\n\nHowever, Phoenix had the lowest number,\n\nthat is nearly 7.66 inches.\n\nBesides, there is another data such as Dallas,\n\nthat is nearly 33.7 inches.\n\nIn general, there is a big difference in average rainfall across the four cities.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-24.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=UasUAVCB699dmgPELF6hbkwpEUb7GCzRL6chXb5QV2Jpuhe6WX%2FrRbZyG%2F0nVDOkIIjEDXgKoRzz9cfBeix9v0w8%2FvVovFt8gXErKFH63bWUkyK78vfKWWnbuRShkpObgtqBF%2FE5%2FKvy9UgXpm4HG1bDZ3tygmrTy2yBLCRMJ%2Fo5gvEHeoOmQogfGQOMNhCQAslY5TfLUJonlrZj2WyqYjGHqsdy8zMZH99LFdY2UX%2Fv42q1jieGaQAJcyE8tISUxJhVVBrCnVmHFzCXhO9gF39kpN2%2F3ae%2B5MpK%2FIjcKeGqZIENXicrtsBPUKnKqA1yR3u8XbRoxfUvKhi9IGeP0g%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T07:02:46.234Z"
+    },
+    {
+        "id": 1750950823379,
+        "title": "25",
+        "script": "The line chart demonstrates welfare indicators in Laos over a period of time,\n\nincluding population, newborn mortality, and GDP, measured in unspecified units.\n\nAccording to the line chart, population had the highest number,\n\nthat is nearly 100 units.\n\nHowever, newborn mortality had the lowest number,\n\nthat is nearly 40 units.\n\nBesides, there is another data such as GDP,\n\nthat is nearly 20 units.\n\nIn general, there is a big difference in welfare indicators over time.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-25.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=DtpcPVdUE1%2FUJsODqc9W9FiLv6K1WY2Xm9AJxmVX5wWgYcDKIrhiyyH0njCUWJBFlOP8yxJWsJt00jCvxjXh0U9RgYfpJAu7QbWZNcjIz9FS5zVbnVV%2BGAmVOC4qeU49t3d%2BhFG6tX%2B8dWqraH5iI62UFdYkkbju7A6UtFQY37yk8wlKwNicNbkkbiWv3ETvyLX%2BOWKX58Ge3mEXUQS%2F0dFd1kYOUFYnxOsX5zp0tjbDwZUhH65xxvzmeHqt4NybZG5DKQo8ePFXAbLyoUB3GQUcBqXsnp0coKRsf%2BQ1cbp%2BfxZRMZ1nZUg%2BNCtzpn7BtiPivUEZ2UUXeVL%2BkQl%2FmQ%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:03:33.662Z"
+    },
+    {
+        "id": 1750951018479,
+        "title": "27",
+        "script": "This line chart shows the total greenhouse gas emissions in the United Kingdom from 1990 to 2010, measured in million tonnes of CO2 equivalent.\n\nFirst of all, it is noticeable that the highest level of actual emissions was recorded in 1990, reaching about 750 million tonnes.\n\nMeanwhile, the lowest point occurred around 2010, with the actual emissions dropping to just above 600 million tonnes.\n\nMoreover, the figures for projected emissions in 2010 stood significantly higher than the Kyoto target, at around 700 million tonnes, while the target itself was only about 620 million tonnes.\n\n🔺 In general, there is a clear downward trend in the numbers of greenhouse gas emissions in the UK from 1990 to 2010, with actual figures decreasing considerably over time.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-27.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=i1KjSH5YNxV6Z8JegXhBTzIoWxH4%2Bumvr%2BFMLmxrMHqIOZRhDAlIdzieeBTfsBaH5qv3SeZP4gUcYH0ttMkFlVhw%2FoGbc%2F4vUcr5jCA%2Fj6tSEFaHM2jf9xpSEVvjj6yK7TF1DTdpIakcIqFM8T8ieTZGZWzBNLJ4UT7si1qMryNoz601nOqEWlQnfVju3Qz3mA55ORl1NYQwdqYxE4ZCk%2Fr0B30KZYJ9NLZIO0HpgQs9uIBPexlTtLi0hn34nbcGIGULvKDZOLQBcre%2FCBN4baiXdMYpFoM0yparidN4qc1ZqGVCfY%2FngY0u%2BCgWx%2BTzREnaKEl9C2DFEkTQk6BIEw%3D%3D",
+        "type": "line",
+        "created_at": "2025-06-26T15:16:58.479Z"
+    },
+    {
+        "id": 1750951109751,
+        "title": "26",
+        "script": "The line chart demonstrates total greenhouse gas emissions in the United Kingdom from 1990 to 2010,\n\nincluding actual emissions in 1990, actual emissions in 2010, and the Kyoto target, measured in million tonnes of CO2 equivalent.\n\nAccording to the line chart, actual emissions in 1990 had the highest number,\n\nthat is nearly 750 million tonnes.\n\nHowever, actual emissions in 2010 had the lowest number,\n\nthat is nearly 600 million tonnes.\n\nBesides, there is another data such as the Kyoto target,\n\nthat is nearly 620 million tonnes.\n\nIn general, there is a big difference in greenhouse gas emissions over the period.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-26.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=XAapl7UzHdxEpWoXqSFKmlvT6lIBFJp0uj8IBoIKzsM8CjM9lHcoK9v7AcjlPmDkYE7PBEyWq1v47eWRNVYY7SaljDC4BDhGADj8RtQvT5V4qVsT%2FEqlSgsOli09odGOpL%2Bj%2FR%2FsaKUaM1blETM%2FMtZCTnpJnbvG4CBPPiS%2FQDk0IsXkdPH3XRHw4tyncgbdetN91D2C6aTi6uiLu0GdTnrCFgtY9CY5hkUMv%2FBaLJf14QRULHWTrGrAxGfLKdqon2x8mcS4di1pKeDsPYt5pc8IVL%2BW5EkpyGEJWeImAA4LUH3V0WFqqasZdV6MOBUoZHnaI2j1TRlxKkYQSWZfSA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:04:48.889Z"
+    },
+    {
+        "id": 1750951224596,
+        "title": "28",
+        "script": "The line chart demonstrates times of sunrise and sunset throughout the year,\n\nincluding late June sunset, mid-December sunset, and mid-June sunrise, measured in time.\n\nAccording to the line chart, the sunset in late June had the highest number,\n\nthat is nearly 8:30 p.m.\n\nHowever, the sunset in mid-December had the lowest number,\n\nthat is nearly 5:00 p.m.\n\nBesides, there is another data such as the sunrise in mid-June,\n\nthat is nearly 5:30 a.m.\n\nIn general, there is a big difference in daylight hours across the year.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-28.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=THv36kLSEhuq0XesbaFRUMF%2BEEsjtm7YqOU1XkbFEn%2Fz35K4Hd2fzfvjfL05Y9GRA9dgPITfOSlQ%2F5XgkvmksJdgB38RshDQkIloQ3NHgInm0hpU88FCcT4M4wqlmgLa8c4nseQOyfE1QYUwKkHBv7vgcDUWl0kUlZDMDsASjZCcQmQgApsg%2Bms%2FHrAX%2FsgOR7to291XwQ4ZyeTuhhIA5fwgc%2BjWWsMNDovENboNwM1cleZaqU%2Fcifujsoxk1YZzv8htL0yhRrvQi6j3qC49TDvbTYvh930E3YoBUZzT5iIJoany%2B6P7kU23BszHr8tGAXIKvfEOAObgwgKQKjCFgw%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:05:08.829Z"
+    },
+    {
+        "id": 1750951437623,
+        "title": "29",
+        "script": "The line chart demonstrates annual per capita meat consumption in six countries from 1961 to 2009,\n\nincluding the United States, Ethiopia, and India, measured in kilograms.\n\nAccording to the line chart, the United States had the highest number,\n\nthat is nearly 125 kilograms.\n\nHowever, Ethiopia had the lowest number,\n\nthat is nearly 7 kilograms.\n\nBesides, there is another data such as India,\n\nthat is nearly 10 kilograms.\n\nIn general, there is a big difference in meat consumption levels among the six countries.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-29.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=T0VhbLjuxdy4EbYgSzXGkWCWySX13rEz44aNrq2UQD%2FEiEoR0T4%2B%2BpnpybJPUpWMKH1SOPEPGPlGuWtOH96K7emLzPnKvOx2RH3d%2FgW3m6Q4CezarrEo6r4SEwvrccukyxiYLzF1Mnq1ZvVNkbDffXTIzMh%2B2Mg1xNXflbh23ecrbKiVZNcou1VAUsnAk4uLEa%2FAenA97fAGt%2FaoVkGanQvdcp4av5Bvtc1N2vWV7bemYzf4kfXXUKGwuvYEmo3iaVLoGQTTVO2eVApEpqXtImc5wpRERdlhRQh9sE2QJKpX%2F%2F%2Fmv80pe0jCghKJh%2BGoAWhgKdyaURIj9lrbT5dJmg%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T07:05:32.425Z"
+    },
+    {
+        "id": 1751444659966,
+        "title": "31",
+        "script": "The bar chart demonstrates fruit and vegetable consumption in the US,\nincluding fruit and vegetables, measured in pounds per person per year.\n\nAccording to the bar chart, vegetables had the highest number,\nthat is nearly 425 pounds per person per year around the year 2000.\n\nHowever, fruit had the lowest number,\nthat is around 230 pounds per person per year in the early 1970s.\n\nBesides, there is another data such as fruit consumption in the year 2000,\nthat is nearly 280 pounds per person per year.\n\nIn general, there is a big difference in consumption trends by food category.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-31.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=KL1pmIVCwq15cbGVTbbgn%2FeGQj450kwmMsajaVEKhy2r1EFaaEpXwHp5roHUZRoVj56%2B8v%2Fm%2FzaR2ff2MImqbtN19pKPMafYmJoV8kHmV4to7DAz9JtELUxuQl9SoHTZoAMq8z2cfS%2FNBypPmOji3wjB%2FsomMKQpbamkB6a8SzbiHwOa88VPTAnJZ18w%2FSNMvvBRdCh45AsucWbgHlh3YB6tPwv8%2BqfPsJw0VuY0LlK1co0FuXH83DF85nlMpK1RYToe29Vmj5DUnzGIilkCvP%2FZD05s1b8KNna%2BRcJYaaMOGovhs40x%2FFeAXGsDNqoI60QdE9A6VpKoHOreGzUlWA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:24:19.966Z"
+    },
+    {
+        "id": 1751444712076,
+        "title": "30",
+        "script": "The line chart demonstrates life expectancy at birth by sex,\nincluding males and females, measured in years.\n\nAccording to the line chart, females had the highest number,\nthat is nearly 83 years in the period 2011–2013.\n\nHowever, males had the lowest number,\nthat is around 47 years in the period 1881–1890.\n\nBesides, there is another data such as male life expectancy in 2011–2013,\nthat is nearly 79 years.\n\nIn general, there is a big difference in life expectancy by sex.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Fimages%2Fdi-30.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=a5S88DA6WFeP5pEaCNbvZIcV764V0uN75sX4WpwR5ndKLNEYrzr6zgCK%2FZELcnLPzjtA2gKGVV0hID0LqP2CbNSRRLq2vxQ7YTWmQT4dBuvWLjNqfgyphN2SHgorvD0yGlYT6aAR0oJ%2BdVZrHldGzQLiQvZk2Hzc9z%2Brf%2FCr%2BZ4AjN04%2F91zCzCKC7XwFhJaDFWnYCG5abneI0JsM%2FMMZA0zMyzxitm%2FFxD0j%2B1x9WUxS9Jq4ArPOlyWyUdTcq4UVMIUyWfCdy4pLws10DzIwZ%2FAOKgGHoj9LFGYutY89yZXwnFvHWeiB5Yc4bV5OIL7ZagO4BAPuwHQ8%2B7cjBX%2Fxw%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:25:12.076Z"
+    },
+    {
+        "id": 1751444766506,
+        "title": "32",
+        "script": "The area chart demonstrates the population growth over time,\nincluding various years from 1901 to 2011, measured in number of people.\n\nAccording to the chart, the highest number was in 2011,\nthat is nearly 33,000 people.\n\nHowever, the lowest number was in 1901,\nthat is around 8,000 people.\n\nBesides, there is another data such as the population in 1971,\nthat is approximately 15,000 people.\n\nIn general, there is a big difference in population growth by year.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-32.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=aox5zIwZI7ox%2F8EHbmAzkqrnhU78uOUPtEXN13OBQiIgYkG1qFMgoHtYAccKYVAiZvg0RReshK%2BxaHfJop9vXXCEUPMmOtfBYQy%2Fg0SyMCNNE%2Bp32Hvte1NGp6YHfzP9f%2FCPWNHSlXX%2F91GSnDlL%2B75KTHROUzYWbxM0gtZFzfd%2BZtwG2NKvP7T9eapvczdNUuOdNaTqEqYVuZchYkQ8%2FUOyjxozW%2FGMB8KvONlJFiZAO%2BOCqOcCdvrwPz2aJamxZ%2BW76GejTD0eqvxEpDXz2pjiwzs%2FMcmay6RDoUlpZR1EGkMHc0P9OfDvpbnRe6XDYu9xGdSI5DvJ7f7DdfhKFA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:26:06.506Z"
+    },
+    {
+        "id": 1751444818582,
+        "title": "33",
+        "script": "The line chart demonstrates the gender pay gap over time,\nincluding Scotland and the UK, measured in percent.\n\nAccording to the chart, Scotland had the highest number,\nthat is nearly 20% in 1998.\n\nHowever, the UK had the lowest number,\nthat is about 13% in 2005.\n\nBesides, there is another data such as Scotland’s pay gap in 2000,\nthat is approximately 18%.\n\nIn general, there is a big difference in the pay gap trend between Scotland and the UK.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-33.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=NdFi%2FR74XAi6bN8RLCb6PObYyiXP%2FBKxP%2F8i04mGFuEySIbUJpelEyPC1pY3qgIyrsdqWzfQBDCStSz2mM2BykhUI%2FyN%2B%2BCE0q7xQESwJAxzsfyMkeDzbLAGtj1Td%2BxdtTBnqDOWVl0BsAcFNsYXX4nniMcp1%2BILBlYopDsekxkXAcSeXfxX799ejTYevBvqSmnk3ox%2FutHVJdrvKZyelV0j%2Fk%2FzF%2FurdddLHPrh0coChvlZkmuwdGZAnpBUIr4Dnhp%2Flo8S0BJrK%2BtmeFYTiq1NXLIDEkAmCyoZMGwoMkM5cPAUMkm35Ql73RWwHeS%2FbaZDpcjdag7Btc4l7PlTHw%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:26:58.582Z"
+    },
+    {
+        "id": 1751444915972,
+        "title": "34",
+        "script": "The bar char demonstrates the population distribution by age and gender,\nincluding males and females, measured in thousands.\n\nAccording to the chart, the highest number was in the 0–10 age group for both genders,\nthat is nearly 500,000 people.\n\nHowever, the lowest number was in the 90+ age group,\nthat is less than 100,000 people for both males and females.\n\nBesides, there is another data such as the population of females aged 60–70,\nthat is approximately 300,000.\n\nIn general, there is a big difference in population size across age groups and between genders.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-34.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=SOMnj7pcIvhglI%2BIU%2BXqSKYfzbWO%2Bub27xt2%2FjIu3xfbyV1OnrZ5h%2BuW4flQIidbK1uDcI5F8PWjzuVCCXWCHROSrHoo0qippVzFj8TVtWbc%2FfT%2BGi2O%2BmBehGSItRT%2Bxi62GppyVZNFAbPE%2Fnm2FDpQ1hnNn%2BRDk1itCSVCTYTGF%2B7MdgB%2BOkiO6gsqKVejV00xMLsC1Dy8WfUdQXZt9kolYTSP9hIDiu%2Bp6y1x8MJcbSouJwtRngy4au%2BfCihyDl%2B8QD452f%2Fc%2BozW%2BBo2%2FHwqCsJfaYCLYyLsOggMPsS%2FfbgNa9MF4%2FIBRXMkwdzhnxRcjPd5B9gfWKbykh4QIQ%3D%3D",
+        "type": "bar",
+        "created_at": "2025-07-02T08:28:35.972Z"
+    },
+    {
+        "id": 1751445020779,
+        "title": "35",
+        "script": "The line chart demonstrates the number of years required to double the global population,\nincluding data from 1715 to 2025 (forecast), measured in years.\n\nAccording to the chart, the highest number was in 1715,\nthat is 544 years to double the population from 0.375 to 0.75 billion.\n\nHowever, the lowest number was in 1999,\nthat is only 39 years to double the population from 3 to 6 billion.\n\nBesides, there is another data such as the period from 1960 to 1974,\nthat is 47 years to double the population from 2 to 4 billion.\n\nIn general, there is a big decrease in the time it takes to double the population over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-35.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=J5stWfDEa5XoazPVuTg8Bw6fGgdbpUS3NI%2FQ8rZKTR93BLwIqiDSHajfBHAjF3yfXJWnGxY7DypJlQFOhBSNWFJQBA1374U8Bm7SCEFLPuXkoNYopLWTqK9a4AJbxuSlURovFechGYYZrO7YAgdy5dtZo0h05YZgkKWNzIL1TtjeNU5LTWO%2Fv94TGBe3fg2FIRrgEc%2BwNBNBLNyE4B2wXkHNtodMsq9R7Xjy5kWP%2Bgcy1JJXlsciaDbfahn1cQVj9lLvHwI4m7zTHv2jQQwk0dgu0Bwtyh76m9loegAEFIbwlK3tf3G%2B%2BPl0ai784tgFsF%2FW30S%2BwqVET741Zwwc%2Bg%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:30:20.779Z"
+    },
+    {
+        "id": 1751445037473,
+        "title": "36",
+        "script": "The line chart demonstrates growth trends over time,\nincluding population growth and growth in rating base, measured in percentage.\n\nAccording to the chart, growth in rating base had the highest number,\nthat is around 2.0% in the year 2018.\n\nHowever, population growth had the lowest number,\nthat is nearly 1.3% in the year 2022.\n\nBesides, there is another data such as population growth in 2013,\nthat is approximately 1.6%.\n\nIn general, there is a big difference in growth trends between the two indicators over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-36.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=QOX%2Bun%2FURpw2rWpa5XEA19uMKK0rKpGm04maE72CSUl7lIBjk7BZFqOLiRBd1MPHRKl1fmGX%2Bwp0jsD2jw4QBo7hLgwRpnwMYOjP%2BdgIYaC0HgrR7ul2brjEHuw2mfI1J%2BA2rtY3%2FhZXqEsgg6a9W0Znc0bvoRkvWgy%2BxyQB8DH%2FfVsFxSePbwrRqmw8OanQDiCDL8Xr7i1my%2FO5AvOnZin0uihy5vnay4dzB2XyCkQsZm8tT6%2FDT1i4xFExwinqcatlnLe8OM3UMx49IkZ%2F1HU19It6QDInX2d4XLgTJxTrMD1kwycg98EHN4UhRq4%2BDNOTTe3CquWp1yLJ6MrkAA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:31:22.979Z"
+    },
+    {
+        "id": 1751445102735,
+        "title": "37",
+        "script": "The line chart demonstrates the total population of Thoralby over time,\nincluding the years from 1870 to 2010, measured in number of people.\n\nAccording to the chart, the highest number was in 1960,\nthat is approximately 320 people.\n\nHowever, the lowest number was in 1950,\nthat is around 120 people.\n\nBesides, there is another data such as the population in 2010,\nthat is roughly 150 people.\n\nIn general, there is a big fluctuation in the population of Thoralby over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-37.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=Cs9OnwmoBagmkBeq5B14SEAi50sSpYj4Dot9d43jEere6indzjotMav%2BEa%2Flu53kV0kuZqEn3wl%2BPoD%2FdgxKJOZJQ97yjDumyqfS7SJAUdZgsdbbHjTPru3v2yz9aoP0LHKESDfPxxnrJcMH%2FeObI1alY%2BAshmKu4IL8bo8bWrTtXmR6UZ%2BJV4K1F9uKFOl2oGiPNnLOb5qp5MmB9iZY%2FUwajybyGEE%2BiQYcyKpH0U53%2FaPDj2bp%2FQf1a0nqQ%2BmNXpPXYLxFAm4akhyMW%2BF8ycyeJLpqWHC%2BMIKpX%2FsdB%2F9f7TEzjpYWUHlh9n%2FdDT6o7DWe5QJpySzZSmBu%2BX%2Ff6A%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:31:42.735Z"
+    },
+    {
+        "id": 1751445151222,
+        "title": "38",
+        "script": "The line chart demonstrates Ontario manufacturing employment and the Canadian dollar exchange rate,\nincluding employment numbers and the value of the Canadian dollar in USD, measured from 1981 to 2013.\n\nAccording to the chart, the highest number of manufacturing employment was in the early 2000s,\nthat is around 1,100,000 jobs.\n\nHowever, the lowest value of the Canadian dollar was around 2002,\nthat is approximately $0.63 USD.\n\nBesides, there is another data such as employment in 2013,\nthat is about 750,000 jobs, while the Canadian dollar was nearly $1.00 USD.\n\nIn general, there is a big contrast between employment trends and the value of the Canadian dollar over the years.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-38.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=MQg3Ng2E1pQHglOH3RRzW%2BTSTyolcm56NEe%2F%2Bt4hwmJ9tq5p0JU0NAbjdbpc1GpTS2bzL33wDSXbBmRni5llWVspSa2QLpU6cPq2hBmw0Qu8aG75rDvF1apXwmzXapuVHOgz%2B6H7iQHgV4GARukaJNnK0Hd3omIHfH2hxLd0%2BB1sqLMOk6aBr1eFINi1%2B0Ipvu%2FYTqXVQCN0Os%2FoJ6qiglGA27hTYLfYVPju7x9k3mIiePSCZogG870C4jpAEC2hEPBOMJpaRyb8yzOXtwHQuGmj%2Bz9et4rR%2F6wTdxi4LwM0YDTictXokAwq0KuMPVs2P6kQkWvwhix52TGKGaMqVA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:32:31.222Z"
+    },
+    {
+        "id": 1751445267098,
+        "title": "39",
+        "script": "The line chart illustrates the growth trends in Jill's secondary math scores, measured in percentage, across grade levels from 7 to 12.\n\nAccording to the chart, the math score reached the highest number, that is 91% in grade 12.\n\nHowever, the math score had the lowest number, that is 72% in grade 7.\n\nBesides, there is another data such as the math score in grade 9, that is approximately 81%.\n\nIn general, there is a notable improvement in math scores over the grade levels.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-39.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=OJB9hp7%2FaLuuMg%2FbpowQNCCUIj3FeqY9onVp9D0Ynu%2BtnnXSe3KViSkpkKzOeiRfC2rqYrsDFBwGYbpaRPOTCyMZw8SECPBP%2Fm7oabquyWXiTXybWzo6c7CQO3ZvmS0PIQZ2AV%2BvozbAKdWrgbkbKQ2LUt0SeD9so5QMWcAaw25jcKtZjG6FncZ1KnzxK1lz0m0TtUX%2FNJGqhyYGFBuMZRvRiKtccvlQtw5iehBcfOwSGN5ur%2Fq%2Fs2sNgp0ZzkGfILa%2FxFppU3uNdDNazaNGx%2BJJQP0eoPzp%2F6GyfU5yd%2BhIP11FBTJfWZ6Wjeth6YJwdEAUETyEte8Uk91AYsDTnA%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:34:27.098Z"
+    },
+    {
+        "id": 1751445323359,
+        "title": "40",
+        "script": "The line chart illustrates the temperature trends over the days of the week, measured in degrees Celsius (°C), from Sunday to Saturday.\n\nAccording to the chart, the temperature reached the highest number, that is 28°C on Monday.\n\nHowever, the temperature had the lowest number, that is 19°C on Thursday.\n\nBesides, there is another data such as the temperature on Sunday, that is approximately 25°C.\n\nIn general, there is a noticeable fluctuation in temperature trends throughout the week.",
+        "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-40.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=QejCN4l1wGjztfCdyuLEa6YHcZmCuUIw2GDxXWvYDl0A%2BDLQwmHFCgTrD2zWLau7PjmxHg2Hyav6xqpNuGPCIKmAzGG%2FcUqGVSDXT%2BSkTmkmPJwlZ3%2FJBnn2GU%2FTC3iCt5fS0dAZaumpstWKWh9EIQ3vQnWYJV94MeDdL0dIwTi1y%2Fw2cBivLr5NnRd6lKj2typPlLXA6DdyMkbf7NiWjhjlanMW1mRbxHuA0m2sU2fsqIUqoIfVbYs5qx1J2tjq6Zz4RFEv1XCognImhj0wO%2BxJQz6F2TsqhxzJE3HLuWVOFPDQ0pMjxb5%2FsXuvtQr4UVisHlepvyy%2FaQTBOnSSEQ%3D%3D",
+        "type": "line",
+        "created_at": "2025-07-02T08:35:23.359Z"
+    },
+    {
+        "id": 1751445896743,
+        "title": "301",
+        "script": "This photo shows a cross-sectional view of the Earth, including its outer and inner layers.\n\nOn the left side of the photo, there is a diagram showing the outer parts of the Earth, which include the atmosphere, oceanic crust, continental crust, upper mantle, and lower mantle.\n\nOn the right side, there is another diagram showing the inner parts of the Earth, which include the molten outer core, the solid inner core, and the boundary between the mantle and the core.\n\nIn the middle of the photo, there is a section of the mantle, which connects the upper and lower layers, with parts of South America and Africa visible on the Earth's surface.\n\nAt the bottom, there is a color scale, which is bright and clear, labeling each layer and showing whether it is solid or molten.\n\nOverall, this photo shows a clear illustration of the Earth's internal structure, from the atmosphere to the inner core.",
+        "image": "https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/515013227_122156491130616904_7021984177360304331_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=qM8lRmitl98Q7kNvwH-tzYz&_nc_oc=AdnW7sgIsbRb5yHWNUOFs_V-Ck-ATe16v2GW8eXuWOaNucRNDHcpAfP3A6Ep1KuwFD1XsznKjhlO2hK_BuX6thJy&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=mewM9pzmYcmIJzVA0HUzPw&oh=00_AfPW2qc8X6JxdT8FYWvyYBvhom0A8kDvIBiXDUYN_8B4tA&oe=686ABB32",
+        "type": "photo",
+        "created_at": "2025-07-02T08:49:09.690Z"
+    },
+    {
+        "id": 1751446011608,
+        "title": "302",
+        "script": "This photo shows a Global Average Temperature Map, including both the Western and Eastern Hemispheres.\n\nOn the left side of the photo, there is the Western Hemisphere, which includes North and South America, with cooler areas like Canada and the United States shown in shades of blue and purple.\n\nOn the right side, there is the Eastern Hemisphere, which includes Europe, Asia, and Australia, with warmer areas like Russia and the Middle East shown in red and orange.\n\nIn the middle of the photo, there are regions like Africa and parts of South America, which display a mix of colors, from blue to red, showing moderate to high temperatures.\n\nAt the bottom, there is a color scale, which is bright and clear, ranging from dark blue (-5°C) to dark red (25°C), showing the temperature levels.\n\nOverall, this photo shows a clear comparison of global temperatures, from cooler to warmer regions.",
+        "image": "https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/514435698_122156491070616904_3189700788617733042_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=h4KNrGWQFswQ7kNvwFq1BES&_nc_oc=AdlFAttrgLsAuTEOTVG_Qhbf-2nXVAMAaOP1qBa9sU_VCS6NXQ6o1SrZ0-qHkYZYTH7lmifp-JP9xrdCkZoAII0h&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=ge9rOg85EhQhFjUyvX5HYA&oh=00_AfPY0SXfUv-h5xl24SegQFUjN7RYusBYfypRcM7nuAAdTw&oe=686AC0F3",
+        "type": "photo",
+        "created_at": "2025-07-02T08:49:52.542Z"
+    }
+]
