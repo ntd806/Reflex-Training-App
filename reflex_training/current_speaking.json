@@ -1,8 +1,8 @@
 {
-    "created_at": "2025-06-16T07:38:55.966Z",
+    "created_at": "2025-07-02T08:11:38.946Z",
     "id": 1750059535966,
     "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/hk92ryuf3v5haamzibvne-australia_map_states.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=ehkCgV05lCdLnlMc%2BK3lMmD2eViwrs%2FfFSEQY1xLjL2ypUAN84Ym%2FGhqyE9FBTJAtHbU%2Fqhd%2B9HwfxOvAGmctePOGzBMCWD5WlFxRaQZ4zhCMtkTnoN%2BgfogGRTrHKT3JZoj6eCTFBVd7zdiOgFZ%2Bx8GgKO%2BVTXTLmqzOfy7M8wAJ4w5w3gvDfQG6IwGfZ2tgR%2BtO1qJ8G1AXVtFSy239TECIzNtUshtiDW3BYgNq6RBHsK4AFn%2BORQCcPbqi7ts0W6bGYMjKmrpCjubLhOdu5hlrHk5TwveAwOgztlChmutZsfZtojAYHKHhdoexj%2B6pyYNlL5OiPiemMytVV8Y%2FQ%3D%3D",
-    "script": "This photo illustrates the map of Australia including main regions such as Western Australia, Southern Australia and Queensland.\n\nOn the left of the picture, we can see Western Australia.\nOn the middle of the picture, we can see Southern Australia and Northern Territory.\nOn the right of the picture, we can see Queensland and New South Wales.\n\nOverall, This image illustrates the map of Australia including main regions.",
+    "script": "This photo shows the map of Australia including main regions such as Western Australia, Southern Australia and Queensland.\n\nOn the left of the photo, we can see Western Australia.\nOn the middle of the photo, we can see Southern Australia and Northern Territory.\nOn the right of the photo, we can see Queensland and New South Wales.\n\nOverall, This picture shows the map of Australia including main regions.",
     "title": "01",
     "type": "photo"
 }

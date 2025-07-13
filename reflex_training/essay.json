@@ -1,5 +1,5 @@
 {
-  "Environment": {
+  "Environment: người dân làm": {
     "Doing Something": [
       {
         "English": "Ignoring the importance of environmental conservation",
@@ -24,16 +24,8 @@
         "Vietnamese": "Các nguồn công nghiệp vẫn là nguyên nhân chính gây ô nhiễm không khí và nước."
       },
       {
-        "English": "Public awareness about environmental friendliness is still limited.",
-        "Vietnamese": "Nhận thức cộng đồng về sự thân thiện với môi trường vẫn còn hạn chế."
-      },
-      {
         "English": "Environmental impacts can become irreversible if left unchecked.",
         "Vietnamese": "Tác động môi trường có thể trở nên không thể phục hồi nếu không được kiểm soát."
-      },
-      {
-        "English": "Urban expansion often leads to the destruction of natural ecosystems.",
-        "Vietnamese": "Sự mở rộng đô thị thường dẫn đến phá hủy hệ sinh thái tự nhiên."
       }
     ],
     "Verb-ing": [
@@ -57,7 +49,19 @@
       }
     ]
   },
-  "Education": {
+  "Environment: chính phủ làm": {
+    "Clause": [
+      {
+        "English": "Public awareness about environmental friendliness is still limited.",
+        "Vietnamese": "Nhận thức cộng đồng về sự thân thiện với môi trường vẫn còn hạn chế."
+      },
+      {
+        "English": "Urban expansion often leads to the destruction of natural ecosystems.",
+        "Vietnamese": "Sự mở rộng đô thị thường dẫn đến phá hủy hệ sinh thái tự nhiên."
+      }
+    ]
+  },
+  "Education: người dân làm": {
     "Doing Something": [
       {
         "English": "Emphasizing standardized assessments over creativity",
@@ -76,10 +80,6 @@
       {
         "English": "Intense competition leads to unnecessary pressure among learners.",
         "Vietnamese": "Cạnh tranh gay gắt tạo áp lực không cần thiết cho người học."
-      },
-      {
-        "English": "Gender bias still exists in educational institutions in some regions.",
-        "Vietnamese": "Thiên kiến giới tính vẫn tồn tại trong các cơ sở giáo dục ở một số khu vực."
       },
       {
         "English": "Creativity skills are often undervalued in academic environments.",
@@ -115,7 +115,15 @@
       }
     ]
   },
-  "Technology": {
+  "Education: chính phủ làm": {
+    "Clause": [
+      {
+        "English": "Gender bias still exists in educational institutions in some regions.",
+        "Vietnamese": "Thiên kiến giới tính vẫn tồn tại trong các cơ sở giáo dục ở một số khu vực."
+      }
+    ]
+  },
+  "Technology: người dân làm": {
     "Doing Something": [
       {
         "English": "Relying excessively on artificial intelligence",
@@ -173,7 +181,8 @@
       }
     ]
   },
-  "Work and Career": {
+  "Technology: chính phủ làm": {},
+  "Work and Career: người dân làm": {
     "Doing Something": [
       {
         "English": "Prioritizing salary over job satisfaction",
@@ -231,7 +240,34 @@
       }
     ]
   },
-  "Transportation": {
+  "Work and Career: chính phủ làm": {},
+  "Transportation: người dân làm": {
+    "Clause": [
+      {
+        "English": "Travel offences are rising due to poor driving behavior.",
+        "Vietnamese": "Vi phạm giao thông gia tăng do thói quen lái xe kém."
+      },
+      {
+        "English": "The cost of airfares deters low-income travelers.",
+        "Vietnamese": "Giá vé máy bay cao làm người thu nhập thấp ngần ngại đi lại."
+      },
+      {
+        "English": "Road conditions in remote regions remain hazardous.",
+        "Vietnamese": "Tình trạng đường xá ở vùng xa vẫn còn nguy hiểm."
+      },
+      {
+        "English": "A short commute enhances productivity and work-life balance.",
+        "Vietnamese": "Quãng đường đi làm ngắn giúp tăng năng suất và cân bằng cuộc sống."
+      }
+    ],
+    "Noun": [
+      {
+        "English": "traffic congestion",
+        "Vietnamese": "tắc nghẽn giao thông"
+      }
+    ]
+  },
+  "Transportation: chính phủ làm": {
     "Doing Something": [
       {
         "English": "Increasing private car ownership in urban areas",
@@ -250,22 +286,6 @@
       {
         "English": "Public transport is underfunded and lacks efficiency.",
         "Vietnamese": "Giao thông công cộng thiếu vốn và hiệu quả."
-      },
-      {
-        "English": "Travel offences are rising due to poor driving behavior.",
-        "Vietnamese": "Vi phạm giao thông gia tăng do thói quen lái xe kém."
-      },
-      {
-        "English": "The cost of airfares deters low-income travelers.",
-        "Vietnamese": "Giá vé máy bay cao làm người thu nhập thấp ngần ngại đi lại."
-      },
-      {
-        "English": "Road conditions in remote regions remain hazardous.",
-        "Vietnamese": "Tình trạng đường xá ở vùng xa vẫn còn nguy hiểm."
-      },
-      {
-        "English": "A short commute enhances productivity and work-life balance.",
-        "Vietnamese": "Quãng đường đi làm ngắn giúp tăng năng suất và cân bằng cuộc sống."
       }
     ],
     "Verb-ing": [
@@ -276,10 +296,6 @@
     ],
     "Noun": [
       {
-        "English": "traffic congestion",
-        "Vietnamese": "tắc nghẽn giao thông"
-      },
-      {
         "English": "infrastructure development",
         "Vietnamese": "phát triển cơ sở hạ tầng"
       },
@@ -289,7 +305,7 @@
       }
     ]
   },
-  "Language": {
+  "Language: người dân làm": {
     "Doing Something": [
       {
         "English": "Promoting only dominant global languages",
@@ -346,5 +362,7 @@
         "Vietnamese": "sự đa dạng ngôn ngữ"
       }
     ]
-  }
+  },
+  "Language: chính phủ làm": {}
 }
+  

@@ -18,18 +18,18 @@
     {
         "id": 1750061925411,
         "title": "03",
-        "script": "The bar chart demonstrates population distribution in Australia in 2016 by age group and gender,\n\nincluding ages 25–34, ages 90–100, and ages 1–15, measured in thousands.\n\nAccording to the bar chart, people aged 25 to 34 had the highest number,\n\nthat is nearly 700 thousand.\n\nHowever, those aged 90 to 100 had the lowest number,\n\nthat is nearly 10 thousand.\n\nBesides, there is another data such as ages 1 to 15,\n\nthat is nearly 650 thousand.\n\nIn general, there is a big difference in population distribution by age group and gender in Australia.",
+        "script": "The bar chart demonstrates population distribution in Australia in 2016 by age group and gender,\n\nIncluding ages from 1 to 100, measured in thousands.\n\nAccording to the bar chart, people aged 25 to 34 had the highest number,\n\nthat is nearly 700 thousand.\n\nHowever, those aged 90 to 100 had the lowest number,\n\nthat is nearly 10 thousand.\n\nBesides, there is another data such as ages 1 to 14,\n\nthat is nearly 600 thousand.\n\nIn general, there is a big difference in population distribution by age group and gender in Australia.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/m233r0jwmvi3nkb1y9l5ne-australia-population.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=AhEP2peY7PhS8ujm1%2BSYtjjX8mDlmg0dPBPRKqRoqVt5YQ4dy9%2BgJPR8mkK6HmKU0uhaVTfoZZgC6TsELM2FlAhT3sU8m4MKqDMga6AFjD4pHoxRzyZFjQLSl3CLRlUbmhM3cs25eDVlVd62Pd7am9GCbEwVTr%2BkefeD6kW4SdH1n0s4%2BxXaPhFNuSxAtYg5E7Pcc4yIAVh6twk3jPDVybJT5EPYrE01tWKWdKv2iLNPWW6eOUZWEh1s9izfBMi4wWIcUe%2BZm1HDdruSXvZj5myn0o6DGxRxXfbm4HF3q29Vl3Vtk9KkPP3UfqrB7Ut3JXRrASl1OtHbOqnOgy08%2Bw%3D%3D",
         "type": "bar",
-        "created_at": "2025-07-02T06:55:39.743Z"
+        "created_at": "2025-07-11T09:05:46.513Z"
     },
     {
         "id": 1750062458065,
         "title": "04",
-        "script": "The bar chart demonstrates success and failure rates in Canada from 1999 to 2002,\n\nincluding success rates in 2002, success rates in 1999, and failure rates in 2000–2001, measured in percent.\n\nAccording to the bar chart, the success rate in 2002 had the highest number,\n\nthat is nearly 87.5%.\n\nHowever, the success rate in 1999 had the lowest number,\n\nthat is nearly 66%.\n\nBesides, there is another data such as failure rates in 2000,\n\nthat is nearly 30%.\n\nIn general, there is a big difference in success and failure rates across the years.",
+        "script": "The bar chart demonstrates evolution of success rates in Canada from 1999 to 2002,\n\nincluding success rates and failure rates, measured in percent.\n\nAccording to the bar chart, the success rate in 2002 had the highest number,\n\nthat is nearly 90%.\n\nHowever, the success rate in 1999 had the lowest number,\n\nthat is nearly 70%.\n\nBesides, there is another data such as failure rates in 2000,\n\nthat is nearly 30%.\n\nIn general, there is a big difference in evolution of success rates in Canada from 1999 to 2002.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/3441g9h00huewcmnovy4wt-evoltion-of-success-rate-in-canada.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=TfyLaX%2BSFAU79iNV4%2B2oa1vn9t2dvB8HVXeHiI9e%2BQ7oQRnMHAUqxliqxx0vEovXuUotndLU8WSoQuTSLDn2a90PIKEIafjI5bhdkFp8Vl%2BhtVdEvpWy5yO0CAzMTETP6Ne18MAfiem7T8fcG7h6PFcE4cw6iyF3ZKDelXddpMWqVzuzdaZz735UDUY%2BpZMc3EdrpnZCGiSpqgImeF1KPMCxulz4nfRcYm9fRW5J14qfwi%2FtMaVptchzaPteHlipUgjtq1X%2FDiUmaIcpaNAK4arQELke4qf5Dx%2BLlIL3iSRSLvuMDXlFbSfMS7eHB5XnYwZ7kEN1qhq9RpKPeaKUMg%3D%3D",
         "type": "bar",
-        "created_at": "2025-07-02T06:55:56.962Z"
+        "created_at": "2025-07-11T09:16:01.920Z"
     },
     {
         "id": 1750063200189,

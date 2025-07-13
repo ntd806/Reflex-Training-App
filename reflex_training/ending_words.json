@@ -183,10 +183,16 @@
     ],
     "edWords": [
         {
-            "word": "diverted",
+            "word": "unprecedented",
+            "priority": false,
+            "timestamp": 1752139413,
+            "ending": "/ɪd/"
+        },
+        {
+            "ending": "/ɪd/",
             "priority": false,
             "timestamp": 1752118578,
-            "ending": "/ɪd/"
+            "word": "diverted"
         },
         {
             "ending": "/d/",
