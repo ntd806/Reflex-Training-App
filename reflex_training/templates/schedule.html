@@ -6,36 +6,118 @@
     <title>Schedule</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .nav { margin-bottom: 20px; }
-        .nav a { margin-right: 10px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .done { background-color: #d4edda; }
-        .current-practice { font-weight: bold; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .done {
+            background-color: #d4edda;
+        }
+        .done button {
+            background-color: #28a745;
+            color: white;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 70%;
+            margin-right: 10px;
+        }
+        .current-practice {
+            font-weight: bold;
+            color: #333;
+        }
+        #progressStats ul {
+            list-style: none;
+            padding: 0;
+        }
+        #progressStats li {
+            margin-bottom: 8px;
+            padding: 8px;
+            background-color: #fff;
+            border-left: 4px solid #007bff;
+        }
     </style>
 </head>
 <body>
     <div class="nav">
         <a href="/">Trang chính</a>
-        <a href="/sentence_practice">Write from dictation</a>
+        <a href="/sentence_practice">Write from Dictation</a>
         <a href="/repeat_sentence">Repeat Sentence</a>
         <a href="/ending_practice">Practice -S/-ES & -ED</a>
         <a href="/irregular_verbs">Irregular Verbs</a>
         <a href="/youtube_tracker">YouTube Tracker</a>
         <a href="/speaking_describe_image_page">Speaking Describe Image</a>
         <a href="/random_currency">Random Currency</a>
-        <a href="/schedule_ui">schedual</a>
-        <a href="/essay_vocab">essay vocab</a>
+        <a href="/schedule_ui">Schedule</a>
+        <a href="/essay_vocab">Essay Vocab</a>
         <select id="voiceSelect">
             <option value="en-US">English (US)</option>
             <option value="en-GB">English (UK)</option>
         </select>
     </div>
-
-    <h2>Giải thích các hoạt động</h2>
-    <div id="activityDefinitions"></div>
 
     <h2>Lịch biểu hôm nay</h2>
     <table id="todaySchedule">
@@ -51,7 +133,21 @@
     </table>
 
     <h2>Lịch biểu tuần</h2>
-    <div id="weeklySchedule"></div>
+    <table id="weeklySchedule">
+        <thead>
+            <tr>
+                <th>Thời gian</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
     <h2>Thống kê tiến độ</h2>
     <div id="progressStats"></div>
@@ -65,20 +161,13 @@
                 const today = data.today;
                 const weekDay = data.week_day;
 
-                // Hiển thị định nghĩa hoạt động
-                let definitions = '<ul>';
-                for (let key in schedule.activity_definitions) {
-                    definitions += `<li><strong>${key}</strong>: ${schedule.activity_definitions[key]}</li>`;
-                }
-                definitions += '</ul>';
-                $('#activityDefinitions').html(definitions);
-
                 // Hiển thị lịch hôm nay
                 let todayHtml = '';
                 if (schedule.weekly_plan[weekDay]) {
                     schedule.weekly_plan[weekDay].forEach((item, idx) => {
                         const isDone = status[today] && status[today][weekDay] && status[today][weekDay].includes(idx);
                         const practiceItem = currentPractice[today] && currentPractice[today][weekDay] && currentPractice[today][weekDay][idx] ? currentPractice[today][weekDay][idx] : '';
+                        const isBreak = item.activity.toLowerCase() === 'break';
                         todayHtml += `
                             <tr class="${isDone ? 'done' : ''}">
                                 <td>${item.duration}</td>
@@ -87,8 +176,10 @@
                                     <button onclick="markDone('${weekDay}', ${idx}, '${today}')">${isDone ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}</button>
                                 </td>
                                 <td>
-                                    <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
-                                    <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
+                                    ${isBreak ? '-' : `
+                                        <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
+                                        <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
+                                    `}
                                 </td>
                             </tr>`;
                     });
@@ -96,15 +187,23 @@
                 $('#todaySchedule tbody').html(todayHtml);
 
                 // Hiển thị lịch tuần
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                const maxActivities = Math.max(...days.map(day => schedule.weekly_plan[day].length));
                 let weeklyHtml = '';
-                for (let day in schedule.weekly_plan) {
-                    weeklyHtml += `<h3>${day}</h3><table><thead><tr><th>Thời gian</th><th>Hoạt động</th></tr></thead><tbody>`;
-                    schedule.weekly_plan[day].forEach(item => {
-                        weeklyHtml += `<tr><td>${item.duration}</td><td>${item.activity} (${schedule.activity_definitions[item.activity] || item.activity})</td></tr>`;
+                for (let i = 0; i < maxActivities; i++) {
+                    weeklyHtml += '<tr>';
+                    weeklyHtml += `<td>Khung ${i + 1}</td>`;
+                    days.forEach(day => {
+                        const item = schedule.weekly_plan[day][i];
+                        if (item) {
+                            weeklyHtml += `<td>${item.activity} (${item.duration})</td>`;
+                        } else {
+                            weeklyHtml += '<td>-</td>';
+                        }
                     });
-                    weeklyHtml += '</tbody></table>';
+                    weeklyHtml += '</tr>';
                 }
-                $('#weeklySchedule').html(weeklyHtml);
+                $('#weeklySchedule tbody').html(weeklyHtml);
 
                 // Thống kê tiến độ
                 let progressHtml = '<ul>';
