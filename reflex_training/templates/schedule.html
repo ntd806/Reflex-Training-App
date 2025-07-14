@@ -1,319 +1,155 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lịch biểu học tập</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fa; margin: 0; }
-        .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 16px #0001; padding: 30px; }
-        h2 { color: #007bff; margin-top: 30px; }
-        .today-row { background: #e3f2fd !important; }
-        .done { text-decoration: line-through; color: #888; }
-        .stat { margin: 18px 0 10px 0; font-size: 1.1em; }
-        .progress-bar-bg { background: #e0e0e0; border-radius: 8px; height: 18px; width: 100%; margin-top: 6px; }
-        .progress-bar { background: #4caf50; height: 100%; border-radius: 8px; transition: width 0.5s; }
-        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
-        th, td { padding: 10px 8px; border: 1px solid #e0e0e0; text-align: left; }
-        th { background: #f1f8ff; color: #007bff; }
-        tr.done { background: #f6f6f6; }
-        tr.today-row td { font-weight: bold; }
-        .checkbox-cell { text-align: center; }
-        @media (max-width: 700px) {
-            .container { padding: 10px; }
-            table, th, td { font-size: 0.95em; }
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 10px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .done { background-color: #d4edda; }
+        .current-practice { font-weight: bold; }
     </style>
 </head>
 <body>
-        <nav style="margin-bottom:20px;">
-        <a href="/" style="margin-right:20px;">Trang chính</a>
-        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
-        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
-        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
-        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
-        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
-        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
-        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
-        <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
-        <a href="/essay_vocab" style="margin-right:20px;">essay vocab</a>
-        <label style="margin-left:10px;">
-            Giọng đọc
-            <select id="voiceSelect" style="min-width:120px;"></select>
-        </label>
-    </nav>
-<div class="container">
+    <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/sentence_practice">Write from dictation</a>
+        <a href="/repeat_sentence">Repeat Sentence</a>
+        <a href="/ending_practice">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs">Irregular Verbs</a>
+        <a href="/youtube_tracker">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page">Speaking Describe Image</a>
+        <a href="/random_currency">Random Currency</a>
+        <a href="/schedule_ui">schedual</a>
+        <a href="/essay_vocab">essay vocab</a>
+        <select id="voiceSelect">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+        </select>
+    </div>
+
     <h2>Giải thích các hoạt động</h2>
     <div id="activityDefinitions"></div>
+
     <h2>Lịch biểu hôm nay</h2>
-    <div id="todaySchedule"></div>
-    <h2>Lịch biểu tuần</h2>
-    <div id="weekSchedule"></div>
-    <h2>Thống kê tiến độ</h2>
-    <div id="stats"></div>
-</div>
-<script>
-let scheduleData = {}, statusData = {}, today = '', weekDay = '';
-
-function loadSchedule() {
-    $.get('/schedule', function(res) {
-        scheduleData = res.schedule;
-        statusData = res.status;
-        today = res.today;
-        weekDay = res.week_day;
-        renderToday();
-        renderWeekGrid(); // gọi hàm mới
-        renderStats();
-        renderActivityDefinitions(); // gọi hàm renderActivityDefinitions
-    });
-}
-
-function renderToday() {
-    const plan = scheduleData.weekly_plan[weekDay] || [];
-    const doneIdx = (statusData[today] && statusData[today][weekDay]) || [];
-    if (plan.length === 0) {
-        $('#todaySchedule').html('<i>Không có lịch cho hôm nay.</i>');
-        return;
-    }
-    let html = '<table><tr>';
-    // Tiêu đề cột
-    plan.forEach((item, idx) => {
-        html += `<th>${item.duration}</th>`;
-    });
-    html += '</tr><tr>';
-    // Hoạt động + checkbox hoàn thành
-    plan.forEach((item, idx) => {
-        const isDone = doneIdx && doneIdx.includes(idx);
-        html += `<td style="text-align:center;">
-            <div>${item.activity}</div>
-            <input type="checkbox" ${isDone ? 'checked disabled' : ''} onchange="markDone('${weekDay}',${idx},'${today}')">
-            ${isDone ? '<span style="color:green;">✔</span>' : ''}
-        </td>`;
-    });
-    html += '</tr></table>';
-    $('#todaySchedule').html(html);
-}
-
-function renderWeek() {
-    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-    let html = `
-    <table style="width:100%;max-width:900px;">
+    <table id="todaySchedule">
         <thead>
             <tr>
-                <th style="width:110px;">Thứ</th>
+                <th>Thời gian</th>
                 <th>Hoạt động</th>
-                <th>Thời lượng</th>
                 <th>Trạng thái</th>
+                <th>Bài hiện tại</th>
             </tr>
         </thead>
-        <tbody>
-    `;
-    weekDays.forEach(day => {
-        const plan = scheduleData.weekly_plan[day] || [];
-        const doneIdx = (statusData[today] && statusData[today][day]) || [];
-        const isToday = (day === weekDay);
-        if (plan.length === 0) {
-            html += `<tr${isToday ? ' class="today-row"' : ''}>
-                <td>${isToday ? '<b>' + day + '</b>' : day}</td>
-                <td colspan="3"><i>Không có lịch</i></td>
-            </tr>`;
-        } else {
-            plan.forEach((item, idx) => {
-                const isDone = doneIdx && doneIdx.includes(idx);
-                html += `<tr class="${isDone ? 'done' : ''}${isToday ? ' today-row' : ''}">
-                    <td ${idx === 0 ? `rowspan="${plan.length}" style="vertical-align:middle;text-align:center;"` : 'style="display:none;"'}>
-                        ${idx === 0 ? (isToday ? '<b>' + day + '</b>' : day) : ''}
-                    </td>
-                    <td>${item.activity}</td>
-                    <td>${item.duration}</td>
-                    <td style="text-align:center;">${isDone ? '<span style="color:green;">✔ Đã xong</span>' : ''}</td>
-                </tr>`;
+        <tbody></tbody>
+    </table>
+
+    <h2>Lịch biểu tuần</h2>
+    <div id="weeklySchedule"></div>
+
+    <h2>Thống kê tiến độ</h2>
+    <div id="progressStats"></div>
+
+    <script>
+        $(document).ready(function() {
+            $.getJSON('/schedule', function(data) {
+                const schedule = data.schedule;
+                const status = data.status;
+                const currentPractice = data.current_practice;
+                const today = data.today;
+                const weekDay = data.week_day;
+
+                // Hiển thị định nghĩa hoạt động
+                let definitions = '<ul>';
+                for (let key in schedule.activity_definitions) {
+                    definitions += `<li><strong>${key}</strong>: ${schedule.activity_definitions[key]}</li>`;
+                }
+                definitions += '</ul>';
+                $('#activityDefinitions').html(definitions);
+
+                // Hiển thị lịch hôm nay
+                let todayHtml = '';
+                if (schedule.weekly_plan[weekDay]) {
+                    schedule.weekly_plan[weekDay].forEach((item, idx) => {
+                        const isDone = status[today] && status[today][weekDay] && status[today][weekDay].includes(idx);
+                        const practiceItem = currentPractice[today] && currentPractice[today][weekDay] && currentPractice[today][weekDay][idx] ? currentPractice[today][weekDay][idx] : '';
+                        todayHtml += `
+                            <tr class="${isDone ? 'done' : ''}">
+                                <td>${item.duration}</td>
+                                <td>${item.activity} (${schedule.activity_definitions[item.activity] || item.activity})</td>
+                                <td>
+                                    <button onclick="markDone('${weekDay}', ${idx}, '${today}')">${isDone ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}</button>
+                                </td>
+                                <td>
+                                    <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
+                                    <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
+                                </td>
+                            </tr>`;
+                    });
+                }
+                $('#todaySchedule tbody').html(todayHtml);
+
+                // Hiển thị lịch tuần
+                let weeklyHtml = '';
+                for (let day in schedule.weekly_plan) {
+                    weeklyHtml += `<h3>${day}</h3><table><thead><tr><th>Thời gian</th><th>Hoạt động</th></tr></thead><tbody>`;
+                    schedule.weekly_plan[day].forEach(item => {
+                        weeklyHtml += `<tr><td>${item.duration}</td><td>${item.activity} (${schedule.activity_definitions[item.activity] || item.activity})</td></tr>`;
+                    });
+                    weeklyHtml += '</tbody></table>';
+                }
+                $('#weeklySchedule').html(weeklyHtml);
+
+                // Thống kê tiến độ
+                let progressHtml = '<ul>';
+                for (let date in status) {
+                    for (let day in status[date]) {
+                        progressHtml += `<li>${date} (${day}): Đã hoàn thành ${status[date][day].length} / ${schedule.weekly_plan[day].length} hoạt động</li>`;
+                    }
+                }
+                progressHtml += '</ul>';
+                $('#progressStats').html(progressHtml);
+            });
+
+            $('#voiceSelect').change(function() {
+                // Xử lý thay đổi giọng đọc nếu cần
+            });
+        });
+
+        function markDone(day, idx, date) {
+            $.ajax({
+                url: '/schedule/mark_done',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ day, idx, date }),
+                success: function() {
+                    location.reload();
+                }
             });
         }
-    });
-    html += '</tbody></table>';
-    $('#weekSchedule').html(html);
-}
 
-function renderWeekGrid() {
-    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-    const weekShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const weeklyPlan = scheduleData.weekly_plan;
-    const activityDefs = scheduleData.activity_definitions || {};
-    let maxRows = 0;
-    weekDays.forEach(day => {
-        if (weeklyPlan[day] && weeklyPlan[day].length > maxRows) maxRows = weeklyPlan[day].length;
-    });
-
-    // Tìm ngày gần nhất ứng với từng thứ trong tuần hiện tại
-    const now = new Date(today);
-    const weekDates = [];
-    const monday = new Date(now);
-    monday.setDate(now.getDate() - now.getDay() + 1); // Monday
-    for (let i = 0; i < 7; i++) {
-        const d = new Date(monday);
-        d.setDate(monday.getDate() + i);
-        weekDates.push(d.toISOString().slice(0,10));
-    }
-
-    // Tạo mảng 2 chiều: rows[row][col] = {duration, activity}
-    let rows = [];
-    for (let i = 0; i < maxRows; i++) {
-        let row = [];
-        for (let d = 0; d < weekDays.length; d++) {
-            const plan = weeklyPlan[weekDays[d]] || [];
-            row.push(plan[i] || null);
+        function savePracticeItem(day, idx, date) {
+            const practiceItem = $(`#practice_${day}_${idx}`).val();
+            $.ajax({
+                url: '/current_practice',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ date, day, idx, practice_item: practiceItem }),
+                success: function(response) {
+                    alert('Đã lưu bài thực hành hiện tại!');
+                    location.reload();
+                },
+                error: function() {
+                    alert('Lỗi khi lưu bài thực hành.');
+                }
+            });
         }
-        rows.push(row);
-    }
-
-    // Tạo bảng HTML với tooltip cho hoạt động
-    let html = `<table>
-        <tr>
-            <th></th>
-            ${weekShort.map((d, i) => `<th title="${weekDays[i]}">${d}</th>`).join('')}
-        </tr>
-    `;
-    for (let r = 0; r < rows.length; r++) {
-        let duration = '';
-        for (let c = 0; c < weekDays.length; c++) {
-            if (rows[r][c] && rows[r][c].duration) {
-                duration = rows[r][c].duration;
-                break;
-            }
-        }
-        let durationTitle = activityDefs[duration] ? ` title="${activityDefs[duration]}"` : '';
-        html += `<tr>
-            <td class="time"${durationTitle}>${duration || ''}</td>`;
-        for (let c = 0; c < weekDays.length; c++) {
-            const cell = rows[r][c];
-            let cellHtml = '';
-            let isDone = false;
-            // Lấy trạng thái done đúng ngày trong tuần
-            const dayName = weekDays[c];
-            const dateStr = weekDates[c];
-            const doneIdx = (statusData[dateStr] && statusData[dateStr][dayName]) || [];
-            if (cell && cell.activity) {
-                isDone = doneIdx.includes(r);
-                let actTitle = activityDefs[cell.activity] ? ` title="${activityDefs[cell.activity]}"` : '';
-                cellHtml = `<span${actTitle}${isDone ? ' style="color:green;font-weight:bold;"' : ''}>${cell.activity}${isDone ? ' ✔' : ''}</span>`;
-            }
-            html += `<td${isDone ? ' class="done"' : ''}>${cellHtml}</td>`;
-        }
-        html += `</tr>`;
-    }
-    html += `</table>`;
-    $('#weekSchedule').html(html);
-}
-
-function markDone(day, idx, date) {
-    $.ajax({
-        url: '/schedule/mark_done',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ day: day, idx: idx, date: date }),
-        success: function(res) {
-            statusData = res.status;
-            renderToday();
-            renderWeekGrid();
-            renderStats();
-        }
-    });
-}
-
-function renderStats() {
-    // Tuần hiện tại
-    const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-    const now = new Date(today);
-    const firstDay = new Date(now);
-    firstDay.setDate(now.getDate() - now.getDay() + 1); // Monday
-    let weekDone = 0, weekTotal = 0, monthDone = 0, monthTotal = 0;
-    let month = now.getMonth(), year = now.getFullYear();
-
-    // Thống kê tuần
-    for (let i = 0; i < 7; i++) {
-        const d = new Date(firstDay);
-        d.setDate(firstDay.getDate() + i);
-        const dStr = d.toISOString().slice(0,10);
-        const dayName = weekDays[i];
-        const plan = scheduleData.weekly_plan[dayName] || [];
-        weekTotal += plan.length;
-        const doneIdx = (statusData[dStr] && statusData[dStr][dayName]) || [];
-        weekDone += doneIdx.length;
-    }
-
-    // Thống kê tháng
-    const daysInMonth = new Date(year, month+1, 0).getDate();
-    for (let d = 1; d <= daysInMonth; d++) {
-        const dStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        for (const dayName of weekDays) {
-            const plan = scheduleData.weekly_plan[dayName] || [];
-            monthTotal += plan.length;
-            const doneIdx = (statusData[dStr] && statusData[dStr][dayName]) || [];
-            monthDone += doneIdx.length;
-        }
-    }
-
-    let weekPercent = weekTotal ? Math.round(weekDone*100/weekTotal) : 0;
-    let monthPercent = monthTotal ? Math.round(monthDone*100/monthTotal) : 0;
-
-    let html = `
-    <table style="width:100%;max-width:500px;">
-        <thead>
-            <tr>
-                <th>Thống kê</th>
-                <th>Hoàn thành</th>
-                <th>Tổng</th>
-                <th>Tỷ lệ (%)</th>
-                <th>Tiến độ</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Tuần này</td>
-                <td>${weekDone}</td>
-                <td>${weekTotal}</td>
-                <td>${weekPercent}%</td>
-                <td>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar" style="width:${weekPercent}%;"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Tháng này</td>
-                <td>${monthDone}</td>
-                <td>${monthTotal}</td>
-                <td>${monthPercent}%</td>
-                <td>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar" style="width:${monthPercent}%;"></div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    `;
-    $('#stats').html(html);
-}
-
-function renderActivityDefinitions() {
-    const defs = scheduleData.activity_definitions || {};
-    if (!defs || Object.keys(defs).length === 0) {
-        $('#activityDefinitions').html('<i>Không có giải thích hoạt động.</i>');
-        return;
-    }
-    let html = '<table style="max-width:600px;"><tr><th>Mã</th><th>Giải thích</th></tr>';
-    Object.entries(defs).forEach(([key, value]) => {
-        html += `<tr><td style="font-weight:bold;">${key}</td><td>${value}</td></tr>`;
-    });
-    html += '</table>';
-    $('#activityDefinitions').html(html);
-}
-
-window.markDone = markDone;
-$(function(){ loadSchedule(); });
-</script>
+    </script>
 </body>
 </html>

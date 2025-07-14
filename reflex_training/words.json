@@ -1776,7 +1776,8 @@
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "2025-07-11",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "on their own",
@@ -1784,7 +1785,8 @@
         "priority": true,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
-        "guide": "on‿ner‿own → Nối trơn, nhấn 'OWN', nghe như 'ON-ner-own' hoặc chỉ cần on ne ôn"
+        "guide": "on‿ner‿own → Nối trơn, nhấn 'OWN', nghe như 'ON-ner-own' hoặc chỉ cần on ne ôn",
+        "learned": true
     },
     {
         "word": "in exchange for which",
@@ -1792,7 +1794,8 @@
         "priority": true,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
-        "guide": "không nối âm"
+        "guide": "không nối âm",
+        "learned": true
     },
     {
         "word": "in other ways",
@@ -1824,61 +1827,79 @@
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "distribution",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "Gadget",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "electrical",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "renewable",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "pharmaceutical",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "laboratory",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "minmic",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
         "last_shown_date": "",
-        "guide": ""
+        "guide": "",
+        "learned": true
     },
     {
         "word": "hormones",
-        "priority": false,
+        "priority": true,
         "shown_today": 0,
-        "last_shown_date": ""
+        "last_shown_date": "",
+        "guide": "",
+        "learned": true
+    },
+    {
+        "word": "rather than a political",
+        "priority": true,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": "",
+        "learned": true
     }
 ]
