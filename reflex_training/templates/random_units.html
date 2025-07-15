@@ -93,11 +93,19 @@
         const repeatDelayInput = document.getElementById('repeatDelay');
 
         // Danh sách đơn vị đo lường (hundred, thousand, và các đơn vị phổ biến khác)
-        const units = [
-            'hundred (100)', 'thousand (1000)', 'million (1,000,000)', 'billion (1,000,000,000)',
-            'meter (m)', 'kilometer (km)', 'centimeter (cm)', 'inch (in)', 'foot (ft)', 'mile (mi)',
-            'kilogram (kg)', 'pound (lb)', 'liter (L)', 'gallon (gal)', 'degree Celsius (°C)', 'degree Fahrenheit (°F)'
-        ];
+     const units = [
+    'hundred', 'thousand', 'million', 'billion',
+    'meter', 'kilometer', 'centimeter', 'inch', 'foot', 'mile',
+    'kilogram', 'pound', 'liter', 'gallon', 'degree Celsius', 'degree Fahrenheit',
+    'square meter', 'hectare', 'square foot', 'acre',
+    'joule', 'kilowatt hour', 'British Thermal Unit',
+    'British pound', 'US dollar', 'Canadian dollar', 'Australian dollar',
+    'Africa', 'Antarctica', 'Asia', 'Australia', 'Europe', 'North America', 'South America',
+    'Arctic Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 'Southern Ocean',
+    'latitude', 'longitude',
+    'continent', 'island', 'mountain', 'river', 'valley', 'plateau', 'desert', 'forest',
+    'polar', 'temperate', 'tropical', 'arid', 'mediterranean'
+    ];
 
         function speakUnit(unit) {
             const utterance = new SpeechSynthesisUtterance(unit);
