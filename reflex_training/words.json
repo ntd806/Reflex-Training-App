@@ -1901,5 +1901,53 @@
         "last_shown_date": "",
         "guide": "",
         "learned": true
+    },
+    {
+        "word": "optimistic",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "pessimistic",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "tempers most often in",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "surprisingly",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "On the other hand",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "metabolism",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "legal pads",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": ""
     }
 ]

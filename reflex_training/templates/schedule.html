@@ -249,7 +249,7 @@
                 }
                 $('#todaySchedule tbody').html(todayHtml);
 
-                // Hiển thị lịch tuần
+                // Hiển thị lịch tuần với trạng thái hoàn thành
                 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                 const maxActivities = Math.max(...days.map(day => schedule.weekly_plan[day].length));
                 let weeklyHtml = '';
@@ -258,8 +258,9 @@
                     weeklyHtml += `<td>Khung ${i + 1}</td>`;
                     days.forEach(day => {
                         const item = schedule.weekly_plan[day][i];
+                        const isDone = day === weekDay && status[today] && status[today][day] && status[today][day].includes(i);
                         if (item) {
-                            weeklyHtml += `<td>${item.activity} (${item.duration})</td>`;
+                            weeklyHtml += `<td class="${isDone ? 'done' : ''}">${item.activity} (${item.duration})</td>`;
                         } else {
                             weeklyHtml += '<td>-</td>';
                         }
@@ -314,7 +315,7 @@
                 url: '/current_practice',
                 method: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ date, day, idx, practice_item: practiceItem }),
+                data: JSON.stringify({ day, idx, date, practice_item: practiceItem }),
                 success: function(response) {
                     alert('Đã lưu bài thực hành hiện tại!');
                     location.reload();
