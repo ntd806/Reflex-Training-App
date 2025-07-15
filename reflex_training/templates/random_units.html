@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Units Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+        .nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }
+        #unitDisplay {
+            font-size: 2em;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .controls {
+            margin: 10px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            margin: 0 10px;
+            width: 60px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+       <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/sentence_practice">Write from Dictation</a>
+        <a href="/repeat_sentence">Repeat Sentence</a>
+        <a href="/ending_practice">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs">Irregular Verbs</a>
+        <a href="/youtube_tracker">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page">Speaking Describe Image</a>
+        <a href="/random_currency">Random Currency</a>
+        <a href="/schedule_ui">Schedule</a>
+        <a href="/essay_vocab">Essay Vocab</a>
+        <select id="voiceSelect">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+        </select>
+    </div>
+    <h1>Random Units Display</h1>
+    <div id="unitDisplay">Waiting...</div>
+    <div class="controls">
+        <label>Read Interval (seconds): </label>
+        <input type="number" id="readInterval" value="6" min="1">
+        <label>Repeat Delay (seconds): </label>
+        <input type="number" id="repeatDelay" value="3" min="1">
+        <button onclick="startDisplay()">Start</button>
+        <button onclick="stopDisplay()">Stop</button>
+    </div>
+
+    <script>
+        let intervalId = null;
+        let timeoutId = null;
+        const unitDisplay = document.getElementById('unitDisplay');
+        const readIntervalInput = document.getElementById('readInterval');
+        const repeatDelayInput = document.getElementById('repeatDelay');
+
+        // Danh sách đơn vị đo lường (hundred, thousand, và các đơn vị phổ biến khác)
+        const units = [
+            'hundred (100)', 'thousand (1000)', 'million (1,000,000)', 'billion (1,000,000,000)',
+            'meter (m)', 'kilometer (km)', 'centimeter (cm)', 'inch (in)', 'foot (ft)', 'mile (mi)',
+            'kilogram (kg)', 'pound (lb)', 'liter (L)', 'gallon (gal)', 'degree Celsius (°C)', 'degree Fahrenheit (°F)'
+        ];
+
+        function speakUnit(unit) {
+            const utterance = new SpeechSynthesisUtterance(unit);
+            utterance.lang = 'en-US'; // Có thể thay đổi ngôn ngữ nếu cần
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function displayRandomUnit() {
+            const randomUnit = units[Math.floor(Math.random() * units.length)];
+            unitDisplay.textContent = randomUnit;
+            speakUnit(randomUnit);
+        }
+
+        function startDisplay() {
+            if (intervalId) stopDisplay();
+            const readInterval = parseInt(readIntervalInput.value) * 1000; // Chuyển sang mili giây
+            const repeatDelay = parseInt(repeatDelayInput.value) * 1000; // Chuyển sang mili giây
+
+            displayRandomUnit(); // Hiển thị ngay lập tức
+            intervalId = setInterval(() => {
+                displayRandomUnit();
+                timeoutId = setTimeout(() => {
+                    displayRandomUnit(); // Lặp lại sau delay
+                }, repeatDelay);
+            }, readInterval);
+        }
+
+        function stopDisplay() {
+            if (intervalId) clearInterval(intervalId);
+            if (timeoutId) clearTimeout(timeoutId);
+            window.speechSynthesis.cancel(); // Dừng phát âm
+            unitDisplay.textContent = 'Stopped';
+        }
+    </script>
+</body>
+</html>

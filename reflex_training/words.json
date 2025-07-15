@@ -989,7 +989,7 @@
     },
     {
         "word": "English as a",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "translation": "tiếng Anh như là",
@@ -1665,7 +1665,7 @@
     {
         "word": "as a",
         "translation": "như một",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1674,7 +1674,7 @@
     {
         "word": "success or failure",
         "translation": "thành công hoặc thất bại",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1683,7 +1683,7 @@
     {
         "word": "intellectual",
         "translation": "trí tuệ",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1692,7 +1692,7 @@
     {
         "word": "familiarity",
         "translation": "sự quen thuộc",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1701,7 +1701,7 @@
     {
         "word": "manpower",
         "translation": "nhân lực",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1710,7 +1710,7 @@
     {
         "word": "diverted",
         "translation": "chuyển hướng",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1719,7 +1719,7 @@
     {
         "word": "facilitating",
         "translation": "thúc đẩy",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1728,7 +1728,7 @@
     {
         "word": "preparation",
         "translation": "sự chuẩn bị",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1737,7 +1737,7 @@
     {
         "word": "Domestication is an evolutionary",
         "translation": "Thuần hóa là một quá trình tiến hóa",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1746,7 +1746,7 @@
     {
         "word": "political",
         "translation": "chính trị",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1755,7 +1755,7 @@
     {
         "word": "to survive and prosper",
         "translation": "để tồn tại và thịnh vượng",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1764,7 +1764,7 @@
     {
         "word": "in an alliance",
         "translation": "trong một liên minh",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1782,7 +1782,7 @@
     {
         "word": "on their own",
         "translation": "một mình",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "on‿ner‿own → Nối trơn, nhấn 'OWN', nghe như 'ON-ner-own' hoặc chỉ cần on ne ôn",
@@ -1791,7 +1791,7 @@
     {
         "word": "in exchange for which",
         "translation": "để đổi lấy cái đó",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "không nối âm",
@@ -1800,7 +1800,7 @@
     {
         "word": "in other ways",
         "translation": "theo những cách khác",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1808,7 +1808,7 @@
     },
     {
         "word": "abstract",
-        "priority": true,
+        "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
         "guide": "",
@@ -1816,7 +1816,7 @@
     },
     {
         "word": "there is a big difference in",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1832,7 +1832,7 @@
     },
     {
         "word": "distribution",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1840,7 +1840,7 @@
     },
     {
         "word": "Gadget",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1848,7 +1848,7 @@
     },
     {
         "word": "electrical",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1856,7 +1856,7 @@
     },
     {
         "word": "renewable",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1864,7 +1864,7 @@
     },
     {
         "word": "pharmaceutical",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1872,7 +1872,7 @@
     },
     {
         "word": "laboratory",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1880,7 +1880,7 @@
     },
     {
         "word": "minmic",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1888,7 +1888,7 @@
     },
     {
         "word": "hormones",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1896,7 +1896,7 @@
     },
     {
         "word": "rather than a political",
-        "priority": true,
+        "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1946,6 +1946,62 @@
     },
     {
         "word": "legal pads",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "mechanisms",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "injury",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "concussion",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "model",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "genetic",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "injured",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "ultimately",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "promote",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": ""

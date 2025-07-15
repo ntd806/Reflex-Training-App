@@ -183,10 +183,16 @@
     ],
     "edWords": [
         {
-            "word": "unprecedented",
+            "word": "injured",
+            "priority": false,
+            "timestamp": 1752548743,
+            "ending": "/d/"
+        },
+        {
+            "ending": "/ɪd/",
             "priority": false,
             "timestamp": 1752139413,
-            "ending": "/ɪd/"
+            "word": "unprecedented"
         },
         {
             "ending": "/ɪd/",
