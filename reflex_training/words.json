@@ -2038,6 +2038,20 @@
         "translation": "viện",
         "priority": false,
         "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "existential",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "disaster",
+        "priority": false,
+        "shown_today": 0,
         "last_shown_date": ""
     }
 ]

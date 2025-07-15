@@ -11,33 +11,56 @@
         .yt-list-col { flex: 2; min-width: 0; background: #fff; padding: 15px; border: 1px solid #ccc; }
         .yt-player-col { flex: 6; min-width: 0; }
     </style>
+     <style>.nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }</style>
 </head>
 <body>
 <div class="content">
-    <nav style="margin-bottom:20px; display: flex; align-items: center;">
-        <a href="/" style="margin-right:20px;">Trang chính</a>
-        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
-        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
-        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
-        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
-        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
-        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
-        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
-        <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
-        <a href="/essay_vocab" style="margin-right:20px;">essay vocab</a>
+     <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/sentence_practice">Write from Dictation</a>
+        <a href="/repeat_sentence">Repeat Sentence</a>
+        <a href="/ending_practice">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs">Irregular Verbs</a>
+        <a href="/youtube_tracker">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page">Speaking Describe Image</a>
+        <a href="/random_currency">Random Currency</a>
+        <a href="/schedule_ui">Schedule</a>
+        <a href="/essay_vocab">Essay Vocab</a>
         <a href="/unit" style="margin-right:20px;">unit</a>
         <label style="margin-left:10px; display: flex; align-items: center;">
             <span style="margin-right:4px;">Giọng đọc</span>
             <select id="voiceSelect" style="min-width:100px; max-width:150px; height:28px; font-size:0.95em;"></select>
         </label>
         <input type="text" id="vocabInput" placeholder="Nhập từ vựng..." style="margin-left:30px; padding-left:28px; height:28px; border-radius:4px; border:1px solid #ccc; background:url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/book.svg') no-repeat 6px center/16px 16px, #fff;">
-        <button onclick="readVocab()" style="margin-left:8px; height:32px; display:flex; align-items:center;">
+        <button onclick="readVocab()" >
             <span style="margin-right:4px;">Read</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" style="vertical-align:middle;" viewBox="0 0 16 16">
                 <path d="M8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3zm0 1a4 4 0 1 1 0 8A4 4 0 0 1 8 4zm.5 2.5a.5.5 0 0 0-1 0v2.793l1.146 1.147a.5.5 0 0 0 .708-.708L8.5 8.293V6.5z"/>
             </svg>
         </button>
-    </nav>
+    </div>
+   
     <h1>YouTube Tracker</h1>
     <div class="flex-main">
         <!-- Bên trái: player và nhập link -->

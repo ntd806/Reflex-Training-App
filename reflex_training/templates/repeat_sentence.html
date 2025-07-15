@@ -7,28 +7,50 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .priority-btn[priority="true"] { background: orange; }
+        .nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 <div class="content">
        <!-- Menu điều hướng -->
-    <nav style="margin-bottom:20px;">
-        <a href="/" style="margin-right:20px;">Trang chính</a>
-        <a href="/sentence_practice" style="margin-right:20px;">Write from dictation</a>
-        <a href="/repeat_sentence" style="margin-right:20px;">Repeat Sentence</a>
-        <a href="/ending_practice" style="margin-right:20px;">Practice -S/-ES & -ED</a>
-        <a href="/irregular_verbs" style="margin-right:20px;">Irregular Verbs</a>
-        <a href="/youtube_tracker" style="margin-right:20px;">YouTube Tracker</a>
-        <a href="/speaking_describe_image_page" style="margin-right:20px;">Speaking Describe Image</a>
-        <a href="/random_currency" style="margin-right:20px;">Random Currency</a>
-        <a href="/schedule_ui" style="margin-right:20px;">schedual</a>
-        <a href="/essay_vocab" style="margin-right:20px;">essay vocab</a>
+    <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/sentence_practice">Write from Dictation</a>
+        <a href="/repeat_sentence">Repeat Sentence</a>
+        <a href="/ending_practice">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs">Irregular Verbs</a>
+        <a href="/youtube_tracker">YouTube Tracker</a>
+        <a href="/speaking_describe_image_page">Speaking Describe Image</a>
+        <a href="/random_currency">Random Currency</a>
+        <a href="/schedule_ui">Schedule</a>
+        <a href="/essay_vocab">Essay Vocab</a>
         <a href="/unit" style="margin-right:20px;">unit</a>
-        <label style="margin-left:10px;">
-            Giọng đọc
-            <select id="voiceSelect" style="min-width:120px;"></select>
-        </label>
-    </nav>
+        <select id="voiceSelect">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+        </select>
+    </div>
     <h1>Repeat Sentence</h1>
     <div class="flex-main">
         <!-- Bên trái: Thực hành -->
