@@ -1,8 +1,8 @@
 {
-    "created_at": "2025-07-02T08:11:38.946Z",
-    "id": 1750059535966,
-    "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/hk92ryuf3v5haamzibvne-australia_map_states.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=ehkCgV05lCdLnlMc%2BK3lMmD2eViwrs%2FfFSEQY1xLjL2ypUAN84Ym%2FGhqyE9FBTJAtHbU%2Fqhd%2B9HwfxOvAGmctePOGzBMCWD5WlFxRaQZ4zhCMtkTnoN%2BgfogGRTrHKT3JZoj6eCTFBVd7zdiOgFZ%2Bx8GgKO%2BVTXTLmqzOfy7M8wAJ4w5w3gvDfQG6IwGfZ2tgR%2BtO1qJ8G1AXVtFSy239TECIzNtUshtiDW3BYgNq6RBHsK4AFn%2BORQCcPbqi7ts0W6bGYMjKmrpCjubLhOdu5hlrHk5TwveAwOgztlChmutZsfZtojAYHKHhdoexj%2B6pyYNlL5OiPiemMytVV8Y%2FQ%3D%3D",
-    "script": "This photo shows the map of Australia including main regions such as Western Australia, Southern Australia and Queensland.\n\nOn the left of the photo, we can see Western Australia.\nOn the middle of the photo, we can see Southern Australia and Northern Territory.\nOn the right of the photo, we can see Queensland and New South Wales.\n\nOverall, This picture shows the map of Australia including main regions.",
-    "title": "01",
-    "type": "photo"
+    "created_at": "2025-07-15T08:09:48.071Z",
+    "id": 1750061925411,
+    "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/m233r0jwmvi3nkb1y9l5ne-australia-population.gif?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=AhEP2peY7PhS8ujm1%2BSYtjjX8mDlmg0dPBPRKqRoqVt5YQ4dy9%2BgJPR8mkK6HmKU0uhaVTfoZZgC6TsELM2FlAhT3sU8m4MKqDMga6AFjD4pHoxRzyZFjQLSl3CLRlUbmhM3cs25eDVlVd62Pd7am9GCbEwVTr%2BkefeD6kW4SdH1n0s4%2BxXaPhFNuSxAtYg5E7Pcc4yIAVh6twk3jPDVybJT5EPYrE01tWKWdKv2iLNPWW6eOUZWEh1s9izfBMi4wWIcUe%2BZm1HDdruSXvZj5myn0o6DGxRxXfbm4HF3q29Vl3Vtk9KkPP3UfqrB7Ut3JXRrASl1OtHbOqnOgy08%2Bw%3D%3D",
+    "script": "The bar chart demonstrates population distribution in Australia in 2016 by age group and gender,\n\nIncluding ages from 1 to 100, measured in thousands.\n\nAccording to the age group, people aged 25 to 34 had the highest number,\n\nthat is nearly 700 thousand.\n\nHowever, those aged 90 to 100 had the lowest number,\n\nthat is nearly 10 thousand.\n\nBesides, there is another data such as ages 1 to 14,\n\nthat is nearly 600 thousand.\n\nIn general, there is a big difference in population distribution by age group and gender in Australia.",
+    "title": "03",
+    "type": "bar"
 }

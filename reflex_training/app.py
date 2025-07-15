@@ -1070,5 +1070,9 @@ def essay_vocab_data():
 def essay_vocab_page():
     return render_template('essay_vocab.html')
 
+@app.route('/unit')
+def unit_page():
+    return render_template('random_units.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

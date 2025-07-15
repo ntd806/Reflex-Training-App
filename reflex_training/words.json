@@ -1808,6 +1808,7 @@
     },
     {
         "word": "abstract",
+        "translation": "trừu tượng",
         "priority": false,
         "shown_today": 4,
         "last_shown_date": "2025-07-11",
@@ -1816,6 +1817,7 @@
     },
     {
         "word": "there is a big difference in",
+        "translation": "có sự khác biệt lớn trong",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1824,6 +1826,7 @@
     },
     {
         "word": "there is another data such as",
+        "translation": "có dữ liệu khác như",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1832,6 +1835,7 @@
     },
     {
         "word": "distribution",
+        "translation": "phân phối",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1840,6 +1844,7 @@
     },
     {
         "word": "Gadget",
+        "translation": "thiết bị",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1848,6 +1853,7 @@
     },
     {
         "word": "electrical",
+        "translation": "điện",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1856,6 +1862,7 @@
     },
     {
         "word": "renewable",
+        "translation": "tái tạo",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1864,6 +1871,7 @@
     },
     {
         "word": "pharmaceutical",
+        "translation": "dược phẩm",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1872,6 +1880,7 @@
     },
     {
         "word": "laboratory",
+        "translation": "phòng thí nghiệm",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1880,7 +1889,7 @@
     },
     {
         "word": "minmic",
-        "priority": false,
+        "translation": "bắt chước",
         "shown_today": 0,
         "last_shown_date": "",
         "guide": "",
@@ -1888,6 +1897,7 @@
     },
     {
         "word": "hormones",
+        "translation": "hormone",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1896,6 +1906,7 @@
     },
     {
         "word": "rather than a political",
+        "translation": "thay vì chính trị",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1904,6 +1915,7 @@
     },
     {
         "word": "optimistic",
+        "translation": "lạc quan",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1911,6 +1923,7 @@
     },
     {
         "word": "pessimistic",
+        "translation": "bi quan",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1918,6 +1931,7 @@
     },
     {
         "word": "tempers most often in",
+        "translation": "tính khí thường xuyên nhất trong",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1925,6 +1939,7 @@
     },
     {
         "word": "surprisingly",
+        "translation": "đáng ngạc nhiên",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1932,6 +1947,7 @@
     },
     {
         "word": "On the other hand",
+        "translation": "mặt khác",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1939,6 +1955,7 @@
     },
     {
         "word": "metabolism",
+        "translation": "sự trao đổi chất",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1946,6 +1963,7 @@
     },
     {
         "word": "legal pads",
+        "translation": "sổ tay pháp lý",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1953,6 +1971,7 @@
     },
     {
         "word": "mechanisms",
+        "translation": "cơ chế",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1960,6 +1979,7 @@
     },
     {
         "word": "injury",
+        "translation": "chấn thương",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1967,6 +1987,7 @@
     },
     {
         "word": "concussion",
+        "translation": "chấn động",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1974,6 +1995,7 @@
     },
     {
         "word": "model",
+        "translation": "mô hình",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1981,6 +2003,7 @@
     },
     {
         "word": "genetic",
+        "translation": "di truyền",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1988,6 +2011,7 @@
     },
     {
         "word": "injured",
+        "translation": "bị thương",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -1995,6 +2019,7 @@
     },
     {
         "word": "ultimately",
+        "translation": "cuối cùng",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
@@ -2002,6 +2027,15 @@
     },
     {
         "word": "promote",
+        "translation": "thúc đẩy",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "institute",
+        "translation": "viện",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": ""
