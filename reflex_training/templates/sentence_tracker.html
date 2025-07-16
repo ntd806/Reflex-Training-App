@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #historyList, #stats {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .unheard-word {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentence Tracker</h1>
+        <div class="input-group">
+            <label for="originalSentence">Câu gốc:</label>
+            <textarea id="originalSentence" rows="2" placeholder="Nhập câu gốc..."></textarea>
+        </div>
+        <div class="input-group">
+            <label for="unheardWords">Từ không nghe được (cách nhau bằng dấu phẩy):</label>
+            <input type="text" id="unheardWords" placeholder="Nhập từ không nghe được...">
+        </div>
+        <div class="input-group">
+            <label for="misheardWords">Từ nghe được nhưng sai chính tả hoặc không biết viết (cách nhau bằng dấu phẩy):</label>
+            <input type="text" id="misheardWords" placeholder="Nhập từ nghe được sai...">
+        </div>
+        <button onclick="saveSentence()">Lưu câu</button>
+
+        <h2>Lịch sử theo ngày</h2>
+        <div id="historyList"></div>
+
+        <h2>Thống kê từ không nghe được</h2>
+        <div id="stats"></div>
+    </div>
+
+    <script>
+        function saveSentence() {
+            const originalSentence = document.getElementById('originalSentence').value.trim();
+            const unheardWords = document.getElementById('unheardWords').value.trim().split(',').map(w => w.trim()).filter(w => w);
+            const misheardWords = document.getElementById('misheardWords').value.trim().split(',').map(w => w.trim()).filter(w => w);
+
+            if (!originalSentence) {
+                alert('Vui lòng nhập câu gốc!');
+                return;
+            }
+
+            const now = new Date();
+            const dateStr = now.toISOString().split('T')[0]; // Định dạng ngày: YYYY-MM-DD
+            const entry = {
+                date: dateStr,
+                time: now.toLocaleTimeString(),
+                sentence: originalSentence,
+                unheard: unheardWords,
+                misheard: misheardWords
+            };
+
+            // Lấy dữ liệu lịch sử từ localStorage
+            let history = JSON.parse(localStorage.getItem('sentenceHistory')) || {};
+            if (!history[dateStr]) {
+                history[dateStr] = [];
+            }
+            history[dateStr].push(entry);
+            localStorage.setItem('sentenceHistory', JSON.stringify(history));
+
+            // Cập nhật thống kê từ không nghe được
+            let stats = JSON.parse(localStorage.getItem('unheardStats')) || {};
+            unheardWords.forEach(word => {
+                stats[word] = (stats[word] || 0) + 1;
+            });
+            localStorage.setItem('unheardStats', JSON.stringify(stats));
+
+            // Xóa input sau khi lưu
+            document.getElementById('originalSentence').value = '';
+            document.getElementById('unheardWords').value = '';
+            document.getElementById('misheardWords').value = '';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const history = JSON.parse(localStorage.getItem('sentenceHistory')) || {};
+            const stats = JSON.parse(localStorage.getItem('unheardStats')) || {};
+            const historyList = document.getElementById('historyList');
+            const statsDiv = document.getElementById('stats');
+
+            // Hiển thị lịch sử
+            historyList.innerHTML = '';
+            for (let date in history) {
+                const entries = history[date];
+                const totalSentences = entries.length;
+                let dateHtml = `<h3>${date} (Tổng: ${totalSentences} câu)</h3><ul>`;
+                entries.forEach(entry => {
+                    dateHtml += `<li>
+                        ${entry.time}: "${entry.sentence}"
+                        <ul>
+                            <li><span class="unheard-word">Từ không nghe được:</span> ${entry.unheard.join(', ') || 'Không có'}</li>
+                            <li>Từ nghe được sai: ${entry.misheard.join(', ') || 'Không có'}</li>
+                        </ul>
+                    </li>`;
+                });
+                dateHtml += '</ul>';
+                historyList.innerHTML += dateHtml;
+            }
+
+            // Hiển thị thống kê
+            statsDiv.innerHTML = '<h4>Danh sách từ không nghe được:</h4><ul>';
+            for (let word in stats) {
+                statsDiv.innerHTML += `<li>${word}: ${stats[word]} lần</li>`;
+            }
+            statsDiv.innerHTML += '</ul>';
+            if (Object.keys(stats).length === 0) {
+                statsDiv.innerHTML += '<p>Chưa có từ nào được thống kê.</p>';
+            }
+        }
+
+        // Cập nhật hiển thị khi tải trang
+        document.addEventListener('DOMContentLoaded', updateDisplay);
+    </script>
+</body>
+</html>

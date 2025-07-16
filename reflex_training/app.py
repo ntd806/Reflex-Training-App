@@ -1074,5 +1074,9 @@ def essay_vocab_page():
 def unit_page():
     return render_template('random_units.html')
 
+@app.route('/sentence-tracker')
+def tracker_page():
+    return render_template('sentence_tracker.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

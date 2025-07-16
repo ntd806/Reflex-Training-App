@@ -2052,6 +2052,41 @@
         "word": "disaster",
         "priority": false,
         "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "literature",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": "Anh-Mỹ /ˈlɪ.t̬ɚ.rə.tʃɚ/  Nghe giống: LI-đờ-rờ-chờ  Anh-Anh /ˈlɪt.rə.tʃə/ LÍT-trờ-chờ"
+    },
+    {
+        "word": "vulnerable",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": "Anh-Mỹ VÂN-nờ-rờ-bồ"
+    },
+    {
+        "word": "courses",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": "Anh-Mỹ co-r-xì(z)"
+    },
+    {
+        "word": "as·sess",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "Dealing",
+        "priority": false,
+        "shown_today": 0,
         "last_shown_date": ""
     }
 ]
