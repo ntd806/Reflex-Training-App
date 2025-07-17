@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentence Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: auto;
             background: white;
             padding: 20px;
             border-radius: 5px;
@@ -89,6 +89,7 @@
         <a href="/sentence-tracker">Sentence Tracker</a>
         <a href="/unit">Unit</a>
     </div>
+
     <div class="container">
         <h1>Sentence Tracker</h1>
         <div class="input-group">
@@ -124,7 +125,7 @@
             }
 
             const now = new Date();
-            const dateStr = now.toISOString().split('T')[0]; // Định dạng ngày: YYYY-MM-DD
+            const dateStr = now.toISOString().split('T')[0];
             const entry = {
                 date: dateStr,
                 time: now.toLocaleTimeString(),
@@ -133,65 +134,78 @@
                 misheard: misheardWords
             };
 
-            // Lấy dữ liệu lịch sử từ localStorage
-            let history = JSON.parse(localStorage.getItem('sentenceHistory')) || {};
-            if (!history[dateStr]) {
-                history[dateStr] = [];
-            }
-            history[dateStr].push(entry);
-            localStorage.setItem('sentenceHistory', JSON.stringify(history));
-
-            // Cập nhật thống kê từ không nghe được
-            let stats = JSON.parse(localStorage.getItem('unheardStats')) || {};
-            unheardWords.forEach(word => {
-                stats[word] = (stats[word] || 0) + 1;
+            fetch('/api/save_sentence', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(entry)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === 'ok') {
+                    document.getElementById('originalSentence').value = '';
+                    document.getElementById('unheardWords').value = '';
+                    document.getElementById('misheardWords').value = '';
+                    updateDisplay();
+                }
             });
-            localStorage.setItem('unheardStats', JSON.stringify(stats));
-
-            // Xóa input sau khi lưu
-            document.getElementById('originalSentence').value = '';
-            document.getElementById('unheardWords').value = '';
-            document.getElementById('misheardWords').value = '';
-            updateDisplay();
         }
 
         function updateDisplay() {
-            const history = JSON.parse(localStorage.getItem('sentenceHistory')) || {};
-            const stats = JSON.parse(localStorage.getItem('unheardStats')) || {};
-            const historyList = document.getElementById('historyList');
-            const statsDiv = document.getElementById('stats');
+            fetch('/api/load_sentences')
+                .then(res => res.json())
+                .then(history => {
+                    const historyList = document.getElementById('historyList');
+                    const statsDiv = document.getElementById('stats');
 
-            // Hiển thị lịch sử
-            historyList.innerHTML = '';
-            for (let date in history) {
-                const entries = history[date];
-                const totalSentences = entries.length;
-                let dateHtml = `<h3>${date} (Tổng: ${totalSentences} câu)</h3><ul>`;
-                entries.forEach(entry => {
-                    dateHtml += `<li>
-                        ${entry.time}: "${entry.sentence}"
-                        <ul>
-                            <li><span class="unheard-word">Từ không nghe được:</span> ${entry.unheard.join(', ') || 'Không có'}</li>
-                            <li>Từ nghe được sai: ${entry.misheard.join(', ') || 'Không có'}</li>
-                        </ul>
-                    </li>`;
+                    historyList.innerHTML = '';
+                    statsDiv.innerHTML = '';
+
+                    let stats = {};
+
+                    for (let date in history) {
+                        const entries = history[date];
+                        if (!Array.isArray(entries)) continue;
+
+                        const totalSentences = entries.length;
+                        let dateHtml = `<h3>${date} (Tổng: ${totalSentences} câu)</h3><ul>`;
+
+                        entries.forEach(entry => {
+                            const unheard = Array.isArray(entry.unheard) ? entry.unheard : [];
+                            const misheard = Array.isArray(entry.misheard) ? entry.misheard : [];
+
+                            unheard.forEach(word => {
+                                if (word) {
+                                    stats[word] = (stats[word] || 0) + 1;
+                                }
+                            });
+
+                            dateHtml += `<li>
+                                ${entry.time}: "${entry.sentence}"
+                                <ul>
+                                    <li><span class="unheard-word">Từ không nghe được:</span> ${unheard.length > 0 ? unheard.join(', ') : 'Không có'}</li>
+                                    <li>Từ nghe được sai: ${misheard.length > 0 ? misheard.join(', ') : 'Không có'}</li>
+                                </ul>
+                            </li>`;
+                        });
+
+                        dateHtml += '</ul>';
+                        historyList.innerHTML += dateHtml;
+                    }
+
+                    // Hiển thị thống kê
+                    statsDiv.innerHTML = '<h4>Danh sách từ không nghe được:</h4>';
+                    if (Object.keys(stats).length === 0) {
+                        statsDiv.innerHTML += '<p>Chưa có từ nào được thống kê.</p>';
+                    } else {
+                        statsDiv.innerHTML += '<ul>';
+                        for (let word in stats) {
+                            statsDiv.innerHTML += `<li>${word}: ${stats[word]} lần</li>`;
+                        }
+                        statsDiv.innerHTML += '</ul>';
+                    }
                 });
-                dateHtml += '</ul>';
-                historyList.innerHTML += dateHtml;
-            }
-
-            // Hiển thị thống kê
-            statsDiv.innerHTML = '<h4>Danh sách từ không nghe được:</h4><ul>';
-            for (let word in stats) {
-                statsDiv.innerHTML += `<li>${word}: ${stats[word]} lần</li>`;
-            }
-            statsDiv.innerHTML += '</ul>';
-            if (Object.keys(stats).length === 0) {
-                statsDiv.innerHTML += '<p>Chưa có từ nào được thống kê.</p>';
-            }
         }
 
-        // Cập nhật hiển thị khi tải trang
         document.addEventListener('DOMContentLoaded', updateDisplay);
     </script>
 </body>

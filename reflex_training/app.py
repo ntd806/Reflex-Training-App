@@ -24,6 +24,7 @@ LESSON_STATS_FILE = os.path.join(os.path.dirname(__file__), 'lesson_stats.json')
 SCHEDULE_FILE = 'schedual.json'
 SCHEDULE_STATUS_FILE = 'schedual_status.json'
 CURRENT_PRACTICE_FILE = os.path.join(os.path.dirname(__file__), 'current_practice.json')
+DATA_FILE = "sentence_data.json"
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -1077,6 +1078,32 @@ def unit_page():
 @app.route('/sentence-tracker')
 def tracker_page():
     return render_template('sentence_tracker.html')
+
+def load_data():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_data(data):
+    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+@app.route('/api/save_sentence', methods=['POST'])
+def save_sentence():
+    data = request.json
+    history = load_data()
+    date = data.get('date')
+    if date not in history:
+        history[date] = []
+    history[date].append(data)
+    save_data(history)
+    return jsonify({'status': 'ok'})
+
+@app.route('/api/load_sentences', methods=['GET'])
+def load_sentences():
+    history = load_data()
+    return jsonify(history)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
