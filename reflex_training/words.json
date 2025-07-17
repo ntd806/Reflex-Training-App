@@ -2077,14 +2077,21 @@
         "guide": "Anh-Mỹ co-r-xì(z)"
     },
     {
-        "word": "as·sess",
+        "word": "Dealing",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": "",
         "guide": ""
     },
     {
-        "word": "Dealing",
+        "word": "in favor of",
+        "priority": false,
+        "shown_today": 0,
+        "last_shown_date": "",
+        "guide": ""
+    },
+    {
+        "word": "assess",
         "priority": false,
         "shown_today": 0,
         "last_shown_date": ""
