@@ -1105,5 +1105,9 @@ def load_sentences():
     history = load_data()
     return jsonify(history)
 
+@app.route('/vocab-by-topic')
+def vocabByTopic_page():
+    return render_template('vocab_by_topic.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

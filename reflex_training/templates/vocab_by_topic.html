@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vocabulary by Topic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{{ url_for('static', filename='vocab_by_topic.js') }}"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .word-item {
+      padding: 8px;
+      margin: 4px 0;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+    }
+    .word-item span.word {
+      font-weight: bold;
+    }
+    .word-item span.meaning {
+      color: #666;
+      font-style: italic;
+    }
+    select {
+      padding: 8px;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 10px 5px 0 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vocabulary by Topic</h1>
+    <select id="topicSelector" onchange="renderVocab()"></select>
+    <div id="vocabDisplay"></div>
+    <div>
+      <button onclick="startReading()">🔁 Đọc từ</button>
+      <button onclick="stopReading()">⏹️ Dừng</button>
+    </div>
+  </div>
+
+  <script>
+    let readInterval = null;
+
+    function populateSelector() {
+      const selector = document.getElementById('topicSelector');
+      selector.innerHTML = '';
+      for (const topic in vocabByTopic) {
+        const option = document.createElement('option');
+        option.value = topic;
+        option.textContent = topic;
+        selector.appendChild(option);
+      }
+    }
+
+    function renderVocab() {
+      const topic = document.getElementById('topicSelector').value;
+      const container = document.getElementById('vocabDisplay');
+      container.innerHTML = '';
+      vocabByTopic[topic].forEach(([word, meaning]) => {
+        const item = document.createElement('div');
+        item.className = 'word-item';
+        item.innerHTML = `<span class="word">${word}</span><span class="meaning">${meaning}</span>`;
+        container.appendChild(item);
+      });
+    }
+
+    function speak(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      window.speechSynthesis.speak(utter);
+    }
+
+    function startReading() {
+      const topic = document.getElementById('topicSelector').value;
+      const words = vocabByTopic[topic].map(([word]) => word);
+      let i = 0;
+      stopReading();
+      readInterval = setInterval(() => {
+        if (i >= words.length) {
+          clearInterval(readInterval);
+          return;
+        }
+        speak(words[i]);
+        i++;
+      }, 2500);
+    }
+
+    function stopReading() {
+      if (readInterval) clearInterval(readInterval);
+      window.speechSynthesis.cancel();
+    }
+
+    populateSelector();
+    renderVocab();
+  </script>
+</body>
+</html>

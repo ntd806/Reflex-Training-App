@@ -1,142 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Units Display</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f0f0;
-            margin: 20px;
-        }
-        .nav {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-        .nav a {
-            color: white;
-            margin-right: 15px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-        .nav select {
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
-            background-color: #fff;
-            color: #333;
-        }
-        #unitDisplay {
-            font-size: 2em;
-            margin: 20px;
-            padding: 10px;
-            border: 2px solid #333;
-            border-radius: 5px;
-            background-color: white;
-        }
-        .controls {
-            margin: 10px;
-        }
-        input[type="number"] {
-            padding: 5px;
-            margin: 0 10px;
-            width: 60px;
-        }
-        button {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random Units Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f0f0;
+      margin: 20px;
+    }
+    .nav {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #007bff;
+      border-radius: 5px;
+    }
+    .nav a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav a:hover {
+      text-decoration: underline;
+    }
+    .nav select {
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      background-color: #fff;
+      color: #333;
+    }
+    #unitDisplay {
+      font-size: 2em;
+      margin: 20px;
+      padding: 10px;
+      border: 2px solid #333;
+      border-radius: 5px;
+      background-color: white;
+    }
+    #vnMeaning {
+      font-size: 1.2em;
+      color: #444;
+      margin-top: 10px;
+    }
+    #abbreviation {
+      font-size: 1em;
+      color: #777;
+    }
+    .controls {
+      margin: 10px;
+    }
+    input[type="number"] {
+      padding: 5px;
+      margin: 0 10px;
+      width: 60px;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-       <div class="nav">
-        <a href="/">Trang chính</a>
-        <a href="/sentence_practice">Write from Dictation</a>
-        <a href="/repeat_sentence">Repeat Sentence</a>
-        <a href="/ending_practice">Practice -S/-ES & -ED</a>
-        <a href="/irregular_verbs">Irregular Verbs</a>
-        <a href="/youtube_tracker">YouTube Tracker</a>
-        <a href="/speaking_describe_image_page">Speaking Describe Image</a>
-        <a href="/random_currency">Random Currency</a>
-        <a href="/schedule_ui">Schedule</a>
-        <a href="/essay_vocab">Essay Vocab</a>
-        <a href="/sentence-tracker">sentence tracker</a>
-        <a href="/unit" style="margin-right:20px;">unit</a>
-    </div>
-    <h1>Random Units Display</h1>
-    <div id="unitDisplay">Waiting...</div>
-    <div class="controls">
-        <label>Read Interval (seconds): </label>
-        <input type="number" id="readInterval" value="6" min="1">
-        <label>Repeat Delay (seconds): </label>
-        <input type="number" id="repeatDelay" value="3" min="1">
-        <button onclick="startDisplay()">Start</button>
-        <button onclick="stopDisplay()">Stop</button>
-    </div>
+  <div class="nav">
+    <a href="/">Trang chính</a>
+    <a href="/sentence_practice">Write from Dictation</a>
+    <a href="/repeat_sentence">Repeat Sentence</a>
+    <a href="/ending_practice">Practice -S/-ES & -ED</a>
+    <a href="/irregular_verbs">Irregular Verbs</a>
+    <a href="/youtube_tracker">YouTube Tracker</a>
+    <a href="/speaking_describe_image_page">Speaking Describe Image</a>
+    <a href="/random_currency">Random Currency</a>
+    <a href="/schedule_ui">Schedule</a>
+    <a href="/essay_vocab">Essay Vocab</a>
+    <a href="/sentence-tracker">Sentence Tracker</a>
+    <a href="/unit" style="margin-right:20px;">Unit</a>
+  </div>
 
-    <script>
-        let intervalId = null;
-        let timeoutId = null;
-        const unitDisplay = document.getElementById('unitDisplay');
-        const readIntervalInput = document.getElementById('readInterval');
-        const repeatDelayInput = document.getElementById('repeatDelay');
+  <h1>Random Units Display</h1>
+  <div id="unitDisplay">Waiting...</div>
+  <div id="vnMeaning"></div>
+  <div id="abbreviation"></div>
 
-        // Danh sách đơn vị đo lường (hundred, thousand, và các đơn vị phổ biến khác)
-     const units = [
-    'hundred', 'thousand', 'million', 'billion',
-    'meter', 'kilometer', 'centimeter', 'inch', 'foot', 'mile',
-    'kilogram', 'pound', 'liter', 'gallon', 'degree Celsius', 'degree Fahrenheit',
-    'square meter', 'hectare', 'square foot', 'acre',
-    'joule', 'kilowatt hour', 'British Thermal Unit',
-    'British pound', 'US dollar', 'Canadian dollar', 'Australian dollar',
-    'Africa', 'Antarctica', 'Asia', 'Australia', 'Europe', 'North America', 'South America',
-    'Arctic Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 'Southern Ocean',
-    'latitude', 'longitude',
-    'continent', 'island', 'mountain', 'river', 'valley', 'plateau', 'desert', 'forest',
-    'polar', 'temperate', 'tropical', 'arid', 'mediterranean'
+  <div class="controls">
+    <label>Read Interval (seconds): </label>
+    <input type="number" id="readInterval" value="6" min="1" />
+    <label>Repeat Delay (seconds): </label>
+    <input type="number" id="repeatDelay" value="3" min="1" />
+    <button onclick="startDisplay()">Start</button>
+    <button onclick="stopDisplay()">Stop</button>
+  </div>
+
+  <script>
+    let intervalId = null;
+    let timeoutId = null;
+    const unitDisplay = document.getElementById('unitDisplay');
+    const vnMeaning = document.getElementById('vnMeaning');
+    const abbrDiv = document.getElementById('abbreviation');
+    const readIntervalInput = document.getElementById('readInterval');
+    const repeatDelayInput = document.getElementById('repeatDelay');
+
+    const units = [
+      { word: 'hundred', vn: 'trăm', abbr: '' },
+      { word: 'thousand', vn: 'nghìn', abbr: '' },
+      { word: 'million', vn: 'triệu', abbr: 'M' },
+      { word: 'billion', vn: 'tỷ', abbr: 'B' },
+
+      { word: 'meter', vn: 'mét', abbr: 'm' },
+      { word: 'kilometer', vn: 'kilômét', abbr: 'km' },
+      { word: 'centimeter', vn: 'xentimét', abbr: 'cm' },
+      { word: 'inch', vn: 'in', abbr: 'in' },
+      { word: 'foot', vn: 'feet (bộ)', abbr: 'ft' },
+      { word: 'mile', vn: 'dặm', abbr: 'mi' },
+
+      { word: 'kilogram', vn: 'kilôgam', abbr: 'kg' },
+      { word: 'pound', vn: 'pao', abbr: 'lb' },
+      { word: 'liter', vn: 'lít', abbr: 'L' },
+      { word: 'gallon', vn: 'gallon', abbr: 'gal' },
+      { word: 'degree Celsius', vn: 'độ C', abbr: '°C' },
+      { word: 'degree Fahrenheit', vn: 'độ F', abbr: '°F' },
+
+      { word: 'square meter', vn: 'mét vuông', abbr: 'm²' },
+      { word: 'hectare', vn: 'hécta', abbr: 'ha' },
+      { word: 'square foot', vn: 'feet vuông', abbr: 'ft²' },
+      { word: 'acre', vn: 'mẫu Anh', abbr: 'ac' },
+
+      { word: 'joule', vn: 'Jun (đơn vị năng lượng)', abbr: 'J' },
+      { word: 'kilowatt hour', vn: 'kilôwatt giờ', abbr: 'kWh' },
+      { word: 'British Thermal Unit', vn: 'đơn vị nhiệt Anh', abbr: 'BTU' },
+
+      { word: 'British pound', vn: 'bảng Anh', abbr: 'GBP' },
+      { word: 'US dollar', vn: 'đô la Mỹ', abbr: 'USD' },
+      { word: 'Canadian dollar', vn: 'đô la Canada', abbr: 'CAD' },
+      { word: 'Australian dollar', vn: 'đô la Úc', abbr: 'AUD' },
+
+      { word: 'Africa', vn: 'Châu Phi', abbr: '' },
+      { word: 'Antarctica', vn: 'Châu Nam Cực', abbr: '' },
+      { word: 'Asia', vn: 'Châu Á', abbr: '' },
+      { word: 'Australia', vn: 'Châu Úc', abbr: '' },
+      { word: 'Europe', vn: 'Châu Âu', abbr: '' },
+      { word: 'North America', vn: 'Bắc Mỹ', abbr: '' },
+      { word: 'South America', vn: 'Nam Mỹ', abbr: '' },
+
+      { word: 'Arctic Ocean', vn: 'Bắc Băng Dương', abbr: '' },
+      { word: 'Atlantic Ocean', vn: 'Đại Tây Dương', abbr: '' },
+      { word: 'Indian Ocean', vn: 'Ấn Độ Dương', abbr: '' },
+      { word: 'Pacific Ocean', vn: 'Thái Bình Dương', abbr: '' },
+      { word: 'Southern Ocean', vn: 'Nam Đại Dương', abbr: '' },
+
+      { word: 'latitude', vn: 'vĩ độ', abbr: '' },
+      { word: 'longitude', vn: 'kinh độ', abbr: '' },
+
+      { word: 'continent', vn: 'lục địa', abbr: '' },
+      { word: 'island', vn: 'đảo', abbr: '' },
+      { word: 'mountain', vn: 'núi', abbr: '' },
+      { word: 'river', vn: 'sông', abbr: '' },
+      { word: 'valley', vn: 'thung lũng', abbr: '' },
+      { word: 'plateau', vn: 'cao nguyên', abbr: '' },
+      { word: 'desert', vn: 'sa mạc', abbr: '' },
+      { word: 'forest', vn: 'rừng', abbr: '' },
+
+      { word: 'polar', vn: 'vùng cực', abbr: '' },
+      { word: 'temperate', vn: 'ôn đới', abbr: '' },
+      { word: 'tropical', vn: 'nhiệt đới', abbr: '' },
+      { word: 'arid', vn: 'khô hạn', abbr: '' },
+      { word: 'mediterranean', vn: 'địa trung hải', abbr: '' },
+      { word: 'cubic meter', vn: 'mét khối', abbr: 'm³' },
+      { word: 'cubic foot', vn: 'feet khối', abbr: 'ft³' },
+      { word: 'cubic inch', vn: 'in khối', abbr: 'in³' }
     ];
 
-        function speakUnit(unit) {
-            const utterance = new SpeechSynthesisUtterance(unit);
-            utterance.lang = 'en-US'; // Có thể thay đổi ngôn ngữ nếu cần
-            window.speechSynthesis.speak(utterance);
-        }
+    function speakUnit(unit) {
+      const utterance = new SpeechSynthesisUtterance(unit);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
 
-        function displayRandomUnit() {
-            const randomUnit = units[Math.floor(Math.random() * units.length)];
-            unitDisplay.textContent = randomUnit;
-            speakUnit(randomUnit);
-        }
+    function displayRandomUnit() {
+      const randomItem = units[Math.floor(Math.random() * units.length)];
+      unitDisplay.textContent = randomItem.word;
+      vnMeaning.textContent = `Nghĩa tiếng Việt: ${randomItem.vn || 'Không có'}`;
+      abbrDiv.textContent = randomItem.abbr ? `Viết tắt: ${randomItem.abbr}` : '';
+      speakUnit(randomItem.word);
+    }
 
-        function startDisplay() {
-            if (intervalId) stopDisplay();
-            const readInterval = parseInt(readIntervalInput.value) * 1000; // Chuyển sang mili giây
-            const repeatDelay = parseInt(repeatDelayInput.value) * 1000; // Chuyển sang mili giây
+    function startDisplay() {
+      if (intervalId) stopDisplay();
+      const readInterval = parseInt(readIntervalInput.value) * 1000;
+      const repeatDelay = parseInt(repeatDelayInput.value) * 1000;
 
-            displayRandomUnit(); // Hiển thị ngay lập tức
-            intervalId = setInterval(() => {
-                displayRandomUnit();
-                timeoutId = setTimeout(() => {
-                    displayRandomUnit(); // Lặp lại sau delay
-                }, repeatDelay);
-            }, readInterval);
-        }
+      displayRandomUnit();
+      intervalId = setInterval(() => {
+        displayRandomUnit();
+        timeoutId = setTimeout(() => {
+          displayRandomUnit(); // repeat
+        }, repeatDelay);
+      }, readInterval);
+    }
 
-        function stopDisplay() {
-            if (intervalId) clearInterval(intervalId);
-            if (timeoutId) clearTimeout(timeoutId);
-            window.speechSynthesis.cancel(); // Dừng phát âm
-            unitDisplay.textContent = 'Stopped';
-        }
-    </script>
+    function stopDisplay() {
+      if (intervalId) clearInterval(intervalId);
+      if (timeoutId) clearTimeout(timeoutId);
+      window.speechSynthesis.cancel();
+      unitDisplay.textContent = 'Stopped';
+      vnMeaning.textContent = '';
+      abbrDiv.textContent = '';
+    }
+  </script>
 </body>
 </html>
