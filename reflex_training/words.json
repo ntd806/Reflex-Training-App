@@ -2185,5 +2185,13 @@
         "last_shown_date": "2025-07-18",
         "guide": "👉 ìn-tơ-nơ-lai(z)",
         "learned": true
+    },
+    {
+        "word": "surface",
+        "translation": "Bề mặt",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-20"
     }
 ]

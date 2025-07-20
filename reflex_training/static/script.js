@@ -20,38 +20,36 @@ function speak(text) {
 function addWords() {
     const word = document.getElementById('wordInput').value.trim();
     const guide = document.getElementById('guideInput').value.trim();
+    const type = document.getElementById('typeInput').value;  // select
+    const translation = document.getElementById('translationInput').value.trim();
+
     if (!word) {
-        document.getElementById('output').innerHTML = 'Vui lòng nhập từ!';
+        alert('Hãy nhập từ.');
         return;
     }
+
+    const data = {
+        word: word,
+        guide: guide,
+        type: type,
+        translation: translation
+    };
+
     $.ajax({
         url: '/words',
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({ word: word }),
-        success: function(data) {
-            document.getElementById('output').innerHTML = data.message;
-            document.getElementById('wordInput').value = '';
-            document.getElementById('guideInput').value = '';
+        data: JSON.stringify(data),
+        success: function(res) {
+            alert(res.message || 'Đã thêm từ!');
             showWordList();
-            // Nếu có hướng dẫn đọc, gửi lên server
-            if (guide) {
-                $.ajax({
-                    url: '/guides',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ word: word, guide: guide }),
-                    success: function() {},
-                    error: function() {}
-                });
-            }
         },
-        error: function(xhr) {
-            const res = xhr.responseJSON;
-            document.getElementById('output').innerHTML = res && res.error ? res.error : 'Lỗi!';
+        error: function(err) {
+            alert(err.responseJSON?.error || 'Lỗi khi thêm từ!');
         }
     });
 }
+
 
 function getNextMode(mode) {
     const idx = modeOrder.indexOf(mode);
@@ -199,41 +197,7 @@ function deleteWord(word) {
 }
 
 // Gọi showWordList khi thêm từ mới
-function addWords() {
-    const word = document.getElementById('wordInput').value.trim();
-    const guide = document.getElementById('guideInput').value.trim();
-    if (!word) {
-        document.getElementById('output').innerHTML = 'Vui lòng nhập từ!';
-        return;
-    }
-    $.ajax({
-        url: '/words',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ word: word }),
-        success: function(data) {
-            document.getElementById('output').innerHTML = data.message;
-            document.getElementById('wordInput').value = '';
-            document.getElementById('guideInput').value = '';
-            showWordList();
-            // Nếu có hướng dẫn đọc, gửi lên server
-            if (guide) {
-                $.ajax({
-                    url: '/guides',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ word: word, guide: guide }),
-                    success: function() {},
-                    error: function() {}
-                });
-            }
-        },
-        error: function(xhr) {
-            const res = xhr.responseJSON;
-            document.getElementById('output').innerHTML = res && res.error ? res.error : 'Lỗi!';
-        }
-    });
-}
+
 
 function searchWordList() {
     const q = document.getElementById('searchInput').value.trim();

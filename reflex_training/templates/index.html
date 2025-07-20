@@ -88,8 +88,20 @@
             <h2>3. Linked Speech Practice</h2>
             <input type="text" id="wordInput" placeholder="Enter words (e.g., about it, going to)">
             <input type="text" id="guideInput" placeholder="Pronunciation guide (optional)">
+            <select id="typeInput">
+                <option value="">-- Select type --</option>
+                <option value="noun">Noun</option>
+                <option value="verb">Verb</option>
+                <option value="adjective">Adjective</option>
+                <option value="adverb">Adverb</option>
+                <option value="phrase">Phrase</option>
+                <option value="other">phrasal verb</option>
+                <option value="collocation">collocation</option>
+            </select>
+            <input type="text" id="translationInput" placeholder="Vietnamese meaning">
             <button onclick="addWords()">Add Words</button>
             <button onclick="startPractice('word')">Practice Word</button>
+
             <!-- Thêm vào sau phần nhập câu -->
             <div style="margin-top:20px;">
                    <form id="excelForm" enctype="multipart/form-data" style="margin-top:15px;">
@@ -167,9 +179,13 @@ function showWordDetail(word) {
 
         const translation = wordObj.translation || 'Chưa có nghĩa';
         const guide = wordObj.guide || 'Chưa có hướng dẫn đọc';
+        const type = wordObj.type || 'Chưa rõ loại từ';
         document.getElementById('output').innerHTML = `
             <div style="font-size:1.3em; margin-bottom:10px;">
                 <b>Từ:</b> ${word}
+            </div>
+            <div style="font-size:1.3em; margin-bottom:10px;">
+                <b>Từ:</b> ${type}
             </div>
             <div style="font-size:1.3em; margin-bottom:10px;">
                 <b>Nghĩa:</b> ${translation}

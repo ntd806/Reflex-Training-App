@@ -174,6 +174,8 @@ def get_words():
 def add_word():
     data = request.json
     word = data.get('word', '').strip()
+    translation = data.get('translation')
+    type_ = data.get('type')
     if not word:
         return jsonify({'error': 'Word is required'}), 400
     words = load_words()
@@ -181,10 +183,12 @@ def add_word():
         if isinstance(w, dict) and w.get('word', '').strip().lower() == word.lower():
             return jsonify({'error': 'Word already exists'}), 400
     new_word = {
-        "word": word,
-        "priority": False,
-        "shown_today": 0,
-        "last_shown_date": ""
+        'word': word,
+        'translation': translation,
+        'type': type_,
+        'learned': False,
+        'priority': False,
+        'created_at': '' + today_str(),
     }
     words.append(new_word)
     words = [w for w in words if isinstance(w, dict) and 'word' in w]
