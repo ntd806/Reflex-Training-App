@@ -185,7 +185,7 @@ function showWordDetail(word) {
                 <b>Từ:</b> ${word}
             </div>
             <div style="font-size:1.3em; margin-bottom:10px;">
-                <b>Từ:</b> ${type}
+                <b>Loại Từ:</b> ${type}
             </div>
             <div style="font-size:1.3em; margin-bottom:10px;">
                 <b>Nghĩa:</b> ${translation}
@@ -339,6 +339,9 @@ function loadContent(mode, autoSpeak = false) {
                 document.getElementById('output').innerHTML = `
                     <div style="font-size:1.3em; margin-bottom:10px;">
                         <b>Từ:</b> ${data.text}
+                    </div>
+                     <div style="font-size:1.3em; margin-bottom:10px;">
+                        <b>Loại từ</b> ${data.type || 'Chưa phân loại'}
                     </div>
                     <div style="font-size:1.3em; margin-bottom:10px;">
                         <b>Nghĩa:</b> ${data.translation || 'Chưa có nghĩa'}
