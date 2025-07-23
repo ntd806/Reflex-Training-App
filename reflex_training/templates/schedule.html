@@ -191,7 +191,6 @@
     <h2>Thống kê tiến độ</h2>
     <div id="progressStats"></div>
 
-    <!-- Modal for Progress Details -->
     <div id="progressModal" class="modal">
         <div class="modal-content">
             <span class="close">×</span>
@@ -211,24 +210,24 @@
     </div>
 
     <script>
-        let scheduleData = null; // Khai báo scheduleData ở phạm vi toàn cục
+        let scheduleData = null;
 
-        $(document).ready(function() {
-            $.getJSON('/schedule', function(data) {
-                scheduleData = data; // Gán dữ liệu cho scheduleData
+        $(document).ready(function () {
+            $.getJSON('/schedule', function (data) {
+                scheduleData = data;
                 const schedule = data.schedule;
                 const status = data.status;
                 const currentPractice = data.current_practice;
                 const today = data.today;
                 const weekDay = data.week_day;
 
-                // Hiển thị lịch hôm nay
                 let todayHtml = '';
                 if (schedule.weekly_plan[weekDay]) {
                     schedule.weekly_plan[weekDay].forEach((item, idx) => {
+                        const isBreak = item.activity.toLowerCase() === 'break';
+                        if (isBreak) return;
                         const isDone = status[today] && status[today][weekDay] && status[today][weekDay].includes(idx);
                         const practiceItem = currentPractice[today] && currentPractice[today][weekDay] && currentPractice[today][weekDay][idx] ? currentPractice[today][weekDay][idx] : '';
-                        const isBreak = item.activity.toLowerCase() === 'break';
                         todayHtml += `
                             <tr class="${isDone ? 'done' : ''}">
                                 <td>${item.duration}</td>
@@ -237,17 +236,14 @@
                                     <button onclick="markDone('${weekDay}', ${idx}, '${today}')">${isDone ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}</button>
                                 </td>
                                 <td>
-                                    ${isBreak ? '-' : `
-                                        <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
-                                        <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
-                                    `}
+                                    <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
+                                    <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
                                 </td>
                             </tr>`;
                     });
                 }
                 $('#todaySchedule tbody').html(todayHtml);
 
-                // Hiển thị lịch tuần với trạng thái hoàn thành
                 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                 const maxActivities = Math.max(...days.map(day => schedule.weekly_plan[day].length));
                 let weeklyHtml = '';
@@ -256,8 +252,8 @@
                     weeklyHtml += `<td>Khung ${i + 1}</td>`;
                     days.forEach(day => {
                         const item = schedule.weekly_plan[day][i];
-                        const isDone = day === weekDay && status[today] && status[today][day] && status[today][day].includes(i);
-                        if (item) {
+                        if (item && item.activity.toLowerCase() !== 'break') {
+                            const isDone = day === weekDay && status[today] && status[today][day] && status[today][day].includes(i);
                             weeklyHtml += `<td class="${isDone ? 'done' : ''}">${item.activity} (${item.duration})</td>`;
                         } else {
                             weeklyHtml += '<td>-</td>';
@@ -267,25 +263,22 @@
                 }
                 $('#weeklySchedule tbody').html(weeklyHtml);
 
-                // Hiển thị thống kê tiến độ
                 let progressHtml = '<ul>';
                 for (let date in status) {
                     for (let day in status[date]) {
-                        progressHtml += `<li onclick="showProgressDetails('${date}', '${day}')">${date} (${day}): Đã hoàn thành ${status[date][day].length} / ${schedule.weekly_plan[day].length} hoạt động</li>`;
+                        const totalActivities = schedule.weekly_plan[day].filter(item => item.activity.toLowerCase() !== 'break').length;
+                        progressHtml += `<li onclick="showProgressDetails('${date}', '${day}')">${date} (${day}): Đã hoàn thành ${status[date][day].length} / ${totalActivities} hoạt động</li>`;
                     }
                 }
                 progressHtml += '</ul>';
                 $('#progressStats').html(progressHtml);
-            }).fail(function() {
-                alert('Lỗi khi tải dữ liệu lịch. Vui lòng thử lại.');
             });
 
-            // Xử lý modal
-            $('.close').click(function() {
+            $('.close').click(function () {
                 $('#progressModal').hide();
             });
 
-            $(window).click(function(event) {
+            $(window).click(function (event) {
                 if (event.target.id === 'progressModal') {
                     $('#progressModal').hide();
                 }
@@ -298,10 +291,10 @@
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ day, idx, date }),
-                success: function() {
+                success: function () {
                     location.reload();
                 },
-                error: function() {
+                error: function () {
                     alert('Lỗi khi đánh dấu hoàn thành.');
                 }
             });
@@ -314,21 +307,18 @@
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ day, idx, date, practice_item: practiceItem }),
-                success: function(response) {
+                success: function () {
                     alert('Đã lưu bài thực hành hiện tại!');
                     location.reload();
                 },
-                error: function() {
+                error: function () {
                     alert('Lỗi khi lưu bài thực hành.');
                 }
             });
         }
 
         function showProgressDetails(date, day) {
-            if (!scheduleData) {
-                alert('Dữ liệu lịch chưa được tải. Vui lòng thử lại.');
-                return;
-            }
+            if (!scheduleData) return;
             const schedule = scheduleData.schedule;
             const status = scheduleData.status;
             const currentPractice = scheduleData.current_practice;
@@ -337,9 +327,9 @@
             let detailHtml = '';
             if (schedule.weekly_plan[day]) {
                 schedule.weekly_plan[day].forEach((item, idx) => {
+                    const isBreak = item.activity.toLowerCase() === 'break';
                     const isDone = status[date] && status[date][day] && status[date][day].includes(idx);
                     const practiceItem = currentPractice[date] && currentPractice[date][day] && currentPractice[date][day][idx] ? currentPractice[date][day][idx] : '';
-                    const isBreak = item.activity.toLowerCase() === 'break';
                     detailHtml += `
                         <tr class="${isDone ? 'done' : ''}">
                             <td>${item.duration}</td>

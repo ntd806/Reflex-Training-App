@@ -5,7 +5,7 @@
         "script": "The bar chart demonstrates integration challenges by age group,\n\nincluding learning the local language, making friends, and finding somewhere to live, measured in percent.\n\nAccording to the learning the local language, people over 55 years old had the highest number,\n\nthat is nearly 55%.\n\nHowever, those aged 18 to 34 had the lowest number,\n\nthat is nearly 30%.\n\nBesides, there is another data such as making friends and finding somewhere to live for people over 55,\n\nthat is nearly 20%.\n\nIn general, there is a big difference in integration challenges by age group.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/cwiviuykvvjta7iyzbuk1p-Integration-challenges.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=P%2BmHRx5RTYi%2F5zxwHqQkjCSW2Vx%2F8%2BTsdAI92vWAKHQEcMqr826yZ0KyLzfrT9Q2UtJ1kEGlhb2v0psbEhgK33yqqkkQj1mFrVAuI%2F17saGYKqIv5HxnAegkmz2o0VXWiz3gqE5P0USw0%2Ffu7uogsSwrgsNdgizD7fJ95KSpxCO2P8bo4CW3%2FBQAesH%2Fuiz823LF5wEtIbCCWyVfae2OE8E7EonC8Ie%2BOsFeiVZZFe2twTnnCPoCGM29a6TP2my4vdwk8ZzFvnKLmeIKFpbuV0uMUFA50i9kO42RXar3ofoO%2FxJMb7wD26topRKrN67MBdC3koD37AgUFvKVtTA64Q%3D%3D",
         "type": "bar",
-        "created_at": "2025-07-15T08:09:01.843Z"
+        "created_at": "2025-07-22T08:48:35.170Z"
     },
     {
         "id": 1750059535966,
@@ -114,10 +114,10 @@
     {
         "id": 1750581175906,
         "title": "16",
-        "script": "The line chart demonstrates the sales trend of a product over time,\n\nincluding Maturity, Introduction, and Decline stages, measured in sales volume.\n\nAccording to the line chart, the Maturity stage had the highest number,\n\nthat is nearly the peak of the curve.\n\nHowever, the Introduction stage had the lowest number,\n\nthat is nearly the starting point.\n\nBesides, there is another data such as the Growth long stage,\n\nthat is nearly a sharp increase.\n\nIn general, there is a big difference in the sales trend across the product life cycle.",
+        "script": "This line chart shows the product life cycle,\n\nincluding Maturity, Introduction, and Decline stages, measured in sales volume.\n\nAccording to the line chart, the Maturity stage had the highest number,\n\nthat is nearly the peak of the curve.\n\nHowever, the Introduction stage had the lowest number,\n\nthat is nearly the starting point.\n\nBesides, there is another data such as the Growth long stage and Decline stage,\n\nthat is nearly a sharp increase and a sharp decrease.\n\nIn general, there is a big difference in the product life cycle.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app%2Ffiles%2Fo44pl3ax03qoqlyvsp6u-DI16.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=LbItg3VZBTttPnZTDankH9ct6P34hSCy%2FWfunrQm22UGH1ELHHTRb4y6za%2FzH4F4W4YT4YJsC2idVMQBOvtqxwCf0xtfbnmKynqgxIRjD4P1MSdqKUboKUrVV247uhxL9ZTLX2grL7X0BtRCbJrb2iPt1Z4Ps1lTzsbo0ENtu1xSy4dk%2ByUCaXs0rB33V52xRYxOWM0ci2k8auUmpc5p98dJrHOv3kVSngUlKizeLv34fFBaLdxTfnjAFqpdCPLxZdWFCSBoYNho61owg%2FSoVwAk3geGcMAIpEPBTFEsnaYUUgrdDXwpg1fU%2BFg8VRGkgiTAVG8dq0y36ot3%2FKEvZg%3D%3D",
         "type": "line",
-        "created_at": "2025-07-02T07:00:12.628Z"
+        "created_at": "2025-07-22T08:49:51.423Z"
     },
     {
         "id": 1750581939612,
@@ -173,7 +173,7 @@
         "script": "The line chart demonstrates world population development from 1750 to 2050,\n\nincluding developing countries, industrialized countries, and pre-1900 populations, measured in billions.\n\nAccording to the line chart, developing countries had the highest number,\n\nthat is nearly 9 billion.\n\nHowever, industrialized countries had the lowest number,\n\nthat is nearly 1 billion.\n\nBesides, there is another data such as pre-1900 populations,\n\nthat is nearly 1 billion.\n\nIn general, there is a big difference in world population development over time.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/images/di-21.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=KNF%2B9ogTkfhIVVUL0A4gAdHhQoKJEunAYCoA30iYIyIv9GuMk24S8S2XzPg8cwiwW0qU79BQ1l5oIXLUZn1sVTJqLzUh48Hl2dhbiJWtMhlVtGfc5%2FuS8KDMNexXx%2B4s1JJ0P7WpiFdatuYxwj9Yh9dj1iAPAelugJRcjaX0rM3QHzywQywSALS2HTlV6uEoXgIOvNxuBDs9SZHwyaRuW%2FclTFCTc9kwgQI5GzkqKRV%2FnoPMCkzzPigXA8drZqrDt0TBd48PrRuIHgoNwhbhIW8nFarpeXMZ21L9TMP1DUAXTALw75mw6szIwwSRKqISzEy%2BCBCXmOkCyYFBf6CcFg%3D%3D",
         "type": "line",
-        "created_at": "2025-07-02T07:01:05.338Z"
+        "created_at": "2025-07-22T09:29:06.492Z"
     },
     {
         "id": 1750950335900,

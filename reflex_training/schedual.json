@@ -19,7 +19,7 @@
       { "duration": "15p", "activity": "Break" }
     ],
     "Tuesday": [
-      { "duration": "25p", "activity": "RA" },
+      { "duration": "25p", "activity": "SST" },
       { "duration": "5p", "activity": "Break" },
       { "duration": "25p", "activity": "RS" },
       { "duration": "5p", "activity": "Break" },
@@ -55,7 +55,7 @@
       { "duration": "15p", "activity": "Break" }
     ],
     "Thursday": [
-      { "duration": "25p", "activity": "RA" },
+      { "duration": "25p", "activity": "Essay" },
       { "duration": "5p", "activity": "Break" },
       { "duration": "25p", "activity": "WFD" },
       { "duration": "5p", "activity": "Break" },
@@ -73,7 +73,7 @@
       { "duration": "15p", "activity": "Break" }
     ],
     "Friday": [
-      { "duration": "25p", "activity": "RA" },
+      { "duration": "25p", "activity": "RTS" },
       { "duration": "5p", "activity": "Break" },
       { "duration": "25p", "activity": "RS" },
       { "duration": "5p", "activity": "Break" },

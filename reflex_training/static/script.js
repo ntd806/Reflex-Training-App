@@ -48,6 +48,28 @@ function addWords() {
             alert(err.responseJSON?.error || 'Lỗi khi thêm từ!');
         }
     });
+
+    $.ajax({
+        url: '/guides',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+                   word: word,
+                   guide: guide
+        }),
+        success: function(res) {
+            alert(res.message || 'Đã thêm hướng dẫn!');
+            showWordList();
+        },
+        error: function(err) {
+            alert(err.responseJSON?.error || 'Lỗi khi thêm hướng dẫn!');
+        }
+    });
+    const defaultTypeValue= document.getElementById('typeInput').options[0].value;
+    document.getElementById('wordInput').value = "";
+    document.getElementById('guideInput').value = "";
+    document.getElementById('typeInput').value = defaultTypeValue;
+    document.getElementById('translationInput').value = "";
 }
 
 

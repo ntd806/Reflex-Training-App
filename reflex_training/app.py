@@ -25,6 +25,7 @@ SCHEDULE_FILE = 'schedual.json'
 SCHEDULE_STATUS_FILE = 'schedual_status.json'
 CURRENT_PRACTICE_FILE = os.path.join(os.path.dirname(__file__), 'current_practice.json')
 DATA_FILE = "sentence_data.json"
+AUDIO_FILE = 'speaking_audio_data.json'
 
 def today_str():
     return datetime.date.today().isoformat()
@@ -175,6 +176,7 @@ def add_word():
     data = request.json
     word = data.get('word', '').strip()
     translation = data.get('translation')
+    guide = data.get('guide')
     type_ = data.get('type')
     if not word:
         return jsonify({'error': 'Word is required'}), 400
@@ -1112,6 +1114,63 @@ def load_sentences():
 @app.route('/vocab-by-topic')
 def vocabByTopic_page():
     return render_template('vocab_by_topic.html')
+
+# Tạo file nếu chưa tồn tại
+if not os.path.exists(AUDIO_FILE):
+    with open(AUDIO_FILE, 'w') as f:
+        json.dump([], f)
+
+# Route HTML
+@app.route('/speaking')
+def speaking_audio_page():
+    return render_template('speaking_audio_practice.html')
+
+# Lấy danh sách
+@app.route('/speaking_audio_practice', methods=['GET'])
+def get_audio_items():
+    with open(AUDIO_FILE, 'r') as f:
+        data = json.load(f)
+    return jsonify(data)
+
+# Thêm bài mới
+@app.route('/speaking_audio_practice', methods=['POST'])
+def add_audio_item():
+    new_item = request.get_json()
+    with open(AUDIO_FILE, 'r+') as f:
+        data = json.load(f)
+        data.append(new_item)
+        f.seek(0)
+        json.dump(data, f, indent=2)
+    return '', 204
+
+# Xoá
+@app.route('/speaking_audio_practice/<int:item_id>', methods=['DELETE'])
+def delete_audio_item(item_id):
+    with open(AUDIO_FILE, 'r+') as f:
+        data = json.load(f)
+        data = [d for d in data if d['id'] != item_id]
+        f.seek(0)
+        f.truncate()
+        json.dump(data, f, indent=2)
+    return '', 204
+
+# Tìm kiếm
+@app.route('/speaking_audio_practice/search')
+def search_audio_items():
+    query = request.args.get('q', '').lower()
+    with open(AUDIO_FILE, 'r') as f:
+        data = json.load(f)
+    results = [d for d in data if query in d['title'].lower() or query in d['script'].lower()]
+    return jsonify(results)
+
+@app.route('/speaking_audio_practice/<int:item_id>')
+def speaking_audio_detail(item_id):
+    with open('speaking_audio_data.json', 'r') as f:
+        data = json.load(f)
+    item = next((d for d in data if d['id'] == item_id), None)
+    if not item:
+        return f"<h3>Không tìm thấy bài với ID: {item_id}</h3>", 404
+    return render_template('speaking_audio_detail.html', item=item)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

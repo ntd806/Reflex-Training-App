@@ -1,0 +1,56 @@
+digraph {
+	rankdir=LR size=10
+	root [label="HỌC TEMPLATE HIỆU QUẢ"]
+	same [label="✅ PHẦN GIỐNG NHAU"]
+	diff [label="❌ PHẦN KHÁC NHAU"]
+	tips [label="🧠 CÁCH HỌC THÔNG MINH"]
+	root -> same
+	root -> diff
+	root -> tips
+	intro_same [label="Intro: This essay will discuss..."]
+	link_same [label="Liên kết: Moreover, For example..."]
+	reason_same [label="Lý do: This is because..."]
+	example_same [label="Ví dụ: For instance..."]
+	conclusion_same [label="Kết luận: In conclusion..."]
+	same -> intro_same
+	same -> link_same
+	same -> reason_same
+	same -> example_same
+	same -> conclusion_same
+	agree [label="Dạng 1: Agree/Disagree"]
+	discuss [label="Dạng 2: Discuss Both Views"]
+	problem [label="Dạng 3: Problem-Solution"]
+	diff -> agree
+	diff -> discuss
+	diff -> problem
+	agree_intro [label="Intro: I completely agree..."]
+	agree_b1 [label="Body 1: The most compelling reason..."]
+	agree_b2 [label="Body 2: Another convincing reason..."]
+	agree_con [label="Conclusion: I firmly support..."]
+	agree -> agree_intro
+	agree -> agree_b1
+	agree -> agree_b2
+	agree -> agree_con
+	discuss_intro [label="Intro: Examine both perspectives..."]
+	discuss_b1 [label="Body 1: On the one hand..."]
+	discuss_b2 [label="Body 2: On the other hand..."]
+	discuss_con [label="Conclusion: I personally believe..."]
+	discuss -> discuss_intro
+	discuss -> discuss_b1
+	discuss -> discuss_b2
+	discuss -> discuss_con
+	problem_intro [label="Intro: This is a serious issue..."]
+	problem_b1 [label="Body 1: One major problem is..."]
+	problem_b2 [label="Body 2: One possible solution is..."]
+	problem_con [label="Conclusion: Measures can mitigate..."]
+	problem -> problem_intro
+	problem -> problem_b1
+	problem -> problem_b2
+	problem -> problem_con
+	fixed_phrases [label="🧩 Học câu cố định dùng mọi dạng"]
+	compare_table [label="🧠 Tạo bảng 3 cột: Agree/Discuss/Problem"]
+	practice_all [label="🔁 Luyện 1 đề theo 3 dạng"]
+	tips -> fixed_phrases
+	tips -> compare_table
+	tips -> practice_all
+}

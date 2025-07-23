@@ -1,0 +1,54 @@
+digraph {
+	rankdir=LR size=10
+	Main [label="Cách sử dụng Template Writing (PTE/IELTS)"]
+	Target [label="Mục tiêu của Template:
+- Khung tư duy
+- Logic rõ ràng
+- Tránh lặp ý
+- Tạo nhịp điệu"]
+	Main -> Target
+	Agree [label="1. Agree / Disagree"]
+	Main -> Agree
+	Discuss [label="2. Discuss Both Sides"]
+	Main -> Discuss
+	Problem [label="3. Problem – Solution"]
+	Main -> Problem
+	Agree_Logic [label="Tư duy:
+- Chọn 1 phía rõ ràng
+- 2 lý do chính
+- Giải thích + ví dụ + tác động"]
+	Agree -> Agree_Logic
+	Agree_Structure [label="Cấu trúc:
+Intro - Quan điểm
+Body 1 - Lý do 1
+Body 2 - Lý do 2
+Conclusion - Tổng kết"]
+	Agree -> Agree_Structure
+	Discuss_Logic [label="Tư duy:
+- Trình bày 2 phía
+- Giữ trung lập
+- Nêu ý kiến ở kết luận"]
+	Discuss -> Discuss_Logic
+	Discuss_Structure [label="Cấu trúc:
+Intro - 2 quan điểm
+Body 1 - Quan điểm A
+Body 2 - Quan điểm B
+Conclusion - Ý kiến riêng"]
+	Discuss -> Discuss_Structure
+	Problem_Logic [label="Tư duy:
+- Nêu rõ vấn đề
+- Đưa giải pháp khả thi
+- Có ví dụ cụ thể"]
+	Problem -> Problem_Logic
+	Problem_Structure [label="Cấu trúc:
+Intro - Nhấn mạnh vấn đề
+Body 1 - Problem
+Body 2 - Solution
+Conclusion - Tổng kết"]
+	Problem -> Problem_Structure
+	Summary [label="Tóm tắt Logic:
+- Agree: Chọn 1 phía, 2 lý do
+- Discuss: 2 mặt + ý kiến cuối
+- Problem: Nêu vấn đề + giải pháp cụ thể"]
+	Main -> Summary
+}

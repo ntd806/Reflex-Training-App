@@ -2228,5 +2228,76 @@
         "guide": "sơ phịts",
         "shown_today": 3,
         "last_shown_date": "2025-07-21"
+    },
+    {
+        "word": "supportive",
+        "translation": "hỗ trợ",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-21",
+        "guide": "Sờ port tive"
+    },
+    {
+        "word": "curve",
+        "translation": "Đường cong",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "Kởr v"
+    },
+    {
+        "word": "Maturity",
+        "translation": "đến kỳ hạn",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "Mờ trua rờ đì"
+    },
+    {
+        "word": "Industrialized",
+        "translation": "đã công nghiệp hóa",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "ìn-đấs-tri-ơ-lai-zđ"
+    },
+    {
+        "word": "tutorial",
+        "translation": "Tutorial (hướng dẫn) là một tài liệu, video, hoặc chuỗi các bước được trình bày chi tiết để hướng dẫn người dùng cách thực hiện một nhiệm vụ cụ thể",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "thù tho rì ồ"
+    },
+    {
+        "word": "produced",
+        "translation": "nghĩa là đã tạo ra, đã sản xuất, đã sinh ra",
+        "type": "verb",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "prơ-đu-st"
+    },
+    {
+        "word": "organic",
+        "translation": "Liên quan đến sinh học, cơ thể sống",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-22",
+        "guide": "o-r-ga-nịch"
+    },
+    {
+        "word": "susceptible",
+        "translation": "dễ bị tổn thương",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-23"
     }
 ]

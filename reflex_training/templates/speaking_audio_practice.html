@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speaking Audio Practice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/speaking_describe_image_page">Describe Image</a>
+        <a href="/speaking_audio_practice">Audio Practice</a>
+    </div>
+
+    <div class="flex-main" style="display: flex; gap: 15px;">
+        <!-- Bên trái: Form nhập liệu -->
+        <div style="flex: 2; padding: 15px; border: 1px solid #ccc;">
+            <h3>Thêm bài luyện nghe</h3>
+            <form id="addSpeakingForm">
+                <label>Tiêu đề:</label>
+                <input type="text" id="titleInput" placeholder="Nhập tiêu đề..." style="width:100%; margin-bottom:10px;">
+                <label>Script:</label>
+                <textarea id="scriptInput" placeholder="Nhập nội dung bài nói..." style="width:100%; height:100px; margin-bottom:10px;"></textarea>
+                <label>Audio (link MP3 hoặc WAV):</label>
+                <input type="text" id="audioInput" placeholder="Nhập URL audio..." style="width:100%; margin-bottom:10px;">
+                <audio id="previewAudio" controls style="width:100%; display:none; margin-bottom:10px;"></audio>
+                <label>Loại bài nói:</label>
+                <select id="typeInput" style="width:100%; margin-bottom:10px;">
+                    <option value="dialogue">Dialogue</option>
+                    <option value="monologue">Monologue</option>
+                    <option value="story">Story</option>
+                    <option value="lecture">Lecture</option>
+                </select>
+                <button type="button" onclick="addSpeaking()">Thêm bài luyện nghe</button>
+            </form>
+        </div>
+
+        <!-- Bên phải: Danh sách -->
+        <div style="flex: 6; padding: 15px; border: 1px solid #ccc;">
+            <div style="margin-bottom:10px;">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm bài nói..." style="width:60%;">
+                <button onclick="searchSpeakings()" style="margin-left:10px;">Tìm kiếm</button>
+                <select id="filterType" style="width:30%;" onchange="filterSpeakings()">
+                    <option value="">Tất cả</option>
+                    <option value="dialogue">Dialogue</option>
+                    <option value="monologue">Monologue</option>
+                    <option value="story">Story</option>
+                    <option value="lecture">Lecture</option>
+                </select>
+            </div>
+            <div id="speakingList" style="display: flex; flex-wrap: wrap; gap: 15px;"></div>
+        </div>
+    </div>
+
+    <div id="currentSpeaking" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9;">
+        <h3>Đang tải bài học...</h3>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <button onclick="nextSpeaking()">Bài tiếp theo</button>
+    </div>
+</div>
+
+<script>
+let currentSpeaking = null;
+
+$('#audioInput').on('input', function () {
+    const audioUrl = $(this).val().trim();
+    if (audioUrl) {
+        $('#previewAudio').attr('src', audioUrl).show();
+    } else {
+        $('#previewAudio').hide();
+    }
+});
+
+function addSpeaking() {
+    const title = $('#titleInput').val().trim();
+    const script = $('#scriptInput').val().trim();
+    const type = $('#typeInput').val();
+    const audio = $('#audioInput').val().trim();
+
+    if (!title || !script || !type || !audio) {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+    }
+
+    const newSpeaking = {
+        id: Date.now(),
+        title,
+        script,
+        audio,
+        type,
+        created_at: new Date().toISOString()
+    };
+
+    $.ajax({
+        url: '/speaking_audio_practice',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(newSpeaking),
+        success: function () {
+            alert('Đã thêm bài luyện nghe!');
+            loadSpeakings();
+            $('#addSpeakingForm')[0].reset();
+            $('#previewAudio').hide();
+        }
+    });
+}
+
+function loadSpeakings() {
+    $.get('/speaking_audio_practice', function (data) {
+        renderSpeakingList(data);
+    });
+}
+
+function renderSpeakingList(list) {
+    const container = $('#speakingList');
+    console.log('Rendering speaking list:', list);
+    container.empty();
+    list.forEach(item => {
+        container.append(`
+            <div style="border:1px solid #ccc; padding:10px; width:220px;">
+                <h4>${item.title}</h4>
+                <p>Loại: ${item.type}</p>
+                <audio src="${item.audio}" controls style="width:100%; margin:5px 0;"></audio>
+                <a href="/speaking_audio_practice/${item.id}" target="_blank" style="display:block; text-align:center; background:#007bff; color:white; padding:5px; border-radius:4px; text-decoration:none;">Chi tiết</a>
+                <button onclick="deleteSpeaking(${item.id})" style="margin-top:8px;">Xoá</button>
+            </div>
+        `);
+    });
+}
+
+function filterSpeakings() {
+    const type = $('#filterType').val();
+    $.get('/speaking_audio_practice/filter', { type: type }, function (data) {
+        renderSpeakingList(data);
+    });
+}
+
+function searchSpeakings() {
+    const keyword = $('#searchInput').val().trim();
+    $.get('/speaking_audio_practice/search', { q: keyword }, function (data) {
+        renderSpeakingList(data);
+    });
+}
+
+function deleteSpeaking(id) {
+    if (!confirm('Bạn có chắc muốn xoá bài này?')) return;
+    $.ajax({
+        url: `/speaking_audio_practice/${id}`,
+        type: 'DELETE',
+        success: function () {
+            alert('Đã xoá!');
+            loadSpeakings();
+            loadCurrentSpeaking();
+        }
+    });
+}
+
+function loadCurrentSpeaking() {
+    $.get('/speaking_audio_practice', function (speaking) {
+        if (!speaking || speaking.error) {
+            $('#currentSpeaking').html('<h3>Không có bài học nào để hiển thị.</h3>');
+            currentSpeaking = null;
+            return;
+        }
+        currentSpeaking = speaking;
+        $('#currentSpeaking').html(`
+            <h3>${speaking.title}</h3>
+            <p><b>Loại:</b> ${speaking.type}</p>
+            <p><b>Script:</b> ${speaking.script}</p>
+            <audio src="${speaking.audio}" controls style="width:100%; margin-top:10px;"></audio>
+        `);
+    }).fail(function () {
+        $('#currentSpeaking').html('<h3>Đã xảy ra lỗi khi tải bài học.</h3>');
+        currentSpeaking = null;
+    });
+}
+
+function nextSpeaking() {
+    $.get('/speaking_audio_practice', function (list) {
+        if (!list || !Array.isArray(list) || list.length === 0) {
+            alert('Không có bài học nào để chuyển tiếp!');
+            return;
+        }
+
+        if (!currentSpeaking) {
+            currentSpeaking = list[0];
+        } else {
+            const currentIndex = list.findIndex(s => s.id === currentSpeaking.id);
+            const nextIndex = (currentIndex + 1) % list.length;
+            currentSpeaking = list[nextIndex];
+        }
+
+        window.location.href = `/speaking_audio_practice/${currentSpeaking.id}`;
+    });
+}
+
+$(document).ready(function () {
+    loadSpeakings();
+    loadCurrentSpeaking();
+});
+</script>
+</body>
+</html>

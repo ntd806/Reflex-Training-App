@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item.title }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        audio {
+            width: 100%;
+            margin-top: 15px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h2>{{ item.title }}</h2>
+    <p><b>Loại:</b> {{ item.type }}</p>
+    <p><b>Script:</b></p>
+    <pre style="white-space: pre-wrap; font-family: inherit;">{{ item.script }}</pre>
+    <audio src="{{ item.audio }}" controls></audio>
+    <br>
+    <a href="/speaking_audio_practice_page">← Quay lại danh sách</a>
+</body>
+</html>
