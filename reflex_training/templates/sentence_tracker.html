@@ -72,6 +72,14 @@
             color: red;
             font-weight: bold;
         }
+        .misheardWords{
+           color: #2200ff;
+           font-weight: bold;
+        }
+        .sentence{
+           color: #ea00ff;
+           font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -180,10 +188,10 @@
                             });
 
                             dateHtml += `<li>
-                                ${entry.time}: "${entry.sentence}"
+                                <span class="sentence">${entry.time}</span>: "${entry.sentence}"
                                 <ul>
                                     <li><span class="unheard-word">Từ không nghe được:</span> ${unheard.length > 0 ? unheard.join(', ') : 'Không có'}</li>
-                                    <li>Từ nghe được sai: ${misheard.length > 0 ? misheard.join(', ') : 'Không có'}</li>
+                                    <li><span class="misheardWords">Từ nghe được sai:</span> ${misheard.length > 0 ? misheard.join(', ') : 'Không có'}</li>
                                 </ul>
                             </li>`;
                         });

@@ -2298,6 +2298,51 @@
         "type": "adjective",
         "learned": false,
         "priority": false,
+        "created_at": "2025-07-23",
+        "guide": "səˈseptəb(ə)l"
+    },
+    {
+        "word": "life of a",
+        "translation": "",
+        "type": "",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-23",
+        "guide": ""
+    },
+    {
+        "word": "indeed",
+        "translation": "thật vậy, quả thật, đúng là",
+        "type": "adverb",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-23",
+        "guide": "Phát âm tiếng Việt: in-đi:d (nhấn vào âm đi)"
+    },
+    {
+        "word": "is indeed",
+        "translation": "quả thật là, thực sự là, đúng là",
+        "type": "other",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-23",
+        "guide": "iz in-đi:d"
+    },
+    {
+        "word": "solitary, poor, nasty, brutish, and short",
+        "translation": "cô độc, nghèo nàn, xấu xa, tàn bạo và thấp bé",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-07-23",
+        "guide": ""
+    },
+    {
+        "word": "respects",
+        "translation": "",
+        "type": "",
+        "learned": false,
+        "priority": false,
         "created_at": "2025-07-23"
     }
 ]
