@@ -77,7 +77,7 @@
            font-weight: bold;
         }
         .sentence{
-           color: #ea00ff;
+           color: #ff00f2;
            font-weight: bold;
         }
     </style>
@@ -158,6 +158,18 @@
             });
         }
 
+        function parseTime12hTo24h(date, timeStr) {
+            const [time, modifier] = timeStr.split(' ');
+            let [hours, minutes, seconds] = time.split(':').map(Number);
+
+            if (modifier === 'PM' && hours < 12) hours += 12;
+            if (modifier === 'AM' && hours === 12) hours = 0;
+
+            // pad to two digits
+            const pad = num => num.toString().padStart(2, '0');
+            return new Date(`${date}T${pad(hours)}:${pad(minutes)}:${pad(seconds)}`);
+        }
+
         function updateDisplay() {
             fetch('/api/load_sentences')
                 .then(res => res.json())
@@ -170,14 +182,22 @@
 
                     let stats = {};
 
-                    for (let date in history) {
-                        const entries = history[date];
-                        if (!Array.isArray(entries)) continue;
+                    const sortedDates = Object.keys(history).sort((a, b) => new Date(b) - new Date(a));
 
-                        const totalSentences = entries.length;
+                    sortedDates.forEach(date => {
+                        const entries = history[date];
+                        if (!Array.isArray(entries)) return;
+
+                        const sortedEntries = entries.sort((a, b) => {
+                            const timeA = parseTime12hTo24h(date, a.time);
+                            const timeB = parseTime12hTo24h(date, b.time);
+                            return timeB - timeA;
+                        });
+
+                        const totalSentences = sortedEntries.length;
                         let dateHtml = `<h3>${date} (Tổng: ${totalSentences} câu)</h3><ul>`;
 
-                        entries.forEach(entry => {
+                        sortedEntries.forEach(entry => {
                             const unheard = Array.isArray(entry.unheard) ? entry.unheard : [];
                             const misheard = Array.isArray(entry.misheard) ? entry.misheard : [];
 
@@ -198,7 +218,7 @@
 
                         dateHtml += '</ul>';
                         historyList.innerHTML += dateHtml;
-                    }
+                    });
 
                     // Hiển thị thống kê
                     statsDiv.innerHTML = '<h4>Danh sách từ không nghe được:</h4>';
