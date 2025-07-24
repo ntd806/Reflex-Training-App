@@ -193,6 +193,17 @@
             return typeLabels[type] || "Write from Dictation";
         }
 
+        function countTypes(entries) {
+            const typeCounts = {};
+
+            entries.forEach(entry => {
+                const label = getTypeLabel(entry.type);  // dùng label đã chuẩn hóa
+                typeCounts[label] = (typeCounts[label] || 0) + 1;
+            });
+
+            return typeCounts;
+        }
+
         function parseTime12hTo24h(date, timeStr) {
             const [time, modifier] = timeStr.split(' ');
             let [hours, minutes, seconds] = time.split(':').map(Number);
@@ -228,10 +239,12 @@
                             const timeB = parseTime12hTo24h(date, b.time);
                             return timeB - timeA;
                         });
-
+                        const counts = countTypes(sortedEntries);
                         const totalSentences = sortedEntries.length;
                         let dateHtml = `<h3>${date} (Tổng: ${totalSentences} câu)</h3><ul>`;
-
+                        for (const label in counts) {
+                            dateHtml += `<ul><li>${label}: <span class="unheard-word">${counts[label]} câu</span></li> </ul>`;
+                        }
                         sortedEntries.forEach(entry => {
                             const unheard = Array.isArray(entry.unheard) ? entry.unheard : [];
                             const misheard = Array.isArray(entry.misheard) ? entry.misheard : [];
