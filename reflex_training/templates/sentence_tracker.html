@@ -80,6 +80,10 @@
            color: #ff00f2;
            font-weight: bold;
         }
+        .type{
+            color: #04ff00;
+           font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +108,19 @@
             <label for="originalSentence">Câu gốc:</label>
             <textarea id="originalSentence" rows="2" placeholder="Nhập câu gốc..."></textarea>
         </div>
+         <div class="input-group">
+            <label for="originalSentence">Bài tập:</label>
+            <select id="typeInput">
+                <option value="">-- Select type --</option>
+                <option value="WFD">Write from Dictation</option>
+                <option value="RS">Retell Sentence</option>
+                <option value="LST">Listening Practice</option>
+                <option value="V&G">Vocabulary and Grammar</option>
+                <option value="phrase">Phrase</option>
+                <option value="other">phrasal verb</option>
+                <option value="collocation">collocation</option>
+            </select>
+        </div>
         <div class="input-group">
             <label for="unheardWords">Từ không nghe được (cách nhau bằng dấu phẩy):</label>
             <input type="text" id="unheardWords" placeholder="Nhập từ không nghe được...">
@@ -126,6 +143,7 @@
             const originalSentence = document.getElementById('originalSentence').value.trim();
             const unheardWords = document.getElementById('unheardWords').value.trim().split(',').map(w => w.trim()).filter(w => w);
             const misheardWords = document.getElementById('misheardWords').value.trim().split(',').map(w => w.trim()).filter(w => w);
+            const type = document.getElementById('typeInput').value;
 
             if (!originalSentence) {
                 alert('Vui lòng nhập câu gốc!');
@@ -139,7 +157,8 @@
                 time: now.toLocaleTimeString(),
                 sentence: originalSentence,
                 unheard: unheardWords,
-                misheard: misheardWords
+                misheard: misheardWords,
+                type: type || 'other'
             };
 
             fetch('/api/save_sentence', {
@@ -150,12 +169,28 @@
             .then(res => res.json())
             .then(res => {
                 if (res.status === 'ok') {
+                    const defaultTypeValue= document.getElementById('typeInput').options[0].value
+                    document.getElementById('typeInput').value = defaultTypeValue;
                     document.getElementById('originalSentence').value = '';
                     document.getElementById('unheardWords').value = '';
                     document.getElementById('misheardWords').value = '';
                     updateDisplay();
                 }
             });
+        }
+
+        const typeLabels = {
+            "WFD": "Write from Dictation",
+            "RS": "Retell Sentence",
+            "LST": "Listening Practice",
+            "V&G": "Vocabulary and Grammar",
+            "phrase": "Phrase",
+            "other": "Phrasal verb",
+            "collocation": "Collocation"
+        };
+
+        function getTypeLabel(type) {
+            return typeLabels[type] || "Write from Dictation";
         }
 
         function parseTime12hTo24h(date, timeStr) {
@@ -209,6 +244,7 @@
 
                             dateHtml += `<li>
                                 <span class="sentence">${entry.time}</span>: "${entry.sentence}"
+                                <ul><li><span class="type">Loại</span>: ${getTypeLabel(entry.type)}</li></ul>
                                 <ul>
                                     <li><span class="unheard-word">Từ không nghe được:</span> ${unheard.length > 0 ? unheard.join(', ') : 'Không có'}</li>
                                     <li><span class="misheardWords">Từ nghe được sai:</span> ${misheard.length > 0 ? misheard.join(', ') : 'Không có'}</li>
