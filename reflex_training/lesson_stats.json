@@ -9,6 +9,16 @@
         "last": "7/22/2025, 9:36:14 PM",
         "type": "RS"
     },
+    "repeat-sentence-20-06-2025": {
+        "count": 1,
+        "last": "7/23/2025, 4:27:28 PM",
+        "type": "RS"
+    },
+    "repeat-sentence-21-06-2025": {
+        "count": 2,
+        "last": "7/27/2025, 4:30:13 PM",
+        "type": "RS"
+    },
     "write-from-dictation-01-06-2025": {
         "count": 2,
         "last": "6/24/2025, 4:09:39 PM",
@@ -20,8 +30,8 @@
         "type": "WFD"
     },
     "write-from-dictation-19-06-2025": {
-        "count": 1,
-        "last": "7/9/2025, 11:00:21 AM",
+        "count": 2,
+        "last": "7/27/2025, 4:30:34 PM",
         "type": "WFD"
     },
     "write-from-dictation-20-06-2025": {
@@ -29,9 +39,14 @@
         "last": "7/10/2025, 11:50:51 AM",
         "type": "WFD"
     },
-    "repeat-sentence-20-06-2025": {
-        "type": "RS",
+    "write-from-dictation-2025-07-27": {
         "count": 1,
-        "last": "7/23/2025, 4:27:28 PM"
+        "last": "7/28/2025, 11:20:58 AM",
+        "type": "WFD"
+    },
+    "repeat-sentence-2025-07-31": {
+        "type": "RS",
+        "count": 2,
+        "last": "8/2/2025, 9:57:42 AM"
     }
 }
