@@ -2,10 +2,10 @@
     {
         "id": 1750045614356,
         "title": "2",
-        "script": "The bar chart demonstrates integration challenges by age group,\n\nincluding learning the local language, making friends, and finding somewhere to live, measured in percent.\n\nAccording to the learning the local language, people over 55 years old had the highest number,\n\nthat is nearly 55%.\n\nHowever, those aged 18 to 34 had the lowest number,\n\nthat is nearly 30%.\n\nBesides, there is another data such as making friends and finding somewhere to live for people over 55,\n\nthat is nearly 20%.\n\nIn general, there is a big difference in integration challenges by age group.",
+        "script": "This bar chart shows integration challenges by age group,\n\nincluding learning the local language, making friends, and finding somewhere to live, measured in percent.\n\nAccording to learning the local language, over 55 had the highest figure, nearly 55%.\n\nHowever, 18 to 34 had the lowest figure, about 30%\n\n\nMoreover, there is another data such as making friends and finding somewhere to live for over 55 was around 20%.\n\nIn general, there is a small difference in integration challenges by age group.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/cwiviuykvvjta7iyzbuk1p-Integration-challenges.png?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=P%2BmHRx5RTYi%2F5zxwHqQkjCSW2Vx%2F8%2BTsdAI92vWAKHQEcMqr826yZ0KyLzfrT9Q2UtJ1kEGlhb2v0psbEhgK33yqqkkQj1mFrVAuI%2F17saGYKqIv5HxnAegkmz2o0VXWiz3gqE5P0USw0%2Ffu7uogsSwrgsNdgizD7fJ95KSpxCO2P8bo4CW3%2FBQAesH%2Fuiz823LF5wEtIbCCWyVfae2OE8E7EonC8Ie%2BOsFeiVZZFe2twTnnCPoCGM29a6TP2my4vdwk8ZzFvnKLmeIKFpbuV0uMUFA50i9kO42RXar3ofoO%2FxJMb7wD26topRKrN67MBdC3koD37AgUFvKVtTA64Q%3D%3D",
         "type": "bar",
-        "created_at": "2025-07-22T08:48:35.170Z"
+        "created_at": "2025-09-04T08:28:37.894Z"
     },
     {
         "id": 1750059535966,
@@ -162,10 +162,10 @@
     {
         "id": 1750780691373,
         "title": "11",
-        "script": "This picture shows two types of eclipse, including a solar eclipse at the top and a lunar eclipse at the bottom.\n\nOn the top of the picture, we can see a solar eclipse. The yellow Sun is on the left, the grey Moon is in the middle, and the blue and green Earth is on the right. The Moon blocks the sunlight and creates a shadow on the Earth.\n\nOn the bottom of the picture, we can see a lunar eclipse. The orange Sun is on the left, the Earth is in the middle, and the dark grey Moon is on the right. The Earth blocks the sunlight and makes a shadow on the Moon.\n\nOverall, this picture shows the difference between solar and lunar eclipses using clear colors and simple positions.",
+        "script": "This picture shows two types of eclipses, including a solar eclipse at the top and a lunar eclipse at the bottom.\n\nAt the top of the picture, there is a solar eclipse. The yellow Sun is on the left, the grey Moon is in the middle, and the blue and green Earth is on the right. The Moon blocks the sunlight and creates a shadow on the Earth.\n\nAt the bottom, there is a lunar eclipse. The orange Sun is on the left, the Earth is in the middle, and the grey Moon is on the right. The Earth blocks the sunlight and casts a shadow on the Moon.\n\nIn both diagrams, the positions of the Sun, Earth, and Moon are clearly shown, helping to explain how each type of eclipse occurs.\n\nOverall, this picture shows the difference between a solar eclipse and a lunar eclipse, highlighting their positions and shadow directions.",
         "image": "https://storage.googleapis.com/pte-assistant.appspot.com/app/files/n52g6d6y0hd72ed2cfjr9j-solar-eclipse-model-for-solar-eclipse-STEM-activities.jpg?GoogleAccessId=firebase-adminsdk-t7i9w%40pte-assistant.iam.gserviceaccount.com&Expires=2524608000&Signature=aC5lrKrJjJC4PXRAQsNCB5AUQ7WvitBen13hXz2wWaa2AmpNRNBqulmrtBfKd4idILHp1wxCB4ky6CThNtRq09e0Isb6TAWlTKxWhFsAEmgGksOZoVTtFb6dWpNfDXOuPsrAaYCS82fFslRzJO5ET7q%2B6fgdzrIkGPEaH3cUIWTopK6VFK06ZhGBefiqEvgGLd4mDVzgI6pjcanl5CfDNES2R3H1cquJ8zXyVI0Qb7hfspupYrlA1nudYTqTQ9G8mTDmIhcWMDmevT6cunqDW5hNYerKvfwnyN4UMiBhWifN4f2KEZCTKvr2r7JpA7mA0UkiarKtCrHmylFyNbhCCA%3D%3D",
         "type": "photo",
-        "created_at": "2025-07-02T07:44:14.179Z"
+        "created_at": "2025-08-14T09:33:30.451Z"
     },
     {
         "id": 1750950123047,

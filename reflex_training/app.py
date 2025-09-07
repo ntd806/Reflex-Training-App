@@ -1172,5 +1172,19 @@ def speaking_audio_detail(item_id):
         return f"<h3>Không tìm thấy bài với ID: {item_id}</h3>", 404
     return render_template('speaking_audio_detail.html', item=item)
 
+@app.route('/words/mark_learned', methods=['POST'])
+def mark_learned():
+    data = request.json
+    word = data.get('word')
+    learned = data.get('learned')
+    # Update the word's "learned" status in your database or JSON file
+    # Example:
+    for w in words:
+        if w['word'] == word:
+            w['learned'] = learned
+            break
+    save_words()  # Save the updated words list
+    return jsonify({'success': True})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

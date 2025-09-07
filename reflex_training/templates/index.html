@@ -118,6 +118,12 @@
     </label>
     <button onclick="loadWordsByDay()">Lọc</button>
 </div>
+<div style="margin-bottom: 10px;">
+    <label>
+        <input type="checkbox" id="hideRememberedCheckbox" onchange="toggleHideRemembered()">
+        Ẩn từ đã nhớ
+    </label>
+</div>
         </div>
         
         <!-- Bên phải: Danh sách từ và tìm kiếm -->
@@ -144,12 +150,16 @@
     <script>
 function showWordList() {
     $.get('/words', function(words) {
+        const hideRemembered = document.getElementById('hideRememberedCheckbox').checked;
         if (!words.length) {
             document.getElementById('wordList').innerHTML = '<i>Chưa có từ nào.</i>';
             return;
         }
         let html = '<b>Danh sách từ:</b><ul style="margin-top:5px;">';
         words.forEach(wordObj => {
+            if (hideRemembered && wordObj.learned) {
+                return; // Skip remembered words if the checkbox is checked
+            }
             html += `<li>
                 <input type="checkbox" ${wordObj.learned ? 'checked' : ''} onchange="toggleLearnedWord('${wordObj.word.replace(/'/g, "\\'")}', this.checked)">
                 <span style="cursor:pointer;color:#007bff;text-decoration:underline;" 
@@ -381,7 +391,7 @@ function toggleLearnedWord(word, learned) {
         contentType: 'application/json',
         data: JSON.stringify({ word: word, learned: learned }),
         success: function() {
-            // Optionally, update UI or show a message
+            showWordList(); // Refresh the word list after updating
         }
     });
 }
