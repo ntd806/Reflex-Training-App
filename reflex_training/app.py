@@ -1121,6 +1121,15 @@ if not os.path.exists(AUDIO_FILE):
         json.dump([], f)
 
 # Route HTML
+@app.route('/chunking')
+def chunking():
+    return render_template('sentence_reordering.html')
+
+# Route HTML
+@app.route('/check')
+def check_page():
+    return render_template('check.html')
+# Route HTML
 @app.route('/speaking')
 def speaking_audio_page():
     return render_template('speaking_audio_practice.html')
@@ -1185,6 +1194,46 @@ def mark_learned():
             break
     save_words()  # Save the updated words list
     return jsonify({'success': True})
+
+DATA_FILE = 'day_chunking.json'
+
+# API để lấy dữ liệu từ file JSON
+@app.route('/api/chunking', methods=['GET'])
+def get_chunking():
+    try:
+        with open(DATA_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = {}
+    return jsonify(data)
+
+# API để lưu dữ liệu vào file JSON
+@app.route('/api/chunking', methods=['POST'])
+def add_chunking():
+    new_data = request.json  # Dữ liệu mới gửi từ client
+    try:
+        # Đọc dữ liệu cũ từ file JSON
+        with open('day_chunking.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = {}  # Nếu file không tồn tại, khởi tạo dữ liệu rỗng
+
+    # Thêm dữ liệu mới vào dữ liệu cũ
+    for date, sentences in new_data.items():
+        if date in data:
+            # Nếu ngày đã tồn tại, nối thêm câu mới (tránh trùng lặp)
+            existing_sentences = set(data[date].split(';'))
+            new_sentences = set(sentences.split(';'))
+            data[date] = ';'.join(existing_sentences.union(new_sentences))
+        else:
+            # Nếu ngày chưa tồn tại, thêm mới
+            data[date] = sentences
+
+    # Ghi lại dữ liệu vào file JSON
+    with open('day_chunking.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+    return jsonify({'success': True, 'message': 'Data added successfully!'})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

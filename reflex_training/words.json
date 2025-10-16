@@ -100,6 +100,78 @@
         "type": "collocation",
         "learned": false,
         "priority": false,
-        "created_at": "2025-09-07"
+        "created_at": "2025-09-07",
+        "guide": "the connection"
+    },
+    {
+        "word": "fellow",
+        "translation": "danh từ) Người cùng nhóm, đồng nghiệp, đồng môn, bạn đồng hành my fellow students → bạn cùng lớp",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-12",
+        "guide": "phe-lâu"
+    },
+    {
+        "word": "digital",
+        "translation": "Kỹ thuật số, điện tử",
+        "type": "adjective",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-13",
+        "guide": "đi-jì-tồ"
+    },
+    {
+        "word": "linguist",
+        "translation": "Người giỏi nhiều ngoại ngữ, Nhà ngôn ngữ học",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-16",
+        "guide": "linh-guỵsts"
+    },
+    {
+        "word": "violent survivor fatalities",
+        "translation": "adad",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-16",
+        "guide": "âda"
+    },
+    {
+        "word": "gulf",
+        "translation": "gấlf",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-17",
+        "guide": "(địa lý) Vịnh (phần biển ăn sâu vào đất liền)."
+    },
+    {
+        "word": "fertility",
+        "translation": "khả năng sinh sản",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-17",
+        "guide": "fờ-ti-lơ-ti"
+    },
+    {
+        "word": "diploma vs degree vs certificate",
+        "translation": "",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-22",
+        "guide": ""
+    },
+    {
+        "word": "attainment",
+        "translation": "",
+        "type": "noun",
+        "learned": false,
+        "priority": false,
+        "created_at": "2025-09-22"
     }
 ]

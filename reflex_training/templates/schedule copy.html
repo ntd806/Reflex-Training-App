@@ -175,7 +175,7 @@
     <table id="weeklySchedule">
         <thead>
             <tr>
-                <th>Buổi</th>
+                <th>Thời gian</th>
                 <th>Monday</th>
                 <th>Tuesday</th>
                 <th>Wednesday</th>
@@ -209,64 +209,51 @@
         </div>
     </div>
 
-   <script>
-    let scheduleData = null;
-    const sessions = ['Morning', 'Afternoon', 'Evening'];
+    <script>
+        let scheduleData = null;
 
-    $(document).ready(function () {
-        $.getJSON('/schedule', function (data) {
-            scheduleData = data;
-            const schedule = data.schedule;
-            const status = data.status;
-            const currentPractice = data.current_practice;
-            const today = data.today;
-            const weekDay = data.week_day;
+        $(document).ready(function () {
+            $.getJSON('/schedule', function (data) {
+                scheduleData = data;
+                const schedule = data.schedule;
+                const status = data.status;
+                const currentPractice = data.current_practice;
+                const today = data.today;
+                const weekDay = data.week_day;
 
-            // ====== HIỂN THỊ LỊCH HÔM NAY ======
-            let todayHtml = '';
-            if (schedule.weekly_plan[weekDay]) {
-                const sessions = ['Morning', 'Afternoon', 'Evening'];
-                sessions.forEach(session => {
-                    if (schedule.weekly_plan[weekDay][session]) {
-                        todayHtml += `<tr><th colspan="4">${session}</th></tr>`;
-                        schedule.weekly_plan[weekDay][session].forEach((item, idx) => {
-                            const isBreak = item.activity.toLowerCase() === 'break';
-                            if (isBreak) return;
-                            const isDone = status[today] && status[today][weekDay] && status[today][weekDay].includes(session + '_' + idx);
-                            const practiceItem = currentPractice[today] && currentPractice[today][weekDay] && currentPractice[today][weekDay][session] && currentPractice[today][weekDay][session][idx]
-                                ? currentPractice[today][weekDay][session][idx]
-                                : '';
-                            todayHtml += `
-                                <tr class="${isDone ? 'done' : ''}">
-                                    <td>${item.duration}</td>
-                                    <td>${item.activity} (${schedule.activity_definitions[item.activity] || item.activity})</td>
-                                    <td>
-                                        <button onclick="markDone('${weekDay}', '${session}', ${idx}, '${today}')">${isDone ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}</button>
-                                    </td>
-                                    <td>
-                                        <input type="text" id="practice_${weekDay}_${session}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
-                                        <button onclick="savePracticeItem('${weekDay}', '${session}', ${idx}, '${today}')">Lưu</button>
-                                    </td>
-                                </tr>`;
-                        });
-                    }
-                });
-            }
-            $('#todaySchedule tbody').html(todayHtml);
+                let todayHtml = '';
+                if (schedule.weekly_plan[weekDay]) {
+                    schedule.weekly_plan[weekDay].forEach((item, idx) => {
+                        const isBreak = item.activity.toLowerCase() === 'break';
+                        if (isBreak) return;
+                        const isDone = status[today] && status[today][weekDay] && status[today][weekDay].includes(idx);
+                        const practiceItem = currentPractice[today] && currentPractice[today][weekDay] && currentPractice[today][weekDay][idx] ? currentPractice[today][weekDay][idx] : '';
+                        todayHtml += `
+                            <tr class="${isDone ? 'done' : ''}">
+                                <td>${item.duration}</td>
+                                <td>${item.activity} (${schedule.activity_definitions[item.activity] || item.activity})</td>
+                                <td>
+                                    <button onclick="markDone('${weekDay}', ${idx}, '${today}')">${isDone ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}</button>
+                                </td>
+                                <td>
+                                    <input type="text" id="practice_${weekDay}_${idx}" value="${practiceItem}" placeholder="Nhập bài hiện tại">
+                                    <button onclick="savePracticeItem('${weekDay}', ${idx}, '${today}')">Lưu</button>
+                                </td>
+                            </tr>`;
+                    });
+                }
+                $('#todaySchedule tbody').html(todayHtml);
 
-            // ====== HIỂN THỊ LỊCH TUẦN ======
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            const sessions = ['Morning', 'Afternoon', 'Evening'];
-
-            let weeklyHtml = '';
-            sessions.forEach(session => {
-                let maxActivities = Math.max(...days.map(day => (schedule.weekly_plan[day][session] || []).length));
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                const maxActivities = Math.max(...days.map(day => schedule.weekly_plan[day].length));
+                let weeklyHtml = '';
                 for (let i = 0; i < maxActivities; i++) {
-                    weeklyHtml += `<tr><td>${session} ${i + 1}</td>`;
+                    weeklyHtml += '<tr>';
+                    weeklyHtml += `<td>Khung ${i + 1}</td>`;
                     days.forEach(day => {
-                        const item = schedule.weekly_plan[day][session] && schedule.weekly_plan[day][session][i];
+                        const item = schedule.weekly_plan[day][i];
                         if (item && item.activity.toLowerCase() !== 'break') {
-                            const isDone = day === weekDay && status[today] && status[today][day] && status[today][day].includes(session + '_' + i);
+                            const isDone = day === weekDay && status[today] && status[today][day] && status[today][day].includes(i);
                             weeklyHtml += `<td class="${isDone ? 'done' : ''}">${item.activity} (${item.duration})</td>`;
                         } else {
                             weeklyHtml += '<td>-</td>';
@@ -274,91 +261,75 @@
                     });
                     weeklyHtml += '</tr>';
                 }
-            });
-            $('#weeklySchedule tbody').html(weeklyHtml);
+                $('#weeklySchedule tbody').html(weeklyHtml);
 
-            // ====== THỐNG KÊ ======
-            let progressHtml = '<ul>';
-            for (let date in status) {
-                for (let day in status[date]) {
-                    let totalActivities = 0;
-                    sessions.forEach(session => {
-                        totalActivities += (schedule.weekly_plan[day][session] || []).filter(item => item.activity.toLowerCase() !== 'break').length;
-                    });
-                    progressHtml += `<li onclick="showProgressDetails('${date}', '${day}')">${date} (${day}): Đã hoàn thành ${status[date][day].length} / ${totalActivities} hoạt động</li>`;
+                let progressHtml = '<ul>';
+                for (let date in status) {
+                    for (let day in status[date]) {
+                        const totalActivities = schedule.weekly_plan[day].filter(item => item.activity.toLowerCase() !== 'break').length;
+                        progressHtml += `<li onclick="showProgressDetails('${date}', '${day}')">${date} (${day}): Đã hoàn thành ${status[date][day].length} / ${totalActivities} hoạt động</li>`;
+                    }
                 }
-            }
-            progressHtml += '</ul>';
-            $('#progressStats').html(progressHtml);
-        });
+                progressHtml += '</ul>';
+                $('#progressStats').html(progressHtml);
+            });
 
-        $('.close').click(function () {
-            $('#progressModal').hide();
-        });
-
-        $(window).click(function (event) {
-            if (event.target.id === 'progressModal') {
+            $('.close').click(function () {
                 $('#progressModal').hide();
-            }
+            });
+
+            $(window).click(function (event) {
+                if (event.target.id === 'progressModal') {
+                    $('#progressModal').hide();
+                }
+            });
         });
-    });
 
-    function markDone(day, session, idx, date) {
-        $.ajax({
-            url: '/schedule/mark_done',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ day, idx: session + '_' + idx, date }), // gửi idx = "Morning_0"
-            success: function () {
-                location.reload();
-            },
-            error: function () {
-                alert('Lỗi khi đánh dấu hoàn thành.');
-            }
-        });
-    }
- 
-    function savePracticeItem(day, session, idx, date) {
-        const practiceItem = $(`#practice_${day}_${session}_${idx}`).val();
-        $.ajax({
-            url: '/current_practice',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ 
-                day, 
-                idx: session + '_' + idx,   // ghép session vào idx thành "Morning_0"
-                date, 
-                practice_item: practiceItem 
-            }),
-            success: function () {
-                alert('Đã lưu bài thực hành hiện tại!');
-                location.reload();
-            },
-            error: function () {
-                alert('Lỗi khi lưu bài thực hành.');
-            }
-        });
-    }
+        function markDone(day, idx, date) {
+            $.ajax({
+                url: '/schedule/mark_done',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ day, idx, date }),
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert('Lỗi khi đánh dấu hoàn thành.');
+                }
+            });
+        }
 
+        function savePracticeItem(day, idx, date) {
+            const practiceItem = $(`#practice_${day}_${idx}`).val();
+            $.ajax({
+                url: '/current_practice',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ day, idx, date, practice_item: practiceItem }),
+                success: function () {
+                    alert('Đã lưu bài thực hành hiện tại!');
+                    location.reload();
+                },
+                error: function () {
+                    alert('Lỗi khi lưu bài thực hành.');
+                }
+            });
+        }
 
-    function showProgressDetails(date, day) {
-        if (!scheduleData) return;
-        const schedule = scheduleData.schedule;
-        const status = scheduleData.status;
-        const currentPractice = scheduleData.current_practice;
-        const sessions = ['Morning', 'Afternoon', 'Evening'];
+        function showProgressDetails(date, day) {
+            if (!scheduleData) return;
+            const schedule = scheduleData.schedule;
+            const status = scheduleData.status;
+            const currentPractice = scheduleData.current_practice;
 
-        $('#modalTitle').text(`Chi tiết tiến độ: ${date} (${day})`);
-        let detailHtml = '';
-        sessions.forEach(session => {
-            if (schedule.weekly_plan[day][session]) {
-                detailHtml += `<tr><th colspan="4">${session}</th></tr>`;
-                schedule.weekly_plan[day][session].forEach((item, idx) => {
+            $('#modalTitle').text(`Chi tiết tiến độ: ${date} (${day})`);
+            let detailHtml = '';
+            if (schedule.weekly_plan[day]) {
+                schedule.weekly_plan[day].forEach((item, idx) => {
                     const isBreak = item.activity.toLowerCase() === 'break';
-                    const isDone = status[date] && status[date][day] && status[date][day].includes(session + '_' + idx);
-                    const practiceItem = currentPractice[date] && currentPractice[date][day] && currentPractice[date][day][session] && currentPractice[date][day][session][idx]
-                        ? currentPractice[date][day][session][idx]
-                        : '';
+                    const isDone = status[date] && status[date][day] && status[date][day].includes(idx);
+                    const practiceItem = currentPractice[date] && currentPractice[date][day] && currentPractice[date][day][idx] ? currentPractice[date][day][idx] : '';
                     detailHtml += `
                         <tr class="${isDone ? 'done' : ''}">
                             <td>${item.duration}</td>
@@ -367,12 +338,12 @@
                             <td>${isBreak ? '-' : practiceItem || '-'}</td>
                         </tr>`;
                 });
+            } else {
+                detailHtml = '<tr><td colspan="4">Không có dữ liệu cho ngày này.</td></tr>';
             }
-        });
-        $('#progressDetailTable tbody').html(detailHtml);
-        $('#progressModal').show();
-    }
-</script>
-
+            $('#progressDetailTable tbody').html(detailHtml);
+            $('#progressModal').show();
+        }
+    </script>
 </body>
 </html>

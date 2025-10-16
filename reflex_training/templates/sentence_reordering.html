@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tách câu & luyện sắp xếp từ (Fixed DnD)</title>
+<style>
+  body {font-family: "Segoe UI", sans-serif; margin: 20px; background: #f9fafb; color: #333}
+  textarea, input[type="text"], input[type="date"] {width: 100%; margin-top: 8px; margin-bottom: 10px; padding: 8px; font-size: 14px; border-radius: 6px; border: 1px solid #ccc}
+  button {background: #2563eb; color: white; border: none; border-radius: 6px; padding: 8px 12px; margin: 4px; cursor: pointer; font-size: 14px}
+  button:hover { background: #1e40af }
+  #wordbank, #workspace {min-height: 60px; border: 2px dashed #ccc; border-radius: 8px; padding: 10px; margin-top: 10px; background: #fff; display: flex; flex-wrap: wrap; gap: 6px}
+  .token {background: #f1f5f9; border: 1px solid #ccc; border-radius: 6px; padding: 6px 10px; cursor: grab; user-select: none}
+  .token.dragging { opacity: 0.4 }
+  .token.selected { outline: 3px solid rgba(59,130,246,0.25); background: #eff6ff }
+  #resultArea { margin-top: 15px; padding: 10px; border-radius: 8px; background: #f3f4f6; display: none }
+  .section-title { margin-top: 20px; font-weight: bold; color: #1e3a8a }
+  .highlight-bar {
+  width: 2px;
+  background: orange;
+  margin: 0 2px;
+ }
+</style>
+</head>
+<body>
+
+<h2>🧠 Luyện sắp xếp câu theo ngày — (Đã sửa lỗi DnD)</h2>
+
+<div>
+  <div class="section-title">📋 Nhập danh sách câu theo ngày (dạng: YYYY-MM-DD|câu1; câu2; ...)</div>
+  <textarea id="dayInput" rows="6" placeholder="Ví dụ:\n2025-10-04|I like apples.;She studies English every day.\n2025-10-05|They play football.;Learning languages is fun."></textarea>
+  <button id="saveDayBtn">💾 Lưu dữ liệu</button>
+  <button id="loadDayBtn">📥 Tải dữ liệu đã lưu</button>
+  <button id="clearStorageBtn">🗑️ Xóa dữ liệu đã lưu</button>
+</div>
+
+<div>
+  <div class="section-title">📅 Chọn ngày và lấy câu ngẫu nhiên</div>
+  <input type="date" id="dayPicker">
+  <button id="randomSentenceBtn">🎲 Lấy ngẫu nhiên câu trong ngày</button>
+</div>
+
+<hr>
+
+<div class="section-title">✏️ Nhập hoặc chỉnh sửa câu bên dưới</div>
+<input id="input" type="text" placeholder="Nhập câu cần luyện hoặc dùng nút Lấy ngẫu nhiên ở trên">
+
+<div>
+  <button id="shuffleBtn">🔀 Shuffle</button>
+  <button id="resetBtn">♻️ Reset</button>
+  <button id="checkBtn">✅ Kiểm tra</button>
+</div>
+
+<h3>🧩 Word Bank</h3>
+<div id="wordbank" aria-label="Word Bank"></div>
+
+<h3>🧩 Workspace</h3>
+<div id="workspace" aria-label="Workspace"></div>
+
+<div id="resultArea"></div>
+
+<div>
+  <div class="section-title">✏️ Nhập câu để kiểm tra</div>
+  <input id="checkInput" type="text" placeholder="Nhập câu cần kiểm tra">
+  <button id="checkSentenceBtn">✅ Kiểm tra câu</button>
+</div>
+<div id="checkResult" style="margin-top: 10px; font-weight: bold;"></div>
+
+<script>
+// ---------- Config & DOM ----------
+const STORAGE_KEY = 'daySentenceList_fixed';
+const dayInput = document.getElementById('dayInput');
+const dayPicker = document.getElementById('dayPicker');
+const saveDayBtn = document.getElementById('saveDayBtn');
+const loadDayBtn = document.getElementById('loadDayBtn');
+const clearStorageBtn = document.getElementById('clearStorageBtn');
+const randomSentenceBtn = document.getElementById('randomSentenceBtn');
+const inputEl = document.getElementById('input');
+const wordbank = document.getElementById('wordbank');
+const workspace = document.getElementById('workspace');
+const shuffleBtn = document.getElementById('shuffleBtn');
+const resetBtn = document.getElementById('resetBtn');
+const checkBtn = document.getElementById('checkBtn');
+const resultArea = document.getElementById('resultArea');
+const checkInput = document.getElementById('checkInput');
+const checkSentenceBtn = document.getElementById('checkSentenceBtn');
+const checkResult = document.getElementById('checkResult');
+
+let tokenCounter = 0; // unique id generator
+
+// ---------- Helpers for parsing day list ----------
+function parseList(text) {
+  if(!text) return {};
+  const lines = text.trim().split(/\n/).filter(Boolean);
+  const obj = {};
+  for (const line of lines) {
+    const idx = line.indexOf('|');
+    if (idx === -1) continue;
+    const d = line.slice(0, idx).trim();
+    const sents = line.slice(idx + 1).trim();
+    if (d) obj[d] = sents;
+  }
+  return obj;
+}
+function stringifyList(obj) {
+  return Object.entries(obj).map(([d,s]) => `${d}|${s}`).join('\n');
+}
+
+// ---------- Token creation ----------
+function createToken(text) {
+  const el = document.createElement('div');
+  el.className = 'token';
+  el.textContent = text;
+  el.setAttribute('draggable', 'true');
+  el.dataset.id = 't' + (++tokenCounter);
+
+  // selection (click / multi-select with Ctrl/Cmd)
+  el.addEventListener('click', (e) => {
+    if (!e.ctrlKey && !e.metaKey) {
+      document.querySelectorAll('.token.selected').forEach(t => t.classList.remove('selected'));
+    }
+    el.classList.toggle('selected');
+  });
+
+  el.addEventListener('dragstart', (e) => {
+    el.classList.add('dragging');
+    // Put the token id into dataTransfer so drop can identify the exact element
+    e.dataTransfer.setData('text/plain', el.dataset.id);
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  el.addEventListener('dragend', () => {
+    el.classList.remove('dragging');
+  });
+
+  return el;
+}
+
+// ---------- Render tokens into a container ----------
+function renderTokens(container, tokens) {
+  container.innerHTML = '';
+  for (const t of tokens) container.appendChild(createToken(t));
+}
+
+// ---------- Drag helpers: find closest element to mouse ----------
+function getDragAfterElement(container, x, y) {
+  const draggableElements = [...container.querySelectorAll('.token:not(.dragging)')];
+  if (draggableElements.length === 0) return null;
+  let closest = null;
+  let closestDist = Number.POSITIVE_INFINITY;
+  for (const el of draggableElements) {
+    const rect = el.getBoundingClientRect();
+    const dx = x - (rect.left + rect.width / 2);
+    const dy = y - (rect.top + rect.height / 2);
+    const dist = Math.hypot(dx, dy);
+    if (dist < closestDist) { closestDist = dist; closest = el; }
+  }
+  return closest;
+}
+
+// Drop handler that moves the original element (no cloning)
+function handleDropToContainer(e, container) {
+  e.preventDefault();
+  const id = e.dataTransfer.getData('text/plain');
+  if (!id) return;
+  const dragged = document.querySelector(`[data-id="${id}"]`);
+  if (!dragged) return;
+  const after = getDragAfterElement(container, e.clientX, e.clientY);
+  if (!after) container.appendChild(dragged);
+  else container.insertBefore(dragged, after);
+}
+
+// Allow drop and dropping into workspace and bank
+workspace.addEventListener('dragover', (e) => e.preventDefault());
+workspace.addEventListener('drop', (e) => handleDropToContainer(e, workspace));
+wordbank.addEventListener('dragover', (e) => e.preventDefault());
+wordbank.addEventListener('drop', (e) => handleDropToContainer(e, wordbank));
+
+// ---------- Game logic: shuffle / reset / check ----------
+function normalize(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
+function tokenize(s) { return normalize(s).length ? normalize(s).split(' ') : []; }
+function shuffleArray(a) { return a.map(v => [Math.random(), v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
+
+let original = '';
+let originalTokens = [];
+
+function initFromInput() {
+  // clear any selected tokens
+  document.querySelectorAll('.token.selected').forEach(t=>t.classList.remove('selected'));
+  original = normalize(inputEl.value || '');
+  originalTokens = tokenize(original);
+  tokenCounter = 0; // reset id generator to keep elements fresh each render
+  renderTokens(wordbank, shuffleArray(originalTokens));
+  renderTokens(workspace, []);
+  resultArea.style.display = 'none';
+}
+
+shuffleBtn.addEventListener('click', initFromInput);
+resetBtn.addEventListener('click', () => { tokenCounter = 0; renderTokens(wordbank, originalTokens); renderTokens(workspace, []); resultArea.style.display = 'none'; });
+checkBtn.addEventListener('click', () => {
+  const arranged = normalize(Array.from(workspace.querySelectorAll('.token')).map(t=>t.textContent).join(' '));
+  const target = normalize(original);
+  resultArea.style.display = 'block';
+  resultArea.innerHTML = (arranged.toLowerCase() === target.toLowerCase() ? '✅ Chính xác!':'❌ Sai rồi!') +
+    `<br><b>Kết quả của bạn:</b> ${arranged}<br><b>Đáp án đúng:</b> ${target}`;
+});
+
+// ---------- Day list saving/loading (merge by date) ----------
+saveDayBtn.addEventListener('click', () => {
+    const newData = parseList(dayInput.value);
+    fetch('/api/chunking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('✅ Dữ liệu đã được lưu vào server.');
+    })
+    .catch(err => {
+        console.error('Lỗi khi lưu dữ liệu:', err);
+        alert('❌ Lỗi khi lưu dữ liệu.');
+    });
+});
+
+loadDayBtn.addEventListener('click', () => {
+    fetch('/api/chunking')
+        .then(response => response.json())
+        .then(data => {
+            dayInput.value = stringifyList(data);
+            alert('📥 Dữ liệu đã được tải từ server.');
+        })
+        .catch(err => {
+            console.error('Lỗi khi tải dữ liệu:', err);
+            alert('❌ Lỗi khi tải dữ liệu.');
+        });
+});
+
+clearStorageBtn.addEventListener('click', () => {
+    if (confirm('Bạn có chắc muốn xóa toàn bộ dữ liệu không?')) {
+        fetch('/api/chunking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            dayInput.value = '';
+            alert('🗑️ Dữ liệu đã được xóa trên server.');
+        })
+        .catch(err => {
+            console.error('Lỗi khi xóa dữ liệu:', err);
+            alert('❌ Lỗi khi xóa dữ liệu.');
+        });
+    }
+});
+
+// ---------- Random sentence by day (prefer LocalStorage, fallback to textarea) ----------
+randomSentenceBtn.addEventListener('click', () => {
+    const date = dayPicker.value;
+    if (!date) return alert('⚠️ Chọn một ngày trước!');
+    fetch('/api/chunking')
+        .then(response => response.json())
+        .then(data => {
+            const chunking = data[date];
+            if (!chunking) {
+                alert('❌ Không tìm thấy câu cho ngày này.');
+                return;
+            }
+            const candidates = chunking.split(';').map(s => s.trim()).filter(Boolean);
+            inputEl.value = candidates[Math.floor(Math.random() * candidates.length)];
+            initFromInput();
+        })
+        .catch(err => {
+            console.error('Lỗi khi lấy câu ngẫu nhiên:', err);
+            alert('❌ Lỗi khi lấy câu ngẫu nhiên.');
+        });
+});
+
+// ---------- Init ----------
+// If there is saved day list, pre-load it into textarea so user can see
+if (localStorage.getItem(STORAGE_KEY)) dayInput.value = localStorage.getItem(STORAGE_KEY);
+initFromInput();
+
+
+function getDragAfterElement(container, x) {
+  const draggableElements = [...container.querySelectorAll('.word:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = x - box.left - box.width / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function showHighlight(container, afterElement) {
+  removeHighlight();
+  highlightBar = document.createElement("div");
+  highlightBar.className = "highlight-bar";
+
+  if (afterElement == null) {
+    container.appendChild(highlightBar);
+  } else {
+    container.insertBefore(highlightBar, afterElement);
+  }
+}
+
+function removeHighlight() {
+  if (highlightBar && highlightBar.parentElement) {
+    highlightBar.parentElement.removeChild(highlightBar);
+  }
+  highlightBar = null;
+}
+
+// ---------- Kiểm tra câu ----------
+checkSentenceBtn.addEventListener('click', () => {
+    const inputSentence = checkInput.value.trim();
+    if (!inputSentence) {
+        checkResult.textContent = '⚠️ Vui lòng nhập câu để kiểm tra.';
+        checkResult.style.color = 'orange';
+        return;
+    }
+
+    fetch('/api/chunking')
+        .then(response => response.json())
+        .then(data => {
+            let isCorrect = false;
+
+            // Duyệt qua tất cả các ngày và câu trong JSON
+            Object.values(data).forEach(sentences => {
+                const sentenceList = sentences.split(';').map(s => s.trim());
+                if (sentenceList.includes(inputSentence)) {
+                    isCorrect = true;
+                }
+            });
+
+            // Hiển thị kết quả
+            if (isCorrect) {
+                checkResult.textContent = '✅ Câu chính xác!';
+                checkResult.style.color = 'green';
+            } else {
+                checkResult.textContent = '❌ Câu không đúng.';
+                checkResult.style.color = 'red';
+            }
+        })
+        .catch(err => {
+            console.error('Lỗi khi kiểm tra câu:', err);
+            checkResult.textContent = '❌ Lỗi khi kiểm tra câu.';
+            checkResult.style.color = 'red';
+        });
+});
+</script>
+</body>
+</html>

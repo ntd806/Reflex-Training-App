@@ -1,72 +1,126 @@
 {
   "weekly_plan": {
-    "Monday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "15p", "activity": "Summarize Written Text" },
-      { "duration": "15p", "activity": "Respond to a Situation" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Tuesday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "20p", "activity": "Essay" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Wednesday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "15p", "activity": "Retell Lecture" },
-      { "duration": "15p", "activity": "Summarize Group Discussion" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Thursday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "20p", "activity": "Essay" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Friday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "15p", "activity": "Summarize Written Text" },
-      { "duration": "15p", "activity": "Respond to a Situation" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Saturday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "20p", "activity": "Essay" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ],
-    "Sunday": [
-      { "duration": "20p", "activity": "Vocabulary for Essay" },
-      { "duration": "25p", "activity": "Grammar Practice & External Listening" },
-      { "duration": "30p", "activity": "RS & WFD" },
-      { "duration": "30p", "activity": "DI" },
-      { "duration": "15p", "activity": "Retell Lecture" },
-      { "duration": "15p", "activity": "Summarize Group Discussion" },
-      { "duration": "25p", "activity": "FIBR" },
-      { "duration": "20p", "activity": "Select-missing-word" }
-    ]
+    "Monday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
+        { "duration": "13:30:14:00", "activity": "Summarize Written Text" },
+        { "duration": "14:00:14:30", "activity": "Respond to a Situation" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Tuesday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
+        { "duration": "13:20-13:40", "activity": "Essay" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Wednesday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
+        { "duration": "13:30:14:00", "activity": "Summarize Group Discussion" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Thursday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
+        { "duration": "13:20-13:40", "activity": "Essay" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Friday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
+        { "duration": "13:30:14:00", "activity": "Summarize Written Text" },
+        { "duration": "14:00:14:30", "activity": "Respond to a Situation" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Saturday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
+        { "duration": "13:20-13:40", "activity": "Essay" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    },
+    "Sunday": {
+      "Morning": [
+        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
+        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
+        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
+        { "duration": "09:00-09:30", "activity": "RS & WFD" },
+        { "duration": "09:30-10:00", "activity": "DI" }
+      ],
+      "Afternoon": [
+        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
+        { "duration": "13:30:14:00", "activity": "Summarize Group Discussion" }
+      ],
+      "Evening": [
+        { "duration": "19:00-19:25", "activity": "FIBR" },
+        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+      ]
+    }
   },
   "activity_definitions": {
     "WFD": "Write From Dictation",

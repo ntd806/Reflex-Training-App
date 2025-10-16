@@ -242,15 +242,14 @@ window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener('DOMContentLoaded', loadVoices);
 
 function speak(text) {
-    if (text) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        const voiceSelect = document.getElementById('voiceSelect');
-        if (voiceSelect && voices[voiceSelect.value]) {
-            utterance.voice = voices[voiceSelect.value];
-            utterance.lang = voices[voiceSelect.value].lang;
-        }
-        window.speechSynthesis.speak(utterance);
+    if (!text) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voiceSelect = document.getElementById('voiceSelect');
+    if (voiceSelect && voices[voiceSelect.value]) {
+        utterance.voice = voices[voiceSelect.value];
+        utterance.lang = voices[voiceSelect.value].lang;
     }
+    window.speechSynthesis.speak(utterance);
 }
 
 $('#excelForm').on('submit', function(e) {
@@ -394,6 +393,53 @@ function toggleLearnedWord(word, learned) {
             showWordList(); // Refresh the word list after updating
         }
     });
+}
+
+let practiceInterval = null; // Biến lưu interval để tự động chuyển số
+let currentRandomValue = null; // Lưu giá trị hiện tại để đọc
+
+function startPractice(mode) {
+    let min, max;
+
+    // Lấy giá trị min và max từ giao diện
+    if (mode === 'year') {
+        min = parseInt(document.getElementById('minYear').value, 10) || 1;
+        max = parseInt(document.getElementById('maxYear').value, 10) || 2999;
+
+        if (min < 1 || max > 2999 || min >= max) {
+            alert('⚠️ Giá trị năm không hợp lệ. Vui lòng nhập Min >= 1, Max <= 2999 và Min < Max.');
+            return;
+        }
+    } else if (mode === 'number') {
+        min = parseInt(document.getElementById('minNumber').value, 10) || -1000;
+        max = parseInt(document.getElementById('maxNumber').value, 10) || 1000000000;
+
+        if (min >= max) {
+            alert('⚠️ Giá trị số không hợp lệ. Vui lòng nhập Min < Max.');
+            return;
+        }
+    }
+
+    // Hàm sinh số ngẫu nhiên và đọc số
+    function generateAndSpeak() {
+        currentRandomValue = Math.floor(Math.random() * (max - min + 1)) + min; // Sinh số ngẫu nhiên
+        document.getElementById('output').innerHTML = `
+            <div style="font-size:1.5em; color:blue; font-weight:bold;">
+                ${mode === 'year' ? 'Năm ngẫu nhiên: ' : 'Số ngẫu nhiên: '} ${currentRandomValue}
+            </div>
+        `;
+        speak(currentRandomValue.toString()); // Đọc số hoặc năm
+    }
+
+    // Xóa interval cũ nếu có
+    if (practiceInterval) {
+        clearInterval(practiceInterval);
+    }
+
+    // Gọi hàm lần đầu và thiết lập interval để tự động chuyển số
+    generateAndSpeak();
+    const intervalSeconds = parseInt(document.getElementById('intervalInput').value, 10) || 10;
+    practiceInterval = setInterval(generateAndSpeak, intervalSeconds * 1000);
 }
 </script>
 </body>

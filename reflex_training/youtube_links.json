@@ -252,7 +252,7 @@
         "title": "write-from-dictation-2025-07-27",
         "added_date": "2025-07-28",
         "watched": true,
-        "last_time": 4,
+        "last_time": 7,
         "video_type": "PTE - WRITE FROM DICTATION"
     },
     {
@@ -352,5 +352,13 @@
         "watched": true,
         "last_time": 105,
         "video_type": "PTE - Vocabulary - Education"
+    },
+    {
+        "url": "https://youtu.be/P8gk3eFwDC0",
+        "title": "write-from-dictation-2025-10-09",
+        "added_date": "2025-09-10",
+        "watched": true,
+        "last_time": 0,
+        "video_type": "PTE - WRITE FROM DICTATION"
     }
 ]
