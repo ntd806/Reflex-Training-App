@@ -1,3 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflex Training App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>.nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .nav select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="content">
+    <!-- Menu điều hướng -->
+     <div class="nav">
+        <a href="/">Trang chính</a>
+        <a href="/chunking">chunking</a>
+        <a href="/check">check</a>
+        <a href="/ending_practice">Practice -S/-ES & -ED</a>
+        <a href="/irregular_verbs">Irregular Verbs</a>
+        <a href="/random_currency">Random Currency</a>
+        <a href="/schedule_ui">Schedule</a>
+        <select id="voiceSelect">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+        </select>
+    </div>
+    <h1>Sentence Practice</h1>
 For better or worse, we live in a world <span style="color:red; font-weight:bold">profoundly affected</span> by Sigmund Freud.
 If I had to ask you, choose a <span style="color:red; font-weight:bold">psycho…, no, name a famous psychologist</span>, the answer of most of you would be Freud.
 He's <span style="color:red; font-weight:bold">the most famous psychologist ever and he's had a profound influence</span> on the 20th and 21st century.
@@ -87,3 +135,5 @@ When you think <span style="color:blue;">of (about)</span> a leader, you may thi
 
     We may soon see if such tendencies also hold true in humans, when </span> <span style="color:blue;">Americans (Americans..)</span><span style="color:red; font-weight:bold">decide who they’ll follow in November.</span> 
 <hr style="border: 1px solid black; margin: 20px 0;">
+</body>
+</html>

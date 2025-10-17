@@ -2,123 +2,338 @@
   "weekly_plan": {
     "Monday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
-        { "duration": "13:30:14:00", "activity": "Summarize Written Text" },
-        { "duration": "14:00:14:30", "activity": "Respond to a Situation" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Ôn lại sáng và chiều"
+        }
       ]
     },
     "Tuesday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
-        { "duration": "13:20-13:40", "activity": "Essay" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Học trên lớp"
+        }
       ]
     },
     "Wednesday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
-        { "duration": "13:30:14:00", "activity": "Summarize Group Discussion" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Ôn lại sáng và chiều"
+        }
       ]
     },
     "Thursday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
-        { "duration": "13:20-13:40", "activity": "Essay" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Học trên lớp"
+        }
       ]
     },
     "Friday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
-        { "duration": "13:30:14:00", "activity": "Summarize Written Text" },
-        { "duration": "14:00:14:30", "activity": "Respond to a Situation" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Ôn lại sáng và chiều"
+        }
       ]
     },
     "Saturday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:20", "activity": "Retell Lecture" },
-        { "duration": "13:20-13:40", "activity": "Essay" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Học trên lớp"
+        }
       ]
     },
     "Sunday": {
       "Morning": [
-        { "duration": "08:00-08:20", "activity": "Vocabulary for Essay" },
-        { "duration": "08:20-08:45", "activity": "Grammar Practice & External Listening" },
-        { "duration": "08:45-09:00", "activity": "Retell Lecture" },
-        { "duration": "09:00-09:30", "activity": "RS & WFD" },
-        { "duration": "09:30-10:00", "activity": "DI" }
+        {
+          "duration": "07:00-08:00",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "08:00-08:40",
+          "activity": "6 câu DI (Describe Image)"
+        },
+        {
+          "duration": "08:40-09:00",
+          "activity": "1 bài RL (Retell Lecture)"
+        },
+        {
+          "duration": "09:00-09:30",
+          "activity": "5 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "09:30-11:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Afternoon": [
-        { "duration": "13:00-13:30", "activity": "Retell Lecture" },
-        { "duration": "13:30:14:00", "activity": "Summarize Group Discussion" }
+        {
+          "duration": "13:00-13:40",
+          "activity": "2 bài SRT (Summarize Written Text)"
+        },
+        {
+          "duration": "13:40-14:40",
+          "activity": "15 câu RS (Repeat Sentence)"
+        },
+        {
+          "duration": "14:40-15:20",
+          "activity": "10 câu WFD (Write From Dictation)"
+        },
+        {
+          "duration": "15:20-16:00",
+          "activity": "Học Template & Từ vựng"
+        }
       ],
       "Evening": [
-        { "duration": "19:00-19:25", "activity": "FIBR" },
-        { "duration": "19:25-19:45", "activity": "Select-missing-word" }
+        {
+          "duration": "19:00-22:00",
+          "activity": "Ôn lại sáng và chiều"
+        }
       ]
     }
   },
@@ -129,7 +344,7 @@
     "FIBL": "Fill in the Blanks (Listening)",
     "DI": "Describe Image",
     "RL": "Retell Lecture",
-    "SWT": "Summarize Written Text",
+    "SRT": "Summarize Written Text",
     "Essay": "Essay Writing",
     "SGD": "Summarize Group Discussion",
     "Vocabulary for Essay": "Học từ vựng, collocations, idioms cho chủ đề PTE essay",
